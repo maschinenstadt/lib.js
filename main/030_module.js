@@ -127,7 +127,7 @@ realInclude.directory = function(_path)
 
 			if(p.endsWith('.json'))
 			{
-				name += '.json';
+				name = name.toUpperCase();
 			}
 
 			result[name] = realInclude.file(p);

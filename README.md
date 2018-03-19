@@ -102,24 +102,14 @@ so just extend the basic global Objects ('Object', 'Array', 'String' .. etc.)
 as I did it in a directory like 'global/'; then just this script code results
 in including the whole bunch of (your potential) files:
 
-	include('/global/');
+	include('global/');
 
 And yes: at least one slash ('/') is necessary: without these my system would
 try to regularily "require()" original "Node.js" or "npm.js" modules.
 
-Some next possibility is to directly save these files (like 'String.js') into
-the home directory's "./lib.js/" root (e.g. "/home/$user/lib.js/Array.js") ..
-this should be (nearly..) the same. But I think it's cleaner to move your .js
-files into appropriate directories, and then include them in some root files.
-
-Note: you shouldn't be in the "/lib.js" (or any) directory: this would result
-in using the "global/" directory in THERE, as that will be your working dir.,
-which always comes first (and a twice include('/global/') results @ Error()).
-
-See the order of (automatically adjusted) search paths with this tiny script:
-
-	#!/usr/bin/env node.js
-	console.inspect(settings.library.path);
+If these files export something ("module.exports = {}"), it will be available
+by file name w/o extension as key and w/ UPPER CASE keys, if the file had the
+'.json' extension: in "global.home"! There are all of your "/home/*" exports.
 
 
 #### File functions
@@ -184,8 +174,8 @@ access "(global.)nodejs[module]" as described here.. some default modules are
 being automatically loaded during initialization - look into "./settings.js".
 
 Last but not least it's also possible to include() whole directories: this is
-going to return a regular Object, with key names set by file name and '.json'
-extension in case it was a '.json' file .. this is because otherwise it would
+going to return a regular Object, with key names set by file name - w/ UPPER-
+CASE name in case it was a '.json' file .. this is because otherwise it would
 result in a conflict, if two files ('.js' and '.json') have the same name! ..
 
 Sub directories won't be included in this application. We *really* don't want
