@@ -1,0 +1,15 @@
+
+        //
+        // 4000: Hidden File
+        // 2000: System File
+        // 1000: Archive bit
+        // 0400: Individual read
+        // 0200: Individual write
+        // 0100: Individual execute
+        // 0040: Group read
+        // 0020: Group write
+        // 0010: Group execute
+        // 0004: Other read
+        // 0002: Other write
+        // 0001: Other execute
+        //

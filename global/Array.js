@@ -13,21 +13,13 @@ Object.defineProperty(Array.prototype, 'first', {
 Array.prototype.toCharString = function(_from = 0, _length = this.length - _from)
 {
 	var result = '';
-
-	for(var i = _from, j = 0; j < _length; j++)
+	//
+	//TODO/ fehlen noch NEGATIVE _length ..!!
+	//und natürlich ncoh zu testen.. erste version ohne test ist das bloß..
+	//
+	for(var i = 0, j = _from; i < _length; i++, j = (j+1) % this.length)
 	{
-		i = this.offset(i);
-
-		result += String.fromCharCode(this[i]);
-
-		if(_length < 0)
-		{
-			i--;
-		}
-		else
-		{
-			i++;
-		}
+		result += String.fromCharCode(this[j]);
 	}
 
 	return result;

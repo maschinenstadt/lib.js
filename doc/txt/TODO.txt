@@ -14,6 +14,13 @@
 ------------------------------------------------------------------------------------------------------
 
 
+	# Array.... etc.
+		=> richtig mit "_length" param umgehen! d.h. als param w/ "this.length - _from"
+			... und i von 0 bis länge zählen, während j immer ((j+1)%this.length) usw.
+			.. und natürlich auch negative _length unbedingt beachten!
+
+
+
 	# not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
 
 
