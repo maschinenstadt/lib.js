@@ -3,6 +3,7 @@ var main = module.exports = {};
 
 var service = main.service = global.service = {};
 
+//TODO/ remove after a while...
 try
 {
 	// maybe even older ..
