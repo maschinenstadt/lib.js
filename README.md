@@ -31,6 +31,12 @@ This function will regularily search in the directories set in your settings,
 and if it finds a module, it will not search further. So concern the order of
 the paths (which will be automatically removed if not existing as directory).
 
+Note: if you try to include a module by it's absolute file path name (so that
+it begins with a slash '/'), your filesystem's root will be the first path to
+search for the files; so if they exist, they're taken in the first attempt of
+loading by "include()". If you specify "relative" modules, your fs' root will
+be the last path to be looked up. ..
+
 You can also include() Node.js own modules, just specify them without any '/'
 (slash) like in paths. In this case my second parameter is (true) or (false),
 whether you want to re-read them or just use the copies in the cache.
