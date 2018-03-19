@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------
 
-bring better performance to "file.find()" .. maybe filter out everything AFTER a whole file list..!!?
+# bring better performance to "file.find()" .. maybe filter out everything AFTER a whole file list..!!?
 
 # fs-listen-mapping/-filter (array-aktionen und coreutils)
 # file.mode() w/ array-filter
@@ -10,6 +10,9 @@ bring better performance to "file.find()" .. maybe filter out everything AFTER a
 # uuid & services w/ account @ dyndns+space
 # ypkg @ lib+linux (live/any) w/ forms+mux (@ net/ssh)
 # (flache, aktive) datenbank und kombination/abstraktion (lib.)js+ylinux+community w/ net+js+db+linux+apps+community+mud+oo
+
+# alles in "main/" nochmal durchgehen und mit besseren styles versehen (z.b. default values je func., not() w/ return new Error(), ..)
+# alles in "global/" nochmal durchgehen und möglichst sinnvolle gestaltung (w/ abstraktion zu gemeinsamen algo-struct-basics wohl..)
 
 ------------------------------------------------------------------------------------------------------
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
