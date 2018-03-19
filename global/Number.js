@@ -39,3 +39,8 @@ Number.prototype.toPositive = function()
 	return ( this.valueOf() < 0 ? 0 - this.valueOf() : this.valueOf() );
 }
 
+Number.prototype.round = function(_precision = 0)
+{
+	return Math.round(this.valueOf(), _precision);
+}
+

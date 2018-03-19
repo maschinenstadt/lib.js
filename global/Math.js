@@ -3,28 +3,21 @@ if(! BROWSER)
 	module.exports = Math;
 }
 
-var _round = Math.round;
+const _round = Math.round;
 
-Math.round = function(_number, _precision)
+Math.round = function(_number = undefined, _precision = 0)
 {
-	// TODO / !!!
-	/*
-		*own* "Math.round(_number, _precision)"
+	if(! _number)
+	{
+		return new Error();
+	}
 
-			.. as "round(1.456)" (etc.) show (1), not (2) ..etc!
+        var factor = Math.pow(10, _precision);
+        return ( _round(_number * factor) / factor );
 
-				... sprich, wir müssen das erledigen, was bislang fehlt:
-					von hinten rückwärts nach vorne hin *alle* (> 5)
-					mit anwenden ...
-
-				.. regulär scheinen also weitere ziffern zu übersehen ..
-
-					PS: kann auch schrittweise jeden ziffern-schritt mehr "round()";
-						but that's not that efficient (as direct symbol comparison), eh!??
-	*/
-
-	// ersetzen eben, wie gehabt.
-	return _round(_number, _precision);
+	//	!!!!!!!!
+	// 	SEE ALSO "doc/txt/Math.round.js.txt"!!!!!!!!!!
+	// 	!!!!!!!!!!
 }
 
 Math.random.float = function(_max, _min)
@@ -46,7 +39,6 @@ Math.radToDeg = function(_radians)
 	return ( _radians * ( 180 / Math.PI ) );
 }
 
-// [deg2rad(180)] => (3.141592653589793)
 Math.degToRad = function(_degrees)
 {
 	return ( _degrees * ( Math.PI / 180 ) );
