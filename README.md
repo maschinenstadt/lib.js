@@ -43,6 +43,18 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Re-new
+Most elements of this library have gone these days - I thought they were very
+unstructured and not finished anyway. They'll come again. When they're really
+finished (each). But my basic structure of this library extensions stayed the
+same (so the news below are still valid).
+
+I'm working on it. And you can do this, too.. Either you send your own things
+to me (or this repository), or you structure your API elements in your search
+paths or your home directory - this piece of code was ment to support further
+extensions etc. by all the user's etc.! ;-)´
+
+
 #### [global.]not()
 The best replacement for code like "if(! result) {}" - think for yourself! ..
 
