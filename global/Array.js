@@ -40,6 +40,18 @@ Array.prototype.cut = function(_start = 0, _length = this.length - _start)
 	return this.replaceAt(_start, _length, '');
 }
 
+/*Array.prototype.reverse = function(_from = 0, _length = this.length - _from)
+{
+	//TODO/ again (see somewhere else in here..):
+	//negative _lengths! (in this case here: double reverse => regular ;-)´
+
+	var result = [];
+
+	//TODO/
+
+	return result;
+}*/
+
 Array.prototype.rotate = function(_diff = 1)
 {
 	var result = [];
@@ -476,12 +488,8 @@ Array.prototype.push = function()
 	return arguments.length;
 }
 
-Array.prototype.pop = function(_amount, _reverse, _peek)
+Array.prototype.pop = function(_amount = 1, _reverse = false, _peek = false)
 {
-	_amount = _amount || 1;
-	_reverse = _reverse === true;
-	_peek = _peek === true;
-
 	if(_amount > this.length)
 	{
 		_amount = this.length;
@@ -513,9 +521,9 @@ Array.prototype.pop = function(_amount, _reverse, _peek)
 	return result;
 }
 
-Array.prototype.peek = function(_amount, _reverse)
+Array.prototype.peek = function(_amount = 1, _reverse = false)
 {
-	return this.pop((_amount||1), _reverse, true);
+	return this.pop(_amount, _reverse, true);
 }
 
 /*
