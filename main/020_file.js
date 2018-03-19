@@ -1014,6 +1014,15 @@ global.file.truncate = function(_path, _size)
 {
 }
 
+global.file.xargs = function(/* TODO */)
+{
+	//TODO/ .. mainly for "file.find()" array/list (of paths!)
+}
+
+//
+// necessary: own "class File" .. for my own fs-db and maybe for fuse. and for own, BETTER file operations (instead of pure path lists..)
+//
+
 global.file.find = function(_path = '/', _types = [], _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
 {
 	//TODO/ maybe w/ "_encoding = global.settings.encoding" as arg? THEN ALSO at those func. below (same but w/ types)!
