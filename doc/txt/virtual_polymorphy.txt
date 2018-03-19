@@ -1,0 +1,30 @@
+
+	@ Arguments.map()
+
+//TODO/
+        //
+        //direkt in's "argument" object hinein auf basis der reihenfolge und länge sowie types..
+        //... siehe virtual polymorphy (@ get())
+        //
+        //
+        //
+        //am ende jedenfalls haben wir dann in jeder funktion nur einen 'map()' aufruf für param-polymorphie,
+        //und können auf passende string-bezeichner zugreifen via 'arguments..' ..
+        //
+        //TODO: evtl. sowas wie "filter()" einsetzen noch, wg. prüfung der argumente oder so!???!
+        //..
+
+
+
+Ich übergebe für jede mögliche Argumente-Version einen String als jeweils weiteren Parameter.
+
+	'Number numberArg, Boolean booleanArg'
+	'Object objectArg'
+
+.. je nachdem, welche Zeile gerade passt, wird entsprechend dem "arguments"-Index (dieser String-Zeilen) die
+jeweils passende Rückgabe gemacht .. und wenn keine Zeile passt, dann eben (-1).
+
+So kann man je nach Rückgabe-Zahl die weitere Funktion beschreiben - und zusätzlich sollte "map()" auch in's
+"arguments"-Objekt direkt mit hinein alle passenden Schlüssel-Namen so einschreiben (also "numberArg" etc.),
+damit direkter Zugriff in jeder Funktion durch z.B. "arguments.numberArg" möglich ist. ..
+

@@ -1,0 +1,10 @@
+// this "TODO" array is meant for managing own TODO tasks in the objects ..
+// ..
+// e.g. if an sub-object is not yet available, but it will be in the future
+// AND there's a task which is just partially done yet (as the missing obj.
+// should be a part of this current task), .. we can "promise" (*g*) it for
+// later ..
+//
+// we should let this automatically work, so we need more code w/ structure
+//
+Object.prototype.TODO = [];

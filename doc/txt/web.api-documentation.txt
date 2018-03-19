@@ -1,0 +1,13 @@
+
+
+
+	=>	@ https://kekse.biz/lib.js/ (@ /lib.js/doc/www/*)
+
+		(some php + js styles for automatic documentation etc. pp...)
+		[w/ referential(!) "inclusion" of "npm.js" and "github" data]
+
+			.. maybe i should add some extra structure to the .js
+			source files .. either like C#'s "///" comments or my
+			own specialized functions .. research a bit @ google!
+
+

@@ -1,0 +1,4 @@
+< http://www.linux-community.de/Internal/Artikel/Print-Artikel/LinuxUser/2005/02/Portabel-programmieren-mit-Dialog-Gdialog-und-Kdialog >
+< http://www.linux-community.de/Internal/Artikel/Print-Artikel/LinuxUser/2010/09/Textbasierte-User-Interfaces-Teil-1 >
+< http://www.linux-community.de/Internal/Artikel/Print-Artikel/LinuxUser/2014/03/Mehr-Komfort >
+< https://www.npmjs.com/package/dialog >

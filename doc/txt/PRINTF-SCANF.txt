@@ -1,0 +1,33 @@
+
+	(s)scanf, (s)printf.
+
+%d			integer
+%f			floating point number
+%s			string
+%x / %X			hexadecimal
+%o			octal
+%c			character
+%B			byte			(*own*! ;-)´
+%b			binary BIT(/bool)	(*own*! ;-)´
+%O			OBJECT .. uses "util::inspect()" .. (wobei *eigene* inspect() noch kommt!!)
+
+
+	// TODO / are the following .. maybe useful w/ 'Stream' or TypedArray or so..!?
+
+%u			unsigned integer
+%ld			long signed integer
+%lu			long unsigned integer
+%lf			double
+%p			address format
+
+
+	Example
+
+var array = sscanf('2017-4-06', '%d-%d-%d', function(year, month, day) { });
+	... w/ if(array.length === 3) { /* FULL success */ }; ..
+
+
+	Beispiele
+
+< https://github.com/ChauMing/nodejs-scanf/tree/master/lib >
+< https://github.com/Lellansin/node-scanf/tree/master/lib >

@@ -1,0 +1,19 @@
+Array.prototype.toString = function(_radix)
+{
+
+        //TODO/..!
+	//       _radix
+        //.. maybe the "outer limit" of every (sub-)array? to extend by multiple arrays..
+        //... would be the consequent continuation of my quantum fields w/ radix limits!!
+	//
+	// überlege hin zur universellen "toString()" anwendung, auch für andere klassen!
+	// sowie eine so ähnliche anwendung mit "depth" (in _current_depth & _max_depth)!
+	//
+
+
+
+	// neu: evtl. *ist* "_radix" sogar die "depth"-angabe oder so!??!
+
+	// so jedenfalls kann z.b. "Array.prototype.toString.long(_radix)" in dem _radix
+	// argument die array-verschachtelungs-ebene angeben .. (um *erstmal nur* <tab>)
+

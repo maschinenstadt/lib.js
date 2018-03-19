@@ -1,0 +1,8 @@
+
+
+	hinweis (@ Git)
+
+		>> rename {data => example}/fs/example.js (100%)
+
+			=> d.h. wohl abstrakte betrachtung in strings, nicht direkte pfad-trees ..!
+				GREAT! :-D

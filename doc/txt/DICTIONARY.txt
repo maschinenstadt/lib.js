@@ -1,0 +1,8 @@
+
+	# "ALLES" (.. zumweiterdenken!) relativieren durch "settings" .. hin zu globalem ..
+
+		=> "dictionary" etc.. so dass selbst variablen-namen variable werden; ..
+		.. was ich nur nutze zum weiterdenken in richtung automatismus und "gehirn";
+
+			=> was wäre daraus zu machen, wenn mehrfache variablen-zugriffe durch ein
+				dictionary bestimmte keys hätten. etc..

@@ -1,0 +1,10 @@
+GLOB() is still todo ... will use '*' AND '**' .. [-> genügsamkeit??]
+
+später könnte ich überlegen in richtung eigenes "pattern matching", durch paar
+zusätzliche token/zeichen/symbole/.. o.ä. .. ähnlich '(s)scanf()' oder RegExp,
+nur eben etwas einfacher gedacht; und trotzdem bestenfalls universell möglich!
+
+easy engine quasi ..
+
+bis dahin verwenden wir ein array als result von glob(), um nun in reihenfolge
+der sternchen $1, $2 etc (wie regexp) zu erhalten. ..

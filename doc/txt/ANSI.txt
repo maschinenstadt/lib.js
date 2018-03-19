@@ -1,0 +1,62 @@
+
+
+// das ist TODO. vermutlich eine extra klasse oder datenstruktur (<Multiset> ?!)
+//
+// ..
+//
+// im übrigen wären _TAGS_ auch nicht ganz verkehrt, so wie bei html? aber evtl.
+// auch nicht so gut wie einfache klassen-funktionen zum aufruf, bevor text aus-
+// gegeben wird. ..
+
+	// ... beachte auch, wo die texte eingesetzt werden. wenn man die codes in datei
+	// reinschreibt, würde man sie mit `cat file.txt` im terminal mitsamt attributen
+	// ausgeben können. die farben etc. werden also angewandt. alles @ file-prozess!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!		// bedneke aber auch "readline" (< https://nodejs.org/api/readline.html >)
+		!!!!!!!!!!           ^^^^^^^^^^
+
+///////////////////
+// 
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// beachte, dass manche codes '[' benötigen, andere nicht. dazu siehe 'write()' w/ '_left' boolean!
+//
+// < http://ascii-table.com/ansi-escape-sequences.php >
+// < http://ascii-table.com/ansi-escape-sequences-vt-100.php >
+
+
+< http://wiki.bash-hackers.org/scripting/terminalcodes >
+
+
+// < https://github.com/chalk/ansi-styles >
+// < https://github.com/sindresorhus/ansi-escapes >
+//
+// < https://github.com/chalk/chalk >
+// < https://github.com/chjj/blessed >
+
+
+
+// < https://www.google.de/search?q=ansi+terminal+codes+256+position >
+//
+// < https://en.wikipedia.org/wiki/ANSI_escape_code#Colors_and_Styles >
+//
+
+// < http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#writing-a-command-line >
+// < http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux >
+//
+// < https://github.com/sindresorhus/ansi-escapes >
+// < https://github.com/chalk/ansi-styles >
+
+// < https://github.com/chjj/blessed >
+
+// < https://www.npmjs.com/package/dialog >
+
+
+
+ansi.ESC = global.ESC || String.fromCharCode(27);
+ansi.LEFT = String.fromCharCode(91);
+
+

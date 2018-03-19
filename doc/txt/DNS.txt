@@ -1,0 +1,10 @@
+// < http://www.codingdefined.com/2014/07/lets-take-look-at-dns-module-in-nodejs.html >
+// < https://nodejs.org/dist/latest/docs/api/dns.html >
+
+// => resolve(): turns a domain into a dns record
+// => reverse(): turns an ip address into an array of domain names
+
+@ resolve(_domain, _type, _callback[_error ,_record]);
+
+	# type => ( A, AAAA, MX, TXT, SRV, PTR, NS, CNAME )
+

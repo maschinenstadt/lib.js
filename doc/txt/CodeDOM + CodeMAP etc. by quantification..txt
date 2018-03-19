@@ -1,0 +1,14 @@
+alles auf die basis der "code/element.js" im CodeDOM stellen, wo es in SCRIPT-code genau
++3 ./code/script/{attribute,type,value}.js" gibt. ...
+
+.. im anschluss codeMAP zur quantifizierung .. w/ "vector()" and "matrix()" für raumzeit
+in vektor-quanteldern und der string-/m-theorie.
+
+
+um es mal klar zu stellen: sowohl die relativistische quantenfeld-physik wie auch die m-
+theorie sind wahr[tm]: beides andere abstrakte ebenen; also in dimensionaler betrachtung
+die string-prozesse (bzw. v.a. (sync'ed) streams) in 1d-form und die nD-feld-strukturen,
+die in hashtable implementierbar sind z.b. (aber sowieso virtualisiert werden müssen, so
+wie auch alle zellen und strings - quasi die virtuelle existenz vieler dateien in so nur
+einem physischen hdd-string, etc. ;-)`
+

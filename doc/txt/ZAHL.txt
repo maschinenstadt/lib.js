@@ -1,0 +1,145 @@
+
+
+	# je nachdem -> .gitignore && .npmignore zusätzlich erweitern!? ;-)´
+
+
+
+
+		# LIVE.*UPTIME* counter .. start - end // .. sum() them all! :-)
+
+
+
+	# @ "live": UUID als datei und als inhalt ein JSON-code mit jew. aktuellesten werten
+		.. (also immer neu (ge-/über-)schrieben, nicht immer mehr angehangen! ;-)´
+
+		=> sowohl auf server- wie auch client-seite! also network-infos immer neu schreiben z.b.!
+
+			=> siehe "/srv/http/*" ..!
+
+		=> wie im CMS .. auf PHP-seite die $_SERVER['REMOTE_ADDR'] ergänzen @ json-code (== CMS ;)
+
+		=> andere werte überlegen; v.a. wg. kartografie w/ graphen/grafiken; und 2d-mesh evtl.!?!
+
+			=> gerade auch zählbarkeiten .. (hin zu vektor-raumzeit-mesh'es?!!!?)
+
+		=> den server-load (mit zeit?) regelmäßig (setInterval()) zu mir senden ... und zwar zum
+			ANHÄNGEN, *NICHT* ÜBERSCHREIBEN .. so entstehen größere statistiken / graphen! ;-)´
+
+			=> evtl. diesen timer verwenden für uptime-zählung? sonst muss ich daran denken,
+				dass unbedingt mit jedem prozess-ende auch tatsächlich delta-messung erfolgt!!
+
+
+
+
+
+	@ "/node.js" ...
+
+			global.zahl = {};
+
+			global.func = function(_func, _arguments)
+			{
+			        global.zahl[_func.name] = (global.zahl[_func.name] || 0) + 1;
+        			return _func.apply(this, _arguments);
+			}
+
+		=> möglichkeit, alle prozess-bewegungen "einfach" zählen/protokollieren zu können??!?
+
+			=> dann ist klar, wie du funktionen aufrust ..
+
+				=> evtl. set/get von vars/attribs!? .. TODO => EIGENE FUNC @ accessors! ;)
+
+
+
+
+
+
+			/node.js
+
+		=> call() vereinfachen .. wieder mal ..
+
+			.. ohne redundanz der angabe EVTL(!?)
+
+			mit object-traversing if '.' contained in names .. selbst zusammebauen also
+
+
+		/main/90_zahl...
+
+			=> ich speicher nur einmal am anfang von 90_*... das, was in "global.zahl" ist;
+
+			ABER KLAR IST, dass es immer weiter geht mit den funktionen usw. .. d.h. also,
+				.. erst am ende alles in eine datei schreiben - oder das periodisch
+				oder mit jeder veränderung - noch besser evtl.?!
+
+		=> TODO
+WICHTIG!!!
+			mit jeder veärnderfung durhc "global.call" schreiben in's fs .. und zwar NICHT
+			MEHR in eine .json-datei, sondern am besten .. ERSTMAL - vor BRAIN - einfach
+
+			"/.zahl/zahl/${function}.json" => (Number)
+
+		TODO: natürlich auch ÜBERALL UMSETZEN von "call()" using to call funcitons!!! ;-D
+
+			.. sonst zählt der ja nicht mit .. aber erst call() ganz richtig implementieren!!!!!
+
+
+
+		PS: wenn ich schon "call" hab, dann doch auch "describe()" o.ä. ..
+
+			.. damit die API automatisch entstehen kann. ich muss nur meine library dinge
+			"beschriften" mit extra-strukturen bzw. parametern, die alles notwendige mit
+			enthalten sein lassen (beschreibung, parameter, returns, .. maybe dependencies;
+
+			 .. sicherung evtl. in JSON-datei(en).
+			.. sonst eigenem format.
+
+				=> jedenfalls muss ich daraus eine schöne HTML-API-documentation sowie
+					EVTL. PDF-version (js pdf lib?!) und evtl. auch eine "text/plain"
+					automatisch entstehen lassen.
+
+				=> davon ab: ähnlich AST? bringt's das? AAAABER: was es bringt, das wäre
+					eine solche (json? egal..) strukturierung, dass nicht nur die API
+					docs automatisch entstehen, sondern sich auch "IntelliSence" oder
+					wie das heißt einfach einstellen ließe .. bedenke dazu deine ganz
+					eigene IDE!??! sonst nya~
+
+
+
+
+!
+!!
+!!!
+!	GANZ, GANZ WICHTIG!!!!!!!!
+!!
+!!!		"call()" soll nicht mehr beim prozess-aufruf verwendet werden müssen!
+
+		=> .. vielmehr verwende ich zuerst "open(_name)"-funktion am anfang
+			einer JEDEN solchen. dadurch stimmen schon die namen (was sie
+			noch nicht tun, z.b. bei "prototype"-"this"-aufrufen.
+
+		=> .. zusätzlich codiere ich noch umgekehrt am ENDE jeder funktion
+			SOWIE vor jedem 'return' die passende "close()"-funktion.
+
+		SINN UND ZWECK ist die quantifizierung, d.h. prozess-RAUM-ZEIT-
+			(vektoren-)ABZÄHLUNG - das bewegungs-protokoll.
+
+			.. dazu werden beide func., open() und close(), min. noch 2D-parameter
+			verwalten .. min. .. nämlich [ _physical_time(_hr?), _process_time[***] ];
+
+				.. so dass wir für raum/zeit, d.h. open/close, stets aktuelle, min.
+				physische zeit zählen .. (zur relationierung, bis in's neuronale!!)
+
+			AUßERDEM muss ich die weiteren *zählbarkeiten* mit bedenken .. d.h. min. noch
+			die ABSOLUTE prozess-zeit-zählung (in allen systemen parallel - evtl. das ganze
+			zusammen erst mit fs-relationierung (siehe a4)) ...
+
+			.. und natürlich so weit, dass auch die kausalität von OPEN/CLOSE() überprüft
+			wird, um daraus die ersten taktungs-bits zu machen - die dann in größerer menge
+			ebenso "verschränkt" betrachtet würden, für weitere, multiple zählungen! siehe a4.
+
+		UND SO WEITER. BEDENKE ALSO: es könnte bald schon zu den neuronalen fs-relationen kommen!
+
+			etc. .. pp. ...
+
+
+
+

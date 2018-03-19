@@ -1,0 +1,3 @@
+< https://www.xul.fr/javascript/proxy.php >
+< https://soft.vub.ac.be/~tvcutsem/proxies/ >
+< https://www.google.de/search?q=javascript+proxy+tutorial >

@@ -1,0 +1,12 @@
+
+	< https://github.com/mafintosh/fuse-bindings >
+
+
+
+
+... allerdings erwarte ich immer noch die neue 3er-version von FUSE. was?
+
+außerdem will ich zusehen, dass ich selbst derartige "module" integriere,
+auch auf C-anbindungs-basis - eines der ziele meiner library ist die ganz
+vollständige UNABHÄNGIGKEIT von anderen (npm.js-)modulen!!
+

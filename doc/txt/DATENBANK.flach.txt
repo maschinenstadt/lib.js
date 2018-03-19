@@ -1,0 +1,4 @@
+DATENBANK-Anbindung an einen Prozess-[(/Event-)Message-Routing-]Stack.
+
+Alles flach angebunden. ... bestenfalls die (nD-)Datenbank-Strukturen,
+indem wir mit einer 1D-(String-/Prozess-)Abstraktion (de-)codieren! ..

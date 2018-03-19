@@ -1,0 +1,13 @@
+finish and publish my "Any/License" ..
+... see "chefmops.odt" @ /doc for a first preview (private atm);
+
+reason(s) for my own license?
+
+→ i'm planning to create really much software .. and want to have a company in some years.
+→ have wishes how my library/code(s) is/are used .. e.g. i don't want forks to be created;
+	.. rather I'd like to extend my codes as YOU WISH [them to be].
+→ I'd be happy about postcards e.g. *gg* (this was going on in earlier times ;-)
+→ i want to give anyone support for my codes - companies can use it for free, but i want
+	to be the one who extends it (or answers questions) .. 'lil bit pocket money ^_^
+→ more to come ..
+

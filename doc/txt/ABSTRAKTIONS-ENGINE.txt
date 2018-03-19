@@ -1,0 +1,112 @@
+
+
+
+
+
+        // TODO /
+//
+//      the following, both functions look exactly the same .. außer 'basename' vs. 'dirname' ..
+//
+//      ... hier würde ich eine abstrakte (versteckte! ;-)´ funktion schreiben, damit zusätzlich
+//      die jew. funktion (basename vs dirname) als letztes/erstes argument übergeben wird usw.!
+//
+//      
+//
+//              GANZ ALLGEMEIN:
+//
+//              .. würde ich hier überlegen, eine automatische abstraktions-(denkprozess-)engine
+//              so zu entwerfen, dass sie so "ähnlichkeit" (oder gleichheit) diverser ANTEILIGER
+//              funktions-elemente überprüft (und ähnliches ..! ;-)´ und ganz von alleine alles,
+//              wo konkrete differenz ist, zu neuen funktionen zu machen, deren allgemeine basis
+//              die gleichen elemente sind etc. pp. ..! :-D
+//
+//
+
+
+
+
+global.file.path.basename = function(_paths, _suffices, _prefices)
+{
+        if(arguments.length === 0)
+                return global.file.path.basename.defaultReturn;
+
+        if(type(_paths, 'String'))
+                _paths = [ _paths ];
+
+        if(_paths.length === 0)
+                return global.file.path.basename.defaultReturn;
+
+        if(! _suffices)
+                _suffices = [];
+        else if(type(_suffices, 'String'))
+                _suffices = [ _suffices ];
+
+        if(! _prefices)
+                _prefices = [];
+        else if(type(_prefices, 'String'))
+                _prefices = [ _prefices ];
+
+        var result = [];
+
+        for(var i = 0; i < _paths.length; i++)
+        {
+                var one = global.node.path.basename(_paths[i]);
+
+                for(var j = 0; j < _suffices.length; j++)
+                        one = one.suffix(_suffices[j]);
+                for(var j = 0; j < _prefices.length; j++)
+                        one = one.prefix(_prefices[j]);
+
+                result[result.length] = one;
+        }
+
+        if(result.length === 1)
+                return result[0];
+
+        return result;
+}
+
+global.file.path.basename.defaultReturn = [];
+
+global.file.path.dirname = function(_paths, _suffices, _prefices)
+{
+        if(arguments.length === 0)
+                return global.file.path.dirname.defaultReturn;
+
+        if(type(_paths, 'String'))
+                _paths = [ _paths ];
+        
+        if(_paths.length === 0)
+                return global.file.path.dirname.defaultReturn;
+
+        if(! _suffices)
+                _suffices = [];
+        else if(type(_suffices, 'String'))
+                _suffices = [ _suffices ];
+
+        if(! _prefices)
+                _prefices = [];
+        else if(type(_prefices, 'String'))
+                _prefices = [ _prefices ];
+
+        var result = [];
+
+        for(var i = 0; i < _paths.length; i++)
+        {
+                var one = global.node.path.dirname(_paths[i]);
+
+                for(var j = 0; j < _suffices.length; j++)
+                        one = one.suffix(_suffices[j]);
+                for(var j = 0; j < _prefices.length; j++)
+                        one = one.prefix(_prefices[j]);
+
+                result[result.length] = one;
+        }
+
+        if(result.length === 1)
+                return result[0];
+
+        return result;
+}
+
+global.file.path.dirname.defaultReturn = [];

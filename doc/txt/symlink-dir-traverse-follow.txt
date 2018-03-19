@@ -1,0 +1,15 @@
+
+
+
+	# file.readlink.all*()
+
+		=> schrittweise auflösung von symlinks .. mit verzeichnis-"traversing" zur auswahl von
+			js-scripts in verzeichnis-hinein-gehen durch jeden symlink-resolve - so finden
+			der letzten 'main.js'
+
+			.. also sprich: während wir schrittweise symlinks auflösen, ist von schritt zu
+			schritt jew. ein datei-name vorliegend, in dem wir das nächste sub-verzeichnis
+			finden .. dort wieder ein nächstes sub-verz. auf basis des folgenden resolve'd
+			symlink usw. ... bis am ende kein link mehr steht, sondern konkrete datei - um
+			dann die letzte .js-datei zu wählen (bzw. main.js, passend unter directories);
+

@@ -1,0 +1,21 @@
+AKTIVE DATENBANK ...
+
+	.. sprich, wir hangeln/hebeln uns direkt am datenbestand! ...
+
+STRUCT @ object/* || w/ 3D
+
+	.. und der datenbestand wiederum durch eigene (zelluläre energie-)strukturen.
+
+	... wobei wir entweder direkt die "object/*" neu implementieren (beachte alle
+		reguläre oo-struktur für evtl. basis-zugriffe von seiten javascript);
+
+	... oder aber 3DScript-engine nutzen zur umsetzung mit eigenen token/symbolen
+	usw. ... o.ä. usw. ..
+
+
+
+jedenfalls, hebel/hangel ist das wichtigste ..
+
+	und zwar die oo-basis-objekte(-strukturen) direkt mit der datenbank "verschmolzen"
+	quasi; u.a. zur VIRTUALISIERUNG, aber auch für MAXIMALE EFFIZIENZ der zugriffe! ..
+

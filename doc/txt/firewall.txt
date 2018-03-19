@@ -1,0 +1,14 @@
+Firewall
+
+Nicht zu vergessen aber auch die Firewall … eine globale „Betrachtung“ aller Netzwerk-Aktivität(en)!
+
+Klar wollte ich das so u.a. mit einer Ban-List lösen (siehe eigene Datenbank zur Sicherung), dass
+jeder Ban() mit Zeit-Dauer so durchgeführt wird, dass die Endzeit des Bands mit in die Tabelle/Liste
+kommt. Findet nun ein Netzwerk-Zugriff von solcher bestimmten IP-Adresse statt (oder auch Benutzer-
+Accounts oder div. andere Attribute denkbar – und sinnvoll!), so wird der Ban erst dann gelöst/gelöscht,
+wenn der aktuelle Zeitpunkt hinter dem eingetragenen liegt. Sonst wird der Netzwerk-Zugriff blockiert!
+
+
+Stream(ing)-Processor(s)
+
+Eine Daten-Filterung wäre ziemlich optimal. Falls es z.B. darum geht, keine Tunnel zulassen zu möchten.

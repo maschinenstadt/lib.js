@@ -1,0 +1,19 @@
+{
+  "name": "maschinenstadt",
+  "version": "2.11.6",
+  "description": "My personal JavaScript / Node.js library (and interpreter) extension(s).",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/maschinenstadt/lib.js.git"
+  },
+  "author": "Sebastian 'Kuchen' Kucharczyk <geleeschaumgummi@gmail.com> (https://kekse.biz/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maschinenstadt/lib.js/issues"
+  },
+  "homepage": "https://kekse.biz/?page:lib.js"
+}

@@ -1,0 +1,37 @@
+
+
+
+
+
+
+	>> Keep a track of each object's origins.
+
+
+.. bester ratschlag. das kann man gut beobachten, um einen workaround gegen zirkuläres zu erhalten. eh?! ;-)´
+
+
+
+
+
+
+
+
+	>>
+	>> The reason your deep copy is having problems is because you're ending up with circular object references.
+	>>
+	>> < https://stackoverflow.com/questions/597588/how-do-you-clone-an-array-of-objects-in-javascript >
+	>>
+
+
+
+		=> @ 'toString'
+
+			@ 'String': (_depth) (bzw radix) für tab-tiefen-versch-anzahl .. eigenes toString()!
+
+
+//
+// < https://www.ibm.com/developerworks/web/library/wa-memleak/wa-memleak-pdf.pdf >
+//
+// < https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management >
+//
+

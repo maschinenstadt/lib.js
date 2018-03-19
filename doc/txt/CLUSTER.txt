@@ -1,0 +1,22 @@
+(see "/node.js" @ "main.start()")
+
+	// < http://www.codingdefined.com/2014/07/use-of-cluster-in-nodejs.html >
+	// < https://nodejs.org/dist/latest/docs/api/cluster.html >
+
+reason for this: i want to use all the cpu cores AND NETWORK RESSOURCES parallel (that's
+one reason why i've implemented SYNC functions before ASYNC versions)...
+
+
+
+?> should i create some (local-/remote-)IPC communication protocol?
+
+
+
+that was an answer to many things in controlling/managing all the events/processes;
+.. and would be some more virtuality! .. (so maybe to combine with step-by-step extending
+codes to ("own"..) scripting (parse/render, .. @ object/node w/ own console(s) (streams)..
+
+
+
+=> PLUS: using NETWORK RESOURCES would be solved by this, too!! ...
+

@@ -1,0 +1,19 @@
+String.prototype.toText (...)
+
+
+
+    //TODO/
+    //strings abschneiden für eine darstellung in der konsole; so dass einzelne wörter
+    //*nicht* einfach getrennt werden wg. newline! .. sprich: erst passend gemäß aller
+    //<Space> wort-trennugen ...
+    //
+    //.. evtl sollte ich das auslagern, irgwndwo unter "./console/text.js" or so!? ;)
+    //(zusammen mit "toTable()" oder sowas .. eben für bestmögliche console-tabellen!
+
+}
+
+String.prototype.toTable (...)
+
+
+	// gehört evtl. mit forms/?
+

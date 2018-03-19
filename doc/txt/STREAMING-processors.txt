@@ -1,0 +1,257 @@
+wie wäre es am anfang damit, bloß die prozess-STDIO über's netzwerk zu leiten, statt nur localhost;
+.. damit quasi applikationen so wie gewünscht über's netzwerk laufen (also nur GUI||I/O am client)?
+
+daraus könnte man alles weitere einleiten .. oder? ;-)´ ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	Stream(ing)-Processor(s)
+
+
+IPC w/ Threads - auch im Netzwerk. …
+
+Ich verwende einfach ein eigenes Messaging-Protokoll sowie eigene Call-Stacks mit Message-Queue(s)
+… und virtualisiere alle Funktions-Aufrufe, die einfach lokal (unter den Threads) sowie im Netzwerk
+(verteilte CPUs – u.a. … ;-)´ durch dort jeweils verfügbare Streams interpretiert und zum Aufruf
+gebracht werden.
+
+Dazu implementiere ich meine eigenen …
+
+	Function.prototype.call();
+	Function.prototype.apply();
+
+… und setze ganz auf die „EventTable“, die in Richtung Raumzeit-Vektoren bis zu einer Art
+Nebenläufigkeits-Analyse reichen dürften. … wobei diese beiden „Function“-Methoden meine globale
+EVENT-Basis (evtl. umgesetzt mit verschachtelten Arrays, ganz im Quantensystem-Sinne!?) so bilden,
+wo auch die Rückgabe der Prozesse jeweils so abgewartet wird, dass ich direkt auch die/das SW-
+Taktungs-Schritte-Zählung(s-Protokoll) anwenden kann (dass nun im nächsten Schritt das neuronale
+Netzwerk beginnen könnte ;-)´ ...!
+
+Im Prinzip denke ich an PSYC-Pakete und [ein] höhere[s] ROUTING(-Tabellen), wo alle Objekte und
+Funktionen via URL mitsamt UUID-Hash()-Fragment adressierbar werden. Der Datenaustausch allein
+ist nun noch wichtig, evtl. benötige ich dafür meinen MASTER-Prozess? … btw: das ROUTING sollte
+mit Objekten direkt arbeiten, die ihrerseits jeweils eine ganz eigene URL o.ä. Netzwerk-Adresse
+erhalten.
+
+Jedenfalls geht‘s um Pipeline-Konstruktionen und die Synchronisation von Streams, bis in‘s Netzwerk
+hinein also. Sowie die Objekt-Konsolen und ihre ganz eigene Parse()- und Render()-Funktionalität, die
+auch in verschiedenen Formaten/Protokollen/… erfolgen könnte (evtl. hier w/ INPUT-/OUTPUT-Formaten)!
+
+
+
+(1D-)Abstraktion
+
+Ich muss das ganze Prinzip „Software“ noch einmal in Grundlagenforschung auseinander nehmen bestenfalls.
+Und sollte neben („erweiterten“) Algorithmen auch noch die Datenstrukturen (mit (De-)Serialisierung usw.)
+weiter überbedenken … was so weit geht, dass eine 1D-String-/Prozess-(/Stream-)Abstraktion zu virtuellen
+nD-(Raumzeit-)Strukturen (bzw. Arrays in Arrays etc.) führte. Woraus auch Datenbank(/Dateisystem)
+resultieren sollten. So oder so, wenn eine 1D-Abstraktion statt findet, muss alles am Ende durch
+raumzeitliche (Abstands-/Größen-)Zählungen (die wiederum zur „EventTable“ gehen dürften o.ä. …) weiter
+quantifiziert werden.
+
+
+
+Konversion(s-Mapping(s))
+
+Im Prinzip geht‘s sogar hin zur ganz eigenen Script-Syntax (wobei JavaScript-Kompatibilität evtl. wichtig
+sein könnte … also für „lib.js“?) … diese wird durch Konversions-Hebelungs-Übersetzungen zurück in
+JavaScript-Evaluierung gebracht.
+
+
+
+Rechenzeit? Speicherplatz!
+
+Durch die Verwendung vieler (dezentraler!) Streams, Call-Stacks, Message-Queues, … etc. können letztlich
+Remote-Ressourcen und daraus Rechenzeit sogar im Netzwerk umverteilt werden. Ganz einfache Basis eigentlich.
+Einzige Frage wäre nun, wie die Daten einerseits gesichert (oder ganz anonym) gehalten werden können, ...
+andererseits, wie ich den verteilten Speicherplatz besser nutzen könnte. … neben Rechenzeit ist ja auch
+Speicherplatz hier sinnvoll!
+
+
+
+Umverteilung
+
+Eventuell wäre es sinnvoll, größere Abstände der Nutzung verteilter IP-Knoten zu bewahren. Wenn wir nämlich
+mit konkreten Datenwerten kommunizieren, so lässt sich bei „hoher Periodizität“ eher ableiten, welche Daten
+wir verarbeiten usw. (aber auch diese Lösung ist keine Garantie auf Sicherheit!); …
+
+Jedenfalls sieht die eine, erste Basis nun so aus, dass wir min. eine Queue an Nachrichten (und damit nun
+(potentiellen) Funktions-Bewegungen) haben, wobei diese nun so durchlaufen wird, dass jede ausgeführte Einheit
+einfach (Modulo % Nachbar-Knoten) der Reihe nach umverteilt werden (sowohl rein lokal wie auch im Netzwerk).
+Das wichtige hierbei ist eben die Kommunikation bzw. Synchronisation der Daten, also v.a. der Prozess-Rückgabe-
+Ergebnisse (und die Synchronisation zwischen Prozessen ist auch wichtiger Punkt – hier zu lösen, vermute ich?)!! …
+
+
+
+Remote-Prozesse w/ URL (und (UUID-)Hash()-Fragment ‚#‘)
+
+Im übrigen wäre eine übergreifende Protokoll-Behandlung überlegenswert … wo die Adressen mit Protokoll-/Scheme-
+Codierung jeweils passend/übersetzt umgesetzt werden könnten … also auch HTTP-REST-Nutzbarkeit bspw. … hier wäre
+evtl. am besten, wenn ich mich auf mein eigenes Protokoll (so wie mit PSYC ;-)´ als Mittelpunkt/Basis berufe,
+von dem und in welches alle anderen Netzwerk-Pakete einfach hin/her konvertiert(/abgebildet) werden könnten.
+
+Ich bräuchte dann also nicht viel mehr „Hebelungen“, um zwischen vielen Protokoll-Konstellationen alles "global"
+übersetzbar zu halten, sondern ich konvertiere hin/her mit Hilfe von „PSYC“ (o.ä.), zu welchem dann nur relativ
+wenige Konversions-Mappings (FS-Strukturen bspw. … „./+Ziel/-Quelle“) notwendig sein würden!! :-D´
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	Basics
+
+
+
+Der STACK
+
+Funktions-Aufrufe bilden einen STACK OF FRAMES: wird die eine erste solche aufgerufen, wird ein erstes „Frame“
+erzeugt, in welchem sich die Argumente/Parameter sowie lokale Variablen befinden. Wenn nun eine zweite Funktion
+(darin) aufgerufen wird, so wird ein nächster „Frame“ direkt auf den STACK gelegt. Dort wiederum die neuen 
+Parameter/Argumente und (dort wiederum ansässigen) lokalen Variablen. … sobald eine Funktion zurück gibt,
+so wird auch ihr „Frame“ vom Stack (zurück-/ab-)geholt.
+
+
+
+Eventuelle Optimierbarkeit #1
+
+Eventuell wäre hier eine denkbare „Optimierung“ möglich, dass bei mehrfach geöffneten, gleichen Funktionen nur
+ein Frame je Funktion steht, dass darin wiederum eine optimierte Daten-Anordnung o.ä. geschehen könnte? …
+
+
+
+HEAP w/ eventueller Optimierbarkeit #2
+
+Zweite Idee wäre, ob wir nicht einen HEAP einsetzen, der auf einer 2D-Form der Multiplikation der „Frames“ bzw.
+(„Stack“ * „Queue“) o.ä. basiert, bereits also in eine erste (2D-)(Vektor-)Raumzeit-Form übergehen könnte?!?
+
+Zumal zu überlegen ist, dass „HEAP“ wohl häufig auch mal auf einer BAUM-Strukturierung basiert?!
+
+
+
+(Message) QUEUE
+
+Eine Liste, z.B. mit Funktionen (o.ä. … URLs? ^_^), wo der älteste Eintrag zuerst behandelt wird. Also zum
+Aufruf gebracht wird. …
+
+
+
+Eventuelle Optimierbarkeit #3
+
+Hier besteht wiederum potential zur Optimierung. In vielerlei Hinsicht und bis hin zum ASYNC (Event/PUSH(?!))
+Prinzip?! …
+
+
+
+EVENT LOOP
+
+	while(queue.waitForMessage()) {
+		queue.processNextMessage();
+	}
+
+Ich könnte bspw. mit ZEIT-STEMPEL(n) dazu arbeiten, dass diverse Prozesse erst zu bestimmten Zeiten oder nach
+diversen Wartezeiten ablaufen. Was u.a. sinnvoll wäre für eigene „Timer“-Funktionalität (setTimeout etc. … fast
+schon mit CRONJOB-Ähnlichkeit ;-)´ … ganz davon ab natürlich auch Prozess-Priorisierbarkeit … bzw. die allgemeine
+Abarbeitung der Nachrichten (etc.) in diversen, möglicherweise optimierten „Anordnungen“?!
+
+
+
+Eventuelle Optimierbarkeit #4
+
+Vor allem würde ich direkt in die Message-Queue bzw. Event-Loop eine Abfrage integrieren, um für jede gerade
+aktuelle Funktion o.ä. zu prüfen, ob diese bereits fertig ist quasi … oder ob sie noch auf diverse Daten wartet
+o.ä. … [wie auch immer das genau/überall zu strukturieren wäre …] (!!!) …
+
+Vermutlich wäre eine sinnvolle Struktur hierzu, dass wir bspw. für jede einzelne Funktion ihre eigene Queue
+verwenden, die wir alle passend in einer BAUM-Struktur dazu verschachteln könnten, dass nicht jede einzelne
+Kausalität alles schön „ordentlich“ abarbeitet, sondern dass wir zwischen vielen solchen „Prozess-Listen“ (als
+Queue also) hin und her schalten – im „Context“-Sinne (siehe CPU-Threads z.B.) …
+
+ZUMAL wir hier auch die protokollierte Abzählung im Protokoll von (Taktungs-)Raum- und Zeit-Koordination
+durchführen könnten … sprich, eine Einsetzung der „Abstands-Vektoren“ gewissermaßen … die (evtl.. wohl auch
+natürliche, min. aber …) Prozess-Zeit zwischen den Funktionen mit weiteren etc. pp. …
+
+Vor allem die Abstände sind interessant, da sie in Richtung „Nebenläufigkeiten analysieren“ gehen dürften!?!! :-D´
+
+Und z.B. auch denkbar (Richtung Priorisierung), dass wir einstellen (ob nun global und/oder relativ zu div.
+Attributen, bspw. dem User oder dem IP-Link), wieviele male jede Funktion der Queue(s) überprungen werden sollte
+(also je Abfrage direkt (Function[0]++ o.ä.)), um erst nach wiederholter Abfrage/Erscheinung einer solchen Funktion
+diese auch zu „prozessieren“. … dieses Ganze wäre natürlich sehr vorteilhaft zusammen mit Raumzeit-Vektoren, die
+wir einsetzen sollten.
+
+
+
+Speicher und Raumzeit-Vektoren
+
+Ganz klar, wenn wir eine (min.!) 2D-Abzählung schon einmal haben, so können wir den Speicher ebenso „formen“ …!
+Und apropos Speicher: bitte hier auch nicht die „Garbage Collection“ vergessen, hm‘k? (^_^)° …
+
+
+
+EVENT TABLE & EVENT QUEUE
+
+Every time you call a setTimeout() or you do some async. operation, it is added to the Event Table. This is a
+data structure which knows that a certain function should be triggered after a certain event. Once that event
+occurs (timeout, click, mouse move, …) it sends a notice. Bear in mind that the Event Table does not execute
+functions and does not add them to the call stack on it‘s own. It‘s sole purpose is to keep track of events
+and send them to the Event Queue.
+
+The Event Queue is a data structure similar to the stack – again you add items to the back but can only
+remove them from the front. It kind of stores the correct order in which the functions should be executed.
+It receives the function calls from the Event Table, but it needs to somehow send them to the Call Stack?
+This is were the Event Loop comes in. …
+
+
+
+INFO
+
+>> Ist der Stack leer, werden Messages auf der Queue in den Stack verschoben und verarbeitet.
+
