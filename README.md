@@ -133,7 +133,7 @@ by file name w/o extension as key and w/ UPPER CASE keys, if the file had the
 #### File functions
 Mainly "readlink()" (with all sub's) has been finished again. It will be used
 for different purposes .. if you'd like to find out more, change into the sub
-directory './example' to run `./symlinks.js --debug=8` (won't work from other
+dir 'example/readlink' to run `./symlinks.js --debug=4` (not working in other
 directories - as 'process.cwd()' is considered there). You would like to look
 to the area 'Process'. ;-)´
 

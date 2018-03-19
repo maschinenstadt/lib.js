@@ -1,0 +1,1 @@
+../../../example/readlinks/symlinks/test.1.js

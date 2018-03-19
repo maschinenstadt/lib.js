@@ -638,7 +638,7 @@ global.file.stat.resolve = function(_path)
 
 global.file.mode = function(_path, _resolveSymlinks = false)
 {
-	// see "util/mode" ..
+	// see "doc/txt/file.modes.txt". ..
 
 	var stats = global.file.stat(_path, _resolveSymlinks);
 	return ( stats ? stats.mode : undefined );
