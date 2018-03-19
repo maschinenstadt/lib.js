@@ -84,11 +84,7 @@ right now: there's missing my "glob()" to search for names - at the moment we
 can just search for different file TYPE (directory, file, symlink, character,
 block, socket, fifo). .. and (b) IT IS REALLY SLOW - compared to `find`! BAD!
 
-Could anyone please look at my script code(s) in "main/020_file.js" at (1017)
-and send me a comment, why this is so much slower! Bad, bad. ... and sure, we
-can use `find` as child_process, but that's not what I'd really like to see!!
-
-I will extend the "file.find()" functionality to some nice things (including:
+And I'll extend my "file.find()" functionality to some nice things (including
 `xargs` or other "filter" functionality for arrays w/ paths; with conversions
 from path lists to real "new File()" structures (which will be used by my own
 database, too).
