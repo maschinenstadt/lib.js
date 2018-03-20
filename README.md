@@ -72,7 +72,8 @@ Uuuh, forgot one thing: just added the parameter "radix" to "get()", so it is
 about to jump over elements with gaps or intervals in between. So if you will
 argue (-2) for the third argument, the result will be build upon jumping from
 e.g. 7 to 5 to 3 to 1 (and more repetitions) - or with (+2) it will be 1 to 3
-to 5 to 7. ... this could be a helpful feature.
+to 5 to 7. ... this could be a helpful feature (but think about some negation
+of negation! BOTH negative "length" AND "radix" result in [ (- * -) = (+) ])!
 
 Now don't forget to look at the example code in "example/array/get.js"!! ;-)´
 
