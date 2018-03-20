@@ -1,3 +1,21 @@
+// INFO: JavaScript only supports (53) bit integers..!!
+// 
+// < https://javascript.info/number >
+// < http://mathjs.org >
+//
+// TODO: own "BigNumber" bis "Figure"(!! w/ abstraction and vectors etc.).
+//
+// < http://www.joseprio.com/blog/2013/04/27/biginteger-libraries-for-js/ >
+// < http://2ality.com/2012/07/large-integers.html >
+// < https://stackoverflow.com/questions/36826748/how-to-convert-strings-to-bigint-in-javascript >
+// < http://peterolson.github.io/BigInteger.js/ >
+// < https://github.com/rauschma/strint >
+// < https://github.com/substack/node-bigint >
+// < https://github.com/tc39/proposal-bigint >
+// < https://silentmatt.com/biginteger/ >
+// < https://github.com/MikeMcl/decimal.js/ >
+// < http://mathjs.org/docs/datatypes/bignumbers.html >
+
 if(! BROWSER)
 {
 	module.exports = Number;
@@ -66,8 +84,10 @@ Number.from = function(_string, _radix = 10)
 	return parseInt(_string, _radix);
 }
 
-Number.prototype.to = function(_radix = 10)
+Number.prototype.to = function(_radix = 10, _padding)
 {
+	//TODO/ _padding .. add "0"'s before number string.. optional.
+
 	// this ist just the default javascript radix conversion..
 	// i('ll) have my own, better version in "util/radix(.js)"
 
