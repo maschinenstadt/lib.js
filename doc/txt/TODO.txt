@@ -4,6 +4,8 @@
 
 	=> davon ab sollte ich passende codes zur (de-)serialisierung für meine eigene datenbank. ..
 
+		=> siehe auch "util/radix.js" ;-D´
+
 # fs-listen-mapping/-filter (array-aktionen und coreutils)
 # file.mode() w/ array-filter
 # array-filter w/ prefix/suffix, relativeTo und XARGS(!)
