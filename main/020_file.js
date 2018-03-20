@@ -496,7 +496,8 @@ global.file.list = function(_path, _suffix = [], _prefix = [], _inverse = false,
 	{
 		if(global.type(_path, 'String'))
 		{
-			_path = global.file(_path);
+			//_path = global.file(_path);
+			_path = global.nodejs.path.resolve(_path);
 		}
 		else
 		{
@@ -624,8 +625,7 @@ global.file.stat = function(_path, _resolveSymlinks = false)
 	}
 	catch(_error)
 	{
-		//return _error;
-		return null;
+		return _error;
 	}
 
 	return stats;
@@ -666,6 +666,11 @@ global.file.type = function(_path, _resolveSymlinks = false)
 {
 	var stats = global.file.stat(_path, _resolveSymlinks);
 
+	if(not(stats))
+	{
+		return 'unknown';
+	}
+
 	if(stats.isFile())
 		return 'file';
 	if(stats.isDirectory())
@@ -686,44 +691,42 @@ global.file.type = function(_path, _resolveSymlinks = false)
 
 global.file.type.file = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isFile() : false );
+	return 'file' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.type.directory = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isDirectory() : false );
+	return 'directory' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.type.symlink = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isSymbolicLink() : false );
+	return 'symlink' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.type.block = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isBlockDevice() : false );
+	return 'block' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.type.character = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isCharacterDevice() : false );
+	return 'character' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.type.socket = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isSocket() : false );
+	return 'socket' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.type.fifo = function(_path, _resolveSymlinks = false)
 {
-	var stats = global.file.stat(_path, _resolveSymlinks);
-	return ( stats ? stats.isFIFO() : false );
+	return 'fifo' === global.file.type(_path, _resolveSymlinks);
+}
+
+global.file.type.unknown = function(_path, _resolveSymlinks = false)
+{
+	return 'unknown' === global.file.type(_path, _resolveSymlinks);
 }
 
 global.file.readlink = function(_path, _resolve = false, _encoding = global.settings.encoding)
@@ -1023,14 +1026,12 @@ global.file.xargs = function(/* TODO */)
 // necessary: own "class File" .. for my own fs-db and maybe for fuse. and for own, BETTER file operations (instead of pure path lists..)
 //
 
-global.file.find = function(_path = '/', _types = [], _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find = function(_path = '/', _depth = 1, _types = [], _glob = '*', _caseSensitive = true, _inverse = false, _encoding = global.settings.encoding, _currentDepth = 1)
 {
-	//TODO/ maybe w/ "_encoding = global.settings.encoding" as arg? THEN ALSO at those func. below (same but w/ types)!
-	var _encoding = global.settings.encoding;
-
 	//TODO/ .. accept MULTIPLE *_path* and call every with this function .. better search ... (todo: abs. vs. rel. paths in result arr..)
+	//TODO/ _glob w/ _caseSensistive .. && "_inverse" => wie `grep -v` .. alles im _glob liegende wird NICHT gezählt, der nicht matchende rest schon.. ^-^
 
-	var result = [];
+	var result;
 
 	try
 	{
@@ -1039,19 +1040,12 @@ global.file.find = function(_path = '/', _types = [], _glob = '*', _caseSensitiv
 			_types = [ _types ];
 		}
 
-		var types;
+		var types = [];
 
 		if(global.type(_types, 'Array'))
 		{
-			types = [];
-
 			for(var i = 0; i < _types.length; i++)
 			{
-				if(! global.type(_types[i], 'String'))
-				{
-					continue;
-				}
-
 				switch(_types[i])
 				{
 					case 'file':
@@ -1065,64 +1059,42 @@ global.file.find = function(_path = '/', _types = [], _glob = '*', _caseSensitiv
 						continue;
 					case 'unknown':
 					default:
-						return new Error(_types[i]);
+						continue;
 				}
 			}
 		}
-		else
+
+		//!??!??!!??
+		//_path = global.nodejs.path.resolve(_path);
+
+		if(! global.file.exists(_path))
 		{
-			types = [];
+			return [];
 		}
 
-		//also ///TODO:
-		//_path = global.file.path(_path);
-
+		result = [ _path ];
 
 		if(global.file.type.directory(_path))
 		{
-			var ls = global.file.list(_path, [], [], false, _encoding);
+			var res = global.file.list(_path, [], [], false, _encoding);
 
-			for(var i = 0; i < ls.length; i++)
+			for(var i = 0; i < res.length; i++)
 			{
-				var elem = global.nodejs.path.join(_path, ls[i]);
-				var type = global.file.type(elem);
-				var res = [];
+				var p = result[result.length] = global.nodejs.path.join(_path, res[i]);
 
-				for(var j = 0; j < types.length; j++)
+				if(_depth === 0 || (_currentDepth < _depth))
 				{
-					if(types[j] === type)
+					if(global.file.type.directory(p))
 					{
-						result[result.length] = elem;
-					}
-				}
+						var subRes = global.file.find(p, _depth, types, _glob, _caseSensitive, _inverse, _encoding, _currentDepth + 1);
 
-				if(global.file.type.directory(elem))
-				{
-					res = global.file.find(elem, _types, _glob, _caseSensitive, _depth, _currentDepth + 1);
-				}
-
-				for(var j = 0; j < res.length; j++)
-				{
-					result[result.length] = res[j];
-				}
-			}
-		}
-		else
-		{
-			if(global.file.exists(_path))
-			{
-				var type = global.file.type(_path);
-
-				for(var i = 0; i < types.length; i++)
-				{
-					if(types[i] === type)
-					{
-						return [ _path ];
+						for(var j = 0; j < subRes.length; j++)
+						{
+							result[result.length] = subRes[j];
+						}
 					}
 				}
 			}
-
-			return [];
 		}
 	}
 	catch(_error)
@@ -1130,57 +1102,86 @@ global.file.find = function(_path = '/', _types = [], _glob = '*', _caseSensitiv
 		return _error;
 	}
 
-	//TODO/ array result w/ (relative and/or absolute?) PATH strings .. then maybe own (fs) "resource"!???
-	//
-	return result;
+	if(not(types))
+	{
+		return result;
+	}
+
+	//TODO/ globs, inverse, .. etc.! minimum..
+
+	var realResult = [];
+
+	for(var i = 0; i < result.length; i++)
+	{
+		var t = global.file.type(result[i], false);
+		var ok = ( types.length === 0 ? true : false );
+
+		for(var j = 0; j < types.length; j++)
+		{
+			if(types[j] === t)
+			{
+				ok = true;
+				break;
+			}
+		}
+
+		if(_inverse) ok = !ok;
+
+		if(ok)
+		{
+			realResult[realResult.length] = result[i];
+		}
+	}
+
+	return realResult;
 }
 
-global.file.find.file = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.file = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'file', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'file', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.find.directory = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.directory = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'directory', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'directory', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.find.symlink = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.symlink = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'symlink', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'symlink', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.find.block = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.block = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'block', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'block', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.find.character = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.character = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'character', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'character', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.find.socket = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.socket = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'socket', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'socket', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.find.fifo = function(_path = '/', _glob = '*', _caseSensitive = true, _depth = 0, _currentDepth = 1)
+global.file.find.fifo = function(_path = '/', _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return global.file.find(_path, 'fifo', _glob, _caseSensitive, _depth, _currentDepth);
+	return global.file.find(_path, _depth, 'fifo', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
-global.file.count.lines = function(_delim = global.EOL, _path, _glob, _depth = 0, _currentDepth = 1)
+global.file.count.lines = function(_delim = global.EOL, _path, _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
 	//_delim is by default EOL (global.EOL)
 }
 
-global.file.count.words = function(_delim = ' ', _path, _glob, _depth = 0, _currentDepth = 1)
+global.file.count.words = function(_delim = ' ', _path, _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
 	//_delim is by default ' ' <Space>
 }
 
-global.file.count.bytes = function(_path, _glob, _depth = 0, _currentDepth = 1)
+global.file.count.bytes = function(_path, _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
 	var b = global.file.size(_path, false);
 	//
@@ -1189,12 +1190,12 @@ global.file.count.bytes = function(_path, _glob, _depth = 0, _currentDepth = 1)
 	return b;
 }
 
-global.file.count.bits = function(_path, _glob, _depth = 0, _currentDepth = 1)
+global.file.count.bits = function(_path, _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
-	return (global.file.count.bytes(_path, _glob, _depth, _currentDepth) * 8);
+	return (global.file.count.bytes(_path, _depth, _glob, _currentDepth) * 8);
 }
 
-global.file.hash = function(_path, _inRadix = 256, _outRadix = 256, _depth = 0, _currentDepth = 1)
+global.file.hash = function(_path, _depth = 1, _inRadix = 256, _outRadix = 256, _currentDepth = 1)
 {
 	//own hash.. w/ multiple radices.. bit/byte-count..
 	//
@@ -1220,7 +1221,7 @@ global.file.hash = function(_path, _inRadix = 256, _outRadix = 256, _depth = 0, 
 	//und kann ja sowieso in sync'ed ausgabe enden (hier eben, w/o ".async" (much TODO, btw))..
 }
 
-global.file.hash.sha3 = function(_path, _bitSize = 512, _depth = 0, _currentDepth = 1)
+global.file.hash.sha3 = function(_path, _depth = 1, _bitSize = 512, _currentDepth = 1)
 {
 	switch(_bitSize)
 	{
@@ -1234,7 +1235,7 @@ global.file.hash.sha3 = function(_path, _bitSize = 512, _depth = 0, _currentDept
 	}
 }
 
-global.file.grep = function(_path, _string, _caseSensitive = true, _inverse = false, _depth = 0, _currentDepth = 1)
+global.file.grep = function(_path, _depth = 1, _string, _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
 	//TODO/
 }

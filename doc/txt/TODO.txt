@@ -1,10 +1,9 @@
 ------------------------------------------------------------------------------------------------------
 
-# bring better performance to "file.find()" .. maybe filter out everything AFTER a whole file list..!!?
-
 # fs-listen-mapping/-filter (array-aktionen und coreutils)
 # file.mode() w/ array-filter
 # array-filter w/ prefix/suffix, relativeTo und XARGS(!)
+# .. sowie auch alle durchlaufen für summation der file-GRÖßEN!! ;-)´
 # new File(); .. w/ list-to-struct(s) (@ arr-filter)
 # website+news+todo+docs+wiki+issues/forum+git w/ api @ net/http+git+smtp+nntp+irc
 # uuid & services w/ account @ dyndns+space
