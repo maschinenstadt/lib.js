@@ -129,7 +129,7 @@ try to regularily "require()" original "Node.js" or "npm.js" modules.
 
 If these files export something ("module.exports = {}"), it will be available
 by file name w/o extension as key and w/ UPPER CASE keys, if the file had the
-'.json' extension: in "global.home"! There are all of your "/home/*" exports.
+'.json' extension. @"[global.]home": there are all of your "/home/*" exports!
 
 
 #### File functions

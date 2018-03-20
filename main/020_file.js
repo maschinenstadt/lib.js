@@ -392,7 +392,7 @@ global.file.readStream = function(_path, _options = {})
 		return undefined;
 	}
 
-	_options = Object.assign(global.file.readStream.options, _options);
+	_options = Object.assign(global.file.readStream.options, _options || {});
 	//
 	return global.nodejs.fs.createReadStream(_path, _options);
 }
@@ -421,7 +421,7 @@ global.file.writeStream = function(_path, _options = {})
 		return undefined;
 	}
 
-	_options = Object.assign(global.file.writeStream.options, _options);
+	_options = Object.assign(global.file.writeStream.options, _options || {});
 	//
 	return global.nodejs.fs.createWriteStream(_path, _options);
 }

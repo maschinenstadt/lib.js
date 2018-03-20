@@ -1,18 +1,13 @@
 var main = module.exports = {};
 
 //global.console.trace(!!)
+// < https://nodejs.org/api/readline.html >
 
-global.console.prompt = function(_prompt = '> ')
-{
-	global.console.write(_prompt);
-	return global.console.read();
-}
-
-global.console.read = function()
-{
-	// < https://nodejs.org/api/readline.html >
-}
-
+/*	TODO!!!!
+ *	TODO!!!
+ *	!!TODO
+ *	!!!TODO!
+ *
 //TODO/!!!!!!!!!!!!! (as better replacement for "console.inspect()" (or additionally?!?)
 global.console.object = function(_object, _depth, _currentDepth)
 {
@@ -69,57 +64,40 @@ global.console.object.depth = 4;
 global.console.object.arrayLength = 8;
 global.console.object.indentStr = ' ';
 global.console.object.indentTab = 4;
+*/
 
-/*
-global.console.size = function()
-{
-	return [
-		global.console.size.width(),
-		global.console.size.height()
-	];
-}
+global.console.stream = global.process.stdout;
+global.console.errorStream = global.process.stderr;
 
-global.console.size.width = function()
-{
-	return global.process.stdout.columns;
-}
-
-global.console.size.height = function()
-{
-	return global.process.stdout.rows;
-}*/
 Object.defineProperty(global.console, 'size', {
 	get: function() { return {
-		width: global.process.stdout.columns,
-		height: global.process.stdout.rows,
+		width: global.console.stream.columns,
+		height: global.console.stream.rows,
 
-		rows: global.process.stdout.rows,
-		cols: global.process.stdout.columns,
-		columns: global.process.stdout.columns,
+		rows: global.console.stream.rows,
+		cols: global.console.stream.columns,
+		columns: global.console.stream.columns,
 
-		0: global.process.stdout.columns,
-		1: global.process.stdout.rows
+		x: global.console.stream.columns,
+		y: global.console.stream.rows,
+
+		0: global.console.stream.columns,
+		1: global.console.stream.rows
 	}; } });
 
-global.console.EOL = function(_count = 1, _padStr, _width, _stream)
+global.console.EOL = function(_count = 1, _padStr = '', _width = global.console.size.width, _stream = global.console.stream)
 {
-	if(_width !== 0)
+	if(global.type(_stream, 'Boolean'))
 	{
-		_width = _width || global.console.size.width || 0;
+		_stream = ( _stream ? global.console.stream : undefined );
 	}
-
-	if(_stream !== false)
+	else if(! global.type(_stream, 'Object'))
 	{
-		_stream = _stream || global.process.stdout;
-	}
-
-	if(! _padStr)
-	{
-		_padStr = undefined;
-		_width = 0;
+		_stream = undefined;
 	}
 
 	var result = '';
+	var kk = 0;
 
 	for(var i = 0; i < _count; i++)
 	{
@@ -129,7 +107,7 @@ global.console.EOL = function(_count = 1, _padStr, _width, _stream)
 			continue;
 		}
 
-		for(var j = 0, k = 0; j < _width; j++, k = ((k+1) % _padStr.length))
+		for(var j = 0, k = kk; j < _width; j++, kk = k = ((k+1) % _padStr.length))
 		{
 			result += _padStr[k];
 		}
@@ -145,11 +123,10 @@ global.console.EOL = function(_count = 1, _padStr, _width, _stream)
 	return result;
 }
 
-global.console.inspect = function(_object, _depth, _options, _stream, _colors)
+global.console.inspect = function(_object, _depth = 2, _options = {}, _colors = true, _stream = global.console.stream)
 {
-	_options = _options || {};
-	_options = Object.assign(global.console.inspect.options, _options);
-	_options.colors = _options.colors || ( _colors !== false );
+	_options = Object.assign(global.console.inspect.options, _options || {});
+	_options.colors = ( global.type(_colors, 'Boolean') ? _colors : _options.colors );
 
 	/*
 	 * => anderes verhalten als util.inspect ..
@@ -172,21 +149,20 @@ global.console.inspect = function(_object, _depth, _options, _stream, _colors)
 		_options.depth = _depth - 1;
 	}
 
-	if(_stream !== false)
+	if(global.type(_stream, 'Boolean'))
 	{
-		_stream = _stream || global.process.stdout;
+		_stream = ( _stream ? global.console.stream : undefined );
 	}
-	else if(global.type(_stream, 'Boolean'))
+	else if(! global.type(_stream, 'Object'))
 	{
-		_stream = global.process.stdout;
-		_options.colors = (_stream !== false);
+		_stream = undefined;
 	}
 
 	var data = global.nodejs.util.inspect(_object, _options);
 
 	if(_stream)
 	{
-		_stream.write(data + EOL);
+		_stream.write(data + global.EOL);
 	}
 
 	return data;
@@ -202,23 +178,29 @@ global.console.inspect.options = {
 	breakLength: global.console.size.width || 60
 };
 
-global.console.line = function(_padStr, _width, _stream)	//TODO/ _space_left _space_right (!??)
+global.console.line = function(_padStr = global.console.line.padStr, _width = global.console.size.width, _stream = global.console.stream)
 {
-	if(_stream !== false)
+	if(global.type(_stream, 'Boolean'))
 	{
-		_stream = _stream || global.process.stdout;
+		_stream = ( _stream ? global.console.stream : undefined );
 	}
-	_width = _width || global.console.size.width;
-	_padStr = _padStr || global.console.line.padStr;
+	else if(! global.type(_stream, 'Object'))
+	{
+		_stream = undefined;
+	}
 
 	var data = '';
 
 	for(var i = 0, j = 0; i < _width; i++, j = (j+1) % _padStr.length)
+	{
 		data += _padStr[j];
+	}
+
+	data += global.EOL;
 
 	if(_stream)
 	{
-		_stream.write(data += EOL);
+		_stream.write(data);
 	}
 
 	return data;
@@ -226,23 +208,29 @@ global.console.line = function(_padStr, _width, _stream)	//TODO/ _space_left _sp
 
 global.console.line.padStr = '-';
 
-global.console.left = function(_text, _padStr, _width, _stream)
+global.console.left = function(_text = '', _padStr = global.console.left.padStr, _width = global.console.size.width, _stream = global.console.stream)
 {
-	if(_stream !== false)
+	if(global.type(_stream, 'Boolean'))
 	{
-		_stream = _stream || global.process.stdout;
+		_stream = ( _stream ? global.console.stream : undefined );
 	}
-	_width = _width || global.console.size.width;
-	_padStr = _padStr || global.console.left.padStr;
+	else if(! global.type(_stream, 'Object'))
+	{
+		_stream = undefined;
+	}
 
 	var data = _text;
 
 	for(var i = data.length, j = 0; i < _width; i++, j = (j+1) % _padStr.length)
+	{
 		data += _padStr[j];
+	}
+
+	data += global.EOL;
 
 	if(_stream)
 	{
-		_stream.write(data += EOL);
+		_stream.write(data);
 	}
 
 	return data;
@@ -250,14 +238,16 @@ global.console.left = function(_text, _padStr, _width, _stream)
 
 global.console.left.padStr = global.console.line.padStr;
 
-global.console.center = function(_text, _padStr, _width, _stream)
+global.console.center = function(_text = '', _padStr = global.console.center.padStr, _width = global.console.size.width, _stream = global.console.stream)
 {
-	if(_stream !== false)
+	if(global.type(_stream, 'Boolean'))
 	{
-		_stream = _stream || global.process.stdout;
+		_stream = ( _stream ? global.console.stream : undefined );
 	}
-	_width = _width || global.console.size.width;
-	_padStr = _padStr || global.console.center.padStr;
+	else if(! global.type(_stream, 'Object'))
+	{
+		_stream = undefined;
+	}
 
 	var data = '';
 	//var centerPos = Math.floor(_width / 2) - Math.floor(_text.length / 2);
@@ -267,17 +257,23 @@ global.console.center = function(_text, _padStr, _width, _stream)
 	var j = 0;
 
 	for(; i < centerPos; i++, j = (j+1) % _padStr.length)
+	{
 		data += _padStr[j];
+	}
 
 	data += _text;
 	i += _text.length;
 
 	for(; i < _width; i++, j = (j+1) % _padStr.length)
+	{
 		data += _padStr[j];
+	}
+
+	data += global.EOL;
 
 	if(_stream)
 	{
-		_stream.write(data += EOL);
+		_stream.write(data);
 	}
 
 	return data;
@@ -285,26 +281,30 @@ global.console.center = function(_text, _padStr, _width, _stream)
 
 global.console.center.padStr = global.console.line.padStr;
 
-global.console.right = function(_text, _padStr, _width, _stream)
+global.console.right = function(_text = '', _padStr = global.console.right.padStr, _width = global.console.size.width, _stream = global.console.stream)
 {
-	if(_stream !== false)
+	if(global.type(_stream, 'Boolean'))
 	{
-		_stream = _stream || global.process.stdout;
+		_stream = ( _stream ? global.console.stream : undefined );
 	}
-	_width = _width || global.console.size.width;
-	_padStr = _padStr || global.console.right.padStr;
+	else if(! global.type(_stream, 'Object'))
+	{
+		_stream = undefined;
+	}
 
 	var data = '';
 	var endPos = _width - _text.length;
 
 	for(var i = 0, j = 0; i < endPos; i++, j = (j+1) % _padStr.length)
+	{
 		data += _padStr[j];
+	}
 
-	data += _text;
+	data += _text + global.EOL;
 
 	if(_stream)
 	{
-		_stream.write(data += EOL);
+		_stream.write(data);
 	}
 
 	return data;
@@ -313,14 +313,14 @@ global.console.right = function(_text, _padStr, _width, _stream)
 global.console.right.padStr = global.console.line.padStr;
 
 //TODO/ (wie bei err() below) "format()" quasi, wohl mit (s)printf()?!
-global.console.write = function(_message = global.EOL)
+global.console.stdout = function(_message = global.EOL)
 {
-	global.process.stdout.write(_message);
+	global.console.stream.write(_message);
 }
 
-global.console.writeError = function(_message = global.EOL)
+global.console.stderr = function(_message = global.EOL)
 {
-	global.process.stderr.write(_message);
+	global.console.errorStream.write(_message);
 }
 
 const _log = global.console.log;
@@ -332,33 +332,33 @@ global.console.log = function()
 	return Array.prototype.join.call(arguments, ' ');
 }
 
-global.console.info = function(_data)
+global.console.info = function()
 {
 	_log.apply(this, arguments);
 	return Array.prototype.join.call(arguments, ' ');
 }
 
-global.console.warning = function(_data)
+global.console.warning = function()
 {
 	_error.apply(this, arguments);
 	return Array.prototype.join.call(arguments, ' ');
 }
 
-global.console.error = function(_data)
+global.console.error = function()
 {
 	_error.apply(this, arguments);
 	return Array.prototype.join.call(arguments, ' ');
 }
 
-global.console.exception = function(_data)
+global.console.exception = function()
 {
 	_error.apply(this, arguments);
 	return Array.prototype.join.call(arguments, ' ');
 }
 
-global.console.debug = function(_level, _data)
+global.console.debug = function(_level)
 {
-	var args = [].slice.call(arguments);
+	var args = Array.from(arguments);//vs. "arguments.toArray()" ;-)´
 
 	if(global.type(_level, 'Number'))
 	{
