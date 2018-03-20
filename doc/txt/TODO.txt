@@ -7,6 +7,9 @@
 			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
 
 
+
+
+
 ------------------------------------------------------------------------------------------------------
 
 # file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)
@@ -37,14 +40,6 @@
 ------------------------------------------------------------------------------------------------------
 
 
-
-	# String.sprintf();
-	# String.prototype.sscanf();
-	# console.printf();
-	# console.scanf();
-
-
-
 	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
 
 		# überall in funktionen einen genauen check der parameter-übergabe(n) ...
@@ -61,6 +56,20 @@
 
 
 
+!!!	!!	@ VIRTUAL POLYMORPHY:
+
+==>			arguments.map(..); darin dann direkt aufruf via "arguments.callee[result]" (result je nach angenommener argv-zeile);
+  ===>>				.. wenn man nämlich jeder funktion einfach zusätzlich "func[-1, 0, (..)]" implementiert!! automatism rulez!!
+
+
+
+
+
+
+
+
+
+
 	# not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
 
 
@@ -74,6 +83,14 @@
 
 			=> ABER: gehts noch etwas effizienter und/oder "sauberer" ["formuliert"]!? ..
 
+
+
+
+
+	# String.sprintf();
+	# String.prototype.sscanf();
+	# console.printf();
+	# console.scanf();
 
 
 
