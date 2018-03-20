@@ -59,9 +59,9 @@ There you can see how i imagine the handling of basic "get()" access @ arrays
 and the sense of (_from) and (_length) - which can both also be NEGATIVE etc.
 
 I'm using negative values like with screen coordinates e.g., when I'm drawing
-with "<canvas>" e.g.: we just add() the negative(!) coordinate vectors to the
+with "canvas" e.g... we just add() the negative(!) coordinate vectors to your
 width or height of the monitor, page or anything, so we're subtracting values
-from the limits respectively the maximum coordinates. This is VERY USEFUL! ..
+from the limits respectively maximum coordinates. That's REALLY very helpful!
 
 In case you specify a negative "_length" (2nd argument to "get()"), we access
 the array in reverse order! Last but not least: if we specify *larger* values
