@@ -979,6 +979,10 @@ Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from)
 	{
 		_from = (this.length + _from) % this.length;
 	}
+	else
+	{
+		_from = _from % this.length;
+	}
 
 	if(! global.type(_length, 'Number'))
 	{

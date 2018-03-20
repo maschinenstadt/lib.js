@@ -1,3 +1,12 @@
+
+
+	WICHTIGST!!!
+
+		"test/WICHTIG-ARRAY.js" ..
+
+			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
+
+
 ------------------------------------------------------------------------------------------------------
 
 # file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)

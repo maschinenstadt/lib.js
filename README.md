@@ -49,6 +49,15 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Array BUG
+Important info: one big mistake happened! I can not access greater or smaller
+"index" (arg) values (which usually should be done by "modulo" (%)). Have not
+any time right now, but I'm gonna fix it (tomorrow maybe)!
+
+Also maybe I could optimize the routine(s) there, too. We'll see. ... but for
+now: PLEASE BE PATIENT. ^-^
+
+
 #### Array ("global/Array.js")
 Just for your info, even if it are just really small news - I do believe, the
 handling of arrays is very important for most reasons, so I'm mentioning it..
