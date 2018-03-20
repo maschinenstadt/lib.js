@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+try
+{
+
 global.path = { root: __dirname };
 //
 const _settings = global.path.root + '/settings.js';
@@ -224,4 +228,11 @@ if(global.settings.START)
 
 //
 module.exports = main.include;
+
+}
+
+catch(_error)
+{
+	console.error(_error.text);
+}
 

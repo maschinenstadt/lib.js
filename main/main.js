@@ -201,5 +201,3 @@ for(var i = 0; i < libraryPaths.length; i++)
 	}
 }
 
-//global.node = main.node = include('system/node');
-

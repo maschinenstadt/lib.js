@@ -195,6 +195,16 @@ global.console.line = function(_padStr = global.console.line.padStr, _width = gl
 		_stream = undefined;
 	}
 
+	if(! global.type(_padStr, 'String'))
+	{
+		_padStr = global.console.line.padStr;
+	}
+
+	if(! global.type(_width, 'Number'))
+	{
+		_width = global.console.size.width;
+	}
+
 	var data = '';
 
 	for(var i = 0, j = 0; i < _width; i++, j = (j+1) % _padStr.length)
@@ -225,6 +235,21 @@ global.console.left = function(_text = '', _padStr = global.console.left.padStr,
 		_stream = undefined;
 	}
 
+	if(! global.type(_text, 'String'))
+	{
+		_text = '';
+	}
+
+	if(! global.type(_padStr, 'String'))
+	{
+		_padStr = global.console.left.padStr;
+	}
+
+	if(! global.type(_width, 'Number'))
+	{
+		_width = global.console.size.width;
+	}
+
 	var data = _text;
 
 	for(var i = data.length, j = 0; i < _width; i++, j = (j+1) % _padStr.length)
@@ -253,6 +278,21 @@ global.console.center = function(_text = '', _padStr = global.console.center.pad
 	else if(! global.type(_stream, 'Object'))
 	{
 		_stream = undefined;
+	}
+
+	if(! global.type(_text, 'String'))
+	{
+		_text = '';
+	}
+
+	if(! global.type(_padStr, 'String'))
+	{
+		_padStr = global.console.center.padStr;
+	}
+
+	if(! global.type(_width, 'Number'))
+	{
+		_width = global.console.size.width;
 	}
 
 	var data = '';
@@ -298,6 +338,21 @@ global.console.right = function(_text = '', _padStr = global.console.right.padSt
 		_stream = undefined;
 	}
 
+	if(! global.type(_text, 'String'))
+	{
+		_text = '';
+	}
+
+	if(! global.type(_padStr, 'String'))
+	{
+		_padStr = global.console.right.padStr;
+	}
+
+	if(! global.type(_width, 'Number'))
+	{
+		_width = global.console.size.width;
+	}
+
 	var data = '';
 	var endPos = _width - _text.length;
 
@@ -321,12 +376,24 @@ global.console.right.padStr = global.console.line.padStr;
 //TODO/ (wie bei err() below) "format()" quasi, wohl mit (s)printf()?!
 global.console.stdout = function(_message = global.EOL)
 {
+	if(! global.type(_message, 'String'))
+	{
+		_message = _message.toString();
+	}
+
 	global.console.stream.write(_message);
+	return _message;
 }
 
 global.console.stderr = function(_message = global.EOL)
 {
+	if(! global.type(_message, 'String'))
+	{
+		_message = _message.toString();
+	}
+
 	global.console.errorStream.write(_message);
+	return _message;
 }
 
 const _log = global.console.log;

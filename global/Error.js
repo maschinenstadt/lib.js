@@ -10,7 +10,8 @@ if(! BROWSER)
 }
 
 Object.defineProperty(Error.prototype, 'isError', {
-	get: function() { return true; } });
+	get: function() { return true; }
+});
 
 Error.prototype.clone = function()
 {
@@ -22,10 +23,15 @@ Error.prototype.throw = function()
 	throw this;
 }
 
-Error.prototype.toString = function()
-{
-	return    '[' + ('.name').pad(-10) + ']  ' + this.name.pad(40) + global.EOL
-		+ '[' + ('.code').pad(-10) + ']  ' + this.code.pad(40) + global.EOL
-		+ '[' + ('.message').pad(-10) + ']  ' + this.message.pad(40) + global.EOL;
-}
+Object.defineProperty(Error.prototype, 'text', {
+	get: function()
+	{
+		var text = global.EOL + '( Exception / Error )' + global.EOL
+			 + '[    .code ]  "' + this.code + '"' + global.EOL
+			 + '[    .name ]  "' + this.name + '"' + global.EOL
+			 + '[ .message ]  "' + this.message + '"' + global.EOL
+			 + global.EOL + this.stack + global.EOL;
+		return text;
+	}
+});
 
