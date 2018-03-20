@@ -678,9 +678,8 @@ Array.prototype.globs = function(_size = 1, _onlyStrings = false)
 	return result;
 }
 
-var _originalToString = Array.prototype.toString;
-
-Array.prototype.toString = function(_radix = 0)
+//TODO/ _radix
+Array.prototype.toString = function()
 {
 	//TODO/..!
 	//.. maybe the "outer limit" of every (sub-)array? to extend by multiple arrays..
@@ -704,17 +703,15 @@ Array.prototype.toString = function(_radix = 0)
 	var result = '[ ';
 
 	for(var i = 0; i < this.length; i++)
+	{
 		result += this[i].toString() + ', ';
+	}
 
 	result = result.substr(0, result.length - 2);
 	return ( result += ' ]' );
-
-	//
-	var result = _originalToString.apply(this, this);
-	result = '[ ' + result + ' ]';
-	return result;
 }
 
+/*
 Array.prototype.toDebug = function(_radix, _tag)
 {
 	const padAdd = 4;
@@ -747,13 +744,6 @@ Array.prototype.toDebug = function(_radix, _tag)
 
 	return ( result = result.substr(0, result.length - 1 ) );
 }
-
-/*Array.fromArguments = function(_arguments)
-{
-	return [].slice.call(_arguments);
-}
-
-	disabled. reason: "Array.from()" exists by default! ;-)
 */
 
 Array.prototype.prefix = function(_prefix, _maximum, _remove, _filter)
@@ -978,19 +968,43 @@ Array.prototype.types = function(_types, _inverse = false, _index = false)
 	return result;
 }
 
-Array.prototype.get = function(_from = 0, _length = this.length - _from, _radix = 0)
+Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from) : this.length - _from))
 {
-	if(arguments.length === 0)
+	if(! global.type(_from, 'Number'))
 	{
-		return this.valueOf();
+		_from = 0;
 	}
 
-	_from = this.offset(_from);
-	_length = (_length - _from) % this.length;
+	if(_from < 0)
+	{
+		_from = (this.length + _from) % this.length;
+	}
+
+	if(! global.type(_length, 'Number'))
+	{
+		if(_from < 0)
+		{
+			_length = Math.abs(_from);
+		}
+		else
+		{
+			_length = this.length - _from;
+		}
+	}
 
 	var result = [];
 
-	//TODO/
+	var reverse = ( _length < 0 ? true : false );
+	_length = Math.abs(_length);
+
+	for(var i = 0, j = _from; i < _length; i++)
+	{
+		result[i] = this[j];
+
+		j += ( reverse ? -1 : 1 );
+		j = j % this.length;
+		j = ( j < 0 ? this.length + j : j );
+	}
 
 	return result;
 }
@@ -999,6 +1013,4 @@ Array.prototype.set = function(_index = 0, _value)
 {
 	//TODO/
 }
-
-//Array.prototype.remove (etc.)!?
 

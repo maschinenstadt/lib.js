@@ -28,6 +28,7 @@
 ------------------------------------------------------------------------------------------------------
 
 
+
 	# String.sprintf();
 	# String.prototype.sscanf();
 	# console.printf();
@@ -35,7 +36,9 @@
 
 
 
-	# überall in funktionen einen genauen check der parameter-übergabe(n) ...
+	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
+
+		# überall in funktionen einen genauen check der parameter-übergabe(n) ...
 
 		.. ich habe zwar standard-werte, aber wenn was falsches übergeben wird, entstehen fehler
 
@@ -49,14 +52,21 @@
 
 
 
+	# not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
+
+
+
 	# Array.... etc.
 		=> richtig mit "_length" param umgehen! d.h. als param w/ "this.length - _from"
 			... und i von 0 bis länge zählen, während j immer ((j+1)%this.length) usw.
 			.. und natürlich auch negative _length unbedingt beachten!
 
+		=====>> BEISPIEL NEHMEN AN VOLLSTÄNDIG FUNKTIONIERENDEN(!!) "Array.prototype.get(_from, _length)"!! ;-D´
+
+			=> ABER: gehts noch etwas effizienter und/oder "sauberer" ["formuliert"]!? ..
 
 
-	# not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
+
 
 
 ------------------------------------------------

@@ -454,9 +454,10 @@ String.alphabet[52] = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 String.alphabet[62] = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 // WICHTIG TODO /
-String.prototype.toString = function(_radix, _tag)
+// w/ _radix, ..
+String.prototype.toString = function()
 {
-	return this.valueOf();
+	return '"' + this.valueOf() + '"';
 }
 
 /*String.prototype.toDebug = function(_radix, _tag)
