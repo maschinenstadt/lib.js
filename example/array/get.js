@@ -14,8 +14,9 @@ var res6 = arr.get(-4, -2);
 var res7 = arr.get(-3, -9);
 var res8 = arr.get(0, 16);
 
-console.inspect(arr);
 console.EOL();
+console.inspect(arr);
+console.EOL(2);
 console.debug(0, 'arr.get()\t\t%O\n\narr.get(2)\t\t%O\n\narr.get(3,3)\t\t%O\n\n'
 	+ 'arr.get(-2)\t\t%O\n\narr.get(-4,2)\t\t%O\n\narr.get(-4,-2)\t\t%O\n\n'
 	+ 'arr.get(-3,-9)\t\t%O\n\narr.get(0,16)\t\t%O\n\n',

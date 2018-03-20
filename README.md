@@ -49,6 +49,28 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Array ("global/Array.js")
+Just for your info, even if it are just really small news - I do believe, the
+handling of arrays is very important for most reasons, so I'm mentioning it..
+
+Many array functions are not ready yet. Don't rely on it (check the source by
+yourself). .. BUT "Array.prototype.get(_from, _length)" is (nearly) finished!
+There you can see how i imagine the handling of basic "get()" access @ arrays
+and the sense of (_from) and (_length) - which can both also be NEGATIVE etc.
+
+I'm using negative values like with screen coordinates e.g., when I'm drawing
+with "<canvas>" e.g.: we just add() the negative(!) coordinate vectors to the
+width or height of the monitor, page or anything, so we're subtracting values
+from the limits respectively the maximum coordinates. This is VERY USEFUL! ..
+
+In case you specify a negative "_length" (2nd argument to "get()"), we access
+the array in reverse order! Last but not least: if we specify *larger* values
+in "_length" than the real length of an array, it repeats collecting elements
+(some kind of modulo '%' ;-)´. That's all for now.
+
+But don't forget to look at the script "example/array/get.js"! ;-)´
+
+
 #### Re-new
 Most elements of this library have gone these days - I thought they were very
 unstructured and not finished anyway. They'll come again. When they're really
@@ -65,7 +87,7 @@ extensions etc. by all the user's etc.! ;-)´
 The best replacement for code like "if(! result) {}" - think for yourself! ..
 
 	0			false
-
+				/true	[by (true) as 2nd "not()" argument..]
 	false			true
 	new [*]Error()		true
 	''			true
