@@ -44,3 +44,50 @@ Number.prototype.round = function(_precision = 0)
 	return Math.round(this.valueOf(), _precision);
 }
 
+Number.from = function(_string, _radix = 10)
+{
+	if(global.not(_string))
+	{
+		return new Error();
+	}
+
+	if(! global.type(_radix, 'Number'))
+	{
+		return new Error(global.type(_radix));
+	}
+
+	if(_string.indexOf('.') > -1 || _string.indexOf(',') > -1)
+	{
+		_string = _string.split(',').join('.');
+		return parseFloat(_string);
+		// < https://www.quora.com/What-is-the-difference-in-Javascript-between-Number-parseFloat-and-String-*1 >
+	}
+
+	return parseInt(_string, _radix);
+}
+
+Number.prototype.to = function(_radix = 10)
+{
+	// this ist just the default javascript radix conversion..
+	// i('ll) have my own, better version in "util/radix(.js)"
+
+	if(global.not(_radix))
+	{
+		return new Error();
+	}
+
+	if(global.type(_radix, 'Number'))
+	{
+		if(_radix < 2 || _radix > 36)
+		{
+			return new Error('2 .. 36');
+		}
+	}
+	else
+	{
+		return new Error(global.type(_radix));
+	}
+
+	return this.toString(_radix);
+}
+
