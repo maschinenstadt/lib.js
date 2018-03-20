@@ -373,16 +373,6 @@ String.prototype.indexOfAll = function(_search, _start, _end, _case_sensitive)
 }
 */
 
-String.sprintf = function()
-{
-	//TODO/
-}
-
-String.prototype.sscanf = function()
-{
-	//TODO/
-}
-
 String.prototype.glob = function(_glob, _caseSensitive = true)
 {
 	// using 'Array' to produce pattern match logics .. ;-)
@@ -887,4 +877,24 @@ String.prototype.set = function()
 {
 }
 */
+
+String.sprintf = function()
+{
+	//TODO/
+	//
+	// < https://github.com/Lellansin/node-scanf >
+	// < https://github.com/ChauMing/nodejs-scanf >
+	//
+	// .. just two examples... i'll better do this on my own (better idea(s) for it)
+}
+
+String.prototype.sscanf = function()
+{
+	//TODO/
+	//
+	// < https://github.com/Lellansin/node-scanf >
+	// < https://github.com/ChauMing/nodejs-scanf >
+	//
+	// .. just two examples... i'll better do this on my own (better idea(s) for it)
+}
 

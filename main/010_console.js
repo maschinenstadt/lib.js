@@ -373,7 +373,6 @@ global.console.right = function(_text = '', _padStr = global.console.right.padSt
 
 global.console.right.padStr = global.console.line.padStr;
 
-//TODO/ (wie bei err() below) "format()" quasi, wohl mit (s)printf()?!
 global.console.stdout = function(_message = global.EOL)
 {
 	if(! global.type(_message, 'String'))
@@ -394,6 +393,20 @@ global.console.stderr = function(_message = global.EOL)
 
 	global.console.errorStream.write(_message);
 	return _message;
+}
+
+// both following (and String's implementations) replace Node.js' format().. 8? :-)
+global.console.printf = function()
+{
+	//TODO/
+	//# should use "String" implementations (sscanf, sprintf)
+}
+
+global.console.scanf = function()
+{
+	//TODO/
+	//# should use "String" implementations (sscanf, sprintf)
+	//# maybe use 'readline' for input? otherweise you could also open /dev/* or so (as file)? but: async is better????
 }
 
 const _log = global.console.log;

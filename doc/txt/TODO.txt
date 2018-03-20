@@ -28,6 +28,13 @@
 ------------------------------------------------------------------------------------------------------
 
 
+	# String.sprintf();
+	# String.prototype.sscanf();
+	# console.printf();
+	# console.scanf();
+
+
+
 	# überall in funktionen einen genauen check der parameter-übergabe(n) ...
 
 		.. ich habe zwar standard-werte, aber wenn was falsches übergeben wird, entstehen fehler
