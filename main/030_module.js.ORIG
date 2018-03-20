@@ -21,8 +21,7 @@ global.include = main.include = function(_module, _libraryPaths)
 
 		if(! ((_module in global.nodejs) && (! reload)))
 		{
-			//global.nodejs[_module] = require(_module);
-			global.nodejs[_module] = realInclude(_module);
+			global.nodejs[_module] = require(_module);
 		}
 
 		if(_module in global.nodejs)
@@ -87,35 +86,25 @@ global.include = main.include = function(_module, _libraryPaths)
 	return undefined;
 }
 
-function realInclude(_what)
+function realInclude(_path)
 {
 	try
 	{
-		if(_what.indexOf('/') === -1)
+		if(global.file.type.directory(_path))
 		{
-			return require(_what);
-		}
-		else if(global.file.type.directory(_what))
-		{
-			return realInclude.directory(_what);
+			return realInclude.directory(_path);
 		}
 		else
 		{
-			return realInclude.file(_what);
+			return realInclude.file(_path);
 		}
 	}
 	catch(_error)
 	{
-		//TODO/ include '_what' in Error(), somewhere..
 		return _error;
 	}
 
 	return null;
-}
-
-realInclude.original = function(_module)
-{
-	return require(_module);
 }
 
 realInclude.directory = function(_path)

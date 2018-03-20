@@ -96,12 +96,18 @@ global.console.EOL = function(_count = 1, _padStr = '', _width = global.console.
 		_stream = undefined;
 	}
 
+	//TODO/ such task(s) should be solved via "arguments"-prototype-methods.. see polymorphy and mainly ".check()" w/ type-filter!!
+	if(! global.type(_padStr, 'String'))
+	{
+		_padStr = '';
+	}
+
 	var result = '';
 	var kk = 0;
 
 	for(var i = 0; i < _count; i++)
 	{
-		if(_width === 0)
+		if(_width === 0 || not(_padStr))
 		{
 			result += global.EOL;
 			continue;

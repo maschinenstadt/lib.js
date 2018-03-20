@@ -1,8 +1,5 @@
 ------------------------------------------------------------------------------------------------------
 
-# test/find.js (!!)
-# test/round.js
-
 # fs-listen-mapping/-filter (array-aktionen und coreutils)
 # file.mode() w/ array-filter
 # array-filter w/ prefix/suffix, relativeTo und XARGS(!)
@@ -13,12 +10,30 @@
 # ypkg @ lib+linux (live/any) w/ forms+mux (@ net/ssh)
 # (flache, aktive) datenbank und kombination/abstraktion (lib.)js+ylinux+community w/ net+js+db+linux+apps+community+mud+oo
 
+
 # alles in "main/" nochmal durchgehen und mit besseren styles versehen (z.b. default values je func., not() w/ return new Error(), ..)
 # alles in "global/" nochmal durchgehen und möglichst sinnvolle gestaltung (w/ abstraktion zu gemeinsamen algo-struct-basics wohl..)
+
+
+# "test/" durcharbeiten und bei fertigstellung nach "example/" verschieben. ich teste, dann mach ich beispiele daraus (neben docs) ;-)´
 
 ------------------------------------------------------------------------------------------------------
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
 ------------------------------------------------------------------------------------------------------
+
+
+	# überall in funktionen einen genauen check der parameter-übergabe(n) ...
+
+		.. ich habe zwar standard-werte, aber wenn was falsches übergeben wird, entstehen fehler
+
+		=> bitte auflösen via "arguments"-(prototype-)implementation ..
+
+			=> arguments.check(..) w/ type-/klassen-filter v.a.!
+
+			=> arguments.map() => VIRTUAL POLYMORPHY überhaupt richtig integrieren übereall..!!!
+
+				=> relativism? ich sollte mich innherlab der api auf sie selbst mehr beziehen; nicht alles immmer wieder code'n..
+
 
 
 	# Array.... etc.
