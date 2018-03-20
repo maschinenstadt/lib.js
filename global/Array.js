@@ -968,7 +968,7 @@ Array.prototype.types = function(_types, _inverse = false, _index = false)
 	return result;
 }
 
-Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from) : this.length - _from))
+Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from) : this.length - _from), _radix = 1)
 {
 	if(! global.type(_from, 'Number'))
 	{
@@ -992,6 +992,18 @@ Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from)
 		}
 	}
 
+	if(global.type(_radix, 'Number'))
+	{
+		if(_radix === 0)
+		{
+			_radix = 1;
+		}
+	}
+	else
+	{
+		_radix = 1;
+	}
+
 	var result = [];
 
 	var reverse = ( _length < 0 ? true : false );
@@ -1001,7 +1013,7 @@ Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from)
 	{
 		result[i] = this[j];
 
-		j += ( reverse ? -1 : 1 );
+		j += ( reverse ? -_radix : _radix );
 		j = j % this.length;
 		j = ( j < 0 ? this.length + j : j );
 	}

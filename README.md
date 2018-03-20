@@ -68,7 +68,13 @@ the array in reverse order! Last but not least: if we specify *larger* values
 in "_length" than the real length of an array, it repeats collecting elements
 (some kind of modulo '%' ;-)´. That's all for now.
 
-But don't forget to look at the script "example/array/get.js"! ;-)´
+Uuuh, forgot one thing: just added the parameter "radix" to "get()", so it is
+about to jump over elements with gaps or intervals in between. So if you will
+argue (-2) for the third argument, the result will be build upon jumping from
+e.g. 7 to 5 to 3 to 1 (and more repetitions) - or with (+2) it will be 1 to 3
+to 5 to 7. ... this could be a helpful feature.
+
+Now don't forget to look at the example code in "example/array/get.js"!! ;-)´
 
 
 #### Re-new

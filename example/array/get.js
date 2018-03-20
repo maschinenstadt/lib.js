@@ -13,12 +13,18 @@ var res5 = arr.get(-4, 2);
 var res6 = arr.get(-4, -2);
 var res7 = arr.get(-3, -9);
 var res8 = arr.get(0, 16);
+// now w/ _radix (spaces..)
+var res9 = arr.get(null, null, 3);
+var res10 = arr.get(-1, -6, 2);
+var res11 = arr.get(-1, -6, -2);
 
 console.EOL();
 console.inspect(arr);
 console.EOL(2);
-console.debug(0, 'arr.get()\t\t%O\n\narr.get(2)\t\t%O\n\narr.get(3,3)\t\t%O\n\n'
-	+ 'arr.get(-2)\t\t%O\n\narr.get(-4,2)\t\t%O\n\narr.get(-4,-2)\t\t%O\n\n'
-	+ 'arr.get(-3,-9)\t\t%O\n\narr.get(0,16)\t\t%O\n\n',
-		res1, res2, res3, res4, res5, res6, res7, res8);
+console.debug(0, 'arr.get()\t\t%O\n\narr.get(2)\t\t%O\n\narr.get(3, 3)\t\t%O\n\n'
+	+ 'arr.get(-2)\t\t%O\n\narr.get(-4, 2)\t\t%O\n\narr.get(-4, -2)\t\t%O\n\n'
+	+ 'arr.get(-3, -9)\t\t%O\n\narr.get(0, 16)\t\t%O\n\n'
+	+ '\narr.get(null, null, 3)\t%O\n\narr.get(-1, -6, 2)\t%O\n\n'
+	+ 'arr.get(-1, -6, -2)\t%O\n\n',
+		res1, res2, res3, res4, res5, res6, res7, res8, res9, res10, res11);
 
