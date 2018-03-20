@@ -13,10 +13,12 @@ var arr = [
 	undefined
 ];
 
-console.info('\n(0)\t\t%s\n\n(false)\t\t%s\n(new *Error())\t%s\n(\'\')\t\t%s\n([])\t\t%s\n(null)\t\t%s\n(undefined)\t%s\n',
-	not(0), not(false), not(new TypeError()), not(''), not([]), not(null), not(undefined));
+console.info('\n(false)\t\t\t%s\n(new *Error())\t\t%s\n(\'\')\t\t\t%s\n([])\t\t\t%s\n(null)\t\t\t%s\n(undefined)\t\t%s\n',
+	not(false), not(new TypeError()), not(''), not([]), not(null), not(undefined));
 
 
+
+console.info('\nnot(true);\t\t%s\n\nnot(0);\t\t\t%s\nnot(0, false);\t\t%s\nnot(0, true);\t\t%s\n\n', not(true), not(0), not(0, false), not(0, true));
 
 
 
