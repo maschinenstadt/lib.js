@@ -130,6 +130,16 @@
 
 
 
+!	==>					if(global.not(_uuid) || (! global.type(_uuid, 'String')))
+!!		===>				{
+!!!			=====>				_uuid = uuid.random();
+!!!!				======>		}
+
+					=> => => ... genau sowas z.b. .. ersetzen durch automatismus mit "arguments" hilfe z.b. ..
+							.. sonst müsste ich das noch ca. so überall einbauen; wg. sicherheit bei der api-nutzung.
+
+
+
 
 ------------------------------------------------
 
