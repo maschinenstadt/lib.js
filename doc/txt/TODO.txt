@@ -6,12 +6,7 @@
 
 	WICHTIGST!!!
 
-		"test/WICHTIG-ARRAY.js" .. (siehe auch "example/array/get.js" - für danach ;-)´
-
-			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
-
-				=> (neu schreiben bestenfalls .. und neue ordnung (überall in global/) einbringen, bitte. ;-)´
-
+		Array.prototype.get(..); .. etc. pp. ...
 
 
 
