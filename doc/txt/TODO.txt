@@ -9,6 +9,7 @@
 
 
 
+
 	# überlege wg. "class"es wie ..
 
 		# "core/event"
@@ -22,6 +23,17 @@
 		.. hin zu netzwerk-klassen sehr wichtig z.b. .. inkl. folgendem, also automatische event-registrierung durch listen, ..
 
 	=>	# "net/tcp/socket" ...
+
+
+
+
+
+! ! ! ==> ==>	momentante idee .. alles/vieles von "node" "ableiten" (extends also), "node" selbst aber "event" erweitern lassen!?!?
+
+
+
+
+
 
 
 
