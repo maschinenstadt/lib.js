@@ -281,7 +281,9 @@ Just clone the repository into "/lib.js" and link "/usr/local/bin/node.js" to
 "/lib.js/node.js". The rest is up to you - so please read more of the README.
 
 
-### Library/API Documentation
+### Et cetera.
+
+#### Library/API Documentation
 Sooner or later I'd like to automatically generate my API documentation; this
 will get to work in more or less steps. .. if it works as planned, everything
 in the 'lib.js' directory will be automatically translated into a "describing
@@ -291,24 +293,8 @@ about the 'Node.js' API as '.json' file .. see the following link).
 
 	< https://nodejs.org/dist/latest/docs/api/index.json >
 
-### More features and parts (only) of my TODO
 
-#### Database
-My own database is also a definitely planned feature.
-
-
-#### DynDNS
-That's planned specially for you ... users of this library extensions. I will
-just implement the DNS (server) protocol in this library, then I'm gonna give
-everyone of you a new DynDNS address. ;-)´
-
-Maybe I'll extend this to provide you some own hosting. And maybe I will also
-integrate some cellular (Automata..!!) P2P mesh'es. To be continued. ;-)´ ...
-
-
-### Et cetera. ...
-
-#### The *real* TODO .. and other documents ...
+#### My TODO .. and other documents ...
 Risk a look into "doc/txt/TODO.txt" or my other (text/plain) documents there.
 It's a little mess .. but that's all I am planing to implement in the future!
 
