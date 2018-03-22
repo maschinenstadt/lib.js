@@ -67,44 +67,6 @@ to decide, whether to RE-load the module (into the cache, again) - even if it
 already has been loaded. Just to be sure; maybe you've made changes there? ;)
 
 
-#### Array BUG
-Important info: one big mistake happened! I can not access greater or smaller
-"index" (arg) values (which usually should be done by "modulo" (%)). Have not
-any time right now, but I'm gonna fix it (tomorrow maybe)!
-
-Also maybe I could optimize the routine(s) there, too. We'll see. ... but for
-now: PLEASE BE PATIENT. ^-^
-
-
-#### Array ("global/Array.js")
-Just for your info, even if it are just really small news - I do believe, the
-handling of arrays is very important for most reasons, so I'm mentioning it..
-
-Many array functions are not ready yet. Don't rely on it (check the source by
-yourself). .. BUT "Array.prototype.get(_from, _length)" is (nearly) finished!
-There you can see how i imagine the handling of basic "get()" access @ arrays
-and the sense of (_from) and (_length) - which can both also be NEGATIVE etc.
-
-I'm using negative values like with screen coordinates e.g., when I'm drawing
-with "canvas" e.g... we just add() the negative(!) coordinate vectors to your
-width or height of the monitor, page or anything, so we're subtracting values
-from the limits respectively maximum coordinates. That's REALLY very helpful!
-
-In case you specify a negative "_length" (2nd argument to "get()"), we access
-the array in reverse order! Last but not least: if we specify *larger* values
-in "_length" than the real length of an array, it repeats collecting elements
-(some kind of modulo '%' ;-)´. That's all for now.
-
-Uuuh, forgot one thing: just added the parameter "radix" to "get()", so it is
-about to jump over elements with gaps or intervals in between. So if you will
-argue (-2) for the third argument, the result will be build upon jumping from
-e.g. 7 to 5 to 3 to 1 (and more repetitions) - or with (+2) it will be 1 to 3
-to 5 to 7. ... this could be a helpful feature (but think about some negation
-of negation! BOTH negative "length" AND "radix" result in [ (- * -) = (+) ])!
-
-Now don't forget to look at the example code in "example/array/get.js"!! ;-)´
-
-
 #### Re-new
 Most elements of this library have gone these days - I thought they were very
 unstructured and not finished anyway. They'll come again. When they're really
@@ -133,7 +95,23 @@ This makes it really much easier to check return values and anything like it!
 You can find that example in "example/not.js".
 
 
-#### "file.find()"
+#### More File functions
+"[global.]file" contains all the magic.
+
+Following both seem to be [nearly] done; at least. The others will work, too,
+but with one big issue: "ASYNC" is not yet supported. I'm working on it. Stay
+tuned. (^_^)´ ..
+
+
+##### "readlink()"
+Mainly "readlink()" (with all sub's) has been finished again. It will be used
+for different purposes .. if you'd like to find out more, change into the sub
+dir 'example/readlink' to run `./symlinks.js --debug=4` (not working in other
+directories - as 'process.cwd()' is considered there). You would like to look
+to the area 'Process'. ;-)´
+
+
+##### "find()"
 First version of this function (and it's sub functions - to choose types) has
 began .. it's a really important feature for me! But .. (a) it's not complete
 right now: there's missing my "glob()" to search for names - at the moment we
@@ -146,22 +124,21 @@ from path lists to real "new File()" structures (which will be used by my own
 database, too).
 
 
-#### 'Node.js' VERSION CHECK and 'util/getopt'
+#### 'Node.js' VERSION CHECK
+A (first) Node.js version check is done!
+
+You can set the delay between every query (directly to Node.js main server ;)
+in the "settings.js" (in minutes). This is not a bug, it's a feature that the
+server(s) don't get flooded by us.
+
+It is worth to say here: we just check for the really latest/current version,
+NOT the LTS version (would that be a wished feature or it is good as it is?).
+
+PS: Additionally I've made the version warning STAY .. even if the delay time
+prevents a new query. It will automatically disappear when running the system
+with a new Node.js version! :-)´
+
 Now w/ support for 'http:' AND 'https:'. Just adapt the URL in 'settings.js'.
-
-It still support only the really 'latest' version, as it's based on a HTTP(S)
-request to "/dist/latest/", where we can see if your current version is still
-listed there. ;-)´
-
-JFYI: I had to disable the '--check-version' argument (to force check despite
-of delay time) as there were some errors. It's planned (maybe even for today)
-to finally implement 'util/getopt', so it will work.. with this there will be
-a new "process.args" variable (next to the regular "process.argv") containing
-PARSED 'argv' arguments/parameters.
-
-You'll be able to use this API module "util/getopt" in your own applications,
-but those also get access to the planned "process.args" (so usually you won't
-have to "include()" it ;-)´. I will inform you in this README when it's done!
 
 
 #### User's (home directory) library extensions: automatically start scripts.
@@ -186,35 +163,6 @@ try to regularily "require()" original "Node.js" or "npm.js" modules.
 If these files export something ("module.exports = {}"), it will be available
 by file name w/o extension as key and w/ UPPER CASE keys, if the file had the
 '.json' extension. @"[global.]home": there are all of your "/home/*" exports!
-
-
-#### File functions
-Mainly "readlink()" (with all sub's) has been finished again. It will be used
-for different purposes .. if you'd like to find out more, change into the sub
-dir 'example/readlink' to run `./symlinks.js --debug=4` (not working in other
-directories - as 'process.cwd()' is considered there). You would like to look
-to the area 'Process'. ;-)´
-
-More file functions are about to come .. even some own extended filesystem as
-special, own database for various purposes (including website development..),
-and additionally there will be "find()" and "grep()" features amongst others!
-
-
-#### 'Node.js' VERSION CHECK
-A (first) Node.js version check is done!
-
-You can set the delay between every query (directly to Node.js main server ;)
-in the "settings.js" (in minutes). This is not a bug, it's a feature that the
-server(s) don't get flooded by us.
-
-It is worth to say here: we just check for the really latest/current version,
-NOT the LTS version (would that be a wished feature or it is good as it is?).
-
-PS: Additionally I've made the version warning STAY .. even if the delay time
-prevents a new query. It will automatically disappear when running the system
-with a new Node.js version! :-)´
-
-PS: See '--check-version' ("doc/[txt/]ARGV.txt").
 
 
 #### Administrators and Users
