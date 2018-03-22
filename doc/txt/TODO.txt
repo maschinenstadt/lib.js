@@ -73,6 +73,15 @@
 
 		Array.prototype.get(..); .. etc. pp. ...
 
+
+
+
+	# < https://github.com/mafintosh/fuse-bindings >
+
+		ohne abhängigkeiten... siehe dir die codes mal an und versuche, selbst sowas zu "portieren" .. bestenfalls ganz neues fuse >= 3.0! ;-)´
+
+
+
 ------------------------------------------------
 
 
