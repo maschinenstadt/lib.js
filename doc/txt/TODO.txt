@@ -70,7 +70,7 @@
 
 
 
-	# not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
+	# [global.]not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
 
 
 
