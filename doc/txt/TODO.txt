@@ -1,29 +1,4 @@
 ------------------------------------------------------------------------------------------------------
-
-# file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)
-
-	=> davon ab sollte ich passende codes zur (de-)serialisierung für meine eigene datenbank. ..
-
-		=> siehe auch "util/radix.js" ;-D´
-
-# fs-listen-mapping/-filter (array-aktionen und coreutils)
-# file.mode() w/ array-filter
-# array-filter w/ prefix/suffix, relativeTo und XARGS(!)
-# .. sowie auch alle durchlaufen für summation der file-GRÖßEN!! ;-)´
-# new File(); .. w/ list-to-struct(s) (@ arr-filter)
-# website+news+todo+docs+wiki+issues/forum+git w/ api @ net/http+git+smtp+nntp+irc
-# uuid & services w/ account @ dyndns+space
-# ypkg @ lib+linux (live/any) w/ forms+mux (@ net/ssh)
-# (flache, aktive) datenbank und kombination/abstraktion (lib.)js+ylinux+community w/ net+js+db+linux+apps+community+mud+oo
-
-
-# alles in "main/" nochmal durchgehen und mit besseren styles versehen (z.b. default values je func., not() w/ return new Error(), ..)
-# alles in "global/" nochmal durchgehen und möglichst sinnvolle gestaltung (w/ abstraktion zu gemeinsamen algo-struct-basics wohl..)
-
-
-# "test/" durcharbeiten und bei fertigstellung nach "example/" verschieben. ich teste, dann mach ich beispiele daraus (neben docs) ;-)´
-
-------------------------------------------------------------------------------------------------------
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
 ------------------------------------------------------------------------------------------------------
 
@@ -36,10 +11,6 @@
 			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
 
 				=> (neu schreiben bestenfalls .. und neue ordnung (überall in global/) einbringen, bitte. ;-)´
-
-
-
-
 
 
 
@@ -83,21 +54,6 @@
 
 
 
-	# Array.... etc.
-		=> richtig mit "_length" param umgehen! d.h. als param w/ "this.length - _from"
-			... und i von 0 bis länge zählen, während j immer ((j+1)%this.length) usw.
-			.. und natürlich auch negative _length unbedingt beachten!
-
-		=====>> BEISPIEL NEHMEN AN VOLLSTÄNDIG FUNKTIONIERENDEN(!!) "Array.prototype.get(_from, _length)"!! ;-D´
-
-			=> ABER: gehts noch etwas effizienter und/oder "sauberer" ["formuliert"]!? ..
-
-
-
-
-	# restliche "file"-methoden .. sowie *überall* SYNC AND ASYNC!!!
-
-
 
 
 	# String.sprintf();
@@ -105,6 +61,20 @@
 	# console.printf();
 	# console.scanf();
 
+
+
+------------------------------------------------
+
+	 .. *überall* SYNC AND ASYNC!!!
+
+------------------------------------------------
+
+
+# alles in "main/" nochmal durchgehen und mit besseren styles versehen (z.b. default values je func., not() w/ return new Error(), ..)
+# alles in "global/" nochmal durchgehen und möglichst sinnvolle gestaltung (w/ abstraktion zu gemeinsamen algo-struct-basics wohl..)
+
+
+# "test/" durcharbeiten und bei fertigstellung nach "example/" verschieben. ich teste, dann mach ich beispiele daraus (neben docs) ;-)´
 
 
 ------------------------------------------------
@@ -160,7 +130,10 @@
 
 
 
-	# file ..
+	# restliche "file"-methoden
+
+		# überall auch ASYNC!!!!!!
+
 
 		# path... .. .
 
@@ -195,6 +168,26 @@
 		# file.grep()
 
 			=> still missing..
+
+------------------------------------------------------------------------------------------------------
+
+# file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)
+
+	=> davon ab sollte ich passende codes zur (de-)serialisierung für meine eigene datenbank. ..
+
+		=> siehe auch "util/radix.js" ;-D´
+
+# fs-listen-mapping/-filter (array-aktionen und coreutils)
+# file.mode() w/ array-filter
+# array-filter w/ prefix/suffix, relativeTo und XARGS(!)
+# .. sowie auch alle durchlaufen für summation der file-GRÖßEN!! ;-)´
+# new File(); .. w/ list-to-struct(s) (@ arr-filter)
+# website+news+todo+docs+wiki+issues/forum+git w/ api @ net/http+git+smtp+nntp+irc
+# uuid & services w/ account @ dyndns+space
+# ypkg @ lib+linux (live/any) w/ forms+mux (@ net/ssh)
+# (flache, aktive) datenbank und kombination/abstraktion (lib.)js+ylinux+community w/ net+js+db+linux+apps+community+mud+oo
+
+------------------------------------------------------------------------------------------------------
 
 
 

@@ -968,12 +968,16 @@ Array.prototype.cut = function(_start = 0, _length = this.length - _start)
 	return this.replace(_start, _length, undefined);
 }
 
-Array.prototype.set = function(_index, _value)
+Array.prototype.set = function(_index = this.length, _value)
 {
 	// see also "Array.prototype.replaceAt()" or so.. maybe even more (todo)..
 }
 
-Array.prototype.get = function(_index, _length, _radix = 1, _typeFilter = [], _inverseTypeFilter = false)
+Array.prototype.get = function(_index = 0, _length = 1, _radix = 1, _typeFilter = [], _inverseTypeFilter = false)
 {
 	// see also "Array.prototype.(offset||index)"! ..
+	//
+	// w/ ...
+	// while(result.length < _length) {}; ..
 }
+
