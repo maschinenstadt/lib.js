@@ -62,6 +62,10 @@ get the object itself. ;-)´
 	var server = nodejs('http').createServer();	// new, better way.
 	console.inspect(nodejs.http);	// possible .. but this won't load!
 
+As "include()" supports a second parameter, "nodejs()" also supports a "bool"
+to decide, whether to RE-load the module (into the cache, again) - even if it
+already has been loaded. Just to be sure; maybe you've made changes there? ;)
+
 
 #### Array BUG
 Important info: one big mistake happened! I can not access greater or smaller
