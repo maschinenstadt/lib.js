@@ -10,6 +10,17 @@
 
 
 
+	# überlege wg. "class"es wie ..
+
+		# "core/event"
+		# "mud/entity"
+
+		... usw., wie ich das konstruieren möchte. klar ist z.b., dass "event" überall gebraucht wird, grundsätzlich.
+		aber dann gibt's auch noch die basis-klasse "node", die im prinzip am ende aller klassen zur abs. basis wird.
+		.. sollte das event auch hoch abstrakte basis sein - oder sogar erst vom "node" 'extended' werden? .. TODO ..
+
+
+
 
 
 	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
