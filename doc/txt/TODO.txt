@@ -1,14 +1,3 @@
-
-
-	WICHTIGST!!!
-
-		"test/WICHTIG-ARRAY.js" .. (siehe auch "example/array/get.js" - für danach ;-)´
-
-			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
-
-				=> (neu schreiben bestenfalls .. und neue ordnung (überall in global/) einbringen, bitte. ;-)´
-
-
 ------------------------------------------------------------------------------------------------------
 
 # file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)
@@ -40,6 +29,23 @@
 
 
 
+	WICHTIGST!!!
+
+		"test/WICHTIG-ARRAY.js" .. (siehe auch "example/array/get.js" - für danach ;-)´
+
+			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
+
+				=> (neu schreiben bestenfalls .. und neue ordnung (überall in global/) einbringen, bitte. ;-)´
+
+
+
+
+
+
+
+
+
+
 	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
 
 		# überall in funktionen einen genauen check der parameter-übergabe(n) ...
@@ -63,8 +69,11 @@
 
 
 
+!! -->>		.. und allg. auch überall noch umfangreiche parameter-checks, inkl. TYPE-CHECKs usw. .. w/ "arguments", too! ^_^
 
+!! -->			=> auch bei "get()" z.b. o.ä. .. nicht nur "arguments", auch sonstige zugriffe *FILTER*-bar machen..!
 
+				(.. siehe "Array.prototype.get(_index, _length, _radix = 1, _typeFilter = [], _inverseTypeFilter = false)" ...)
 
 
 

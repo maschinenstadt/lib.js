@@ -25,21 +25,6 @@ Array.prototype.toCharString = function(_from = 0, _length = this.length - _from
 	return result;
 }
 
-Array.prototype.replaceAt = function(_start = 0, _length = this.length - _start, _value)
-{
-	//TODO/
-}
-
-Array.prototype.insert = function(_index = this.length - 1, _value)
-{
-	return this.replaceAt(_index, 0, _value);
-}
-
-Array.prototype.cut = function(_start = 0, _length = this.length - _start)
-{
-	return this.replaceAt(_start, _length, '');
-}
-
 /*Array.prototype.reverse = function(_from = 0, _length = this.length - _from)
 {
 	//TODO/ again (see somewhere else in here..):
@@ -882,23 +867,6 @@ Array.prototype.trim = function(_remove_empty)
 	return result;
 }
 
-Array.prototype.offset = function(_offset)
-{
-	_offset = (_offset||0) % this.length;
-
-	while(_offset < 0)
-	{
-		_offset = this.length + _offset;
-	}
-
-	return Math.abs(_offset);
-}
-
-Array.prototype.index = function(_offset)	//TODO: _amount arg here? or otherewhere?
-{
-	return this[this.offset((_offset||0))];
-}
-
 Array.prototype.types = function(_types, _inverse = false, _index = false)
 {
 	if(arguments.length === 0)
@@ -968,65 +936,44 @@ Array.prototype.types = function(_types, _inverse = false, _index = false)
 	return result;
 }
 
-Array.prototype.get = function(_from = 0, _length = (_from < 0 ? Math.abs(_from) : this.length - _from), _radix = 1)
+Array.prototype.offset = function(_offset)
 {
-	if(! global.type(_from, 'Number'))
+	_offset = (_offset||0) % this.length;
+
+	while(_offset < 0)
 	{
-		_from = 0;
+		_offset = this.length + _offset;
 	}
 
-	if(_from < 0)
-	{
-		_from = (this.length + _from) % this.length;
-	}
-	else
-	{
-		_from = _from % this.length;
-	}
-
-	if(! global.type(_length, 'Number'))
-	{
-		if(_from < 0)
-		{
-			_length = Math.abs(_from);
-		}
-		else
-		{
-			_length = this.length - _from;
-		}
-	}
-
-	if(global.type(_radix, 'Number'))
-	{
-		if(_radix === 0)
-		{
-			_radix = 1;
-		}
-	}
-	else
-	{
-		_radix = 1;
-	}
-
-	var result = [];
-
-	var reverse = ( _length < 0 ? true : false );
-	_length = Math.abs(_length);
-
-	for(var i = 0, j = _from; i < _length; i++)
-	{
-		result[i] = this[j];
-
-		j += ( reverse ? -_radix : _radix );
-		j = j % this.length;
-		j = ( j < 0 ? this.length + j : j );
-	}
-
-	return result;
+	return Math.abs(_offset);
 }
 
-Array.prototype.set = function(_index = 0, _value)
+Array.prototype.index = function(_offset)	//TODO: _amount arg here? or otherewhere?
+{
+	return this[this.offset((_offset||0))];
+}
+
+Array.prototype.replace = function(_start = 0, _length = this.length - _start, _value)
 {
 	//TODO/
 }
 
+Array.prototype.insert = function(_index = this.length - 1, _value)
+{
+	return this.replace(_index, 0, _value);
+}
+
+Array.prototype.cut = function(_start = 0, _length = this.length - _start)
+{
+	return this.replace(_start, _length, undefined);
+}
+
+Array.prototype.set = function(_index, _value)
+{
+	// see also "Array.prototype.replaceAt()" or so.. maybe even more (todo)..
+}
+
+Array.prototype.get = function(_index, _length, _radix = 1, _typeFilter = [], _inverseTypeFilter = false)
+{
+	// see also "Array.prototype.(offset||index)"! ..
+}
