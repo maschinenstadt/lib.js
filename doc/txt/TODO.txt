@@ -41,10 +41,6 @@
 
 
 
-	# < https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
-
-
-
 	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
 
 		# überall in funktionen einen genauen check der parameter-übergabe(n) ...
@@ -99,11 +95,22 @@
 
 
 
-
 ------------------------------------------------
 
+	@ doc/txt/HTTP....txt
+
+		< https://stackoverflow.com/questions/35586957/nodejs-starttls-use-sni >
+		< https://stackoverflow.com/questions/12219639/is-it-possible-to-dynamically-return-an-ssl-certificate-in-nodejs >
+
+		< https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
+		< https://www.sitepoint.com/how-to-use-ssltls-with-node-js/ >
+
+
+
+
+
 	# net/(server/)...
-	=> callbacks automatisch zusammen setzen. .. aus initialem setup() .. hin zu "this.callbacks" 4 foreign;
+!!!	=> callbacks automatisch zusammen setzen. .. aus initialem setup() .. hin zu "this.callbacks" 4 foreign;
 
 		=> events & callbacks .. @ OWN <Event> class or so .. von wegen "this.event...(add() z.b.)" [w/ fire() @ func-call?]
 
