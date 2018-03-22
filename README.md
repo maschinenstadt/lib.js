@@ -278,7 +278,7 @@ I'd like to create an installation script. TODO (should it be BASH or NODE?)!
 
 #### Manual
 Just clone the repository into "/lib.js" and link "/usr/local/bin/node.js" to
-"/lib.js/node.js". The rest is up to you - so please read more of the README.
+"/lib.js/node.js". The rest is up to you (so please read more of the README).
 
 
 ### Et cetera.
@@ -302,14 +302,12 @@ It's a little mess .. but that's all I am planing to implement in the future!
 ### About
 
 #### Copyright
-Copyright (c) maschinenstadt (Sebastian Kucharczyk <kuchen@kekse.biz>)
+Copyright (c) maschinenstadt (Sebastian Kucharczyk <geleeschaumgummi @ gmail.com>)
 
 
 #### Homepage && Contact
 
 	< https://kekse.biz/ >
-
-	< kuchen @ kekse.biz >
 	< geleeschaumgummi @ gmail.com >
 
 
