@@ -1,12 +1,24 @@
+
+	@ TLS w/ SNI (!!)
+
 < https://stackoverflow.com/questions/35586957/nodejs-starttls-use-sni >
 < https://stackoverflow.com/questions/12219639/is-it-possible-to-dynamically-return-an-ssl-certificate-in-nodejs >
 
 
 
+
+
+
+	@ HTTPD ..
+
 < https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
 < https://www.sitepoint.com/how-to-use-ssltls-with-node-js/ >
 
 
+
+
+
+	@ methods & status codes .. ^-^
 
 
 { _connectionListener: [Function: connectionListener],
