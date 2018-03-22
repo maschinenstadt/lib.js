@@ -132,12 +132,10 @@ server(s) don't get flooded by us.
 
 It is worth to say here: we just check for the really latest/current version,
 NOT the LTS version (would that be a wished feature or it is good as it is?).
+Additionally I've made the version warning STAY - even if delay time prevents
+a new (HTTP) query. It will automatically disappear when running new version.
 
-PS: Additionally I've made the version warning STAY .. even if the delay time
-prevents a new query. It will automatically disappear when running the system
-with a new Node.js version! :-)´
-
-Now w/ support for 'http:' AND 'https:'. Just adapt the URL in 'settings.js'.
+And now w/ support for 'http:' AND 'https:'. Change the URL in 'settings.js'!
 
 
 #### User's (home directory) library extensions: automatically start scripts.
