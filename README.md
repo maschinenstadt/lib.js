@@ -178,7 +178,9 @@ out. Last but not least duplicates are removed, too (first occurence counts).
 Have fun! ;-D´
 
 
-## API and include()
+## A bit more to read. ..
+
+### API and include()
 
 This includes my (important) `include()` version. See the directory structure
 in this repository (or soon my upcoming API documentation) for more. If you'd
@@ -187,8 +189,8 @@ the 2nd include()-argument also(!) for a Boolean value to FORCE reload) - and
 they'll be available in the (global) "nodejs"-Object (so you do not need here
 to assign the result every time to a new variable). ... Example is following:
 
-	include('net');
-	nodejs.net.createServer();
+	include('net');	// will return 'net' and cache it in "global.nodejs";
+	var server = nodejs('net', true).createServer();  // => RE-LOAD 'net'
 
 If you assign this example to 'net', you can access it regularily - otherwise
 access "(global.)nodejs[module]" as described here.. some default modules are
@@ -222,10 +224,12 @@ say: if we consequently use my "include()", we'll have the maximum power when
 it's about 'process control' etc. .. and it is only logical to use the better
 version (that has no disadvantages over the original one).
 
+PS: Look at the point "Node.js original modules" in section "News/Updates"..!
 
-## Usage
 
-### Interpreter
+### Usage
+
+#### Interpreter
 I've decided to create a new "interpreter" script to be started via "shebang"
 line - so it's never necessary to require() this whole thing every time (even
 if that is possible, too - therefore see the next paragraph of this README)..
@@ -247,7 +251,7 @@ you really wish to execute):
 Both of these are valid (even if `env` would be the better decision).
 
 
-### Regular 'npm.js' usage
+#### Regular 'npm.js' usage
 You can also do without the 'interpreter' thing! .. Use it like every regular
 'npm.js' module. It's tested right now and really seems to work (completely)!
 
@@ -266,11 +270,18 @@ You do not really have to assign this to a variable, as most code is exported
 to the 'global' object .. so everything necessary may be accessed "directly".
 
 
-## Installation script
+### Installation
+
+#### Script
 I'd like to create an installation script. TODO (should it be BASH or NODE?)!
 
 
-## Library/API Documentation
+#### Manual
+Just clone the repository into "/lib.js" and link "/usr/local/bin/node.js" to
+"/lib.js/node.js". The rest is up to you - so please read more of the README.
+
+
+### Library/API Documentation
 Sooner or later I'd like to automatically generate my API documentation; this
 will get to work in more or less steps. .. if it works as planned, everything
 in the 'lib.js' directory will be automatically translated into a "describing
@@ -280,12 +291,13 @@ about the 'Node.js' API as '.json' file .. see the following link).
 
 	< https://nodejs.org/dist/latest/docs/api/index.json >
 
+### More features and parts (only) of my TODO
 
-## Database
+#### Database
 My own database is also a definitely planned feature.
 
 
-## DynDNS
+#### DynDNS
 That's planned specially for you ... users of this library extensions. I will
 just implement the DNS (server) protocol in this library, then I'm gonna give
 everyone of you a new DynDNS address. ;-)´
@@ -294,37 +306,20 @@ Maybe I'll extend this to provide you some own hosting. And maybe I will also
 integrate some cellular (Automata..!!) P2P mesh'es. To be continued. ;-)´ ...
 
 
-## Web Development
-See also the following github.com repository. That's a web template with some
-JavaScript's imported (of this library - which must be in "/lib.js" to work).
+### Et cetera. ...
 
-	< https://github.com/maschinenstadt/www >
-
-This is the reason I've created the "browser/" directory in the library. :-)´
-
-
-## Application Stack(s), .., (sync.) Streams, ...
-Currently I'm working on kinda "App-Server" (w/ DB) w/ textual plus graphical
-(process) environments and so on. .. much of work. But at the end this all is
-somehow an virtual operating system. Including virtual consoles w/ Session(s)
-and network transparency plus various routing algorithm (in MUD conferences).
-
-Summarized it'll be some realtime environment, also for the web! With our own
-process, memory, network, .. management modules and many other things.. TODO!
-
-
-## Et cetera. ...
-
-### TODO [and other documents..]
+#### The *real* TODO .. and other documents ...
 Risk a look into "doc/txt/TODO.txt" or my other (text/plain) documents there.
 It's a little mess .. but that's all I am planing to implement in the future!
 
 
-### Copyright
+### About
+
+#### Copyright
 Copyright (c) maschinenstadt (Sebastian Kucharczyk <kuchen@kekse.biz>)
 
 
-### Homepage && Contact
+#### Homepage && Contact
 
 	< https://kekse.biz/ >
 
@@ -332,7 +327,7 @@ Copyright (c) maschinenstadt (Sebastian Kucharczyk <kuchen@kekse.biz>)
 	< geleeschaumgummi @ gmail.com >
 
 
-### License
+#### License
 Will be published later. But for now you may now: use it as you would like to
 use it (even commercial use is allowed) - but you may not create a fork! Your
 wishes to change the code(s) should be send me via mail e.g.; or you also may
