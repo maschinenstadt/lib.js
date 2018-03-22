@@ -58,9 +58,9 @@ If it has been loaded before, you get a cached copy of the object. Otherweise
 the function will load it, store it in the cache (for later use) and then you
 get the object itself. ;-)´
 
-	var http; // not necessary, really..
-	var server = (http = nodejs('http')).createServer();
-	console.inspect(nodejs.http); // also possible. ;-)
+	var http = nodejs('http');	// not necessary, really..
+	var server = nodejs('http').createServer();	// new, better way.
+	console.inspect(nodejs.http);	// possible .. but this won't load!
 
 
 #### Array BUG
