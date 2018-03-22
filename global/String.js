@@ -879,6 +879,15 @@ String.prototype.set = function()
 }
 */
 
+/*
+ * %d	integer
+ * %f	float
+ * %s	string
+ * %S	string of line
+ * %x	hex
+ * %o	octal
+ */
+
 String.sprintf = function()
 {
 	//TODO/
