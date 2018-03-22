@@ -3,6 +3,12 @@
 ------------------------------------------------------------------------------------------------------
 
 
+
+	# bedenke grundsätlzich - falls möglich - "this"-rückgabe .. für ketten-verschaltung für direkt weitergehende aufrufen.. ;-)´
+
+
+
+
 	# überlege wg. "class"es wie ..
 
 		# "core/event"
@@ -14,6 +20,9 @@
 		rauf basiert das "event" weitergehend? evtl. auf (oo-(konsolen-))streams(-sync.)?!? usw. ...
 
 		.. hin zu netzwerk-klassen sehr wichtig z.b. .. inkl. folgendem, also automatische event-registrierung durch listen, ..
+
+	=>	# "net/tcp/socket" ...
+
 
 
 
