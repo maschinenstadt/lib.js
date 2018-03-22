@@ -106,9 +106,8 @@ tuned. (^_^)´ ..
 ##### "readlink()"
 Mainly "readlink()" (with all sub's) has been finished again. It will be used
 for different purposes .. if you'd like to find out more, change into the sub
-dir 'example/readlink' to run `./symlinks.js --debug=4` (not working in other
-directories - as 'process.cwd()' is considered there). You would like to look
-to the area 'Process'. ;-)´
+dir 'example/' and run `./readlink.sh` (not working in other directories - as
+'process.cwd()' is considered there). You'd like to look to area 'Process'...
 
 
 ##### "find()"
