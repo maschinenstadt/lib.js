@@ -108,7 +108,31 @@ if(global.type(global.settings.library.path, 'String'))
 	global.settings.library.path = [ global.settings.library.path ];
 }
 
-global.nodejs = {};
+global.nodejs = function(_module)
+{
+	try
+	{
+		if(_module in global.nodejs)
+		{
+			return global.nodejs[_module];
+		}
+
+		var mod = require(_module);
+
+		if(mod)
+		{
+			return (global.nodejs[_module] = mod);
+		}
+		else
+		{
+			return new Error(_module + ' => ' + global.type(mod));
+		}
+	}
+	catch(_error)
+	{
+		return _error;
+	}
+}
 
 for(var idx in settings.nodejs)
 {
