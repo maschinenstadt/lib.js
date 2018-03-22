@@ -1,6 +1,6 @@
 {
   "name": "maschinenstadt",
-  "version": "2.12.15",
+  "version": "2.12.16",
   "description": "My personal JavaScript / Node.js library (and interpreter) extension(s).",
   "main": "node.js",
   "scripts": {
