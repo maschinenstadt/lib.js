@@ -3,13 +3,6 @@
 ------------------------------------------------------------------------------------------------------
 
 
-
-	WICHTIGST!!!
-
-		Array.prototype.get(..); .. etc. pp. ...
-
-
-
 	# überlege wg. "class"es wie ..
 
 		# "core/event"
@@ -17,9 +10,61 @@
 
 		... usw., wie ich das konstruieren möchte. klar ist z.b., dass "event" überall gebraucht wird, grundsätzlich.
 		aber dann gibt's auch noch die basis-klasse "node", die im prinzip am ende aller klassen zur abs. basis wird.
-		.. sollte das event auch hoch abstrakte basis sein - oder sogar erst vom "node" 'extended' werden? .. TODO ..
+		.. sollte das event auch hoch abstrakte basis sein - oder sogar erst vom "node" 'extended' werden? .. UND wo-
+		rauf basiert das "event" weitergehend? evtl. auf (oo-(konsolen-))streams(-sync.)?!? usw. ...
+
+		.. hin zu netzwerk-klassen sehr wichtig z.b. .. inkl. folgendem, also automatische event-registrierung durch listen, ..
 
 
+
+	# net/(server/)...
+!!!	=> callbacks automatisch zusammen setzen. .. aus initialem setup() .. hin zu "this.callbacks" 4 foreign;
+
+		=> events & callbacks .. @ OWN <Event> class or so .. von wegen "this.event...(add() z.b.)" [w/ fire() @ func-call?]
+
+			=> und .. multiple callbacks .. alle in einem array und der reihe nach (async!!!) aktivieren (arr.forEach() ;)
+
+			=> REMOTE-event+callback ... so wie <Stream>-synchronisation und deren "member"-liste w/ anmeldung (w/ passwd zb)
+
+					.. @ "system/event"
+
+!!!!!!!!! =>>			=> use "node.uuid" - so ANY OBJECT can be REMOTE!!!!!
+
+!!!!!!!! -->				=> node.event = new system/event(); .. <- use this!
+
+!!!!!!			.. see "/doc/APP-Server.odt"(!!!!!!!!!!)
+
+
+
+		@ doc/txt/HTTP....txt (v.a. wegen TLS-SNI ..!!)
+
+			< https://stackoverflow.com/questions/35586957/nodejs-starttls-use-sni >
+			< https://stackoverflow.com/questions/12219639/is-it-possible-to-dynamically-return-an-ssl-certificate-in-nodejs >
+
+			< https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
+			< https://www.sitepoint.com/how-to-use-ssltls-with-node-js/ >
+
+
+
+
+------------------------------------------------
+
+	# Readline ... (v.a. wg. "net/(server/)"..!)
+
+		...	< https://nodejs.org/api/readline.html >	..
+
+		=> maybe "console.prompt()" or "console.read()" etc. is better to solve with this?! :-D
+
+		=> maybe "console/ansi(.js)" is not necessary (als ganzes .. evtl. nur zusätzlich wg. FARBEN(!!)?!)
+
+
+------------------------------------------------
+
+	WICHTIGST!!!
+
+		Array.prototype.get(..); .. etc. pp. ...
+
+------------------------------------------------
 
 
 
@@ -56,8 +101,11 @@
 
 
 
+------------------------------------------------
+
 	# [global.]not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
 
+------------------------------------------------
 
 
 
@@ -82,47 +130,6 @@
 
 # "test/" durcharbeiten und bei fertigstellung nach "example/" verschieben. ich teste, dann mach ich beispiele daraus (neben docs) ;-)´
 
-
-------------------------------------------------
-
-	@ doc/txt/HTTP....txt
-
-		< https://stackoverflow.com/questions/35586957/nodejs-starttls-use-sni >
-		< https://stackoverflow.com/questions/12219639/is-it-possible-to-dynamically-return-an-ssl-certificate-in-nodejs >
-
-		< https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
-		< https://www.sitepoint.com/how-to-use-ssltls-with-node-js/ >
-
-
-
-
-
-	# net/(server/)...
-!!!	=> callbacks automatisch zusammen setzen. .. aus initialem setup() .. hin zu "this.callbacks" 4 foreign;
-
-		=> events & callbacks .. @ OWN <Event> class or so .. von wegen "this.event...(add() z.b.)" [w/ fire() @ func-call?]
-
-			=> und .. multiple callbacks .. alle in einem array und der reihe nach (async!!!) aktivieren (arr.forEach() ;)
-
-			=> REMOTE-event+callback ... so wie <Stream>-synchronisation und deren "member"-liste w/ anmeldung (w/ passwd zb)
-
-					.. @ "system/event"
-
-!!!!!!!!! =>>			=> use "node.uuid" - so ANY OBJECT can be REMOTE!!!!!
-
-!!!!!!!! -->				=> node.event = new system/event(); .. <- use this!
-
-!!!!!!			.. see "/doc/APP-Server.odt"(!!!!!!!!!!)
-
-------------------------------------------------
-
-	# Readline ... (v.a. wg. "net/(server/)"..!)
-
-		...	< https://nodejs.org/api/readline.html >	..
-
-		=> maybe "console.prompt()" or "console.read()" etc. is better to solve with this?! :-D
-
-		=> maybe "console/ansi(.js)" is not necessary (als ganzes .. evtl. nur zusätzlich wg. FARBEN(!!)?!)
 
 ------------------------------------------------
 
