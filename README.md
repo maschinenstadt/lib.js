@@ -49,6 +49,20 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Node.js original modules
+Now you won't need to "include()" your original Node.js modules.. you have to
+address them as usual by "[global.]nodejs" - but instead of using it like any
+object.. now you can call it as function, with it's module name as parameter.
+
+If it has been loaded before, you get a cached copy of the object. Otherweise
+the function will load it, store it in the cache (for later use) and then you
+get the object itself. ;-)´
+
+	var http; // not necessary, really..
+	var server = (http = nodejs('http')).createServer();
+	console.inspect(nodejs.http); // also possible. ;-)
+
+
 #### Array BUG
 Important info: one big mistake happened! I can not access greater or smaller
 "index" (arg) values (which usually should be done by "modulo" (%)). Have not
