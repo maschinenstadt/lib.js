@@ -19,18 +19,7 @@ global.include = main.include = function(_module, _libraryPaths)
 			reload = false;
 		}
 
-		if(! ((_module in global.nodejs) && (! reload)))
-		{
-			//global.nodejs[_module] = require(_module);
-			global.nodejs[_module] = realInclude(_module);
-		}
-
-		if(_module in global.nodejs)
-		{
-			return global.nodejs[_module];
-		}
-		
-		return global.nodejs;
+		return global.nodejs(_module, reload);
 	}
 
 	if(_libraryPaths)

@@ -108,11 +108,12 @@ if(global.type(global.settings.library.path, 'String'))
 	global.settings.library.path = [ global.settings.library.path ];
 }
 
-global.nodejs = function(_module)
+global.nodejs = function(_module, _reload = false)
 {
 	try
 	{
-		if(_module in global.nodejs)
+		if(_module in global.nodejs
+			&& (! _reload))
 		{
 			return global.nodejs[_module];
 		}
