@@ -2,12 +2,11 @@
 
 	WICHTIGST!!!
 
-		"test/WICHTIG-ARRAY.js" ..
+		"test/WICHTIG-ARRAY.js" .. (siehe auch "example/array/get.js" - für danach ;-)´
 
 			=> // größer/kleiner indices gehen nicht.. TODO!! WICHTIG!!!!
 
-
-
+				=> (neu schreiben bestenfalls .. und neue ordnung (überall in global/) einbringen, bitte. ;-)´
 
 
 ------------------------------------------------------------------------------------------------------
@@ -84,6 +83,10 @@
 
 			=> ABER: gehts noch etwas effizienter und/oder "sauberer" ["formuliert"]!? ..
 
+
+
+
+	# restliche "file"-methoden .. sowie *überall* SYNC AND ASYNC!!!
 
 
 
