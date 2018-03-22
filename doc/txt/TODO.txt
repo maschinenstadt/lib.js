@@ -40,6 +40,11 @@
 ------------------------------------------------------------------------------------------------------
 
 
+
+	# < https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
+
+
+
 	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
 
 		# überall in funktionen einen genauen check der parameter-übergabe(n) ...
