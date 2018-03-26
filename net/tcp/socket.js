@@ -17,12 +17,14 @@ module.exports = class socket extends sock
 
 	setTimeout(_timeout = socket.timeout)
 	{
-		//TODO/ do this also for the socket, if any
 		if(global.not(_timeout) || (! global.type(_timeout, 'Number')))
 		{
 			_timeout = socket.timeout;
 		}
+
 		this.timeout = _timeout;
+		super.setTimeout(_timeout);
+
 		return this;
 	}
 
@@ -33,7 +35,10 @@ module.exports = class socket extends sock
 		{
 			_encoding = socket.encoding;
 		}
+
 		this.encoding = _encoding;
+		super.setEncoding(_encoding);
+
 		return this;
 	}
 
@@ -43,7 +48,9 @@ module.exports = class socket extends sock
 		{
 			_protocol = socket.protocol;
 		}
+
 		this.protocol = _protocol;
+
 		return this;
 	}
 }
