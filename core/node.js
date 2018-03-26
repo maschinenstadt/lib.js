@@ -1,7 +1,8 @@
 const uuid = include('util/uuid');
-const event = include('core/event');
+//const event = include('core/event');
+//const channel = include('mud/channel');
 
-module.exports = class node extends event
+module.exports = class node //extends channel|event|..
 {
 	constructor(_uuid = uuid.random())
 	{

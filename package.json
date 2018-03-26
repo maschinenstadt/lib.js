@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/maschinenstadt/lib.js.git"
+    "url": "https://git@github.com/maschinenstadt/lib.js.git"
   },
   "author": "Sebastian 'Kuchen' Kucharczyk <geleeschaumgummi@gmail.com> (https://kekse.biz/)",
   "license": "ISC",
