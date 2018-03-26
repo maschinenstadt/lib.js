@@ -183,7 +183,7 @@ Object.prototype.forEach = function(_callback, _foreign = false, _suffix, _prefi
 {
 }
 
-Object.prototype.count = function(_foreign = false, _suffix, _prefix, _maximum, _remove, _filter)
+/*Object.prototype.count = function(_foreign = false, _suffix, _prefix, _maximum, _remove, _filter)
 {
 	//TODO/ anpassen an die anderen hier (wie "Object.prototype.keys()" etc. ..)
 	//momentan nur ganz einfach
@@ -203,7 +203,7 @@ Object.prototype.count = function(_foreign = false, _suffix, _prefix, _maximum, 
 	}
 
 	return result;
-}
+}*/
 
 Object.prototype.glob = function()
 {
@@ -281,4 +281,24 @@ Object.prototype.toDebug = function(_radix, _tag, _foreign, _colors)
 	return result;
 }
 */
+
+Object.prototype.count = function(_foreign = false)
+{
+	if(! global.type(_foreign, 'Boolean'))
+	{
+		_foreign = false;
+	}
+
+	var result = 0;
+
+	for(var idx in this)
+	{
+		if(_foreign || this.hasOwnProperty(idx))
+		{
+			result++;
+		}
+	}
+
+	return result;
+}
 

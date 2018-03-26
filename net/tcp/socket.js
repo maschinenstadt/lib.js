@@ -1,9 +1,12 @@
-module.exports = class socket // extends (..)
+const sock = include('net').Socket;
+
+module.exports = class socket extends sock
 {
 	constructor()
 	{
+		super();
+		//
 		this.setProtocol();
-		// the other can wait .. or find any solution - as they are important for the SOCKET, which comes later..
 		this.setEncoding();
 		this.setTimeout();
 	}
@@ -12,7 +15,6 @@ module.exports = class socket // extends (..)
 	static get encoding() { return global.settings.encoding || 'utf8'; }
 	static get timeout() { return global.settings.net.timeout || 0; }
 
-	// IS THIS CORRECT IN A *CLIENT* (not SERVER)!?? YES, i do think so .. ATM. ..
 	setTimeout(_timeout = socket.timeout)
 	{
 		//TODO/ do this also for the socket, if any

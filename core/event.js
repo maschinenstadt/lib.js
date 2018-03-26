@@ -5,5 +5,9 @@ module.exports = class event // extends node (..)
 		//super();
 		this.events = {};
 	}
+
+	count(_eventName)
+	{
+	}
 }
 
