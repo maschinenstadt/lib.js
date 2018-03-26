@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/maschinenstadt/lib.js/issues"
   },
-  "homepage": "https://kekse.biz/?page:lib.js"
+  "homepage": "https://kekse.biz/?page:lib.js",
+  "dependencies": {
+    "fuse-bindings": "^2.11.2"
+  }
 }
