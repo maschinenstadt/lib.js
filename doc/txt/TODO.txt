@@ -4,6 +4,14 @@
 
 
 
+
+	# "autorun" nicht nur in "/home/*/lib.js" (siehe "[global.]path.home"), sondern ALLEN include-dirs! ..
+
+		=> also nur root-js(on)-dateien jeweils .. keine sub-directories ... genauso eben wie @ /home.
+
+
+
+
 	# bedenke grundsätlzich - falls möglich - "this"-rückgabe .. für ketten-verschaltung für direkt weitergehende aufrufen.. ;-)´
 
 
