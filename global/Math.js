@@ -7,10 +7,29 @@ const _round = Math.round;
 
 Math.round = function(_number = undefined, _precision = 0)
 {
-	if(! _number)
+	if(! global.type(_number, 'Number'))
 	{
-		return new Error();
+		return new Error(global.type(_number));
 	}
+	if(! global.type(_precision, 'Number'))
+	{
+		_precision = 0;
+	}
+
+	/*
+	var str = _number.toString();
+	var prec = 0;
+	var high = false;
+
+	var result = '';
+
+	for(var i = str.length - 1; i >= 0; i--)
+	{
+		var symbol = this.charCodeAt(i);
+	}
+
+	return result;
+	*/
 
         var factor = Math.pow(10, _precision);
         return ( _round(_number * factor) / factor );

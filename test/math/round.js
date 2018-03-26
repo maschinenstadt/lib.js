@@ -36,24 +36,20 @@
 // see also "Beschreibung" @ < https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/round >
 
 
-var nr = 1.23456;
-//var nr = 1.456;
 
+var nr = 1.456;
 
-var res1 = nr.round(5);//Math.round(nr, 5);
-var res2 = nr.round(4);//Math.round(nr, 4);
-var res3 = Math.round(nr, 3);
-var res4 = Math.round(nr, 2);
-var res5 = nr.round(1);//Math.round(nr, 1);
-var res6 = nr.round();//Math.round(nr);
-
+var r0 = nr.round(3); // == Math.round(nr, 3);
+var r1 = nr.round(2); // .. etc. ...
+var r2 = nr.round(1); // ;-)´
+var r3 = nr.round();
 
 console.inspect(nr);
-console.EOL(2);
-console.inspect(res1);
-console.inspect(res2);
-console.inspect(res3);
-console.inspect(res4);
-console.inspect(res5);
-console.inspect(res6);
+
+console.EOL();
+
+console.inspect(r0);
+console.inspect(r1);
+console.inspect(r2);
+console.inspect(r3);
 
