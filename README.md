@@ -49,6 +49,12 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### "fuse-bindings"
+Added this dependency (at the moment the only one) for some own filesystem(s)
+which I'll integrate later. It is for various reasons. I wanted to completely
+stay away from foreign dependencies, but this one could be appropriate. TODO!
+
+
 #### Node.js original modules
 Now you won't need to "include()" your original Node.js modules.. you have to
 address them as usual by "[global.]nodejs" - but instead of using it like any
