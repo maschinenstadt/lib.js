@@ -1,5 +1,26 @@
 
+
 // < https://github.com/michalbe/rgb2xterm >
+
+
+
+
+// < https://linuxtidbits.wordpress.com/2008/08/13/output-color-on-bash-scripts-advanced/ >
+// < https://linuxtidbits.wordpress.com/2008/08/11/output-color-on-bash-scripts/ >
+
+// < https://unix.stackexchange.com/questions/220330/hide-and-unhide-cursor-with-tput >
+
+// < https://en.wikipedia.org/wiki/Tput >
+// < https://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x405.html >
+// < https://www.thegeekstuff.com/2011/01/tput-command-examples/ >
+// < http://www.tutorialspoint.com/unix_commands/tput.htm >
+
+// < http://wiki.bash-hackers.org/scripting/terminalcodes >
+
+// < https://www.csie.ntu.edu.tw/~r92094/c++/VT100.html >
+// < http://www.termsys.demon.co.uk/vtansi.htm >
+// < http://ascii-table.com/ansi-escape-sequences-vt-100.php >
+
 
 
 
