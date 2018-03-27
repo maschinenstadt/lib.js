@@ -1,6 +1,6 @@
 #!/usr/bin/env node.js
 
-const HOST = 'chat.freenode.net';
+const HOST = /*'irc.de.euirc.net' ||*/ 'chat.freenode.net';
 
 var irc = include('net/irc');
 console.inspect(irc, 2);

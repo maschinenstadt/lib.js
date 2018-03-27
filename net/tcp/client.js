@@ -1,14 +1,15 @@
 const tcpSocket = include('net').Socket;
 
-module.exports = class socket extends tcpSocket
+module.exports = class client extends tcpSocket
 {
-	constructor(_socket = new sock())
+	constructor()
 	{
 		super();
 		//
-		this.setProtocol('tcp');
-		this.setEncoding(socket.encoding);
-		this.setTimeout(socket.timeout);
+		this.setProtocol(client.protocol);
+		this.setEncoding(client.encoding);
+		this.setTimeout(client.timeout);
+		//
 		this.setCallbacks(this.callbacks);
 	}
 
@@ -17,11 +18,7 @@ module.exports = class socket extends tcpSocket
 	static get timeout() { return global.settings.net.timeout || 0; };
 	static get version() { return global.settings.net.version || 'IPv6' || 'IPv4'; };
 
-	setSocket(_socket = undefined)
-	{
-	}
-
-	connect(_tls = true, _host = '127.0.0.1', _port = 0, _version = socket.version, _localAddress, _localPort)
+	connect(_tls = true, _host = '127.0.0.1', _port = 0, _version = client.version, _localAddress, _localPort)
 	{
 		if(! global.type(_tls, 'Boolean'))
 		{
@@ -41,15 +38,15 @@ module.exports = class socket extends tcpSocket
 			this.setCrypto('tls');
 		}
 
-		_options = Object.assign(_options, { host: _host, port: _port });
+		var opts = { host: _host, port: _port };
 
-		if(_localAddress)
+		if(global.type(_localAddress, 'String'))
 		{
-			_options = Object.assign(_options, { localAddress: _localAddress });
+			opts.localAddress = _localAddress;
 		}
-		if(_localPort)
+		if(global.type(_localPort, 'Number'))
 		{
-			_options = Object.assign(_options, { localPort: _localPort });
+			opts.localPort = _localPort;
 		}
 
 		switch(_version)
@@ -58,19 +55,19 @@ module.exports = class socket extends tcpSocket
 			case '4':
 			case 'ipv4':
 			case 'IPv4':
-				_options.family = 4;
+				opts.family = 4;
 				break;
 			case 6:
 			case '6':
 			case 'ipv6':
 			case 'IPv6':
-				_options.family = 6;
+				opts.family = 6;
 				break;
 			default:
-				_options.family = socket.version || 6;
+				opts.family = client.version || 6;
 		}
 
-		return super.connect(_options);
+		return super.connect(opts);
 	}
 
 	get port() { return this.remotePort; }
@@ -169,43 +166,46 @@ module.exports = class socket extends tcpSocket
 
 	onClose()
 	{
-		console.debug(0, 'Connection closed (%s)', this.toString());
+		console.right('Connection closed (' + this.toString() + ')');
 	}
 
 	onConnect()
 	{
-		console.debug(0, 'Connection established (%s)', this.toString());
+		console.right('Connection established (' + this.toString() + ')');
 	}
 
 	onData(_chunk)
 	{
-		console.debug(0, 'Connection DATA received (%s) w/ chunk of (%d) bytes]', this.toString(), _chunk.length);
+		console.right('Connection received DATA (' + this.toString() + '): (' + _chunk.length.toString() + ') bytes');
+		console.line('-');
+		console.stdout(_chunk);
+		console.line('-');
 	}
 
 	onDrain()
 	{
-		console.debug(0, 'Connection DRAIN (%s)', this.toString());
+		console.right('Connection DRAIN (' + this.toString() + ')');
 	}
 
 	onEnd()
 	{
-		console.debug(0, 'Connection END (%s)', this.toString());
+		console.right('Connection END (' + this.toString() + ')');
 	}
 
 	onError(_error)
 	{
-		console.debug(0, 'Connection ERROR (%s)', this.toString());
+		console.right('Connection ERROR (' + this.toString() + ')');
 		console.error(_error.text);
 	}
 
 	onLookup()
 	{
-		console.debug(0, 'Connection Lookup (%s)', this.toString());
+		console.right('Connection lookup (' + this.toString() + ')');
 	}
 
 	onTimeout()
 	{
-		console.debug(0, 'Connection TIMEOUT (%s)', this.toString());
+		console.right('Connection TIMEOUT (' + this.toString() + ')');
 	}
 }
 
