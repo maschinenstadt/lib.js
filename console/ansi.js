@@ -121,12 +121,12 @@ ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _heig
 	return write(ansi.ESC + ansi.BRACKET + line.toString() + ';' + column.toString() + ('H'||'f'), _write);
 }
 
-ansi.cursor.save = function(_write = global.console.stream)
+ansi.save = function(_write = global.console.stream)
 {
 	return write(ansi.ESC + '7', _write);
 }
 
-ansi.cursor.load = function(_write = global.console.stream)
+ansi.load = function(_write = global.console.stream)
 {
 	return write(ansi.ESC + '8', _write);
 }

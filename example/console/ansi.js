@@ -26,10 +26,10 @@ ansi.attribute(ansi.attribute.bold);
 ansi.cursor(0, -1);
 ansi.attribute(ansi.attribute.underline);
 console.stdout('zweiter test w/o..');
-ansi.cursor.save();
+ansi.save();
 ansi.cursor(0, 0);
 console.stdout('ABC');
-ansi.cursor.load();
+ansi.load();
 ansi.clear.left();
 console.stdout('ENDE');
 
