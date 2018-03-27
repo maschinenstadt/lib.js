@@ -1,7 +1,6 @@
-const serv = include('net').Server;
-const node = include('core/node');
+const tcpServer = include('net').Server;
 
-module.exports = class server extends serv
+module.exports = class server extends tcpServer
 {
 	constructor()
 	{

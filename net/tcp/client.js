@@ -1,7 +1,6 @@
-const sock = include('net').Socket;
-const node = include('core/node');
+const tcpSocket = include('net').Socket;
 
-module.exports = class socket extends sock
+module.exports = class socket extends tcpSocket
 {
 	constructor(_socket = new sock())
 	{

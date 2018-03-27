@@ -1,6 +1,6 @@
-const sock = include('dgram').Socket;
+const udpSocket = include('dgram').Socket;
 
-module.exports = class socket extends sock
+module.exports = class socket extends udpSocket
 {
 	constructor(_version = 4)
 	{
@@ -23,10 +23,12 @@ module.exports = class socket extends sock
 				v = 'udp6';
 				break;
 			default:
-				return new Error(_version + ' (' + global.type(_version) + ')');
+				v = socket.version;
 		}
 
 		super(v);
 	}
+
+	static get version() { return ( global.settings.net.version === 6 ? 'udp6' : 'udp4' ); }
 }
 
