@@ -1,0 +1,13 @@
+TODO: besser ist ein node.js system hierzu (statt aktuell php)!
+
+direkt zusammen arbeitend mit 'Object.defineProperty()' u.v.m.;
+und alles hin zum eigenen web-server mit server-side-javascript
+und sessions etc. ..! ;-)´
+
+ich sollte aber das design dennoch etwas schnell so ranbringen,
+damit es eine super geniale abbildung wird. vom dateisystem bis
+json-datei-codierungen o.ä. bis zum "web explorer/scout" o.ä...
+
+... und natürlich noch schöne bilder/avatare/ o.ä. quasi gleich
+noch mit dazu. so dass z.b. die api-bereiche mit passendem icon
+geziert werden usw. ..
