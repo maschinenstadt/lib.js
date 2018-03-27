@@ -1,6 +1,7 @@
 #!/usr/bin/env node.js
 var ansi = include('term/ansi');
-ansi.color('this is a test...', 34, 47, 'bold');
+ansi.gray(12);
+console.stdout('testing..');
 ansi.none();
-process.stdout.write('nun normaler text wieder?');
+console.stdout('none now..!');
 
