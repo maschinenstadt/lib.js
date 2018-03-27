@@ -49,6 +49,12 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### "net/"
+I'm currently working on things like IRC connections (server AND client etc.)
+and my UDP/TCP sockets. Goes on.. first "test/" (are previews for "example/")
+shows it - a bit: "test/net/irc.js". This all is Still //TODO/.
+
+
 #### ANSI
 Just finished "console/ansi"! See the .. "example/console/ansi.js". Important
 feature for me - as it goes to own `dialog` styles (or something similar), w/
