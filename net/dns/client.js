@@ -1,7 +1,7 @@
 const node = include('core/node');
-const sock = include('net/socket');
+const tcpClient = include('net/tcp/client');
 
-module.exports = class client extends node
+module.exports = class client extends tcpClient
 {
 	constructor()
 	{

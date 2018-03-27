@@ -11,7 +11,7 @@ var client = new irc.client();
 
 client.connect(false, HOST);//, null, 6, '::1', 12345);
 
-var on = client.tcp.callbacks;
+var on = client.callbacks;
 
 for(var idx in on)
 {

@@ -10,6 +10,7 @@ settings.version.delay = 30;	// in minutes .. will be converted to milliseconds 
 
 settings.net = {};
 settings.net.timeout = 0;	// <1(ms) disables default timeout (which can be set in their net-classes, too)
+settings.net.version = 6;
 
 settings.DEBUG = 0; // param '--debug=8' is also possible
 settings.START = true;	// general start of processes - and use this like an interpreter

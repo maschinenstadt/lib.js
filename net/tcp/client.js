@@ -1,13 +1,11 @@
 const sock = include('net').Socket;
 const node = include('core/node');
 
-module.exports = class socket extends node
+module.exports = class socket extends sock
 {
 	constructor(_socket = new sock())
 	{
 		super();
-		//
-		this.setSocket(_socket);
 		//
 		this.setProtocol('tcp');
 		this.setEncoding(socket.encoding);
@@ -15,17 +13,21 @@ module.exports = class socket extends node
 		this.setCallbacks(this.callbacks);
 	}
 
-	static get protocol() { return 'tcp'; }
-	static get encoding() { return global.settings.encoding || 'utf8'; }
-	static get timeout() { return global.settings.net.timeout || 0; }
+	static get protocol() { return 'tcp'; };
+	static get encoding() { return global.settings.encoding || 'utf8'; };
+	static get timeout() { return global.settings.net.timeout || 0; };
+	static get version() { return global.settings.net.version || 'IPv6' || 'IPv4'; };
 
-	write(_data, _encoding = global.settings.encoding)
+	setSocket(_socket = undefined)
 	{
-		//this.socket.write(_data
 	}
 
-	connect(_host = '127.0.0.1', _port = 0, _options = {})
+	connect(_tls = true, _host = '127.0.0.1', _port = 0, _version = socket.version, _localAddress, _localPort)
 	{
+		if(! global.type(_tls, 'Boolean'))
+		{
+			_tls = true;
+		}
 		if(! global.type(_host, 'String'))
 		{
 			_host = '127.0.0.1';
@@ -35,21 +37,54 @@ module.exports = class socket extends node
 			_port = 0;
 		}
 
+		if(_tls)
+		{
+			this.setCrypto('tls');
+		}
+
 		_options = Object.assign(_options, { host: _host, port: _port });
-		return this.socket.connect(_options);
+
+		if(_localAddress)
+		{
+			_options = Object.assign(_options, { localAddress: _localAddress });
+		}
+		if(_localPort)
+		{
+			_options = Object.assign(_options, { localPort: _localPort });
+		}
+
+		switch(_version)
+		{
+			case 4:
+			case '4':
+			case 'ipv4':
+			case 'IPv4':
+				_options.family = 4;
+				break;
+			case 6:
+			case '6':
+			case 'ipv6':
+			case 'IPv6':
+				_options.family = 6;
+				break;
+			default:
+				_options.family = socket.version || 6;
+		}
+
+		return super.connect(_options);
 	}
 
-	setSocket(_socket = new sock())
-	{
-		this.socket = _socket;
-	}
-
-	get port() { return this.socket.remotePort; }
-	get host() { return this.socket.remoteAddress; }
+	get port() { return this.remotePort; }
+	get host() { return this.remoteAddress; }
 	
 	toString()
 	{
 		return this.host + ':' + this.port;
+	}
+
+	setCrypto(_type = 'tls')
+	{
+		this.crypto = _type || 'tls';
 	}
 
 	setTimeout(_timeout = socket.timeout)
@@ -60,7 +95,7 @@ module.exports = class socket extends node
 		}
 
 		this.timeout = _timeout;
-		this.socket.setTimeout(_timeout);
+		super.setTimeout(_timeout);
 
 		return this;
 	}
@@ -74,7 +109,7 @@ module.exports = class socket extends node
 		}
 
 		this.encoding = _encoding;
-		this.socket.setEncoding(_encoding);
+		super.setEncoding(_encoding);
 
 		return this;
 	}
@@ -112,7 +147,7 @@ module.exports = class socket extends node
 				continue;
 			}
 
-			this.socket.on(idx, _map[idx]);
+			this.on(idx, _map[idx]);
 			result++;
 		}
 

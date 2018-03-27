@@ -1,7 +1,7 @@
 const node = include('core/node');
-const sock = include('net/socket');
+const tcpClient = include('net/tcp/client');
 
-module.exports = class client extends node
+module.exports = class client extends tcpClient
 {
 	constructor(
 		_name_nick = String.random.alphabet(16, 8),
@@ -10,10 +10,7 @@ module.exports = class client extends node
 	){
 		super();
 
-		this.tcp = new sock.tcp();
-
 		this.name = {};
-
 		this.setNick(_name_nick);
 		this.setReal(_name_real);
 		this.setUser(_name_user);
@@ -54,7 +51,7 @@ module.exports = class client extends node
 
 	static get port() { return { tcp: 6667, tls: 5597 }; }
 
-	connect(_tls = true, _host = '127.0.0.1', _port = ( _tls ? client.port.tls : client.port.tcp ), _ipVer = 6, _localAddress, _localPort)
+	connect(_tls = true, _host = '127.0.0.1', _port = ( _tls ? client.port.tls : client.port.tcp ), _version = global.settings.net.version || 6, _localAddress, _localPort)
 	{
 		if(! global.type(_tls, 'Boolean'))
 		{
@@ -80,26 +77,26 @@ module.exports = class client extends node
 			opts = Object.assign(opts, { localPort: _localPort });
 		}
 
-		if(global.type(_ipVer, 'Number'))
+		switch(_version)
 		{
-			switch(_ipVer)
-			{
-				case 4:
-				case '4':
-				case 'ipv4':
-				case 'IPv4':
-					opts = Object.assign(opts, { family: 4 });
-					break;
-				case 6:
-				case '6':
-				case 'ipv6':
-				case 'IPv6':
-					opts = Object.assign(opts, { family: 6 });
-					break;
-			}
+			case 4:
+			case '4':
+			case 'ipv4':
+			case 'IPv4':
+				opts = Object.assign(opts, { family: 4 });
+				break;
+			case 6:
+			case '6':
+			case 'ipv6':
+			case 'IPv6':
+				opts = Object.assign(opts, { family: 6 });
+				break;
+			default:
+				opts = Object.assign(opts, { family: global.settings.net.version || 6 });
 		}
 
-		this.tcp.connect(opts);
+		super.connect(_tls, _host, _port, _version, _localAddress, _localPort);
+
 		return this;
 	}
 }
