@@ -1,13 +1,13 @@
 const uuid = include('util/uuid');
-//const event = include('core/event');
+const event = include('core/event');
 
-module.exports = class node //extends channel|event|..
+module.exports = class node extends event
 {
 	constructor(_uuid = uuid.random())
 	{
 		//super();
 
-		//this.event = new event();
+		this.event = new event();
 
 		if(! global.type(_uuid, 'String'))
 		{
