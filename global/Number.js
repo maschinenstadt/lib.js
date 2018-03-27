@@ -62,6 +62,11 @@ Number.prototype.round = function(_precision = 0)
 	return Math.round(this.valueOf(), _precision);
 }
 
+Number.prototype.abs = function()
+{
+	return Math.abs(this.valueOf());
+}
+
 Number.from = function(_string, _radix = 10)
 {
 	if(global.not(_string))
