@@ -138,6 +138,10 @@ realInclude.directory = function(_path)
 			{
 				name = name.toUpperCase();
 			}
+			else if(! p.endsWith('.js'))
+			{
+				continue;
+			}
 
 			result[name] = realInclude.file(p);
 		}
@@ -148,7 +152,17 @@ realInclude.directory = function(_path)
 
 realInclude.file = function(_path)
 {
-	return require(_path);
+	var ext = nodejs('path').extname(_path);
+
+	for(var i = 0; i < global.settings.library.extensions.length; i++)
+	{
+		if(global.settings.library.extensions[i] === ext)
+		{
+			return require(_path);
+		}
+	}
+
+	return new Error(_path + ' (' + ext + ')');
 }
 
 console.debug(2, "Loaded 'module'");
