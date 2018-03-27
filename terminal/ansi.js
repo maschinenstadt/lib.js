@@ -36,9 +36,9 @@ function write(_code, _write = global.console.stream)
 	//
 }
 
-ansi.color = function(_foreground, _background = 38
+ansi.color = function(_foreground, _background)
 {
-	var code = ansi.ESC + ansi.LEFT + _foreground + ';' + _background + 'm'
+	//var code = ansi.ESC + ansi.LEFT + _foreground + ';' + _background + 'm'
 }
 
 ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _height = global.console.size.height)
