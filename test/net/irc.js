@@ -1,5 +1,11 @@
 #!/usr/bin/env node.js
 
+// here is something wrong at the moment.
+// with the callbacks.
+// i'll work on it.
+// soon.
+
+
 const HOST = /*'irc.de.euirc.net' ||*/ 'chat.freenode.net';
 
 var irc = include('net/irc');
