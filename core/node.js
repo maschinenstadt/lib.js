@@ -1,7 +1,8 @@
 const uuid = include('util/uuid');
 const event = include('core/event');
+const stream = include('core/stream');
 
-module.exports = class node extends Object
+module.exports = class node extends stream
 {
 	constructor(_uuid = uuid.random())
 	{
