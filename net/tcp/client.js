@@ -128,7 +128,7 @@ module.exports = class client extends tcpSocket
 		return this;
 	}
 
-	setCallbacks(_map)
+	setCallbacks(_map, _removeOld = true)
 	{
 		var result = 0;
 
@@ -143,7 +143,13 @@ module.exports = class client extends tcpSocket
 				continue;
 			}
 
+			if(_removeOld)
+			{
+				this.removeAllListeners(idx);
+			}
+
 			this.on(idx, _map[idx]);
+
 			result++;
 		}
 
@@ -162,6 +168,11 @@ module.exports = class client extends tcpSocket
 			lookup: this.onLookup,
 			timeout: this.onTimeout
 		};
+	}
+
+	set callbacks(_map)
+	{
+		this.setCallbacks(_map, true);
 	}
 
 	onClose()

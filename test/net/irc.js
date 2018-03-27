@@ -11,15 +11,21 @@ var client = new irc.client();
 
 client.connect(false, HOST);//, null, 6, '::1', 12345);
 
-var on = client.callbacks;
-
-for(var idx in on)
+var cb = client.callbacks;
+var r = cb.unset('timeout');
+console.EOL(3);
+console.inspect(r);
+console.EOL(3);
+for(var idx in cb)
 {
-	if(! on.hasOwnProperty(idx))
+	if(! cb.hasOwnProperty(idx))
 	{
+		console.inspect(idx);
 		continue;
 	}
 
-	on[idx] = function() { console.inspect('on(%s) => (%d)', idx, arguments.length); };
+	cb[idx] = function() { console.log(' >> ' + idx + '(' + arguments.length + ')'); };
 }
+
+client.callbacks = cb;
 

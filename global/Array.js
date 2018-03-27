@@ -10,506 +10,520 @@ Object.defineProperty(Array.prototype, 'first', {
 	get: function() { return this[0]; },
 	set: function(_v) { return this[0] = _v; } });
 
-Array.prototype.toCharString = function(_from = 0, _length = this.length - _from)
-{
-	var result = '';
-	//
-	//TODO/ fehlen noch NEGATIVE _length ..!!
-	//und natürlich ncoh zu testen.. erste version ohne test ist das bloß..
-	//
-	for(var i = 0, j = _from; i < _length; i++, j = (j+1) % this.length)
+Object.defineProperty(Array.prototype, 'toCharString', {
+	enumerable: false,
+	value: function(_from = 0, _length = this.length - _from)
 	{
-		result += String.fromCharCode(this[j]);
-	}
-
-	return result;
-}
-
-/*Array.prototype.reverse = function(_from = 0, _length = this.length - _from)
-{
-	//TODO/ again (see somewhere else in here..):
-	//negative _lengths! (in this case here: double reverse => regular ;-)´
-
-	var result = [];
-
-	//TODO/
-
-	return result;
-}*/
-
-Array.prototype.rotate = function(_diff = 1)
-{
-	var result = [];
-
-	//TODO/
-
-	return result;
-}
-
-Array.prototype.none = function()
-{
-	var types = [];
-
-	if(arguments.length === 0)
-	{
-		return new Error();
-	}
-	else if(arguments.length === 1)
-	{
-		if(global.type(arguments[0], 'Array'))
+		var result = '';
+		//
+		//TODO/ fehlen noch NEGATIVE _length ..!!
+		//und natürlich ncoh zu testen.. erste version ohne test ist das bloß..
+		//
+		for(var i = 0, j = _from; i < _length; i++, j = (j+1) % this.length)
 		{
-			types = arguments[0];
+			result += String.fromCharCode(this[j]);
 		}
-		else if(global.type(arguments[0], 'String'))
-		{
-			types = [ arguments[0] ];
-		}
-		else
+
+		return result;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'rotate', {
+	enumerable: false,
+	value: function(_diff = 1)
+	{
+		var result = [];
+
+		//TODO/
+
+		return result;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'none', {
+	enumerable: false,
+	value: function()
+	{
+		var types = [];
+
+		if(arguments.length === 0)
 		{
 			return new Error();
 		}
-	}
-	else
-	{
-		types = Array.from(arguments);
-	}
-
-	for(var i = 0; i < this.length; i++)
-	{
-		if(global.type(this[i], types))
+		else if(arguments.length === 1)
 		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-Array.prototype.only = function()
-{
-	var types = [];
-
-	if(arguments.length === 0)
-	{
-		return new Error();
-	}
-	else if(arguments.length === 1)
-	{
-		if(global.type(arguments[0], 'Array'))
-		{
-			types = arguments[0];
-		}
-		else if(global.type(arguments[0], 'String'))
-		{
-			types = [ arguments[0] ];
+			if(global.type(arguments[0], 'Array'))
+			{
+				types = arguments[0];
+			}
+			else if(global.type(arguments[0], 'String'))
+			{
+				types = [ arguments[0] ];
+			}
+			else
+			{
+				return new Error();
+			}
 		}
 		else
 		{
+			types = Array.from(arguments);
+		}
+
+		for(var i = 0; i < this.length; i++)
+		{
+			if(global.type(this[i], types))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'only', {
+	enumerable: false,
+	value: function()
+	{
+		var types = [];
+
+		if(arguments.length === 0)
+		{
 			return new Error();
 		}
-	}
-	else
-	{
-		types = Array.from(arguments);
-	}
-
-	for(var i = 0; i < this.length; i++)
-	{
-		if(! global.type(this[i], types))
+		else if(arguments.length === 1)
 		{
-			return false;
+			if(global.type(arguments[0], 'Array'))
+			{
+				types = arguments[0];
+			}
+			else if(global.type(arguments[0], 'String'))
+			{
+				types = [ arguments[0] ];
+			}
+			else
+			{
+				return new Error();
+			}
 		}
-	}
-
-	return true;
-}
-
-Array.prototype.countValues = function()
-{
-	if(arguments.length === 0)
-	{
-		return new Error();
-	}
-
-	var values = Array.from(arguments);
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
-	{
-		for(var j = 0; j < values.length; j++)
+		else
 		{
-			if(this[i] === values[j])
+			types = Array.from(arguments);
+		}
+
+		for(var i = 0; i < this.length; i++)
+		{
+			if(! global.type(this[i], types))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'countValues', {
+	enumerable: false,
+	value: function()
+	{
+		if(arguments.length === 0)
+		{
+			return new Error();
+		}
+
+		var values = Array.from(arguments);
+
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			for(var j = 0; j < values.length; j++)
+			{
+				if(this[i] === values[j])
+				{
+					result[result.length] = i;
+				}
+			}
+		}
+
+		return result;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'countTypes', {
+	enumerable: false,
+	value: function()
+	{
+		var types;
+
+		if(arguments.length === 0)
+		{
+			return new Error();
+		}
+		else if(arguments.length === 1)
+		{
+			if(global.type(arguments[0], 'Array'))
+			{
+				types = arguments[0];
+			}
+			else if(global.type(arguments[0], 'String'))
+			{
+				types = [ arguments[0] ];
+			}
+			else
+			{
+				return new Error();
+			}
+		}
+		else
+		{
+			types = Array.from(arguments);
+		}
+
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			if(global.type(this[i], types))
 			{
 				result[result.length] = i;
 			}
 		}
+
+		return result;
 	}
+});
 
-	return result;
-}
-
-Array.prototype.countTypes = function()
-{
-	var types;
-
-	if(arguments.length === 0)
+Object.defineProperty(Array.prototype, 'apply', {
+	enumerable: false,
+	value: function(_function, _context)
 	{
-		return new Error();
-	}
-	else if(arguments.length === 1)
-	{
-		if(global.type(arguments[0], 'Array'))
-		{
-			types = arguments[0];
-		}
-		else if(global.type(arguments[0], 'String'))
-		{
-			types = [ arguments[0] ];
-		}
-		else
+		if(! global.type(_function, 'Function'))
 		{
 			return new Error();
 		}
+
+		_context = _context || arguments.caller;
+		return _function.apply(_context, this);
 	}
-	else
-	{
-		types = Array.from(arguments);
-	}
+});
 
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
-	{
-		if(global.type(this[i], types))
-		{
-			result[result.length] = i;
-		}
-	}
-
-	return result;
-}
-
-Array.prototype.apply = function(_function, _context)
-{
-	if(! global.type(_function, 'Function'))
-	{
-		return new Error();
-	}
-
-	_context = _context || arguments.caller;
-	return _function.apply(_context, this);
-}
-
+/*
 Array.prototype.toFunction = function()
-{
-	//see Function.from(.array)
-}
+*/
 
-Array.prototype.removeVoids = function(_removeEmpty)
-{
-	_removeEmpty = _removeEmpty !== false;
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
+Object.defineProperty(Array.prototype, 'removeVoid', {
+	enumerable: false,
+	value: function(_removeEmpty = true)
 	{
-		if(! global.type(this[i], 'String'))
-		{
-			continue;
-		}
+		var result = [];
 
-		if(this[i].length === 0)
+		for(var i = 0; i < this.length; i++)
 		{
-			if(_removeEmpty)
-			{
-				continue;
-			}
-		}
-
-		if(this[i].removeVoids)
-		{
-			var clean = this[i].removeVoids(_removeEmpty);
-
-			if(clean.length === 0)
+			if(! global.type(this[i], 'String'))
 			{
 				continue;
 			}
 
-			result[result.length] = clean;
-		}
-		else
-		{
-			if(this[i].trim)
+			if(this[i].length === 0)
 			{
-				result[result.length] = this[i].trim();
+				if(_removeEmpty)
+				{
+					continue;
+				}
+			}
+
+			if(this[i].removeVoids)
+			{
+				var clean = this[i].removeVoids(_removeEmpty);
+
+				if(clean.length === 0)
+				{
+					continue;
+				}
+
+				result[result.length] = clean;
 			}
 			else
+			{
+				if(this[i].trim)
+				{
+					result[result.length] = this[i].trim();
+				}
+				else
+				{
+					result[result.length] = this[i];
+				}
+			}
+		}
+
+		return result;
+	}
+});
+
+/*
+Array.prototype.unsetType = function()
+*/
+
+Object.defineProperty(Array.prototype, 'unsetTypeInverse', {
+	enumerable: false,
+	value: function()
+	{
+		if(arguments.length === 0)
+		{
+			return this.valueOf();
+		}
+		else if(global.type(arguments[0], 'Array'))
+		{
+			arguments = arguments[0];
+		}
+
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			var type = global.type(this[i]);
+			var take = false;
+
+			for(var j = 0; j < arguments.length; j++)
+			{
+				if(arguments[j] === type)
+				{
+					take = true;
+					break;
+				}
+			}
+
+			if(take)
 			{
 				result[result.length] = this[i];
 			}
 		}
+
+		return result;
 	}
+});
 
-	return result;
-}
-
-Array.prototype.unsetType = function()
-{
-	// see "String.prototype..."
-}
-
-Array.prototype.unsetTypeInverse = function()
-{
-	if(arguments.length === 0)
-	{
-		return this.valueOf();
-	}
-	else if(global.type(arguments[0], 'Array'))
-	{
-		arguments = arguments[0];
-	}
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
-	{
-		var type = global.type(this[i]);
-		var take = false;
-
-		for(var j = 0; j < arguments.length; j++)
-		{
-			if(arguments[j] === type)
-			{
-				take = true;
-				break;
-			}
-		}
-
-		if(take)
-		{
-			result[result.length] = this[i];
-		}
-	}
-
-	return result;
-}
-
+/*
 Array.prototype.unset = function()
-{
 	// String.js
-}
+*/
 
+/*
 Array.prototype.unsetInverse = function()
-{
 	// String.js
-}
+*/
 
+/*
 Array.prototype.replaceAt = function(_start = 0, _length = this.length - _start, _replace)
-{
 	//TODO/!
 	//btw. _replace just one item .. not multiple (because of regular array items)
 	//(whereas string can replace  by bigger substrings ;) - same function, see there.
-}
+*/
 
-Array.prototype.indexOf = function(_search, _start, _end, _case_sensitive)
-{
-	if(! _search)
+Object.defineProperty(Array.prototype, 'indexOf', {
+	enumerable: false,
+	value: function(_search, _start = this.offset(0), _end = this.offset(this.length - 1), _caseSensitive = true)
 	{
-		return undefined;
-	}
-
-	_start = this.offset(_start || 0);
-	if(_end !== 0)
-	{
-		_end = this.offset(_end || this.length - 1);
-	}
-	_case_sensitive = _case_sensitive !== false;
-
-	for(var i = _start; i <= _end; i++)
-	{
-		if(_case_sensitive)
+		if(! _search)
 		{
-			if(this[i] === _search)
-			{
-				return i;
-			}
+			return undefined;
 		}
-		else
+
+		for(var i = _start; i <= _end; i++)
 		{
-			if(type(this[i], 'String') && type(_search, 'String'))
-			{
-				if(this[i].toLowerCase() === _search.toLowerCase())
-				{
-					return i;
-				}
-			}
-			else
+			if(_caseSensitive)
 			{
 				if(this[i] === _search)
 				{
 					return i;
 				}
 			}
+			else
+			{
+				if(type(this[i], 'String') && type(_search, 'String'))
+				{
+					if(this[i].toLowerCase() === _search.toLowerCase())
+					{
+						return i;
+					}
+				}
+				else
+				{
+					if(this[i] === _search)
+					{
+						return i;
+					}
+				}
+			}
 		}
+
+		return -1;
 	}
+});
 
-	return -1;
-}
-
-Array.prototype.indexOfAll = function(_search, _start, _end, _case_sensitive)
-{
-	if(! _search)
+Object.defineProperty(Array.prototype, 'indexOfAll', {
+	enumerable: false,
+	value: function(_search, _start = this.offset(0), _end = this.offset(this.length - 1), _caseSensitive = true)
 	{
-		return undefined;
-	}
-
-	_start = this.offset(_start || 0);
-	if(_end !== 0)
-	{
-		_end = this.offset(_end || this.length - 1);
-	}
-	_case_sensitive = _case_sensitive !== false;
-
-	var idx = _start;
-	var result = [];
-
-	for(var i = _start; i <= _end; i++)
-	{
-		var idx = this.indexOf(_search, i, i, _case_sensitive);
-
-		if(idx > -1)
+		if(! _search)
 		{
-			result[result.length] = idx;
+			return new Error('_search');
 		}
+
+		var idx = _start;
+		var result = [];
+
+		for(var i = _start; i <= _end; i++)
+		{
+			var idx = this.indexOf(_search, i, i, _caseSensitive);
+			// ^^^^ UNZUFRIEDEN? musste wohl schnell gehn' wa?
+
+			if(idx > -1)
+			{
+				result[result.length] = idx;
+			}
+		}
+
+		return result;
 	}
+});
 
-	return result;
-}
-
+/*
 Array.prototype.indexOfAny = function()
-{
-	if(arguments.length === 0)
-	{
-		return undefined;
-	}
-
-	var search = [].slice.call(arguments);
-
-
 	//TODO/ suche nach allen in search .. 
 	//TODO/ (a) als eine liste wie indexOfAll()
 	//TODO/ (b) als nur ein ergebnis-element ..
-}
+*/
 
-Array.prototype.indexOfType = function(_types, _start, _end)
-{
-	if(! _types)
+Object.defineProperty(Array.prototype, 'indexOfType', {
+	enumerable: false,
+	value: function(_types = [], _start = this.offset(0), _end = this.offset(this.length - 1))
 	{
-		return undefined;
-	}
-	else if(! type(_types, 'Array'))
-	{
-		_types = [ _types ];
-	}
-
-	//TODO/ ..
-	//!!
-}
-
-Array.prototype.removeDuplicates = function()
-{
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
-	{
-		if(result.indexOf(this[i]) === -1)
+		if(! _types)
 		{
-			result[result.length] = this[i];
+			return new Error('_types');
 		}
-	}
-
-	return result;
-}
-
-Array.prototype.clone = function(_depth = 1, _currentDepth = 1)
-{
-	// @ doc/txt/deep-copy.clone.txt
-	//
-	// The reason your deep copy is having problems is because you're ending up with circular object references.
-	//
-	// < https://stackoverflow.com/questions/597588/how-do-you-clone-an-array-of-objects-in-javascript >
-	// < https://davidwalsh.name/javascript-clone-array >
-	//
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
-	{
-		var item;
-
-		if(this[i] !== undefined && this[i] !== null && this[i].clone && (_depth === 0 || (_currentDepth < _depth)))
+		else if(! type(_types, 'Array'))
 		{
-			item = this[i].clone(_depth, _currentDepth + 1);
-		}
-		else
-		{
-			item = this[i];
+			_types = [ _types ];
 		}
 
-		result[result.length] = item;
+		//TODO/ ..
+		//!!
 	}
+});
 
-	return result;
-}
-
-Array.prototype.push = function()
-{
-	for(var i = 0; i < arguments.length; i++)
+Object.defineProperty(Array.prototype, 'removeDuplicates', {
+	enumerable: false,
+	value: function()
 	{
-		this[this.length] = arguments[i];
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			if(result.indexOf(this[i]) === -1)
+			{
+				result[result.length] = this[i];
+			}
+		}
+
+		return result;
 	}
+});
 
-	return arguments.length;
-}
-
-Array.prototype.pop = function(_amount = 1, _reverse = false, _peek = false)
-{
-	if(_amount > this.length)
+Object.defineProperty(Array.prototype, 'clone', {
+	enumerable: false,
+	value: function(_depth = 1, _currentDepth = 1)
 	{
-		_amount = this.length;
+		// @ doc/txt/deep-copy.clone.txt
+		//
+		// The reason your deep copy is having problems is because you're ending up with circular object references.
+		//
+		// < https://stackoverflow.com/questions/597588/how-do-you-clone-an-array-of-objects-in-javascript >
+		// < https://davidwalsh.name/javascript-clone-array >
+		//
+
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			var item;
+
+			if(this[i] !== undefined && this[i] !== null && this[i].clone && (_depth === 0 || (_currentDepth < _depth)))
+			{
+				item = this[i].clone(_depth, _currentDepth + 1);
+			}
+			else
+			{
+				item = this[i];
+			}
+
+			result[result.length] = item;
+		}
+
+		return result;
 	}
+});
 
-	var result = [];
-
-	for(var i = 0; i < _amount; i++)
+Object.defineProperty(Array.prototype, 'push', {
+	enumerable: false,
+	value: function()
 	{
-		var idx = this.offset(this.length - 1 - i);
-		result[i] = this[idx];
-	}
+		for(var i = 0; i < arguments.length; i++)
+		{
+			this[this.length] = arguments[i];
+		}
 
-	if(! _peek)
+		return arguments.length;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'pop', {
+	enumerable: false,
+	value: function(_amount = 1, _reverse = false, _peek = false)
 	{
-		this.splice(this.length - _amount, _amount);
-	}
+		if(_amount > this.length)
+		{
+			_amount = this.length;
+		}
 
-	if(_reverse)
+		var result = [];
+
+		for(var i = 0; i < _amount; i++)
+		{
+			var idx = this.offset(this.length - 1 - i);
+			result[i] = this[idx];
+		}
+
+		if(! _peek)
+		{
+			this.splice(this.length - _amount, _amount);
+		}
+
+		if(_reverse)
+		{
+			return result.reverse();
+		}
+
+		if(_amount === 1)
+		{
+			return result[0];
+		}
+
+		return result;
+	}
+});
+
+Object.defineProperty(Array.prototype, 'peek', {
+	enumerable: false,
+	value: function(_amount = 1, _reverse = false)
 	{
-		return result.reverse();
+		return this.pop(_amount, _reverse, true);
 	}
-
-	if(_amount === 1)
-	{
-		return result[0];
-	}
-
-	return result;
-}
-
-Array.prototype.peek = function(_amount = 1, _reverse = false)
-{
-	return this.pop(_amount, _reverse, true);
-}
+});
 
 /*
 Array.prototype.removeAt = function(_index, _count, _real)
@@ -618,83 +632,92 @@ Array.prototype.append = function()
 }
 */
 
-Array.prototype.glob = function(_glob, _caseSensitive = true, _onlyStrings = false)
-{
-	// see 'String...glob()'
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
+Object.defineProperty(Array.prototype, 'glob', {
+	enumerable: false,
+	value: function(_glob = '*', _caseSensitive = true, _onlyStrings = false)
 	{
-		if(! global.type(this[i], 'String'))
+		// see 'String...glob()'
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
 		{
-			if(! _onlyStrings)
+			if(! global.type(this[i], 'String'))
 			{
-				result[i] = this[i];
+				if(! _onlyStrings)
+				{
+					result[i] = this[i];
+				}
+
+				continue;
 			}
 
-			continue;
+			result[i] = this[i].glob(_glob, _caseSensitive);
 		}
 
-		result[i] = this[i].glob(_glob, _caseSensitive);
+		return result;
 	}
+});
 
-	return result;
-}
-
-Array.prototype.globs = function(_size = 1, _onlyStrings = false)
-{
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
+Object.defineProperty(Array.prototype, 'globs', {
+	enumerable: false,
+	value: function(_size = 1, _onlyStrings = false)
 	{
-		if(! global.type(this[i], 'String'))
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
 		{
-			if(! _onlyStrings)
+			if(! global.type(this[i], 'String'))
 			{
-				result[i] = this[i];
+				if(! _onlyStrings)
+				{
+					result[i] = this[i];
+				}
+
+				continue;
 			}
 
-			continue;
+			result[i] = this[i].globs(_size);
 		}
 
-		result[i] = this[i].globs(_size);
+		return result;
 	}
-
-	return result;
-}
+});
 
 //TODO/ _radix
-Array.prototype.toString = function()
-{
-	//TODO/..!
-	//.. maybe the "outer limit" of every (sub-)array? to extend by multiple arrays..
-	//... would be the consequent continuation of my quantum fields w/ radix limits!!
-	//
-        // überlege hin zur universellen "toString()" anwendung, auch für andere klassen!
-        // sowie eine so ähnliche anwendung mit "depth" (in _current_depth & _max_depth)!
-        //
-	//
-	//
-	//// neu: evtl. *ist* "_radix" sogar die "depth"-angabe oder so!??!
-	//
-        // so jedenfalls kann z.b. "Array.prototype.toString.long(_radix)" in dem _radix
-        // argument die array-verschachtelungs-ebene angeben .. (um *erstmal nur* <tab>)
-
-	if(this.length === 0)
+Object.defineProperty(Array.prototype, 'toString', {
+	enumerable: false,
+	value: function()
 	{
-		return '[]';
+		//TODO/..!
+		//.. maybe the "outer limit" of every (sub-)array? to extend by multiple arrays..
+		//... would be the consequent continuation of my quantum fields w/ radix limits!!
+		//
+        	// überlege hin zur universellen "toString()" anwendung, auch für andere klassen!
+	        // sowie eine so ähnliche anwendung mit "depth" (in _current_depth & _max_depth)!
+        	//
+		//
+		//
+		//// neu: evtl. *ist* "_radix" sogar die "depth"-angabe oder so!??!
+		//
+	        // so jedenfalls kann z.b. "Array.prototype.toString.long(_radix)" in dem _radix
+        	// argument die array-verschachtelungs-ebene angeben .. (um *erstmal nur* <tab>)
+
+		if(this.length === 0)
+		{
+			return '[]';
+		}
+
+		var result = '[ ';
+
+		for(var i = 0; i < this.length; i++)
+		{
+			result += this[i].toString() + ', ';
+		}
+
+		result = result.substr(0, result.length - 2);
+		return ( result += ' ]' );
 	}
-
-	var result = '[ ';
-
-	for(var i = 0; i < this.length; i++)
-	{
-		result += this[i].toString() + ', ';
-	}
-
-	result = result.substr(0, result.length - 2);
-	return ( result += ' ]' );
-}
+});
 
 /*
 Array.prototype.toDebug = function(_radix, _tag)
@@ -731,228 +754,245 @@ Array.prototype.toDebug = function(_radix, _tag)
 }
 */
 
-Array.prototype.prefix = function(_prefix, _maximum, _remove, _filter)
-{
-	if(arguments.length === 0)
-		return this.valueOf();
-
-	if(type(_prefix, 'String'))
-		_prefix = [ _prefix ];
-	else if(type(_prefix, 'Array'))
-		_prefix = _prefix;
-
-	if(_prefix.length === 0)
-		return this.valueOf();
-
-	_maximum = ( _maximum === true );
-	_filter = ( _filter === true );
-	_remove = ( _remove !== false );
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
+Object.defineProperty(Array.prototype, 'prefix', {
+	enumerable: false,
+	value: function(_prefix = '', _maximum = false, _remove = true, _filter = false)
 	{
-		var one = this[i];
-		var original = one;
-
-		for(var j = 0; j < _prefix.length; j++)
+		if(arguments.length === 0)
 		{
-			if(one.prefix)
+			return this.valueOf();
+		}
+
+		if(global.type(_prefix, 'String'))
+		{
+			_prefix = [ _prefix ];
+		}
+		else if(global.type(_prefix, 'Array'))
+		{
+			_prefix = _prefix;
+		}
+
+		if(_prefix.length === 0)
+		{
+			return this.valueOf();
+		}
+
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			var one = this[i];
+			var original = one;
+
+			for(var j = 0; j < _prefix.length; j++)
 			{
-				one = one.prefix(_prefix[j], _maximum, _remove, _filter);
+				if(one.prefix)
+				{
+					one = one.prefix(_prefix[j], _maximum, _remove, _filter);
+				}
 			}
-		}
 
-		if(_filter)
-		{
-			if(one === this[i])
+			if(_filter)
 			{
-				continue;
+				if(one === this[i])
+				{
+					continue;
+				}
 			}
+
+			if(! _remove)
+			{
+				one = original;
+			}
+
+			result[result.length] = one;
 		}
 
-		if(! _remove)
-		{
-			one = original;
-		}
-
-		result[result.length] = one;
+		return result;
 	}
+});
 
-	return result;
-}
-
-Array.prototype.suffix = function(_suffix, _maximum, _remove, _filter)
-{
-	if(arguments.length === 0)
-		return this.valueOf();
-
-	if(type(_suffix, 'String'))
-		_suffix = [ _suffix ];
-	else if(type(_suffix, 'Array'))
-		_suffix = _suffix;
-
-	if(_suffix.length === 0)
-		return this.valueOf();
-
-	_maximum = ( _maximum === true );
-	_filter = ( _filter === true );
-	_remove = ( _remove !== false );
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
+Object.defineProperty(Array.prototype, 'suffix', {
+	enumerable: false,
+	value: function(_suffix = '', _maximum = false, _remove = true, _filter = false)
 	{
-		var one = this[i];
-		var original = one;
-
-		for(var j = 0; j < _suffix.length; j++)
+		if(arguments.length === 0)
 		{
-			if(one.prefix)
+			return this.valueOf();
+		}
+
+		if(global.type(_suffix, 'String'))
+		{
+			_suffix = [ _suffix ];
+		}
+		else if(global.type(_suffix, 'Array'))
+		{
+			_suffix = _suffix;
+		}
+
+		if(_suffix.length === 0)
+		{
+			return this.valueOf();
+		}
+
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
+		{
+			var one = this[i];
+			var original = one;
+
+			for(var j = 0; j < _suffix.length; j++)
 			{
-				one = one.suffix(_suffix[j], _maximum, _remove, _filter);
+				if(one.prefix)
+				{
+					one = one.suffix(_suffix[j], _maximum, _remove, _filter);
+				}
 			}
-		}
 
-		if(_filter)
-		{
-			if(one === this[i])
+			if(_filter)
 			{
-				continue;
+				if(one === this[i])
+				{
+					continue;
+				}
 			}
+
+			if(! _remove)
+			{
+				one = original;
+			}
+
+			result[result.length] = one;
 		}
 
-		if(! _remove)
-		{
-			one = original;
-		}
-
-		result[result.length] = one;
+		return result;
 	}
+});
 
-	return result;
-}
-
-Array.prototype.trim = function(_remove_empty)
-{
-	_remove_empty = ( _remove_empty !== false );
-
-	var result = [];
-
-	for(var i = 0; i < this.length; i++)
-	{
-		var one = this[i];
-
-		if(! one)
-		{
-			continue;
-		}
-		
-		if(_remove_empty)
-		{
-			if(one.length && one.length === 0)
-			{
-				continue;
-			}
-		}
-
-		if(one.trim)
-		{
-			one = one.trim(_remove_empty);
-		}
-
-		result[result.length] = one;
-	}
-
-	return result;
-}
-
-Array.prototype.types = function(_types, _inverse = false, _index = false)
-{
-	if(arguments.length === 0)
+Object.defineProperty(Array.prototype, 'trim', {
+	enumerable: false,
+	value: function(_removeEmpty = true)
 	{
 		var result = [];
 
 		for(var i = 0; i < this.length; i++)
 		{
-			result[i] = global.type(this[i]);
+			var one = this[i];
+
+			if(! one)
+			{
+				continue;
+			}
+		
+			if(_remove_empty)
+			{
+				if(one.length && one.length === 0)
+				{
+					continue;
+				}
+			}
+
+			if(one.trim)
+			{
+				one = one.trim(_remove_empty);
+			}
+
+			result[result.length] = one;
 		}
 
 		return result;
 	}
-	else
+});
+
+Object.defineProperty(Array.prototype, 'types', {
+	enumerable: false,
+	value: function(_types = [], _inverse = false, _index = false)
 	{
-		if(global.type(_types, 'String'))
+		if(arguments.length === 0)
 		{
-			_types = [ _types ];
-		}
-	}
+			var result = [];
 
-	var result = [];
+			for(var i = 0; i < this.length; i++)
+			{
+				result[i] = global.type(this[i]);
+			}
 
-	for(var i = 0; i < this.length; i++)
-	{
-		var ok;
-
-		if(_inverse)
-		{
-			ok = true;
+			return result;
 		}
 		else
 		{
-			ok = false;
-		}
-
-		for(var j = 0; j < _types.length; j++)
-		{
-			if(global.type(this[i], _types[j]))
+			if(global.type(_types, 'String'))
 			{
-				if(_inverse)
-				{
-					ok = false;
-				}
-				else
-				{
-					ok = true;
-				}
-
-				break;
+				_types = [ _types ];
 			}
 		}
 
-		if(ok)
+		var result = [];
+
+		for(var i = 0; i < this.length; i++)
 		{
-			if(_index)
+			var ok;
+
+			if(_inverse)
 			{
-				result[result.length] = i;
+				ok = true;
 			}
 			else
 			{
-				result[result.length] = this[i];
+				ok = false;
+			}
+
+			for(var j = 0; j < _types.length; j++)
+			{
+				if(global.type(this[i], _types[j]))
+				{
+					if(_inverse)
+					{
+						ok = false;
+					}
+					else
+					{
+						ok = true;
+					}
+
+					break;
+				}
+			}
+
+			if(ok)
+			{
+				if(_index)
+				{
+					result[result.length] = i;
+				}
+				else
+				{
+					result[result.length] = this[i];
+				}
 			}
 		}
+
+		return result;
 	}
+});
 
-	return result;
-}
-
-Array.prototype.offset = function(_offset)
-{
-	_offset = (_offset||0) % this.length;
-
-	while(_offset < 0)
+Object.defineProperty(Array.prototype, 'offset', {
+	enumerable: false,
+	value: function(_offset = this.length - 1)
 	{
-		_offset = this.length + _offset;
+		_offset = _offset % this.length;
+
+		while(_offset < 0)
+		{
+			_offset = this.length + _offset;
+		}
+
+		return Math.abs(_offset);
 	}
+});
 
-	return Math.abs(_offset);
-}
-
-Array.prototype.index = function(_offset)	//TODO: _amount arg here? or otherewhere?
-{
-	return this[this.offset((_offset||0))];
-}
-
+/*
 Array.prototype.replace = function(_start = 0, _length = this.length - _start, _value)
 {
 	//TODO/
@@ -980,4 +1020,5 @@ Array.prototype.get = function(_index = 0, _length = 1, _radix = 1, _typeFilter 
 	// w/ ...
 	// while(result.length < _length) {}; ..
 }
+*/
 
