@@ -1,10 +1,10 @@
-const stream = include('core/stream');
+const node = include('core/node');
 
-module.exports = class bot extends stream
+module.exports = class bot extends node
 {
 	constructor()
 	{
-		//super();
+		super();
 	}
 }
 

@@ -1,6 +1,7 @@
-const stream = include('core/stream');
+const node = include('core/node');
+const sock = include('net/socket');
 
-module.exports = class client extends stream
+module.exports = class client extends node
 {
 	constructor()
 	{

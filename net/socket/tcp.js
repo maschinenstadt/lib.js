@@ -1,10 +1,13 @@
 const sock = include('net').Socket;
+const node = include('core/node');
 
-module.exports = class socket extends sock
+module.exports = class socket extends node
 {
-	constructor()
+	constructor(_socket = new sock())
 	{
 		super();
+		//
+		this.setSocket(_socket);
 		//
 		this.setProtocol();
 		this.setEncoding();
@@ -14,6 +17,16 @@ module.exports = class socket extends sock
 	static get protocol() { return 'tcp'; }
 	static get encoding() { return global.settings.encoding || 'utf8'; }
 	static get timeout() { return global.settings.net.timeout || 0; }
+
+	write(_data, _encoding = global.settings.encoding)
+	{
+		//this.socket.write(_data
+	}
+
+	setSocket(_socket = new sock())
+	{
+		this.socket = _socket;
+	}
 
 	setTimeout(_timeout = socket.timeout)
 	{
