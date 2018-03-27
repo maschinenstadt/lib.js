@@ -85,6 +85,14 @@ Object.defineProperty(global.console, 'size', {
 		1: global.console.stream.rows
 	}; } });
 
+Object.defineProperty(global.console, 'stdio', {
+	get: function() { return [
+		global.process.stdin,
+		global.process.stdout,
+		global.process.stderr
+	]; }
+});
+
 global.console.EOL = function(_count = 1, _padStr = '', _width = global.console.size.width, _stream = global.console.stream)
 {
 	if(global.type(_stream, 'Boolean'))
@@ -129,7 +137,7 @@ global.console.EOL = function(_count = 1, _padStr = '', _width = global.console.
 	return result;
 }
 
-global.console.inspect = function(_object, _depth = 2, _options = {}, _colors = true, _stream = global.console.stream)
+global.console.inspect = function(_object, _depth = 1, _options = {}, _colors = true, _stream = global.console.stream)
 {
 	_options = Object.assign(global.console.inspect.options, _options || {});
 	_options.colors = ( global.type(_colors, 'Boolean') ? _colors : _options.colors );

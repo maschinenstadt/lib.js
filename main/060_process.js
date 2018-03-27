@@ -10,12 +10,6 @@ global.process.hasRoot = function()
 	return ( global.process.getgid() === 0 || global.process.getegid() === 0 );
 }
 
-global.process.stdio = [
-	global.process.stdin,
-	global.process.stdout,
-	global.process.stderr
-];
-
 global.process.node = global.process.argv.shift();
 
 global.process.exec = global.process.argv.shift();
