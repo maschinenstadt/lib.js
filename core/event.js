@@ -1,13 +1,8 @@
-module.exports = class event // extends node (..)
+module.exports = class event //extends (..)
 {
 	constructor()
 	{
 		//super();
-		this.events = {};
-	}
-
-	count(_eventName)
-	{
 	}
 }
 
