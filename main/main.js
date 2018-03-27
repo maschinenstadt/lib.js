@@ -96,20 +96,20 @@ var libraryPaths = global.settings.library.path.reverse();
 
 for(var i = 0; i < libraryPaths.length; i++)
 {
-	var path = libraryPaths[i] + '/' + global.settings.library.global;
+	var p = libraryPaths[i] + '/' + global.settings.library.global;
 	
-	if(! global.nodejs.fs.existsSync(path))
+	if(! global.nodejs.fs.existsSync(p))
 	{
 		continue;
 	}
 
-	var ls = global.nodejs.fs.readdirSync(path, { encoding: global.settings.encoding });
+	var ls = global.nodejs.fs.readdirSync(p, { encoding: global.settings.encoding });
 
 	for(var j = 0; j < ls.length; j++)
 	{
-		var p = path + '/' + ls[j];
+		var pp = p + '/' + ls[j];
 
-		var ext = global.nodejs.path.extname(p);
+		var ext = global.nodejs.path.extname(pp);
 		var extOK = false;
 
 		for(var i = 0; i < global.settings.library.extensions.length; i++)
@@ -126,7 +126,7 @@ for(var i = 0; i < libraryPaths.length; i++)
 			continue;
 		}
 
-		/*var o = */require(p);
+		/*var o = */require(pp);
 	}
 }
 
@@ -163,25 +163,25 @@ for(var i = 0; i < libraryPaths.length; i++)
 
 for(var i = 0; i < libraryPaths.length; i++)
 {
-	var path = libraryPaths[i] + '/' + global.settings.library.main;
+	var p = libraryPaths[i] + '/' + global.settings.library.main;
 
-	if(! global.nodejs.fs.existsSync(path))
+	if(! global.nodejs.fs.existsSync(p))
 	{
 		continue;
 	}
 
-	var ls = global.nodejs.fs.readdirSync(path, { encoding: global.settings.encoding });
+	var ls = global.nodejs.fs.readdirSync(p, { encoding: global.settings.encoding });
 
 	for(var j = 0; j < ls.length; j++)
 	{
-		var p = path + '/' + ls[j];
+		var pp = p + '/' + ls[j];
 
-		if(global.nodejs.path.basename(p) === thisFile)
+		if(global.nodejs.path.basename(pp) === thisFile)
 		{
 			continue;
 		}
 
-		var ext = global.nodejs.path.extname(p);
+		var ext = global.nodejs.path.extname(pp);
 		var extOK = false;
 
 		for(var i = 0; i < global.settings.library.extensions.length; i++)
@@ -195,7 +195,7 @@ for(var i = 0; i < libraryPaths.length; i++)
 
 		if(extOK)
 		{
-			var o = require(p);
+			var o = require(pp);
 			main = Object.assign(main, (o||{}));
 		}
 	}
