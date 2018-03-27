@@ -49,6 +49,12 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### ANSI
+Just finished "console/ansi"! See the .. "example/console/ansi.js". Important
+feature for me - as it goes to own `dialog` styles (or something similar), w/
+`tmux` (like `screen`) etc. .. :-D´
+
+
 #### "fuse-bindings"
 Added this dependency (at the moment the only one) for some own filesystem(s)
 which I'll integrate later. It is for various reasons. I wanted to completely
