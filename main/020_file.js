@@ -1171,6 +1171,8 @@ global.file.find.fifo = function(_path = '/', _depth = 1, _glob = '*', _caseSens
 	return global.file.find(_path, _depth, 'fifo', _glob, _caseSensitive, _inverse, _currentDepth);
 }
 
+global.file.count = {};
+
 global.file.count.lines = function(_delim = global.EOL, _path, _depth = 1, _glob = '*', _caseSensitive = true, _inverse = false, _currentDepth = 1)
 {
 	//_delim is by default EOL (global.EOL)
