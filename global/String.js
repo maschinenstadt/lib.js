@@ -908,3 +908,10 @@ String.prototype.sscanf = function()
 	// .. just two examples... i'll better do this on my own (better idea(s) for it)
 }
 
+String.prototype.pattern = function(_format)
+{
+	var result = ( [] || {} ); //!???
+	// (nearly..) "BNF"!??? ... i don't want regexp, here, am i right?
+	// //TODO//
+}
+
