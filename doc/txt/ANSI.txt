@@ -1,4 +1,7 @@
 
+// < https://github.com/michalbe/rgb2xterm >
+
+
 
 // das ist TODO. vermutlich eine extra klasse oder datenstruktur (<Multiset> ?!)
 //
