@@ -54,6 +54,9 @@ Just finished "console/ansi"! See the .. "example/console/ansi.js". Important
 feature for me - as it goes to own `dialog` styles (or something similar), w/
 `tmux` (like `screen`) etc. .. :-D´
 
+It also supports 256 colors.. you can define RGB or HEX. Both is convertible,
+see "util/color". ..
+
 
 #### "fuse-bindings"
 Added this dependency (at the moment the only one) for some own filesystem(s)
