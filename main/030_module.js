@@ -53,23 +53,23 @@ global.include = main.include = function(_module, _libraryPaths)
 
 	for(var i = 0; i < _libraryPaths.length; i++)
 	{
-		var path = global.nodejs.path.join(_libraryPaths[i], _module).suffix(extensions);
+		var p = global.nodejs.path.join(_libraryPaths[i], _module).suffix(extensions);
 
 		for(var j = 0; j < extensions.length; j++)
 		{
-			var p = path + extensions[j];
+			var pp = p + extensions[j];
 
-			if(! (p.startsWith('.') || p.startsWith('/')))
+			if(! (pp.startsWith('.') || pp.startsWith('/')))
 			{
-				p = './' + p;
+				pp = './' + pp;
 			}
 
-			if(! global.file.exists(p))
+			if(! global.file.exists(pp))
 			{
 				continue;
 			}
 
-			return realInclude(p);
+			return realInclude(pp);
 		}
 	}
 
@@ -115,35 +115,54 @@ realInclude.directory = function(_path)
 
 	for(var i = 0; i < ls.length; i++)
 	{
-		var path = global.nodejs.path.join(_path, ls[i]);
+		var p = global.nodejs.path.join(_path, ls[i]);
 
 		for(var j = 0; j < global.settings.library.extensions.length; j++)
 		{
-			var p = path + global.settings.library.extensions[j];
+			var pp = p + global.settings.library.extensions[j];
 
-			if(! global.file.exists(p))
+			if(! global.file.exists(pp))
 			{
 				continue;
 			}
 
-			if(global.file.type.directory(p))
+			if(global.file.type.directory(pp))
 			{
-				result[global.file.path.tree(p).last] = {};
+				result[global.file.path.tree(pp).last] = {};
 				continue;
 			}
 
-			var name = global.file.path.basename(p, global.settings.library.extensions)[0];
+			var name = global.file.path.basename(pp, global.settings.library.extensions)[0];
+			var extOk = false;
 
-			if(p.endsWith('.json'))
+			if(pp.endsWith('.json'))
 			{
 				name = name.toUpperCase();
+				extOk = true;
 			}
-			else if(! p.endsWith('.js'))
+			else
+			{
+				for(var k = 0; k < global.settings.library.extensions.length; k++)
+				{
+					if(global.settings.library.extensions[k] === '')
+					{
+						continue;
+					}
+
+					if(pp.endsWith(global.settings.library.extensions[k]))
+					{
+						extOk = true;
+						break;
+					}
+				}
+			}
+
+			if(! extOk)
 			{
 				continue;
 			}
 
-			result[name] = realInclude.file(p);
+			result[name] = realInclude.file(pp);
 		}
 	}
 
