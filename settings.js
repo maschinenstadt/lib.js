@@ -1,5 +1,7 @@
 var settings = module.exports = {};
 
+settings.default = 'sync' || 'async';
+
 settings.version = {};
 settings.version.check = true;	// throw a message if newer version is available ..
 settings.version.url = 'https://nodejs.org/dist/latest/';
