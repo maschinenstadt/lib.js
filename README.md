@@ -52,7 +52,7 @@ include() parameter, it will only search in the current lib.js' path (that is
 #### "fuse-bindings"
 Added this dependency (at the moment the only one) for some own filesystem(s)
 which I'll integrate later. It is for various reasons. I wanted to completely
-stay away from foreign dependencies, but this one could be appropriate. TODO!
+stay away from foreign dependencies, but this one will be appropriate. JFYI..
 
 
 #### Node.js original modules
