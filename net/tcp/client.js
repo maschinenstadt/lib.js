@@ -10,7 +10,8 @@ module.exports = class client extends tcpSocket
 		this.setEncoding(client.encoding);
 		this.setTimeout(client.timeout);
 		//
-		this.setCallbacks(this.callbacks);
+		this.callbacks = this.callbacks;
+//		this.setCallbacks(this.callbacks);
 	}
 
 	static get protocol() { return 'tcp'; };
@@ -81,6 +82,16 @@ module.exports = class client extends tcpSocket
 	setCrypto(_type = 'tls')
 	{
 		this.crypto = _type || 'tls';
+	}
+
+	close(_data = global.EOL, _encoding = client.encoding)
+	{
+		return this.end(_data, _encoding);
+	}
+
+	write(_data = global.EOL, _encoding = client.encoding, _callback)
+	{
+		return super.write(_data, _encoding, _callback);
 	}
 
 	setTimeout(_timeout = socket.timeout)
@@ -172,7 +183,7 @@ module.exports = class client extends tcpSocket
 
 	set callbacks(_map)
 	{
-		this.setCallbacks(_map, true);
+		return this.setCallbacks(_map, true);
 	}
 
 	onClose()
@@ -207,6 +218,8 @@ module.exports = class client extends tcpSocket
 	{
 		console.right('Connection ERROR (' + this.toString() + ')');
 		console.error(_error.text);
+		console.right('DESTROYing socket..');
+		this.destroy(_error);
 	}
 
 	onLookup()

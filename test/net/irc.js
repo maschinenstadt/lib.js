@@ -1,9 +1,12 @@
 #!/usr/bin/env node.js
 
-// here is something wrong at the moment.
-// with the callbacks.
-// i'll work on it.
-// soon.
+
+// this is just a PRE-view. ..
+//
+// most of events and processes will occur in "net/irc/*".
+// this is only for testing reasons - now where i begin..!
+//
+
 
 
 const HOST = /*'irc.de.euirc.net' ||*/ 'chat.freenode.net';
@@ -15,23 +18,23 @@ console.EOL(6);
 var server = new irc.server();
 var client = new irc.client();
 
+var bufferTEMP = '';
+
 client.connect(false, HOST);//, null, 6, '::1', 12345);
 
 var cb = client.callbacks;
-var r = cb.unset('timeout');
-console.EOL(3);
-console.inspect(r);
-console.EOL(3);
-for(var idx in cb)
-{
-	if(! cb.hasOwnProperty(idx))
-	{
-		console.inspect(idx);
-		continue;
-	}
 
-	cb[idx] = function() { console.log(' >> ' + idx + '(' + arguments.length + ')'); };
+cb.data = function(_chunk)
+{
+	bufferTEMP += _chunk;
+	console.log('(%d / %d) "%s"', _chunk.length, bufferTEMP.length, _chunk);
 }
 
 client.callbacks = cb;
+
+timer.set.timeout(function() { client.write('NICK ' + 'a' + String.random.alphabet(16, 8)
+	+ '\r\nUSER ' + 'b' + String.random.alphabet(16, 8) + ' ' + 'c' + String.random.alphabet(16, 8)
+	+ ' ' + 'd' + String.random.alphabet(16, 8) + ' :' + 'e' + String.random.alphabet(16, 8) + "\r\n"); }, 2000);
+
+timer.set.timeout(function() { client.close(); }, 5000);
 

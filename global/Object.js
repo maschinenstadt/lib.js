@@ -17,6 +17,7 @@ Object.defineProperty(Object.prototype, 'TODO', {
 	value: []
 });
 
+// I THINK this worx wrong now.. TODO!
 Object.defineProperty(Object.prototype, 'unset', {
 	enumerable: false,
 	value: function()
