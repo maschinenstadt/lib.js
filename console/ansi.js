@@ -151,12 +151,12 @@ ansi.clear.line = function(_write = global.console.stream)
 	return write(ansi.ESC + ansi.BRACKET + '2K', _write);
 }
 
-ansi.clear.line.start = function(_write = global.console.stream)
+ansi.clear.left = function(_write = global.console.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '1K', _write);
 }
 
-ansi.clear.line.end = function(_write = global.console.stream)
+ansi.clear.right = function(_write = global.console.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '0K', _write);
 }

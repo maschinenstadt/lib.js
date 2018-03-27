@@ -30,7 +30,7 @@ ansi.cursor.save();
 ansi.cursor(0, 0);
 console.stdout('ABC');
 ansi.cursor.load();
-ansi.clear.line.start();
+ansi.clear.left();
 console.stdout('ENDE');
 
 timer.timeout.set(function() { ansi.cursor(0, 4); ansi.clear.down(); }, 2500);
