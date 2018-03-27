@@ -1,5 +1,5 @@
 #!/usr/bin/env node.js
-var ansi = include('console/ansi');
+var ansi = include('tty/ansi');
 
 
 var bg = '#bfff00';
