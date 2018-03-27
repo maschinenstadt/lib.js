@@ -2,8 +2,9 @@ var ansi = module.exports = {};
 
 // "doc/txt/ANSI.txt"
 
-ansi.ESC = global.ESC || String.fromCharCode(27);
-ansi.LEFT = String.fromCharCode(91);
+ansi.ESC = global.ESC || String.fromCharCode(27); // \033
+ansi.BRACKET = String.fromCharCode(91);
+ansi.END = 'm';
 
 function write(_code, _write = global.console.stream)
 {
@@ -13,16 +14,12 @@ function write(_code, _write = global.console.stream)
 	}
 	if(global.type(_write, 'Boolean'))
 	{
-		if(_write === true)
+		if(_write)
 		{
 			_write = global.console.stream;
 		}
-		else
-		{
-			_write = undefined;
-		}
 	}
-	else if(! global.type(_write, 'Object'))
+	else if(! global.type(_write, ['Object','Function']))
 	{
 		_write = global.console.stream;
 	}
@@ -33,12 +30,75 @@ function write(_code, _write = global.console.stream)
 	}
 
 	return _code;
-	//
 }
 
-ansi.attributes = {
+ansi.none = function()
+{
+	return write(ansi.ESC + ansi.BRACKET + '0m');
+}
+
+ansi.color = function(_text = global.EOL, _foreground = 37, _background = 40, _attribute = 0, _write = global.console.stream)
+{
+	if(! global.type(_text, 'String'))
+	{
+		_text = global.EOL;
+	}
+
+	if(global.type(_write, 'Boolean'))
+	{
+		if(_write)
+		{
+			_write = global.console.stream;
+		}
+	}
+	else if(! global.type(_write, ['Object','Function']))
+	{
+		_write = global.console.stream;
+	}
+
+	if(global.type(_foreground, 'String'))
+	{
+		_foreground = ansi.color[_foreground].fg;
+	}
+	else if(! global.type(_foreground, 'Number'))
+	{
+		_foreground = ansi.color.white.fg;
+	}
+
+	if(global.type(_background, 'String'))
+	{
+		_background = ansi.color[_background].bg;
+	}
+	else if(! global.type(_background, 'Number'))
+	{
+		_background = ansi.color.black.bg;
+	}
+
+	if(global.type(_attribute, 'String'))
+	{
+		_attribute = ansi.attribute[_attribute];
+	}
+	else if(! global.type(_background, 'Number'))
+	{
+		_attribute = ansi.attribute.none;
+	}
+
+	var code = ansi.ESC + ansi.BRACKET + _attribute.toString() + ';' + _foreground.toString() + ';' + _background.toString() + 'm';
+	return write(code, _write);
+}
+
+ansi.color.black = { fg: 30, bg: 40 };
+ansi.color.red = { fg: 31, bg: 41 };
+ansi.color.green = { fg: 32, bg: 42 };
+ansi.color.yellow = { fg: 33, bg: 43 };
+ansi.color.blue = { fg: 34, bg: 44 };
+ansi.color.magenta = { fg: 35, bg: 45 };
+ansi.color.cyan = { fg: 36, bg: 46 };
+ansi.color.white = { fg: 37, bg: 47 };
+
+ansi.attribute = {
 	none: 0,
-	bright: 1,
+	bold: 1,
 	dark: 2,
 	italic: 3,
 	underline: 4,
@@ -48,20 +108,6 @@ ansi.attributes = {
 	invisible: 8,
 	linethrough: 9
 };
-
-//ERROR still.. TODO!
-ansi.color = function(_message = global.EOL, _foreground = 148, _background = 38, _attributes = 0, _write = true)
-{
-	var code = ansi.ESC + ansi.LEFT + _attributes + ';' + _foreground + ';' + _background + 'm';
-	code += _message + ansi.ESC + ansi.LEFT + '39m';
-	return write(code, _write);
-}
-
-/*ansi.end = function(_write = true)
-{
-	var code = ansi.ESC + ansi.LEFT + '39m';
-	return write(_code, _write);
-}*/
 
 ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _height = global.console.size.height)
 {
