@@ -228,11 +228,11 @@ function position(_x = 0, _y = 0, _width = global.console.size.width, _height = 
 
 position.x = function(_x = 0, _width = global.console.size.width)
 {
-	return position(_x, 0, _width, global.console.size.height)[0];
+	return position(_x, 0, _width, global.console.size.height || 25)[0];
 }
 
 position.y = function(_y = 0, _height = global.console.size.height)
 {
-	return position(0, _y, global.console.size.width, _height)[1];
+	return position(0, _y, global.console.size.width || 80, _height)[1];
 }
 
