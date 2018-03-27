@@ -1,4 +1,4 @@
 #!/usr/bin/env node.js
 var ansi = include('terminal/ansi');
-console.inspect(ansi);
+ansi.color('this is a test...');
 

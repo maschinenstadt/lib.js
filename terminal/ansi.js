@@ -15,7 +15,7 @@ function write(_code, _write = global.console.stream)
 	{
 		if(_write === true)
 		{
-			write = global.console.stream;
+			_write = global.console.stream;
 		}
 		else
 		{
@@ -36,10 +36,32 @@ function write(_code, _write = global.console.stream)
 	//
 }
 
-ansi.color = function(_foreground, _background)
+ansi.attributes = {
+	none: 0,
+	bright: 1,
+	dark: 2,
+	italic: 3,
+	underline: 4,
+	blinking: 5,
+	/* : 6, */
+	inverse: 7,
+	invisible: 8,
+	linethrough: 9
+};
+
+//ERROR still.. TODO!
+ansi.color = function(_message = global.EOL, _foreground = 148, _background = 38, _attributes = 0, _write = true)
 {
-	//var code = ansi.ESC + ansi.LEFT + _foreground + ';' + _background + 'm'
+	var code = ansi.ESC + ansi.LEFT + _attributes + ';' + _foreground + ';' + _background + 'm';
+	code += _message + ansi.ESC + ansi.LEFT + '39m';
+	return write(code, _write);
 }
+
+/*ansi.end = function(_write = true)
+{
+	var code = ansi.ESC + ansi.LEFT + '39m';
+	return write(_code, _write);
+}*/
 
 ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _height = global.console.size.height)
 {
