@@ -15,7 +15,6 @@ var irc = include('net/irc');
 console.inspect(irc, 2);
 console.EOL();
 
-/*
 var server = new irc.server();
 var client = new irc.client();
 
@@ -38,6 +37,4 @@ timer.set.timeout(function() { client.write('NICK ' + 'a' + String.random.alphab
 	+ ' ' + 'd' + String.random.alphabet(16, 8) + ' :' + 'e' + String.random.alphabet(16, 8) + "\r\n"); }, 2000);
 
 timer.set.timeout(function() { client.close(); }, 5000);
-
-*/
 

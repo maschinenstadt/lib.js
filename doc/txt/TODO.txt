@@ -53,7 +53,11 @@
 
 		.. hin zu netzwerk-klassen sehr wichtig z.b. .. inkl. folgendem, also automatische event-registrierung durch listen, ..
 
-	=>	# "net/tcp/socket" ...
+
+
+		=> auch wichtig: "net/filter(.js)"! ..
+
+
 
 
 
