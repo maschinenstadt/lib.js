@@ -14,6 +14,9 @@ global.type = function(_object, _types = undefined)
 {
 	var type;
 
+	//TODO/
+	//_object.constructor.name
+
 	if(_object === undefined)
 	{
 		type = 'undefined';

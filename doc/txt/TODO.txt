@@ -19,6 +19,10 @@
 
 
 
+	# global.type => _object.constructor.name?
+
+		=> in case we want the original class names..
+
 
 	# IDE!?
 

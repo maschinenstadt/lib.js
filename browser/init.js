@@ -1,5 +1,8 @@
 BROWSER = true;
 
+global = window || this;
+global.global = global;
+
 if(settings.tls)
 {
 	if(window.location.protocol === 'http:')
@@ -69,6 +72,9 @@ const __toString = Object.prototype.toString;
 type = function(_object, _types = undefined)
 {
 	var type;
+
+	//TODO/
+	//_object.constructor.name
 
 	if(_object === undefined)
 	{
