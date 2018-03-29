@@ -57,6 +57,10 @@ then clone the "www" repository, directly into your web root (or your sub's).
 
 	git clone https://github.com/maschinenstadt/www
 
+Alternatively you can also adjust your symlink "www/js", so it points to your
+real "lib.js" installation path (respectively to the "browser/" sub directory
+there..).
+
 
 #### ANSI
 Just finished "console/ansi"! See the .. "example/console/ansi.js". Important
