@@ -51,9 +51,9 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 #### Random number generation
 Just (nearly) completed "util/random". On Linux, it uses "/dev/urandom".. the
-browser is also supported (as with every "util") using "window.crypto".. Soon
-I'm finishing it by .. (a) using the Node.js "crypto" module for Windows etc.
-and .. (b) let "Math.random()" use my new "util/random" class, as this should
+browser is also supported (as every "util") using "window.crypto".. Soon I am
+finishing it by: ... (a) using the Node.js "crypto" module (for Windows etc.)
+and ... (b) let "Math.random()" use my new "util/random" class .. this should
 be much more secure (as I've read in the web).
 
 So now, just try:
