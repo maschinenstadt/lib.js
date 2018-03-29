@@ -45,14 +45,36 @@
 		=> at the moment w/ "random.binary()", "random.hex()", "random.base64". ... ;-)´
 
 			.. (a) for BROWSER (see "window.crypto")
+
 	(done)		.. (b) for LINUX (seems to be READY! ;-)
+
+				.. uses "/dev/urandom"
+
 			.. (c) for OTHER OS (windows, ..) - but there's no "/dev/urandom" (see (b))
 
+				.. but there's no "/dev/urandom" (see (b)).
+				so USE "nodejs('crypto')"!
+
+					< https://nodejs.org/dist/latest/docs/api/crypto.html#crypto_crypto_randombytes_size_callback >
+
+			=> also think about using _encoding (>= 2 && <= 36) in the way "BROWSER" implementation has got now!
+
+
 		=> Math.random() evtl. auch noch anpassen?
+
+			=> ja .. auf basis von "util/random". im web also "window.crypto" etc. .. mit FALLBACK!!!
 
 			=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
 
 				(man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.);
+
+
+
+	# BROWSER
+
+		# performance[.now()]
+
+		# hrtime(r) @ "util/time" OR "Date"!??
 
 
 
