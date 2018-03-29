@@ -2,8 +2,6 @@ var base = {};
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.base = base;
 }
 else

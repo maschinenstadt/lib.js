@@ -2,8 +2,6 @@ var size = {};
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.size = size;
 }
 else

@@ -4,19 +4,8 @@ on.load = function()
 {
 	try
 	{
-		var _init = undefined;
-		var _main = undefined;
-
-		if(init)
-		{
-			_init = init();
-		}
-
-		if(main)
-		{
-			_main = main();
-		}
-
+		var _init = init() || undefined;
+		var _main = main(_init) || undefined;
 		return { init: _init, main: _main };
 	}
 	catch(_error)

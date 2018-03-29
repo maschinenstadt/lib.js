@@ -3,6 +3,9 @@ BROWSER = true;
 global = this;
 global.global = global;
 
+web = {};
+web.util = {};
+
 if(settings.tls)
 {
 	if(window.location.protocol === 'http:')

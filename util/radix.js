@@ -2,8 +2,6 @@ var radix = {};
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.radix = radix;
 }
 else

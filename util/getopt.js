@@ -2,8 +2,6 @@ var getopt = {};
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.getopt = getopt;
 }
 else

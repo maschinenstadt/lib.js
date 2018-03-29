@@ -2,8 +2,6 @@ var uuid = {};
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.uuid = uuid;
 }
 else

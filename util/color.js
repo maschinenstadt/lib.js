@@ -2,8 +2,6 @@ var color = {};
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.color = color;
 }
 else

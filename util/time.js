@@ -8,8 +8,6 @@ var time = function()
 
 if(BROWSER)
 {
-	web = web || {};
-	web.util = web.util || {};
 	web.util.time = time;
 }
 else
