@@ -49,6 +49,35 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Random number generation
+Just (nearly) completed "util/random". On Linux, it uses "/dev/urandom".. the
+browser is also supported (as with every "util") using "window.crypto".. Soon
+I'm finishing it by .. (a) using the Node.js "crypto" module for Windows etc.
+and .. (b) let "Math.random()" use my new "util/random" class, as this should
+be much more secure (as I've read in the web).
+
+So now, just try:
+
+	#!/usr/bin/env node.js
+
+	var random = include('util/random');
+	var length = 1024;
+
+	var binary = random.binary(length);
+	var hex = random.hex(length);
+	var base64 = random.base64(length);
+
+And in the browser you can use:
+
+	var length = 64;
+
+	var binary = web.util.random.binary(length);
+	var hex = web.util.random.hex(length);
+	var base64 = web.util.random.base64(length);
+
+So prepare for more. I am gonna finish this soon (including "Math.random()")!
+
+
 #### Browser support
 Integrated (the 2nd time) browser support/area. See "browser/". For this I've
 got a special Git repository @ github: a basic web project skeleton. See also
