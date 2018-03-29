@@ -1,3 +1,0 @@
-# --debug=10		set custom debug level .. overrides the one in "/settings.js"
-# --check-version	force re-check of version .. so you won't have to wait after upgrade
-
