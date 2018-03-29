@@ -75,8 +75,6 @@ And in the browser you can use:
 	var hex = web.util.random.hex(length);
 	var base64 = web.util.random.base64(length);
 
-So prepare for more. I am gonna finish this soon (including "Math.random()")!
-
 
 #### Browser support
 Integrated (the 2nd time) browser support/area. See "browser/". For this I've
