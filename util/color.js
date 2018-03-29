@@ -1,4 +1,15 @@
-var color = module.exports = {};
+var color = {};
+
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.color = color;
+}
+else
+{
+	module.exports = color;
+}
 
 color.random = function(_upperCase = false, _radix = 16, _amount = 6, _hash_sign = true)
 {

@@ -1,4 +1,15 @@
-var size = module.exports = {};
+var size = {};
+
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.size = size;
+}
+else
+{
+	module.exports = size;
+}
 
 size.toString = function(_bytes, _unit)
 {

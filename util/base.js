@@ -1,4 +1,15 @@
-var base = module.exports = {};
+var base = {};
+
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.base = base;
+}
+else
+{
+	module.exports = base;
+}
 
 // < https://de.wikipedia.org/wiki/Base32 >
 // < https://de.wikipedia.org/wiki/Base64 >

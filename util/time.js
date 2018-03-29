@@ -1,19 +1,20 @@
 //TODO/ "hrtime" u.a. noch.. und natürlich .format()...
 //
 
-var time = module.exports = function(_unix = undefined)
+var time = function()
 {
-	if(global.type(_unix, 'Number'))
-	{
-		this.now = Math.abs(_unix);
-	}
-	else
-	{
-		this.now = Date.now();
-	}
+	return Date.now();
+}
 
-	//
-	return this;
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.time = time;
+}
+else
+{
+	module.exports = time;
 }
 
 time.now = function()

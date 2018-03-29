@@ -1,7 +1,17 @@
-var uuid = module.exports = {};
+var uuid = {};
+
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.uuid = uuid;
+}
+else
+{
+	module.exports = uuid;
+}
 
 uuid.scheme = [ 8, 4, 4, 4, 12 ];
-//uuid.length = 36;
 uuid.separator = '-';
 
 uuid.random = function(_radix = 16, _upperCase = false)

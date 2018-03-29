@@ -1,4 +1,15 @@
-var getopt = module.exports = {};
+var getopt = {};
+
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.getopt = getopt;
+}
+else
+{
+	module.exports = getopt;
+}
 
 getopt.argv = function(_argv = [])
 {

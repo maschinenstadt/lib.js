@@ -1,4 +1,15 @@
-var radix = module.exports = {};
+var radix = {};
+
+if(BROWSER)
+{
+	web = web || {};
+	web.util = web.util || {};
+	web.util.radix = radix;
+}
+else
+{
+	module.exports = radix;
+}
 
 // zur daten-konversion zwischen zahlensystemen ..
 //
