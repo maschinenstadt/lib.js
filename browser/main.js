@@ -7,7 +7,7 @@ function init()
 	var _uuid = document.getElementsByName('uuid');
 	for(var i = 0; i < _uuid.length; i++)
 	{
-		_uuid.innerHTML = _init.UUID;
+		_uuid.innerHTML[i] = _init.UUID;
 	}
 
 	//
