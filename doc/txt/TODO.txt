@@ -18,6 +18,12 @@
 
 
 
+	# global.file.readBytes() ..
+
+		=> w/ "_start" sowie "_length" .. nicht nur einmal "_size"! geht das (mit node.js hausmitteln)? ;-)
+
+
+
 	# crypto -> tls -> abstrashiern wg. evtl. anderer crypto-verfahren!!!
 
 		=> und use 'crypto/tls/stream' or so .. wg. "pipe()" aller daten.. genauso bei anderen crypto-verfahren, hm?!

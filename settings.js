@@ -21,9 +21,6 @@ settings.DEBUG = 0; // param '--debug=8' is also possible
 settings.START = true;	// general start of processes - and use this like an interpreter
 settings.START_ONLY = false;	// set to 'false' if using this as regular npm.js module! IMPORTANT!!
 
-settings.buffer = {};
-settings.buffer.maxLength = (1024 * 1024); // really necessary? or how do it better??
-
 settings.defaultLanguage = 'en' || 'de'; // will be set by env. var. as in 'settings.variable.lang(uage)'
 
 settings.variable = {};

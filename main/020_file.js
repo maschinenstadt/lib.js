@@ -643,7 +643,7 @@ global.file.read = function(_path, _encoding = global.file.encoding)
 }
 
 // _encoding = ( 'utf8' || 'hex' || 'base64' || 'ascii' || 'utf16le'//'ucs2' || 'latin1'/'binary' ); (!!!)
-global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encoding, _flags = 'r', _buffer = false)
+global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encoding = false, _flags = 'r')
 {
 	if(global.type(_path, 'String'))
 	{
@@ -656,7 +656,18 @@ global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encod
 	{
 		return new Error(global.type(_path));
 	}
-	if(! global.type(_encoding, 'String'))
+	if(global.type(_encoding, 'Boolean'))
+	{
+		if(_encoding)
+		{
+			_encoding = global.file.encoding;
+		}
+		else
+		{
+			_encoding = undefined;
+		}
+	}
+	else if(! global.type(_encoding, 'String'))
 	{
 		_encoding = global.file.encoding;
 	}
@@ -668,33 +679,27 @@ global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encod
 	{
 		_flags = 'r';
 	}
-	if(! global.type(_buffer, 'Boolean'))
-	{
-		_buffer = false;
-	}
 
 	if(_size === 0)
 	{
 		return null;
 	}
 
-	if(_size > global.settings.buffer.maxLength)
-	{
-		return new Error(global.settings.buffer.maxLength);
-	}
-
 	var buffer = new Buffer(_size);
 	var handle = global.nodejs('fs').openSync(_path, _flags);
-
 	var read = global.nodejs('fs').readSync(handle, buffer, 0, _size);
 
-	if(_buffer)
-	{
-		return buffer;
-	}
+	var result;
 
-	var result = buffer.toString(_encoding);
-	result = result.substr(0, _size);
+	if(_encoding)
+	{
+		result = buffer.toString(_encoding);
+		result = result.substr(0, _size);
+	}
+	else
+	{
+		result = buffer;
+	}
 
 	return result;
 }
