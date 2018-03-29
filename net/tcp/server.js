@@ -1,4 +1,4 @@
-const tcpServer = require('net').Server; // MUST BE 'require()' .. see "replaceNetClasses()" @ '/node.js'
+const tcpServer = nodejs('net').Server;
 
 module.exports = class server extends tcpServer
 {

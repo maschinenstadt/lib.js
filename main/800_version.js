@@ -197,7 +197,7 @@ function check(_data)
 function error(_error)
 {
 	console.warning("ERROR checking for current Node.js version: '%s'", _error.message);
-	//throw _error;
+	throw _error;
 }
 
 function versionWarning()

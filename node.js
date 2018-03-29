@@ -113,24 +113,6 @@ try
 		global.settings.library.path = [ global.settings.library.path ];
 	}
 
-	function replaceNetClasses(_net)
-	{
-		var newClient = require(path.root + '/net/tcp/client.js');
-		var newServer = require(path.root + '/net/tcp/server.js');
-
-		var oldClient = _net.Socket;
-		var oldServer = _net.Server;
-
-		_net._Socket = oldClient;
-		_net._Server = oldServer;
-
-		_net.Socket = newClient;
-		_net.Client = newClient; // just in case..
-		_net.Server = newServer;
-
-        	return _net;
-	}
-
 	global.nodejs = function(_module, _reload = false)
 	{
 		try
@@ -144,12 +126,6 @@ try
 			else
 			{
 				mod = global.nodejs[_module];
-			}
-
-			if(_module === 'net')
-			{
-				mod = replaceNetClasses(mod);
-				global.nodejs.net = mod;
 			}
 
 			if(mod)
@@ -170,11 +146,6 @@ try
 	for(var idx in settings.nodejs)
 	{
 		global.nodejs[idx] = require(idx);
-	}
-
-	if(global.nodejs.net)
-	{
-		global.nodejs.net = replaceNetClasses(global.nodejs.net);
 	}
 
 	//

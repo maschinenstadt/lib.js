@@ -49,24 +49,6 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
-#### Networking
-NOW I really disadvise to use original "require()" rather than my "include()"
-or my "nodejs()"! .. the problem is: to make use of my own "net/tcp/" classes
-this system will replace your original "net.Socket" and "net.Server" objects!
-
-This is the better solution; otherwise it would be necessarry to "wrap" some-
-how - but I'm implementing my own "Client" and "Server" classes. Now, w/ this
-approach, the "Server" class will _directly_ provide my own "Client"/"Socket"
-when it comes to the "connection" event (of the server)! That is much better!
-
-If you got to access the original versions, you could either "require('net')"
-this one time. But the better way would be to just use the backup copies that
-will be made during "replaceNetClasses()":
-
-	nodejs('net')._Socket;
-	nodejs('net')._Server;
-
-
 #### Browser support
 Integrated (the 2nd time) browser support/area. See "browser/". For this I've
 got a special Git repository @ github: a basic web project skeleton. See also

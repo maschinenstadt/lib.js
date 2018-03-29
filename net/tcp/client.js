@@ -1,4 +1,4 @@
-const tcpSocket = require('net').Socket; // MUST BE 'require()' .. see "replaceNetClasses()" @ '/node.js'
+const tcpSocket = nodejs('net').Socket;
 
 module.exports = class client extends tcpSocket
 {
