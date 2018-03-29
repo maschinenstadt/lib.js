@@ -1,6 +1,5 @@
 #!/usr/bin/env node.js
 
-var node = include('core/node');
 node = new node();
 
 node.event.on('log', console.log);
