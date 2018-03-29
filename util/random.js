@@ -1,8 +1,7 @@
 var random = {};
 
 random.length = 1024;
-
-//TODO/ also in BROWSER!???
+random.radix = 2;
 random.encoding = [ 'binary', 'hex', 'base64', 'boolean', 'bits', 'decimal' ];
 
 if(BROWSER)
@@ -11,7 +10,7 @@ if(BROWSER)
 
 	random.random = function(_length = random.length, _encoding = random.encoding[0])
 	{
-		if(not(random.crypto))
+		if(not(random.crypto) || not(random.crypto.getRandomValues)
 		{
 			//TODO??/ if window.message doesn't exist.. what else, altert??
 			//
@@ -20,7 +19,7 @@ if(BROWSER)
 			//.. or should i GLOBALLY use the WEB.CONSOLE(S)!?!?!!?
 			//
 			var errMessage = '"crypto" not available (in your browser)!!';
-			return new Error(errMessage);
+			throw new Error(errMessage);
 		}
 
 		if(! type(_length, 'Number'))
@@ -34,8 +33,9 @@ if(BROWSER)
 		{
 			if(_encoding < 2 || _encoding > 36)
 			{
-				_encoding = random.encoding[0];
-				encType = 'String';
+				var err = new Error('( 2 .. 36 )');
+				return err;	//  which of ..
+				throw err;	// these both!?
 			}
 		}
 		else if(encType !== 'String')
@@ -111,25 +111,80 @@ if(BROWSER)
 		return random.random(_length, 'base64');
 	}
 
-	// browser impl. ..
+	random.radix = function(_length = random.length, _radix = 2)
+	{
+		if(! global.type(_radix, 'Number'))
+		{
+			_radix = random.radix || 2;
+		}
+
+		return random.random(_length, _radix);
+	}
+
+	//
 	web.util.random = random;
 }
 else
 {
-	/*
-	 * THIS IS *LINUX* ONLY (using '/dev/urandom')!!!
+	/* UPDATE
 	 *
-	 * TODO is the implementation for WINDOWS etc. .. i think about using node.js' "crypto" module (getBytes() or so)!!
-	 * determine os and think further..! ;-)´
-	 * (also if it's really good to use /dev/urandom ... instead of node.js' "crypto" module? or use it globally, also for LINUX??!?
+	 * Bislang war das allein für Linux basierende OS, da "/dev/urandom" genutzt worden war.
+	 *
+	 * JETZT nutze ich das weiterhin (ob's besser ist als folgendes weiß ich atm nicht! ...)
+	 * selbiges. Falls diese Datei aber nicht existiert, so verwende ich das "crypto"-Modul,
+	 * um auch für andere OS bereit zu stehen! ;-)´
 	 *
 	 */
-	random.crypto = '/dev/urandom';
+	random.crypto;
+	random.entropy = '/dev/urandom';
 
-	if(not(random.crypto))
+	if(global.not(random.entropy))
 	{
-		throw new Error('!(random.crypto)!');
+		throw new Error('(! random.entropy)');
 	}
+
+	if(global.file.exists(random.entropy))
+	{
+		random.crypto = random.entropy;
+	}
+	else
+	{
+		random.crypto = nodejs('crypto').randomFillSync;
+		random.entropy = undefined;
+	}
+
+	if(random.entropy)
+	{
+		random = Object.assign(random, randomFile(random.entropy));
+	}
+	else
+	{
+		random = Object.assign(random, randomCrypto(random.crypto));
+	}
+}
+
+
+	//TODO/
+	// (a) 'binary', 'hex', 'base64'
+	// (b) ( 2 .. 36 )
+
+
+
+
+function randomFile(_path = '/dev/urandom')
+{
+}
+
+function randomCrypto(_crypto = nodejs('crypto'))
+{
+}
+
+
+
+
+/*
+
+
 
 	//TODO/ maybe also radix >=2 && <= 36? see BROWSER impl..
 	random.random = function(_length = random.length, _encoding = random.encoding[0])
@@ -172,11 +227,11 @@ else
 		}
 
 		// SHOULD REGULARILY ALSO result in wished _length .. see "global.file.readBytes()" ;-)´
-/*		if(result.length > _length)
-		{
-			result = result.substr(0, _length);
-		}
-*/
+		//if(result.length > _length)
+		//{
+		//	result = result.substr(0, _length);
+		//}
+		//
 		return result;
 	}
 
@@ -197,4 +252,6 @@ else
 
 	module.exports = random;
 }
+
+*/
 

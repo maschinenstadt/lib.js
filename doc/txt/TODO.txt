@@ -17,6 +17,8 @@
 	# windows etc. optimization. currently extepected to only work on linux based systems.
 
 
+	# think GLOBALLY about Error/Exception handling (strucutres or algoirhtms or so)....
+
 
 	# global.file.path();
 
