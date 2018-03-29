@@ -1,4 +1,4 @@
-var Arguments = arguments.__proto__;
+var Arguments = (function() { return arguments; })().__proto__; // 'function' is necessary for browser support
 
 if(! BROWSER)
 {
