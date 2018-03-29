@@ -15,6 +15,8 @@ module.exports = class client extends tcpClient
 		this.setUser(_name_user);
 	}
 
+	static get protocol() { return 'irc'; };
+
 	connect(_tls = true, _host = '127.0.0.1', _port = ( _tls ? client.port.tls : client.port.tcp ))
 	{
 		super.connect(_tls, _host, _port);

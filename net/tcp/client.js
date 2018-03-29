@@ -11,15 +11,14 @@ module.exports = class client extends tcpSocket
 		this.setTimeout(client.timeout);
 		//
 		this.callbacks = this.callbacks;
-//		this.setCallbacks(this.callbacks);
 	}
 
 	static get protocol() { return 'tcp'; };
-	static get encoding() { return global.settings.encoding || 'utf8'; };
+	static get encoding() { return global.settings.net.encoding || 'utf8'; };
 	static get timeout() { return global.settings.net.timeout || 0; };
 	static get version() { return global.settings.net.version || 'IPv6' || 'IPv4'; };
 
-	connect(_tls = true, _host = '127.0.0.1', _port = 0, _version = client.version, _localAddress, _localPort)
+	connect(_tls = true, _host = settings.net.host, _port = 0, _version = client.version, _localAddress, _localPort)
 	{
 		if(! global.type(_tls, 'Boolean'))
 		{
@@ -27,7 +26,7 @@ module.exports = class client extends tcpSocket
 		}
 		if(! global.type(_host, 'String'))
 		{
-			_host = '127.0.0.1';
+			_host = settings.net.host;
 		}
 		if(! global.type(_port, 'Number'))
 		{
@@ -94,11 +93,11 @@ module.exports = class client extends tcpSocket
 		return super.write(_data, _encoding, _callback);
 	}
 
-	setTimeout(_timeout = socket.timeout)
+	setTimeout(_timeout = client.timeout)
 	{
 		if(global.not(_timeout) || (! global.type(_timeout, 'Number')))
 		{
-			_timeout = socket.timeout;
+			_timeout = client.timeout;
 		}
 
 		this.timeout = _timeout;
@@ -107,12 +106,12 @@ module.exports = class client extends tcpSocket
 		return this;
 	}
 
-	setEncoding(_encoding = socket.encoding)
+	setEncoding(_encoding = client.encoding)
 	{
 		//TODO/ do this also for the socket, if any
 		if(global.not(_encoding) || (! global.type(_encoding, 'String')))
 		{
-			_encoding = socket.encoding;
+			_encoding = client.encoding;
 		}
 
 		this.encoding = _encoding;
@@ -121,11 +120,11 @@ module.exports = class client extends tcpSocket
 		return this;
 	}
 
-	setProtocol(_protocol = socket.protocol)
+	setProtocol(_protocol = client.protocol)
 	{
 		if(global.not(_protocol) || (! global.type(_protocol, 'String')))
 		{
-			_protocol = socket.protocol;
+			_protocol = client.protocol;
 		}
 
 		this.protocol = _protocol;
@@ -135,11 +134,16 @@ module.exports = class client extends tcpSocket
 
 	setCallback(_name, _callback)
 	{
-		this.socket.on(_name, _callback);
+		if(! global.type(_callback, 'Function'))
+		{
+			return new Error(global.type(_callback));
+		}
+
+		this.on(_name, _callback);
 		return this;
 	}
 
-	setCallbacks(_map, _removeOld = true)
+	setCallbacks(_map = {}, _removeOld = false)
 	{
 		var result = 0;
 
@@ -170,19 +174,24 @@ module.exports = class client extends tcpSocket
 	get callbacks()
 	{
 		return {
-			close: this.onClose,
-			connect: this.onConnect,
-			data: this.onData,
-			drain: this.onDrain,
-			end: this.onEnd,
-			error: this.onError,
-			lookup: this.onLookup,
-			timeout: this.onTimeout
+			close:		this.onClose,
+			connect:	this.onConnect,
+			data:		this.onData,
+			drain:		this.onDrain,
+			end:		this.onEnd,
+			error:		this.onError,
+			lookup:		this.onLookup,
+			timeout:	this.onTimeout
 		};
 	}
 
-	set callbacks(_map)
+	set callbacks(_map = {})
 	{
+		if(! global.type(_map, 'Object'))
+		{
+			return new Error(global.type(_map));
+		}
+
 		return this.setCallbacks(_map, true);
 	}
 

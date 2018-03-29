@@ -15,6 +15,7 @@ settings.net = {};
 settings.net.timeout = 0;	// <1(ms) disables default timeout (which can be set in their net-classes, too)
 settings.net.version = 6;
 settings.net.encoding = settings.encoding;
+settings.net.host = '0.0.0.0' || '127.0.0.1';
 
 settings.DEBUG = 0; // param '--debug=8' is also possible
 settings.START = true;	// general start of processes - and use this like an interpreter
