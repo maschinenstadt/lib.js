@@ -1,6 +1,6 @@
 BROWSER = true;
 
-global = window || this;
+global = this;
 global.global = global;
 
 if(settings.tls)
@@ -51,9 +51,16 @@ if(html.body.length === 1)
 	//TODO/ maybe check if already defined in document? and use that?
 
 	let meta = document.createElement('meta');
-	let charset = settings.charset || 'utf-8';
 
-	meta.setAttribute('charset', charset);
+	if(settings.charset && settings.charset.length > 0)
+	{
+		meta.setAttribute('charset', settings.charset);
+	}
+	else
+	{
+		meta.setAttribute('charset', 'utf-8');
+	}
+
 	html.head.appendChild(meta);
 }
 

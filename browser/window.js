@@ -1,3 +1,5 @@
+window.window = window;
+
 Object.defineProperty(window, 'size' {
 	get: function()
 	{
