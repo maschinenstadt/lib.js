@@ -23,6 +23,9 @@
 
 		=> in case we want the original class names..
 
+			.. maybe append this name to the 'Object' result string .. and on type test do if .. "startsWith('Object')"..??!
+
+
 
 	# IDE!?
 
