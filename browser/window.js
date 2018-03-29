@@ -1,6 +1,6 @@
 window.window = window;
 
-Object.defineProperty(window, 'size' {
+Object.defineProperty(window, 'size', {
 	get: function()
 	{
 		return {
