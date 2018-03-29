@@ -98,7 +98,7 @@ global.not = function(_object, _zero = false)
 	{
 		return true;
 	}
-	else if(_object.length && _object.length === 0)
+	else if(_object.length === 0)
 	{
 		return true;
 	}

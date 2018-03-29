@@ -97,7 +97,10 @@ global.console.EOL = function(_count = 1, _padStr = '', _width = global.console.
 {
 	if(global.type(_stream, 'Boolean'))
 	{
-		_stream = ( _stream ? global.console.stream : undefined );
+		if(_stream)
+		{
+			_stream = global.console.stream;
+		}
 	}
 	else if(! global.type(_stream, 'Object'))
 	{
