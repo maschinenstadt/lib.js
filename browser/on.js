@@ -1,4 +1,29 @@
-on = on || {};
+on = {};
+
+on.load = function()
+{
+	try
+	{
+		var _init = undefined;
+		var _main = undefined;
+
+		if(init)
+		{
+			_init = init();
+		}
+
+		if(main)
+		{
+			_main = main();
+		}
+
+		return { init: _init, main: _main };
+	}
+	catch(_error)
+	{
+		window.message(_error.message, _error.title);
+	}
+}
 
 on.resize = function(_width, _height)
 {

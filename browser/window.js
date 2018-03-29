@@ -24,33 +24,12 @@ window.message = function(_text, _title)
 
 window.onload = function()
 {
-	try
+	if(on && on.load)
 	{
-		var _init;
-		var _main;
-
-		if(init)
-		{
-			_init = init();
-		}
-
-		_init = _init || {};
-
-		if(main)
-		{
-			_main = main(_init);
-		}
-
-		_main = _main || {};
-
-		//
-		return _main; // return [ _init, _main ]; (!??)
+		return on.load();
 	}
-	catch(_error)
-	{
-		window.message(_error.text, _error.toString());
-		return _error;
-	}
+
+	//return (true|false)?
 }
 
 window.onresize = function()
