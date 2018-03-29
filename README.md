@@ -52,7 +52,7 @@ include() parameter, it will only search in the current lib.js' path (that is
 #### Browser support
 Integrated (the 2nd time) browser support/area. See "browser/". For this I've
 got a special Git repository @ github: a basic web project skeleton. See also
-the "browser/settings.js". You need to install this in "/lib.js" (see below),
+the "browser/settings.js". You need to install THIS in "/lib.js" (see below),
 then clone the "www" repository, directly into your web root (or your sub's).
 
 	git clone https://github.com/maschinenstadt/www
