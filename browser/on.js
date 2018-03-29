@@ -24,14 +24,10 @@ on.key = {};
 
 on.key.down = function()
 {
-	//TODO/(remove, ..)
-	alert('on.key.down()');
 }
 
 on.key.up = function()
 {
-	//TODO/(remove, ..)
-	alert('on.key.up()');
 }
 
 on.mouse = {};
