@@ -10,7 +10,7 @@ if(BROWSER)
 
 	random.random = function(_length = random.length, _encoding = random.encoding[0])
 	{
-		if(not(random.crypto) || not(random.crypto.getRandomValues)
+		if(not(random.crypto) || not(random.crypto.getRandomValues))
 		{
 			//TODO??/ if window.message doesn't exist.. what else, altert??
 			//
