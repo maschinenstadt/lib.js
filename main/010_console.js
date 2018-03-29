@@ -453,7 +453,7 @@ global.console.exception = function()
 	return Array.prototype.join.call(arguments, ' ');
 }
 
-global.console.debug = function(_level)
+global.console.debug = function(_level = 0)
 {
 	var args = Array.from(arguments);//vs. "arguments.toArray()" ;-)´
 
@@ -463,7 +463,7 @@ global.console.debug = function(_level)
 	}
 	else
 	{
-		_level = 1;
+		_level = global.console.debug.level;
 	}
 
 	if(_level > global.settings.DEBUG)
@@ -474,6 +474,8 @@ global.console.debug = function(_level)
 	_log.apply(this, args);
 	return Array.prototype.join.call(args, ' ');
 }
+
+global.console.debug.level = 1;
 
 console.debug(2, "Loaded 'console'");
 
