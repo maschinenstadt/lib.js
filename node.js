@@ -119,12 +119,12 @@ try
 		{
 			var mod;
 
-			if(_reload)
+			if(_reload || global.not(global.nodejs[_module]))
 			{
 				mod = global.nodejs[_module] = require(_module);
 			}
 
-			if(_module in global.nodejs && (global.nodejs[_module] === mod))
+			if(_module in global.nodejs)
 			{
 				return global.nodejs[_module];
 			}
