@@ -31,5 +31,12 @@ Object.defineProperty(Error.prototype, 'text', {
 	}
 });
 
+Object.defineProperty(Error.prototype, 'title', {
+	get: function()
+	{
+		return this.name;
+	}
+});
+
 Error.prototype.isError = true;
 
