@@ -186,50 +186,50 @@ module.exports = class client extends tcpSocket
 		return this.setCallbacks(_map, true);
 	}
 
-	onClose()
+	onClose(_hadError)
 	{
-		console.right('Connection closed (' + this.toString() + ')');
+		console.right('Connection [' + this.toString() + '] closed (had error: ' + _hadError.toString('NO', 'YES') + ')');
 	}
 
 	onConnect()
 	{
-		console.right('Connection established (' + this.toString() + ')');
+		console.right('Connection [' + this.toString() + '] established! :-)´');
 	}
 
 	onData(_chunk)
 	{
-		console.right('Connection received DATA (' + this.toString() + '): (' + _chunk.length.toString() + ') bytes');
-		console.line('-');
+		console.right('Connection [' + this.toString() + '] received DATA (' + _chunk.length.toString() + ' bytes)');
+		/*console.line('-');
 		console.stdout(_chunk);
-		console.line('-');
+		console.line('-');*/
 	}
 
 	onDrain()
 	{
-		console.right('Connection DRAIN (' + this.toString() + ')');
+		console.right('Connection [' + this.toString() + '] DRAIN..');
 	}
 
 	onEnd()
 	{
-		console.right('Connection END (' + this.toString() + ')');
+		console.right('Connection [' + this.toString() + '] ENDs!');
 	}
 
 	onError(_error)
 	{
-		console.right('Connection ERROR (' + this.toString() + ')');
-		console.error(_error.text);
-		console.right('DESTROYing socket..');
+		console.right('Connection [' + this.toString() + '] ERROR: "' + _error.name + '"!');
+		/*console.error(_error.text);
+		console.right('DESTROYing socket..');*/
 		this.destroy(_error);
 	}
 
-	onLookup()
+	onLookup(_error, _address, _family, _host)
 	{
-		console.right('Connection lookup (' + this.toString() + ')');
+		console.right('Connection [' + this.toString() + '] LOOKUP... (Error: ' + (_error ? '"' + _error.name + '"' : 'NO') + ')');
 	}
 
 	onTimeout()
 	{
-		console.right('Connection TIMEOUT (' + this.toString() + ')');
+		console.right('Connection [' + this.toString() + '] TIMEOUT (' + this.timeout.toString() + ' ms)!');
 	}
 }
 
