@@ -3,7 +3,7 @@ var random = {};
 random.length = 1024;
 
 //TODO/ also in BROWSER!???
-random.encoding = [ 'binary', 'hex', 'base64' ];
+random.encoding = [ 'binary', 'hex', 'base64', 'boolean', 'bits', 'decimal' ];
 
 if(BROWSER)
 {
