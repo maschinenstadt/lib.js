@@ -6,7 +6,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Arguments;
+	module.exports = global.Arguments = Arguments;
 }
 
 /*

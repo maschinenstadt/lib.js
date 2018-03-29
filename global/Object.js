@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Object;
+	module.exports = global.Object = Object;
 }
 
 // this "TODO" array is meant for managing own TODO tasks in the objects ..

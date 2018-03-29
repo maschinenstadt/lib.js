@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Function;
+	module.exports = global.Function = Function;
 }
 
 Function.from = function(_source)

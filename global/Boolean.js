@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Boolean;
+	module.exports = global.Boolean = Boolean;
 }
 
 Boolean.prototype.clone = function()

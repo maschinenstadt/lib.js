@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Math;
+	module.exports = global.Math = Math;
 }
 
 const _round = Math.round;

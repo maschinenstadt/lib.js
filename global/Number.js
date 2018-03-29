@@ -22,7 +22,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Number;
+	module.exports = global.Number = Number;
 }
 
 Object.defineProperty(Number.prototype, 'positive', {

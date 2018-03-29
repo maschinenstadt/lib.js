@@ -10,7 +10,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Error;
+	module.exports = global.Error = Error;
 }
 
 Error.prototype.clone = function()

@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = Array;
+	module.exports = global.Array = Array;
 }
 
 Object.defineProperty(Array.prototype, 'last', {

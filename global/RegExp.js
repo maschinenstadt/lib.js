@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = RegExp;
+	module.exports = global.RegExp = RegExp;
 }
 
 RegExp.clone = function()

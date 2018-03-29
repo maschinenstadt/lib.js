@@ -4,7 +4,7 @@ if(BROWSER)
 }
 else
 {
-	module.exports = String;
+	module.exports = global.String = String;
 }
 
 Object.defineProperty(String.prototype, 'last', {
