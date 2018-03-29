@@ -9,7 +9,24 @@ var color = include('util/color');
 ansi.ESC = global.ESC || String.fromCharCode(27); // \033
 ansi.BRACKET = String.fromCharCode(91);
 
-ansi.reset = function(_home = false, _write = global.console.stream)
+ansi.stream = global.console.stream;
+
+ansi.setStream = function(_stream = global.console.stream)
+{
+	if(arguments.length === 0)
+	{
+		_stream = global.console.stream;
+	}
+
+	return ansi.stream = _stream;
+}
+
+ansi.resetStream = function()
+{
+	return ansi.stream = global.console.stream;
+}
+
+ansi.reset = function(_home = false, _write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '0m');
 }
@@ -19,7 +36,7 @@ ansi.color = function(_foreground = 37, _background = 40, _attribute = 0)
 	//TODO/ not really necessary, btw..
 }
 
-ansi.color.fg = function(_r, _g, _b, _write = global.console.stream)
+ansi.color.fg = function(_r, _g, _b, _write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '38;2;'
 		+ _r.toString() + ';'
@@ -29,7 +46,7 @@ ansi.color.fg = function(_r, _g, _b, _write = global.console.stream)
 
 ansi.color.fg.rgb = ansi.color.fg;
 
-ansi.color.bg = function(_r, _g, _b, _write = global.console.stream)
+ansi.color.bg = function(_r, _g, _b, _write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '48;2;'
 		+ _r.toString() + ';'
@@ -39,13 +56,13 @@ ansi.color.bg = function(_r, _g, _b, _write = global.console.stream)
 
 ansi.color.bg.rgb = ansi.color.bg;
 
-ansi.color.fg.hex = function(_hexa, _write = global.console.stream)
+ansi.color.fg.hex = function(_hexa, _write = ansi.stream)
 {
 	var rgb = color.hexToRgb(_hexa);
 	return ansi.color.fg(rgb.r, rgb.g, rgb.b, _write);
 }
 
-ansi.color.bg.hex = function(_hexa, _write = global.console.stream)
+ansi.color.bg.hex = function(_hexa, _write = ansi.stream)
 {
 	var rgb = color.hexToRgb(_hexa);
 	return ansi.color.bg(rgb.r, rgb.g, rgb.b, _write);
@@ -69,7 +86,7 @@ ansi.color.magenta = { fg: 35, bg: 45 };
 ansi.color.cyan = { fg: 36, bg: 46 };
 ansi.color.white = { fg: 37, bg: 47 };
 
-ansi.attribute = function(_attribute, _write = global.console.stream)
+ansi.attribute = function(_attribute, _write = ansi.stream)
 {
 	if(global.type(_attribute, 'String'))
 	{
@@ -94,7 +111,7 @@ ansi.attribute.inverse = 7;
 ansi.attribute.invisible = 8;
 ansi.attribute.crossed = 9;
 
-ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _height = global.console.size.height, _write = global.console.stream)
+ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _height = global.console.size.height, _write = ansi.stream)
 {
 	if(! global.type(_x, 'Number'))
 	{
@@ -121,47 +138,47 @@ ansi.cursor = function(_x = 0, _y = 0, _width = global.console.size.width, _heig
 	return write(ansi.ESC + ansi.BRACKET + line.toString() + ';' + column.toString() + ('H'||'f'), _write);
 }
 
-ansi.save = function(_write = global.console.stream)
+ansi.save = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + '7', _write);
 }
 
-ansi.load = function(_write = global.console.stream)
+ansi.load = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + '8', _write);
 }
 
-ansi.clear = function(_write = global.console.stream)
+ansi.clear = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '2J', _write);
 }
 
-ansi.clear.up = function(_write = global.console.stream)
+ansi.clear.up = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '1J', _write);
 }
 
-ansi.clear.down = function(_write = global.console.stream)
+ansi.clear.down = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '0J', _write);
 }
 
-ansi.clear.line = function(_write = global.console.stream)
+ansi.clear.line = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '2K', _write);
 }
 
-ansi.clear.left = function(_write = global.console.stream)
+ansi.clear.left = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '1K', _write);
 }
 
-ansi.clear.right = function(_write = global.console.stream)
+ansi.clear.right = function(_write = ansi.stream)
 {
 	return write(ansi.ESC + ansi.BRACKET + '0K', _write);
 }
 
-function write(_code, _write = global.console.stream)
+function write(_code, _write = ansi.stream)
 {
 	if(! global.type(_code, 'String'))
 	{
@@ -172,12 +189,12 @@ function write(_code, _write = global.console.stream)
 	{
 		if(_write)
 		{
-			_write = global.console.stream;
+			_write = ansi.stream;
 		}
 	}
 	else if(! global.type(_write, ['Object','Function']))
 	{
-		_write = global.console.stream;
+		_write = ansi.stream;
 	}
 
 	if(_write)
@@ -192,7 +209,7 @@ function write(_code, _write = global.console.stream)
 		}
 		else
 		{
-			global.process.stdout.write(_code);
+			global.console.stream.write(_code);
 		}
 	}
 
