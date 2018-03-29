@@ -90,6 +90,13 @@
 
 
 
+	# "Function" default argument values .. is not everywhere right now!
+
+		# '||' finden .. sollte das problem evtl. schon erstmals bisschen einkreisen.
+
+
+
+
 
 	# global.type => _object.constructor.name?
 
