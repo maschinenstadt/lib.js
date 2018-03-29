@@ -22,6 +22,11 @@ function init()
 	web.RANDOM[10] = web.util.random.radix(web.RANDOM.size, 10);
 	web.RANDOM[32] = web.util.random.radix(web.RANDOM.size, 32);
 
+	var _random_size = document.getElementsByName('random_size');
+	for(var i = 0; i < _random_size.length; i++)
+	{
+		_random_size[i].innerHTML = web.RANDOM.size.toString();
+	}
 	var _random = document.getElementsByName('random');
 	for(var i = 0; i < _random.length; i++)
 	{
