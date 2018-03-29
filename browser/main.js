@@ -28,14 +28,12 @@ function init()
 		var str = '<li><b><big>binary</big></b> ' + web.RANDOM.binary + '</li>'
 			+ '<li><b><big>hex</big></b> ' + web.RANDOM.hex + '</li>'
 			+ '<li><b><big>base64</big></b> ' + web.RANDOM.base64 + '</li>'
-			+ '<br />'
 			+ '<li><b><big>(2)</big></b> ' + web.RANDOM[2] + '</li>'
 			+ '<li><b><big>(10)</big></b> ' + web.RANDOM[10] + '</li>'
 			+ '<li><b><big>(32)</big></b> ' + web.RANDOM[32] + '</li>'
 			+ '<br />';
 		_random[i].innerHTML = str;
 	}
-
 	web.RANDOM.size = undefined;
 	delete web.RANDOM.size;
 
