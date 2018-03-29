@@ -1,10 +1,12 @@
-const tcpServer = include('net').Server;
+const tcpServer = require('net').Server; // MUST BE 'require()' .. see "replaceNetClasses()" @ '/node.js'
 
 module.exports = class server extends tcpServer
 {
-	constructor()
+	constructor(_port = undefined, _host = undefined)
 	{
 		super();
+		//
+		this.clients = [];
 		//
 		this.setProtocol('tcp');
 		//
@@ -28,13 +30,13 @@ module.exports = class server extends tcpServer
 		return this;
 	}
 
-	get port() { return this.address().port; }
-	get host() { return this.address().host; }
-	get family() { return this.address().family; }
+	get port() { return ( this.address() ? this.address().port : '-' ); }
+	get host() { return ( this.address() ? this.address().address : '-' ); }
+	get family() { return ( this.address() ? this.address().family : '-' ); }
 
 	toString()
 	{
-		return this.host.toString() + ':' + this.port.toString();
+		return this.host.toString() + ':' + this.port.toString() + '/' + this.protocol;
 	}
 
 	start(_port = 0, _host = settings.net.host)
@@ -124,8 +126,11 @@ module.exports = class server extends tcpServer
 	{
 	}
 
-	onConnection()
+	onConnection(_socket)
 	{
+console.debug('[onConnection() -> test if MY NEW net.Socket] "%s"', _socket.protocol);
+		//
+		this.clients[this.clients.length] = sock;
 	}
 
 	onError(_error)

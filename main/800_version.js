@@ -118,15 +118,15 @@ function query(_delta)
 
 	try
 	{
-		var client;
+		var webClient;
 
 		if(URL.startsWith('https:'))
 		{
-			client = include('https');
+			webClient = include('https');
 		}
 		else if(URL.startsWith('http:'))
 		{
-			client = include('http');
+			webClient = include('http');
 		}
 		else
 		{
@@ -134,7 +134,7 @@ function query(_delta)
 			return new Error(settings.version.url);
 		}
 
-		client.get(URL, (_response) => {
+		webClient.get(URL, (_response) => {
 			_response.setEncoding(global.settings.encoding);
 
 			var data = '';
@@ -196,8 +196,8 @@ function check(_data)
 
 function error(_error)
 {
-	//throw _error;
 	console.warning("ERROR checking for current Node.js version: '%s'", _error.message);
+	//throw _error;
 }
 
 function versionWarning()

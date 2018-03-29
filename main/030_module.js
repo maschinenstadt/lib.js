@@ -184,5 +184,22 @@ realInclude.file = function(_path)
 	return new Error(_path + ' (' + ext + ')');
 }
 
+main.replaceNetSocket = function(_net)
+{
+	var newer = include('net/tcp/client');
+	var older = _net.Socket;
+
+	_net._Socket = older;
+	_net.Socket = newer;
+
+	{
+		var tN = newer.constructor.name;
+		var tO = older.constructor.name;
+		console.debug(0, 'SWITCH "%s" => "%s"', tO, tN);
+	}
+
+	return _net;
+}
+
 console.debug(2, "Loaded 'module'");
 

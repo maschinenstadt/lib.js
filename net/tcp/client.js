@@ -1,4 +1,4 @@
-const tcpSocket = include('net').Socket;
+const tcpSocket = require('net').Socket; // MUST BE 'require()' .. see "replaceNetClasses()" @ '/node.js'
 
 module.exports = class client extends tcpSocket
 {
@@ -75,7 +75,7 @@ module.exports = class client extends tcpSocket
 	
 	toString()
 	{
-		return this.host + ':' + this.port;
+		return this.host + ':' + this.port + '/' + this.protocol;
 	}
 
 	setCrypto(_type = 'tls')

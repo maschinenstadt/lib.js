@@ -459,9 +459,14 @@ String.alphabet[62] = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTU
 
 // WICHTIG TODO /
 // w/ _radix, ..
-String.prototype.toString = function()
+String.prototype.toString = function(_withQuotationMark = false)
 {
-	return '"' + this.valueOf() + '"';
+	if(_withQuotationMark)
+	{
+		return '"' + this.valueOf() + '"';
+	}
+
+	return this.valueOf();
 }
 
 /*String.prototype.toDebug = function(_radix, _tag)
