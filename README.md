@@ -49,6 +49,15 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Browser support
+Integrated (the 2nd time) browser support/area. See "browser/". For this I've
+got a special Git repository @ github: a basic web project skeleton. See also
+the "browser/settings.js". You need to install this in "/lib.js" (see below),
+then clone the "www" repository, directly into your web root (or your sub's).
+
+	git clone https://github.com/maschinenstadt/www
+
+
 #### ANSI
 Just finished "console/ansi"! See the .. "example/console/ansi.js". Important
 feature for me - as it goes to own `dialog` styles (or something similar), w/
