@@ -7,10 +7,12 @@ global.file = function(_path = global.process.cwd(), _chroot = '')
 	_path = global.file.path(_path);
 	_chroot = global.file.path(_chroot);
 
-	var result = global.file.path(global.nodejs.path.join(_chroot, _path));
+	var result = global.file.path(global.nodejs('path').join(_chroot, _path));
 
 	return result;
 }
+
+global.file.encoding = global.settings.encoding;
 
 global.file.path = function(_path)
 {
@@ -24,7 +26,7 @@ global.file.path = function(_path)
 	
 	// interessant: alle verzeichnisse werden mit '/' am ende markiert. optimum: kein aufwand wg. extra file.type.directory..
 	//
-	if(global.nodejs.fs.existsSync(_path))
+	if(global.nodejs('fs').existsSync(_path))
 	{
 		if(global.file.type.directory(_path))
 		{
@@ -64,7 +66,7 @@ global.file.path.isValid = function(_path)
 	return true;
 }
 
-const _extname = global.nodejs.path.extname;
+const _extname = global.nodejs('path').extname;
 
 global.file.path.extname = function(_paths, _extensions = [], _withErrors = true)
 {
@@ -147,7 +149,7 @@ global.file.path.extname = function(_paths, _extensions = [], _withErrors = true
 	return result;
 }
 
-const _normalize = global.nodejs.path.normalize;
+const _normalize = global.nodejs('path').normalize;
 
 global.file.path.normalize = function()
 {
@@ -239,7 +241,7 @@ global.file.path.tree = function(_paths)
 //
 //
 
-const _basename = global.nodejs.path.basename;
+const _basename = global.nodejs('path').basename;
 
 global.file.path.basename = function(_paths, _suffices = [], _prefices = [], _maximum = false, _remove = true, _filter = false)
 {
@@ -309,7 +311,7 @@ global.file.path.basename = function(_paths, _suffices = [], _prefices = [], _ma
 	return result;
 }
 
-const _dirname = global.nodejs.path.dirname;
+const _dirname = global.nodejs('path').dirname;
 
 global.file.path.dirname = function(_paths, _suffices = [], _prefices = [], _maximum = false, _remove = true, _filter = false)
 {
@@ -379,7 +381,7 @@ global.file.path.dirname = function(_paths, _suffices = [], _prefices = [], _max
 	return result;
 }
 
-global.file.readStream = function(_path, _options = {})
+global.file.readStream = function(_path, _options = global.file.readStream.options, _start = 0, _end = undefined, _encoding = global.file.encoding)
 {
 	if(arguments.length === 0
 		|| (!(global.type(_path, 'String'))))
@@ -389,17 +391,40 @@ global.file.readStream = function(_path, _options = {})
 
 	if(! global.file.exists(_path))
 	{
-		return undefined;
+		return new Error();
+	}
+
+	if(! global.type(_options, 'Object'))
+	{
+		_options = global.file.readStream.options;
 	}
 
 	_options = Object.assign(global.file.readStream.options, _options || {});
+
+	if(global.type(_start, 'Number'))
+	{
+		_options.start = _start;
+	}
+	else
+	{
+		_start = _options.start = undefined;
+	}
+	if(global.type(_end, 'Number'))
+	{
+		_options.end = _end;
+	}
+	else
+	{
+		_end = _options.end = undefined;
+	}
+
 	//
-	return global.nodejs.fs.createReadStream(_path, _options);
+	return global.nodejs('fs').createReadStream(_path, _options);
 }
 
 global.file.readStream.options = {
 	flags: 'r',
-	encoding: global.settings.encoding || null,
+	encoding: global.file.encoding || null,
 	fd: null,
 	mode: 0o666,
 	autoClose: true,
@@ -408,7 +433,7 @@ global.file.readStream.options = {
 	highWaterMark: (64*1024)
 };
 
-global.file.writeStream = function(_path, _options = {})
+global.file.writeStream = function(_path, _options = global.file.writeStream.options, _start = 0, _encoding = global.file.encoding)
 {
 	if(arguments.length === 0
 		|| (!(global.type(_path, 'String'))))
@@ -418,17 +443,32 @@ global.file.writeStream = function(_path, _options = {})
 
 	if(! global.file.exists(_path))
 	{
-		return undefined;
+		return new Error();
+	}
+
+	if(! global.type(_options, 'Object'))
+	{
+		_options = global.file.writeStream.options;
 	}
 
 	_options = Object.assign(global.file.writeStream.options, _options || {});
+
+	if(global.type(_start, 'Number'))
+	{
+		_options.start = _start;
+	}
+	else
+	{
+		_start = _options.start = undefined;
+	}
+
 	//
-	return global.nodejs.fs.createWriteStream(_path, _options);
+	return global.nodejs('fs').createWriteStream(_path, _options);
 }
 
 global.file.writeStream.options = {
 	flags: 'w' || 'w+',
-	encoding: global.settings.encoding,
+	encoding: global.file.encoding,
 	fd: null,
 	mode: 0o666,
 	autoClose: true,
@@ -461,9 +501,9 @@ global.file.mkdir = function(_path)
 
 		for(var i = 0; i < parts.length; i++)
 		{
-			p = global.nodejs.path.join(p, parts[i]);
+			p = global.nodejs('path').join(p, parts[i]);
 
-			if(global.nodejs.fs.existsSync(p))
+			if(global.nodejs('fs').existsSync(p))
 			{
 				if(global.file.type.directory(p))
 				{
@@ -476,7 +516,7 @@ global.file.mkdir = function(_path)
 			}
 			else
 			{
-				global.nodejs.fs.mkdirSync(p);
+				global.nodejs('fs').mkdirSync(p);
 				result++;
 			}
 		}
@@ -490,18 +530,27 @@ global.file.mkdir = function(_path)
 	return result;
 }
 
-global.file.list = function(_path, _suffix = [], _prefix = [], _inverse = false, _encoding = global.settings.encoding)
+global.file.list = function(_path, _suffix = [], _prefix = [], _inverse = false, _encoding = global.file.encoding)
 {
 	try
 	{
 		if(global.type(_path, 'String'))
 		{
 			//_path = global.file(_path);
-			_path = global.nodejs.path.resolve(_path);
+			_path = global.nodejs('path').resolve(_path);
+
+			if(! global.file.exists(_path))
+			{
+				return undefined;
+			}
 		}
 		else
 		{
 			_path = global.process.getcwd();
+		}
+		if(! global.type(_encoding, 'String'))
+		{
+			_encoding = global.file.encoding;
 		}
 
 		_options = { encoding: _encoding };
@@ -516,7 +565,7 @@ global.file.list = function(_path, _suffix = [], _prefix = [], _inverse = false,
 			_prefix = [ _prefix ];
 		}
 
-		var l = global.nodejs.fs.readdirSync(_path, _options);
+		var l = global.nodejs('fs').readdirSync(_path, _options);
 
 		if(_suffix.length === 0 && _prefix.length === 0)
 		{
@@ -554,34 +603,139 @@ global.file.list = function(_path, _suffix = [], _prefix = [], _inverse = false,
 		return _error;
 	}
 
-	return null;
+	return [];
 }
 
 global.file.exists = function(_path)
 {
-	return global.nodejs.fs.existsSync(global.file(_path));
+	return global.nodejs('fs').existsSync(global.file(_path));
 }
 
-global.file.read = function(_path, _encoding)
+global.file.read = function(_path, _encoding = global.file.encoding)
 {
+	if(global.type(_path, 'String'))
+	{
+		if(! global.file.exists(_path))
+		{
+			return undefined;
+		}
+	}
+	else
+	{
+		return new Error(global.type(_path));
+	}
+	if(! global.type(_encoding, 'String'))
+	{
+		_encoding = global.file.encoding;
+	}
+
 	try
 	{
-		_encoding = _encoding || settings.encoding;
-		return global.nodejs.fs.readFileSync(global.file(_path), { encoding: _encoding });
+		_encoding = _encoding || global.file.encoding;
+		return global.nodejs('fs').readFileSync(global.file(_path), { encoding: _encoding });
 	}
 	catch(_error)
 	{
-		//throw _error;
-		return undefined;//!?
+		return _error;
 	}
+
+	return null;
 }
 
-global.file.write = function(_path, _data, _encoding)
+// _encoding = ( 'utf8' || 'hex' || 'base64' || 'ascii' || 'utf16le'//'ucs2' || 'latin1'/'binary' ); (!!!)
+global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encoding, _flags = 'r', _buffer = false)
 {
+	if(global.type(_path, 'String'))
+	{
+		if(! global.file.exists(_path))
+		{
+			return undefined;
+		}
+	}
+	else
+	{
+		return new Error(global.type(_path));
+	}
+	if(! global.type(_encoding, 'String'))
+	{
+		_encoding = global.file.encoding;
+	}
+	if(! global.type(_size, 'Number'))
+	{
+		_size = 0;
+	}
+	if(! global.type(_flags, 'String'))
+	{
+		_flags = 'r';
+	}
+	if(! global.type(_buffer, 'Boolean'))
+	{
+		_buffer = false;
+	}
+
+	if(_size === 0)
+	{
+		return null;
+	}
+
+	if(_size > global.settings.buffer.maxLength)
+	{
+		return new Error(global.settings.buffer.maxLength);
+	}
+
+	var buffer = new Buffer(_size);
+	var handle = global.nodejs('fs').openSync(_path, _flags);
+
+	var read = global.nodejs('fs').readSync(handle, buffer, 0, _size);
+
+	if(_buffer)
+	{
+		return buffer;
+	}
+
+	var result = buffer.toString(_encoding);
+	result = result.substr(0, _size);
+
+	return result;
+}
+
+global.file.readBytes.utf8 = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'utf8', _flags);
+}
+
+global.file.readBytes.hex = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'hex', _flags);
+}
+
+global.file.readBytes.base64 = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'base64', _flags);
+}
+
+global.file.readBytes.binary = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'binary', _flags);
+}
+
+global.file.write = function(_path, _data = global.EOL, _encoding = global.file.encoding)
+{
+	//global.file(_path)!??
+	//|| path.resolve???
+	//
+	if(! global.type(_data, 'String'))
+	{
+		_data = global.EOL;
+	}
+	if(! global.type(_encoding, 'String'))
+	{
+		_encoding = global.file.encoding;
+	}
+
 	try
 	{
-		_encoding = _encoding || settings.encoding;
-		global.nodejs.fs.writeFileSync(global.file(_path), _data, { encoding: _encoding });
+		global.nodejs('fs').writeFileSync(_path, _data, { encoding: _encoding });
 		return _data.length;
 	}
 	catch(_error)
@@ -591,12 +745,20 @@ global.file.write = function(_path, _data, _encoding)
 	}
 }
 
-global.file.append = function(_path, _data, _encoding)
+global.file.append = function(_path, _data = global.EOL, _encoding = global.file.encoding)
 {
+	if(! global.type(_data, 'String'))
+	{
+		_data = global.EOL;
+	}
+	if(! global.type(_encoding, 'String'))
+	{
+		_encoding = global.file.encoding;
+	}
+
 	try
 	{
-		_encoding = _encoding || settings.encoding;
-		global.nodejs.fs.appendFileSync(global.file(_path), _data, { encoding: _encoding });
+		global.nodejs('fs').appendFileSync(global.file(_path), _data, { encoding: _encoding });
 		return _data.length;
 	}
 	catch(_error)
@@ -616,11 +778,11 @@ global.file.stat = function(_path, _resolveSymlinks = false)
 	{
 		if(_resolveSymlinks)
 		{
-			stats = global.nodejs.fs.statSync(_path);
+			stats = global.nodejs('fs').statSync(_path);
 		}
 		else
 		{
-			stats = global.nodejs.fs.lstatSync(_path);
+			stats = global.nodejs('fs').lstatSync(_path);
 		}
 	}
 	catch(_error)
@@ -729,14 +891,18 @@ global.file.type.unknown = function(_path, _resolveSymlinks = false)
 	return 'unknown' === global.file.type(_path, _resolveSymlinks);
 }
 
-global.file.readlink = function(_path, _resolve = false, _encoding = global.settings.encoding)
+global.file.readlink = function(_path, _resolve = false, _encoding = global.file.encoding)
 {
 	//_path = global.file(_path);
 	// WANTED OR NOT!?
-	//_path = global.nodejs.path.resolve(_path);
+	//_path = global.nodejs('path').resolve(_path);
 	if(arguments.length === 0)
 	{
 		return new Error();
+	}
+	if(! global.type(_encoding, 'String'))
+	{
+		_encoding = global.file.encoding;
 	}
 
 	if(global.type(_path, 'Array'))
@@ -756,7 +922,7 @@ global.file.readlink = function(_path, _resolve = false, _encoding = global.sett
 		return new Error(global.type(_path));
 	}
 
-	if(! global.nodejs.fs.existsSync(_path))
+	if(! global.file.exists(_path))
 	{
 		return new Error(_path);
 	}
@@ -767,11 +933,11 @@ global.file.readlink = function(_path, _resolve = false, _encoding = global.sett
 		return _path;	//?!?!?? vs. Error..?
 	}
 
-	var target = global.nodejs.fs.readlinkSync(_path, { encoding: _encoding });
+	var target = global.nodejs('fs').readlinkSync(_path, { encoding: _encoding });
 
 	if(_resolve)
 	{
-		target = global.nodejs.path.resolve(target);
+		target = global.nodejs('path').resolve(target);
 	}
 
 	//TODO/ w/ "file.path()", so we check the target for directory type, so we can let be a '/' added to path..
@@ -780,12 +946,12 @@ global.file.readlink = function(_path, _resolve = false, _encoding = global.sett
 	return target;
 }
 
-global.file.readlink.resolve = function(_path, _encoding = global.settings.encoding)
+global.file.readlink.resolve = function(_path, _encoding = global.file.encoding)
 {
 	return global.file.readlink(_path, true, _encoding);
 }
 
-global.file.readlink.list = function(_path, _resolve = false, _encoding = global.settings.encoding, _withErrors = true)
+global.file.readlink.list = function(_path, _resolve = false, _encoding = global.file.encoding, _withErrors = true)
 {
 	// resolves ALL links IN A LIST (optional resolving)
 	if(arguments.length === 0)
@@ -816,19 +982,19 @@ global.file.readlink.list = function(_path, _resolve = false, _encoding = global
 	}
 	else if(global.type(_path, 'String'))
 	{
-		//_path = global.nodejs.path.normalize(_path);
+		//_path = global.nodejs('path').normalize(_path);
 
-		if(! global.nodejs.fs.existsSync(_path))
+		if(! global.nodejs('fs').existsSync(_path))
 		{
 			return new Error(_path);
 		}
 		else if(! global.file.type.symlink(_path))
 		{
-			return [ ( _resolve ? global.nodejs.path.resolve(_path) : _path ) ];
+			return [ ( _resolve ? global.nodejs('path').resolve(_path) : _path ) ];
 		}
 
-		var path = global.nodejs.path.resolve(_path);
-		var dir = global.nodejs.path.dirname(path);
+		var path = global.nodejs('path').resolve(_path);
+		var dir = global.nodejs('path').dirname(path);
 		var result = [ _resolve ? path : _path ];
 
 		while(global.file.type.symlink(path))
@@ -843,8 +1009,8 @@ global.file.readlink.list = function(_path, _resolve = false, _encoding = global
 			}
 			else
 			{
-				path = global.nodejs.path.join(dir, target);
-				dir = global.nodejs.path.dirname(path);
+				path = global.nodejs('path').join(dir, target);
+				dir = global.nodejs('path').dirname(path);
 
 				result[result.length] = ( _resolve ? path : target );
 			}
@@ -859,20 +1025,20 @@ global.file.readlink.list = function(_path, _resolve = false, _encoding = global
 	}
 }
 
-global.file.readlink.list.resolve = function(_path, _encoding = global.settings.encoding)
+global.file.readlink.list.resolve = function(_path, _encoding = global.file.encoding)
 {
 	// resolves ALL links IN A LIST w/ resolving each
 	return global.file.readlink.list(_path, true, _encoding);
 }
 
-global.file.readlink.all = function(_path, _resolve = false, _encoding = global.settings.encoding)
+global.file.readlink.all = function(_path, _resolve = false, _encoding = global.file.encoding)
 {
 	// resolves ALL links (as ONE) (optional resolving - or original form)
 	var ls = global.file.readlink.list(_path, _resolve, _encoding);
 	return ls[ls.length - 1];
 }
 
-global.file.readlink.all.resolve = function(_path, _encoding = global.settings.encoding)
+global.file.readlink.all.resolve = function(_path, _encoding = global.file.encoding)
 {
 	// resolves ALL links (as ONE) w/ resolving them
 	return global.file.readlink.all(_path, true, _encoding);
@@ -894,7 +1060,7 @@ global.file.remove = function(_path, _recursive = false)
 {
 	if(arguments.length === 0)
 	{
-		return undefined;
+		return new Error();
 	}
 
 	if(global.type(_path, 'Array'))
@@ -915,7 +1081,7 @@ global.file.remove = function(_path, _recursive = false)
 	}
 	else if(! global.type(_path, 'String'))
 	{
-		return null;
+		return new Error(global.type(_path));
 	}
 
 	var result = 0;
@@ -937,7 +1103,7 @@ global.file.remove = function(_path, _recursive = false)
 			{
 				for(var i = 0; i < ls.length; i++)
 				{
-					var p = global.nodejs.path.join(_path, ls[i]);
+					var p = global.nodejs('path').join(_path, ls[i]);
 					result += global.file.remove(p, _recursive);
 				}
 
@@ -967,7 +1133,7 @@ global.file.remove.file = function(_path)
 {
 	try
 	{
-		global.nodejs.fs.unlinkSync(_path); // always returns 'undefined'
+		global.nodejs('fs').unlinkSync(_path); // always returns 'undefined'
 		return true;
 	}
 	catch(_error)
@@ -980,7 +1146,7 @@ global.file.remove.directory = function(_path)
 {
 	try
 	{
-		global.nodejs.fs.rmdirSync(_path); // always returns 'undefined'
+		global.nodejs('fs').rmdirSync(_path); // always returns 'undefined'
 		return true;
 	}
 	catch(_error)
@@ -1026,7 +1192,7 @@ global.file.xargs = function(/* TODO */)
 // necessary: own "class File" .. for my own fs-db and maybe for fuse. and for own, BETTER file operations (instead of pure path lists..)
 //
 
-global.file.find = function(_path = '/', _depth = 1, _types = [], _glob = '*', _caseSensitive = true, _inverse = false, _encoding = global.settings.encoding, _currentDepth = 1)
+global.file.find = function(_path = '/', _depth = 1, _types = [], _glob = '*', _caseSensitive = true, _inverse = false, _encoding = global.file.encoding, _currentDepth = 1)
 {
 	//TODO/ .. accept MULTIPLE *_path* and call every with this function .. better search ... (todo: abs. vs. rel. paths in result arr..)
 	//TODO/ _glob w/ _caseSensistive .. && "_inverse" => wie `grep -v` .. alles im _glob liegende wird NICHT gezählt, der nicht matchende rest schon.. ^-^
@@ -1065,11 +1231,16 @@ global.file.find = function(_path = '/', _depth = 1, _types = [], _glob = '*', _
 		}
 
 		//!??!??!!??
-		//_path = global.nodejs.path.resolve(_path);
+		//_path = global.nodejs('path').resolve(_path);
 
 		if(! global.file.exists(_path))
 		{
 			return [];
+		}
+
+		if(! global.type(_encoding, 'String'))
+		{
+			_encoding = global.file.encoding;
 		}
 
 		result = [ _path ];
@@ -1080,7 +1251,7 @@ global.file.find = function(_path = '/', _depth = 1, _types = [], _glob = '*', _
 
 			for(var i = 0; i < res.length; i++)
 			{
-				var p = result[result.length] = global.nodejs.path.join(_path, res[i]);
+				var p = result[result.length] = global.nodejs('path').join(_path, res[i]);
 
 				if(_depth === 0 || (_currentDepth < _depth))
 				{
@@ -1248,11 +1419,11 @@ global.file.chown = function(_path, _uid = 0, _gid = 0, _recursive = false, _res
 	{
 		if(_resolveSymlinks)
 		{
-			global.nodejs.fs.chownSync(_path, _uid, _gid);
+			global.nodejs('fs').chownSync(_path, _uid, _gid);
 		}
 		else
 		{
-			global.nodejs.fs.lchownSync(_path, _uid, _gid);
+			global.nodejs('fs').lchownSync(_path, _uid, _gid);
 		}
 
 		return true;
@@ -1313,12 +1484,12 @@ global.file.chmod = function(_path, _mode, _recursive = false, _resolveSymlinks 
 	{
 		if(_resolveSymlinks)
 		{
-			global.nodejs.fs.chmodSync(_path, _mode);
+			global.nodejs('fs').chmodSync(_path, _mode);
 		}
 		else
 		{
-			// TypeError: global.nodejs.fs.lchmodSync is not a function
-			global.nodejs.fs.lchmodSync(_path, _mode);
+			// TypeError: global.nodejs('fs').lchmodSync is not a function
+			global.nodejs('fs').lchmodSync(_path, _mode);
 		}
 
 		return true;

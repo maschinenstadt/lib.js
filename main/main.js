@@ -4,36 +4,36 @@ global.global = global;
 
 global.BROWSER = false;
 
-global.EOL = global.nodejs.os.EOL;
+global.EOL = global.nodejs('os').EOL;
 global.ESC = String.fromCharCode(27);
 
-global.delimiter = global.nodejs.path.delimiter;	// ':'
-global.separator = global.nodejs.path.sep;		// '/'
+global.delimiter = global.nodejs('path').delimiter;	// ':'
+global.separator = global.nodejs('path').sep;		// '/'
 //global.divider = //..
 
 Object.defineProperty(global, 'os', {
 	get: function() { return {
-		type: global.nodejs.os.type(),
+		type: global.nodejs('os').type(),
 		platform: global.process.platform,
-		release: global.nodejs.os.release(),
-		endianness: global.nodejs.os.endianness()
+		release: global.nodejs('os').release(),
+		endianness: global.nodejs('os').endianness()
 	}; } } );
 Object.defineProperty(global, 'load', {
-	get: function() { return global.nodejs.os.loadavg(); } });
+	get: function() { return global.nodejs('os').loadavg(); } });
 Object.defineProperty(global, 'memory', {
 	get: function() { return {
-		total: global.nodejs.os.totalmem(),
-		free: global.nodejs.os.freemem()
+		total: global.nodejs('os').totalmem(),
+		free: global.nodejs('os').freemem()
 	}; } });
 Object.defineProperty(global, 'hostname', {
-	get: function() { return global.nodejs.os.hostname(); } });
+	get: function() { return global.nodejs('os').hostname(); } });
 Object.defineProperty(global, 'uptime', {
-	get: function() { return global.nodejs.os.uptime(); } });
+	get: function() { return global.nodejs('os').uptime(); } });
 Object.defineProperty(global, 'cpu', {
-	get: function() { return global.nodejs.os.cpus(); } });
+	get: function() { return global.nodejs('os').cpus(); } });
 Object.defineProperty(global, 'eth', {
 	get: function() {
-		var eth = global.nodejs.os.networkInterfaces();
+		var eth = global.nodejs('os').networkInterfaces();
 
 		eth.lo = undefined;
 		delete eth.lo;
@@ -91,25 +91,25 @@ global['$'] = function(_cmdline)
 	//
 }
 
-var thisFile = global.nodejs.path.basename(__filename);
+var thisFile = global.nodejs('path').basename(__filename);
 var libraryPaths = global.settings.library.path.reverse();
 
 for(var i = 0; i < libraryPaths.length; i++)
 {
 	var p = libraryPaths[i] + '/' + global.settings.library.global;
 	
-	if(! global.nodejs.fs.existsSync(p))
+	if(! global.nodejs('fs').existsSync(p))
 	{
 		continue;
 	}
 
-	var ls = global.nodejs.fs.readdirSync(p, { encoding: global.settings.encoding });
+	var ls = global.nodejs('fs').readdirSync(p, { encoding: global.settings.encoding });
 
 	for(var j = 0; j < ls.length; j++)
 	{
 		var pp = p + '/' + ls[j];
 
-		var ext = global.nodejs.path.extname(pp);
+		var ext = global.nodejs('path').extname(pp);
 		var extOK = false;
 
 		for(var i = 0; i < global.settings.library.extensions.length; i++)
@@ -165,23 +165,23 @@ for(var i = 0; i < libraryPaths.length; i++)
 {
 	var p = libraryPaths[i] + '/' + global.settings.library.main;
 
-	if(! global.nodejs.fs.existsSync(p))
+	if(! global.nodejs('fs').existsSync(p))
 	{
 		continue;
 	}
 
-	var ls = global.nodejs.fs.readdirSync(p, { encoding: global.settings.encoding });
+	var ls = global.nodejs('fs').readdirSync(p, { encoding: global.settings.encoding });
 
 	for(var j = 0; j < ls.length; j++)
 	{
 		var pp = p + '/' + ls[j];
 
-		if(global.nodejs.path.basename(pp) === thisFile)
+		if(global.nodejs('path').basename(pp) === thisFile)
 		{
 			continue;
 		}
 
-		var ext = global.nodejs.path.extname(pp);
+		var ext = global.nodejs('path').extname(pp);
 		var extOK = false;
 
 		for(var i = 0; i < global.settings.library.extensions.length; i++)

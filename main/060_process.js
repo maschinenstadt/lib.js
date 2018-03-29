@@ -19,12 +19,12 @@ main.paths = [];
 
 if(global.process.file.length === 0)
 {
-	global.process.name = global.nodejs.path.basename(global.nodejs.path.basename(global.process.exec, '.js'), '.json');
+	global.process.name = global.nodejs('path').basename(global.nodejs('path').basename(global.process.exec, '.js'), '.json');
 }
 else
 {
-	main.paths[main.paths.length] = global.nodejs.path.dirname(global.nodejs.path.resolve(global.process.file));
-	global.process.name = global.nodejs.path.basename(global.nodejs.path.basename(global.process.file, '.js'), '.json');
+	main.paths[main.paths.length] = global.nodejs('path').dirname(global.nodejs('path').resolve(global.process.file));
+	global.process.name = global.nodejs('path').basename(global.nodejs('path').basename(global.process.file, '.js'), '.json');
 }
 
 global.process.list = []; // resolved symlinks for this process in a list ..!!

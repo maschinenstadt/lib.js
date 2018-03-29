@@ -2,7 +2,7 @@ var main = module.exports = {};
 
 global.user = function(_encoding)
 {
-	return global.nodejs.os.userInfo({encoding: (_encoding||settings.encoding)});
+	return global.nodejs('os').userInfo({encoding: (_encoding||settings.encoding)});
 }
 
 global.user.name = function(_encoding)

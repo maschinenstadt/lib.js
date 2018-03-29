@@ -150,10 +150,10 @@ try
 
 	//
 	Object.defineProperty(global.path, 'temp', {
-		get: function() { return global.nodejs.os.tmpdir(); }
+		get: function() { return global.nodejs('os').tmpdir(); }
 	});
 	Object.defineProperty(global.path, 'home', {
-		get: function() { return global.nodejs.os.homedir(); }
+		get: function() { return global.nodejs('os').homedir(); }
 	});
 	Object.defineProperty(global.path, 'maschinenstadt', {
 		get: function() { return global.path.home + '/.maschinenstadt'; }
@@ -239,7 +239,7 @@ try
 			continue;
 		}
 
-		if(! global.nodejs.fs.existsSync(newPaths[i]))
+		if(! global.nodejs('fs').existsSync(newPaths[i]))
 		{
 			continue;
 		}

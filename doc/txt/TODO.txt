@@ -18,6 +18,45 @@
 
 
 
+	# crypto -> tls -> abstrashiern wg. evtl. anderer crypto-verfahren!!!
+
+		=> und use 'crypto/tls/stream' or so .. wg. "pipe()" aller daten.. genauso bei anderen crypto-verfahren, hm?!
+
+			bedenke auch umgekehrten weg.. server verbinden mit einem beliebigen(!!) crypto-verfahrens-pipe()
+			und dann umsetzen .. ähnlich net.filter-vpn-tunnel o.ä. .. so möchte ich alle protokolle durch meine
+			eigenen server-+client-sockets beliebig chifrrieren können! unabhängig davon, ob das regulär supported wird;
+
+			... ebenso mit "SSH"-tunnel(-stream)! ;-D´
+				... dazu einfach putty-crypto-TUNNEL-verbindung evtl.; hm!? ;-D
+
+		=> bedenke: "include('crypto/' + _type)" ;-D
+
+			=> muss dann "*/stream.js" bestehen? oder was verwende ich?
+
+				.. am besten ein (quasi-)"Interface" für ALLE crypto-verfahren. dazu konkrete _type-einsetzung.
+
+					=> use "/crypto/interface.js"!!! ;-D´
+
+
+
+
+	# "util/random" ...
+
+		=> at the moment w/ "random.binary()", "random.hex()", "random.base64". ... ;-)´
+
+			.. (a) for BROWSER (see "window.crypto")
+	(done)		.. (b) for LINUX (seems to be READY! ;-)
+			.. (c) for OTHER OS (windows, ..) - but there's no "/dev/urandom" (see (b))
+
+		=> Math.random() evtl. auch noch anpassen?
+
+			=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
+
+				(man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.);
+
+
+
+
 
 	# global.type => _object.constructor.name?
 

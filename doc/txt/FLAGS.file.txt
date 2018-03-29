@@ -1,0 +1,41 @@
+// < https://nodejs.org/dist/latest/docs/api/fs.html#fs_fs_open_path_flags_mode_callback >
+// 
+// .. see this link - and complete this list, please. ^_^ ..
+
+
+	'r'	open file for reading.
+		exception occurs if the file doesn't exist.
+
+	'r+'	open file for reading and writing.
+		exception if file doesn't exist.
+
+	'rs+'	open for reading and writing in synchronous mode.
+		instructs the os to bypass local file system cache!
+		has very real impact on I/O performance, so don't use unless really needed.
+
+	'w'	open for writing.
+		file is created if it doesn't exist or truncated if it exists.
+
+	'wx'	..
+
+
+	'wx+'	...
+
+
+	'a'	..
+
+
+	'ax'	...
+
+
+	'as'	..
+
+
+	'a+'	...
+
+
+	'ax+'	..
+
+
+	'as+'	...
+

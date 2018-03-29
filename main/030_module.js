@@ -43,7 +43,7 @@ global.include = main.include = function(_module, _libraryPaths)
 		}
 	}
 
-	var extname = global.nodejs.path.extname(_module);
+	var extname = global.nodejs('path').extname(_module);
 	var extensions = global.settings.library.extensions.clone();
 
 	if(extname.length > 0)
@@ -53,7 +53,7 @@ global.include = main.include = function(_module, _libraryPaths)
 
 	for(var i = 0; i < _libraryPaths.length; i++)
 	{
-		var p = global.nodejs.path.join(_libraryPaths[i], _module).suffix(extensions);
+		var p = global.nodejs('path').join(_libraryPaths[i], _module).suffix(extensions);
 
 		for(var j = 0; j < extensions.length; j++)
 		{
@@ -115,7 +115,7 @@ realInclude.directory = function(_path)
 
 	for(var i = 0; i < ls.length; i++)
 	{
-		var p = global.nodejs.path.join(_path, ls[i]);
+		var p = global.nodejs('path').join(_path, ls[i]);
 
 		for(var j = 0; j < global.settings.library.extensions.length; j++)
 		{

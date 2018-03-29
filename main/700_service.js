@@ -44,7 +44,7 @@ catch(_error)
 	// global.user()
 	// global.memory
 	// global.os
-	// global.nodejs.os.endianness()
+	// global.nodejs('os').endianness()
 //
 //
 //	indem ich die eingehende ip-adresse vergleiche, ob sie in "global.eth" beim user

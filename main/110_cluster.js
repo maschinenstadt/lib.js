@@ -22,12 +22,7 @@ main.cluster = class cluster //extends node
 
 	static cluster()
 	{
-		if(! (global.settings.nodejs.cluster || global.nodejs.cluster))
-		{
-			global.nodejs.cluster = include('cluster');
-		}
-
-		return global.nodejs.cluster;
+		return global.nodejs('cluster');
 	}
 
 	static isMaster()

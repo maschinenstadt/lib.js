@@ -16,9 +16,9 @@ main.environment = function()
 	{
 		var original = global.process.file;
 
-		global.process.file = global.nodejs.path.resolve(global.process.file);
+		global.process.file = global.nodejs('path').resolve(global.process.file);
 
-		if(global.nodejs.fs.existsSync(global.process.file))
+		if(global.nodejs('fs').existsSync(global.process.file))
 		{
 			global.process.list = global.file.readlink.list.resolve(global.process.file);
 			global.process.full = global.process.list[global.process.list.length - 1];
@@ -68,7 +68,7 @@ main.debug = function()
 		console.left('( (Operating) System )', ' - ');
 
 		console.debug("[ %s ]    %s", 'Hostname'.pad(padLen), global.hostname);
-		console.debug("[ %s ]    %s", 'Architecture'.pad(padLen), global.nodejs.os.arch());
+		console.debug("[ %s ]    %s", 'Architecture'.pad(padLen), global.nodejs('os').arch());
 		console.debug("[ %s ]    %s", 'Network Interfaces'.pad(padLen), global.eth.count().toString() + ' ' + global.eth.keys().toString());
 		console.debug("[ %s ]    %s", 'CPU(s) / Cores'.pad(padLen), global.cpu.length.toString());
 		console.debug("[ %s ]    %s", 'Endianness'.pad(padLen), ( global.os.endianness === 'LE' ? 'Little Endian' : 'Big Endian' ) );
@@ -90,7 +90,7 @@ main.debug = function()
 
 		var userInfo = global.user();
 
-		if(userInfo.homedir !== global.nodejs.os.homedir())
+		if(userInfo.homedir !== global.nodejs('os').homedir())
 			throw new Error('HomeDirectoryNotMatching');
 
 		console.debug("[ %s ]    %s", 'TEMP directory'.pad(padLen), global.path.temp);

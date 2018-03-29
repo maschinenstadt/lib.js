@@ -175,7 +175,7 @@ global.console.inspect = function(_object, _depth = 1, _options = {}, _colors = 
 		_stream = undefined;
 	}
 
-	var data = global.nodejs.util.inspect(_object, _options);
+	var data = global.nodejs('util').inspect(_object, _options);
 
 	if(_stream)
 	{

@@ -4,5 +4,7 @@ module.exports = class stream extends node
 	{
 		super();
 	}
+
+	static get type() { return 'tls'; }
 }
 

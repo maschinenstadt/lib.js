@@ -1,14 +1,29 @@
 const tcpSocket = nodejs('net').Socket;
 
-module.exports = class client extends tcpSocket
+module.exports = class client extends node
 {
-	constructor()
+	constructor(_socket = new tcpSocket(), _tls = false)
 	{
 		super();
+
+		if(! global.type(_socket, 'Object'))
+		{
+			_socket = new tcpSocket();
+		}
+		if(! global.type(_tls, 'Boolean'))
+		{
+			_tls = false;
+		}
+
+		//
+		this.tcp = _socket;
+		//
+		this.setCrypto(_tls);
 		//
 		this.setProtocol(client.protocol);
 		this.setEncoding(client.encoding);
 		this.setTimeout(client.timeout);
+
 		//
 		this.callbacks = this.callbacks;
 	}
@@ -78,9 +93,14 @@ module.exports = class client extends tcpSocket
 		return this.host + ':' + this.port + '/' + this.protocol;
 	}
 
-	setCrypto(_type = 'tls')
+	setCrypto(_state = true)
 	{
-		this.crypto = _type || 'tls';
+		if(! global.type(_state, 'Boolean'))
+		{
+			_state = true;
+		}
+
+		this.tls = _state;
 	}
 
 	close(_data = global.EOL, _encoding = client.encoding)

@@ -21,21 +21,15 @@ settings.DEBUG = 0; // param '--debug=8' is also possible
 settings.START = true;	// general start of processes - and use this like an interpreter
 settings.START_ONLY = false;	// set to 'false' if using this as regular npm.js module! IMPORTANT!!
 
+settings.buffer = {};
+settings.buffer.maxLength = (1024 * 1024); // really necessary? or how do it better??
+
 settings.defaultLanguage = 'en' || 'de'; // will be set by env. var. as in 'settings.variable.lang(uage)'
 
 settings.variable = {};
 settings.variable.libraryPath = 'JS_LIBRARY_PATH'; // use `JS_LIBRARY_PATH ./script.js` or `export JS_LIBRARY_PATH=..`
 settings.variable.lang = 'LANG'; // for extraction of user's language to use here (later.. w/ text-db for localization)
 settings.variable.language = 'LANGUAGE'; // alternative: "own" lang var (will use first two chars here, too)
-
-settings.nodejs = { // these common node.js modules will be available as '(global.)nodejs.$module'
-	fs: true,
-	module: true,
-	net: true,
-	os: true,
-	path: true,
-	util: true
-};
 
 settings.library = {};
 settings.library.extensions = [ '.js', '.json', '' ];
