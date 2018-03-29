@@ -4,9 +4,6 @@
 
 
 
-
-
-
 	------------------------------------------------------------	------------------------------------------------------------
 
 	# GRUNDSÄTZLICH "Object.defineProperty()" verwenden! ... zur implementation, auch bei prototype.
@@ -15,6 +12,21 @@
 
 	------------------------------------------------------------	------------------------------------------------------------
 
+
+
+	# windows etc. optimization. currently extepected to only work on linux based systems.
+
+
+
+	# global.file.path();
+
+		=> mabe I should replace '/' by '\\' (vice versa) on windows (etc.?) systems!? (then use file.path() or so for every path)
+
+			=> w/ separator (oder welcher das auch noch war..)
+
+			=> resolve(), too!? ;-)´
+
+			=> überall, wo pfade angegeben werden, durch "file.path()" schicken!! ..
 
 
 
@@ -85,6 +97,13 @@
 
 				(man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.);
 
+
+					encoding = (..) 'bits'|'decimal'
+
+					# aus 'bits' .. ganz easy
+					# aus 'decimal' baue ich zuerst eingene zahlen aus. dann setze ich am anfang einen '.' 
+	
+					... beachte maxLength for Float  @ String
 
 
 	# BROWSER

@@ -126,6 +126,11 @@ else
 	 */
 	random.crypto = '/dev/urandom';
 
+	if(not(random.crypto))
+	{
+		throw new Error('!(random.crypto)!');
+	}
+
 	//TODO/ maybe also radix >=2 && <= 36? see BROWSER impl..
 	random.random = function(_length = random.length, _encoding = random.encoding[0])
 	{
