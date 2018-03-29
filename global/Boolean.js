@@ -1,4 +1,8 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Boolean = Boolean;
+}
+else
 {
 	module.exports = Boolean;
 }

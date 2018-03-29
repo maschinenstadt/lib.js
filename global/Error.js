@@ -4,7 +4,11 @@
 // [message]  "Cannot find module '(..)'"
 //
 
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Error = Error;
+}
+else
 {
 	module.exports = Error;
 }

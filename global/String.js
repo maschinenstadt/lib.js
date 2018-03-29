@@ -1,4 +1,8 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.String = String;
+}
+else
 {
 	module.exports = String;
 }

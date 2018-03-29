@@ -1,6 +1,10 @@
 var Arguments = (function() { return arguments; })().__proto__; // 'function' is necessary for browser support
 
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Arguments = Arguments;
+}
+else
 {
 	module.exports = Arguments;
 }
@@ -10,6 +14,11 @@ if(! BROWSER)
  */
 // arguments.callee	// reference to the currently executing function
 // arguments.caller	// reference to the function that invoked the currently executing function
+
+Arguments.clone = function()
+{
+	return this.valueOf();
+}
 
 Object.defineProperty(Arguments, 'toArray', {
 	enumerable: false,

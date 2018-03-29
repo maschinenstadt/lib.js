@@ -1,9 +1,13 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.RegExp = RegExp;
+}
+else
 {
 	module.exports = RegExp;
 }
 
-RegExp.prototype.clone = function()
+RegExp.clone = function()
 {
 	return this.valueOf();
 }

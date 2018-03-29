@@ -1,4 +1,8 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Function = Function;
+}
+else
 {
 	module.exports = Function;
 }

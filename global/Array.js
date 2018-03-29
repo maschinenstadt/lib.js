@@ -1,4 +1,8 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Array = Array;
+}
+else
 {
 	module.exports = Array;
 }

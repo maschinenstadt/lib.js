@@ -1,4 +1,8 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Math = Math;
+}
+else
 {
 	module.exports = Math;
 }

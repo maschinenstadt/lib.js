@@ -1,4 +1,8 @@
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Object = Object;
+}
+else
 {
 	module.exports = Object;
 }
@@ -224,6 +228,7 @@ Object.defineProperty(Object.prototype, 'glob', {
 
 Object.defineProperty(Object.prototype, 'clone', {
 	enumerable: false,
+	configurable: true,
 	value: function(_depth = 1, _currentDepth = 1, _foreign = false)
 	{
 		// @ doc/txt/deep-copy.clone.txt

@@ -16,7 +16,11 @@
 // < https://github.com/MikeMcl/decimal.js/ >
 // < http://mathjs.org/docs/datatypes/bignumbers.html >
 
-if(! BROWSER)
+if(BROWSER)
+{
+	window.Number = Number;
+}
+else
 {
 	module.exports = Number;
 }
