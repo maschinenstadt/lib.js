@@ -22,9 +22,9 @@ function init()
 	var _random = document.getElementsByName('random');
 	for(var i = 0; i < _random.length; i++)
 	{
-		var str = '<ul><li><b><big>binary</big></b> ' + web.RANDOM.binary + '</li>'
+		var str = '<li><b><big>binary</big></b> ' + web.RANDOM.binary + '</li>'
 			+ '<li><b><big>hex</big></b> ' + web.RANDOM.hex + '</li>'
-			+ '<li><b><big>base64</big></b> ' + web.RANDOM.base64 + '</li></ul>';
+			+ '<li><b><big>base64</big></b> ' + web.RANDOM.base64 + '</li>';
 		_random[i].innerHTML = str;
 	}
 
