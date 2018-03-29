@@ -34,28 +34,19 @@ on.mouse = {};
 
 on.mouse.down = function(e)
 {
-	var x = e.clientX;
-	var y = e.clientY;
-
-	//TODO/(remove, ..)
-	alert('on.mouse.down(' + x.toString() + ', ' + y.toString() + ')');
+	var x = e.clientX; // .. 'client'!
+	var y = e.clientY; // what 'bout absolute coords?
 }
 
 on.mouse.up = function(e)
 {
-	var x = e.clientX;
-	var y = e.clientY;
-
-	//TODO/(remove, ..)
-	alert('on.mouse.up(' + x.toString() + ', ' + y.toString() + ')');
+	var x = e.clientX; // .. 'client'!
+	var y = e.clientY; // absolutes??
 }
 
 on.mouse.move = function(e)
 {
-	var x = e.clientX;
-	var y = e.clientY;
-
-	//TODO/(remove, ..)
-	alert('on.mouse.move(' + x.toString() + ', ' + y.toString() + ')');
+	var x = e.clientX; // ... 'client'!
+	var y = e.clientY; // absolutes!?
 }
 
