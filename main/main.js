@@ -54,7 +54,7 @@ global.fromJSON = function(_string)
 	}
 	catch(_error)
 	{
-		return null;
+		return _error;
 	}
 }
 
@@ -66,7 +66,7 @@ global.toJSON = function(_object)
 	}
 	catch(_error)
 	{
-		return null;
+		return _error;
 	}
 }
 

@@ -10,7 +10,7 @@ global.settings = require(_settings);
 
 const __toString = Object.prototype.toString;
 
-global.type = function(_object, _types)
+global.type = function(_object, _types = undefined)
 {
 	var type;
 
@@ -91,11 +91,11 @@ global.not = function(_object, _zero = false)
 	{
 		return ( _zero ? true : false );
 	}
-	else if(_object.isError)
+	else if(global.type(_object, 'Error') || _object.isError)
 	{
 		return true;
 	}
-	else if(_object.length === 0)
+	else if(_object.length && _object.length === 0)
 	{
 		return true;
 	}
