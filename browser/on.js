@@ -16,8 +16,7 @@ on.load = function()
 
 on.resize = function(_width, _height)
 {
-	//TODO/(remove, ..)
-	alert(_width.toString() + ' x ' + _height.toString());
+	//
 }
 
 on.key = {};
