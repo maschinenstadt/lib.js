@@ -310,3 +310,9 @@ Object.defineProperty(Object.prototype, 'count', {
 	}
 });
 
+Object.defineProperty(Object.prototype, 'isError', {
+	configurable: true,
+	enumerable: false,
+	get: function() { return false; }
+});
+

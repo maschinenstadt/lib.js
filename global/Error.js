@@ -42,5 +42,8 @@ Object.defineProperty(Error.prototype, 'title', {
 	}
 });
 
-Error.prototype.isError = true;
+Object.defineProperty(Error.prototype, 'isError', {
+	enumerable: false,
+	get: function() { return true; }
+})
 
