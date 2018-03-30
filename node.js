@@ -128,19 +128,33 @@ try
 				mod = global.nodejs[_module];
 			}
 
-			if(mod)
-			{
-				return mod;
-			}
-			else
+			if(! mod)
 			{
 				return new Error(_module + ' => ' + global.type(mod));
 			}
+
+			return mod;
 		}
 		catch(_error)
 		{
 			return _error;
 		}
+
+		return null;
+	}
+
+	global.libjs = function(_module)
+	{
+		try
+		{
+			return include(_module, path.root);
+		}
+		catch(_error)
+		{
+			return _error;
+		}
+
+		return null;
 	}
 
 	for(var idx in settings.nodejs)

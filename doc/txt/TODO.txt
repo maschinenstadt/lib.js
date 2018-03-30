@@ -21,6 +21,11 @@
 
 
 
+	# "util/getopt" w/ "main/040_getopt.js"...!!!!!!!!!!! (endlich mal machen!
+
+		=> [genauso wie virtual polymorphy @ "Arguments"!]
+
+
 
 	# think GLOBALLY about Error/Exception handling (strucutres or algoirhtms or so)....
 

@@ -2,23 +2,20 @@ var main = module.exports = {};
 
 global.include = main.include = function(_module, _libraryPaths)
 {
-	if(arguments.length === 0)
+	var reload = false;
+
+	if(global.type(arguments[1], 'Boolean'))
+	{
+		reload = arguments[1];
+	}
+
+	if(arguments.length === 0 || (! global.type(_module, 'String')))
 	{
 		return global.nodejs;
 	}
-	else if(_module.indexOf('/') === -1)
+
+	if(_module.indexOf('/') === -1)
 	{
-		var reload;
-
-		if(global.type(arguments[1], 'Boolean'))
-		{
-			reload = arguments[1];
-		}
-		else
-		{
-			reload = false;
-		}
-
 		return global.nodejs(_module, reload);
 	}
 
@@ -69,7 +66,7 @@ global.include = main.include = function(_module, _libraryPaths)
 				continue;
 			}
 
-			return realInclude(pp);
+			return (global.libjs[_module] = realInclude(pp));
 		}
 	}
 
