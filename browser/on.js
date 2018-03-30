@@ -56,7 +56,6 @@ on.second = function(_second)
 
 on.minute = function(_minute)
 {
-	alert('minute: ' + _minute + ', second: ' + web.TIME.second);
 	return ++web.TIME.minute;
 }
 
