@@ -49,6 +49,24 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### "nodejs()". "libjs()"! .. "include()"?
+Below (in this "News/Updates" section) you can find infos to "nodejs()". This
+time I've integrated "libjs()". It doesn't have a cache (like "nodejs()") now
+but helps to work with APIs in this way: .. if you want to "include()" all of
+the available API elements, that can be distributed all over your system (the
+"settings.library.path" array will show you all paths to search for modules),
+you should use "include()".
+
+If you'd like to work with API elements only by me, respectively the "lib.js"
+installation/root path ("/lib.js" should be chosed) as only directory to look
+for the modules, you should use "libjs()"!
+
+"libjs()" is the same as "include(_module, path.root)". But it is easy going.
+
+And again: "require()" is still possible. But please don't use it. It doesn't
+have any support for all of our API modules etc... it still works, but .. hm!
+
+
 #### Random number generation
 Just (nearly) completed "util/random". On Linux, it uses "/dev/urandom".. the
 browser is also supported (as every "util") using "window.crypto".. Soon I am
@@ -195,14 +213,14 @@ And now w/ support for 'http:' AND 'https:'. Change the URL in 'settings.js'!
 
 #### User's (home directory) library extensions: automatically start scripts.
 For more information see the point "Administrators and Users" (below, in this
-section). I implemented a very easy "autorun" function ("./main/110_home.js")
+section). I implemented a very easy "autorun" function ("./main/900_auto.js")
 for your home directories. EVERY FILE WHICH IS NOT IN A SUB DIRECTORY (in the
 default home library path "~/lib.js") will be loaded automatically - so it is
 possible for your scripts to run without code for the usual "require()" calls
 you need for your applications/scripts.
 
 So the rest of your own API extensions should be in your directory structures
-to provide them for "include()" calls. And they are as easy as "110_home.js",
+to provide them for "include()" calls. And they are as easy as "900_auto.js",
 so just extend the basic global Objects ('Object', 'Array', 'String' .. etc.)
 as I did it in a directory like 'global/'; then just this script code results
 in including the whole bunch of (your potential) files:
