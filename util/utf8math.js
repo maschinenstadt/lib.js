@@ -136,7 +136,7 @@ utf8math.decode = utf8math.toString = utf8math.fromBytes = utf8math.fromArray = 
 	return s;
 }
 
-utf8math.encode2 = utf8math.fromString2 = utf8math.toBytes2 = = utf8math.toArray2 = function(_string)
+utf8math.encode2 = utf8math.fromString2 = utf8math.toBytes2 = utf8math.toArray2 = function(_string)
 {
 	var utf = [];
 
