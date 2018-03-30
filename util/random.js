@@ -1,22 +1,25 @@
 var random = {};
 
-//
-random.length = global.settings.random.length || 64;
-
-random.radix = global.settings.random.radix || 2;
-random.encoding = global.settings.random.encoding || 0;
-
-random.encodings = global.settings.random.encodings;	// [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
-random.entropy = global.settings.random.entropy;	// '/dev/urandom'
-
-//
 if(BROWSER)
 {
 	web.util.random = random;
+
+	//
+	random.length = settings.random.length || 64;
+	random.encoding = settings.random.encoding || 'decimal';
+	random.radix = settings.random.radix || 2;
 }
 else
 {
 	module.exports = random;
+
+	//
+	random.length = global.settings.random.length || 64;
+
+	random.radix = global.settings.random.radix || 2;
+	random.encoding = global.settings.random.encoding || 'decimal';
+
+	random.entropy = global.settings.random.entropy || '/dev/urandom';
 }
 
 //
@@ -177,10 +180,6 @@ else
 
 		//
 		var buffer = global.file.readBytes(p, _length, false);
-
-		//
-
-		//
 		return buffer;
 	}
 

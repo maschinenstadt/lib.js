@@ -67,8 +67,7 @@ Additionally, I've created "util/random" as the REAL interface for all random
 things. It uses all I've described above AND can also act (the same way etc.)
 in your web browser! There it uses "window.crypto(.getRandomValues())"!! ;-D´
 
-
-So now, just try:
+For now, just try:
 
 	#!/usr/bin/env node.js
 	//no need to include - 'util/random' is always integrated (as global)
@@ -97,7 +96,9 @@ And in the browser you can do so:
 	var dec = util.random.decimal(length);
 	//
 	var dual = util.randomData(length, 'dual'||2);
-	var arbitrary = util.random.radix(length, 32);
+	var arbitrary = util.random.radix(length, 36);	// (36) is JS' maxim.
+
+OR you can see a example, ready to use in "./example/readRandomBytes.js". HF!
 
 
 #### "nodejs()". "libjs()"! .. "include()"?
