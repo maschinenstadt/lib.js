@@ -1,34 +1,37 @@
+------------------------------------------------------------------------------------------------------
 
-	# buffer
+	=> check if browser really returns Uint8Array (buffer) on _encoding = false!!!!
 
-	# radix
 
-	# octal
-	# decimal
-	# dual
+# buffer
 
-	# base64
-	# hex
+# radix
+
+# octal
+# decimal
+# dual
+
+# base64
+# hex
 	# utf8
 	# utf16le|ucs2
-	# binary|latin1
+# binary|latin1
 	# ascii
+
+
+		-> MAKE ALL THESE WORK IN .. (a) "crypto" module .. (b) "/dev/urandom" .. (c) BROWSER ...!!
+
+			=> also @ "file" level .. file.random .. file.readBytes ...!!!
+
+
+				// < https://developer.mozilla.org/de/docs/Web/API/TextEncoder >
+				// < https://developer.mozilla.org/de/docs/Web/API/TextDecoder >
+
+				// < https://www.google.de/search?q=javascript+math.random >
 
 ======================================================================================================
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
 ======================================================================================================
-
-	=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
-
-		...  (man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.); ..
-
-		=> viele interessante aspekte, die das prinzip "information" und ihre "codierbarkeit" aufweist!
-
-			=> konversionen am wichtigsten. gerade abstrakt vs. konkret und innen vs außen. @ quantensystem(e)!! ..
-
-			=> codierungen in codierungen .. systeme enthalten andere systeme(?!!) ... "rekursion" .. (TODO)(!!!!)
-
-------------------------------------------------------------------------------------------------------
 
 	# Math.random => file.random.decimal etc..
 
@@ -70,6 +73,18 @@
 				< https://nodejs.org/dist/latest/docs/api/crypto.html#crypto_crypto_randombytes_size_callback >
 
 			=> to test it, set a non-existing path in "settings.random.entropy"! ;-)´
+
+------------------------------------------------------------------------------------------------------
+
+	=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
+
+		...  (man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.); ..
+
+		=> viele interessante aspekte, die das prinzip "information" und ihre "codierbarkeit" aufweist!
+
+			=> konversionen am wichtigsten. gerade abstrakt vs. konkret und innen vs außen. @ quantensystem(e)!! ..
+
+			=> codierungen in codierungen .. systeme enthalten andere systeme(?!!) ... "rekursion" .. (TODO)(!!!!)
 
 ------------------------------------------------------------------------------------------------------
 
