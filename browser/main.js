@@ -1,7 +1,11 @@
 function main(_ = {})
 {
-	alert(_.BIRTHDAY);
-	alert(_.UUID);
+
+	//_.BIRTHDAY
+	//_.UUID
+	//
+
+	//
 }
 
 function table()
@@ -17,6 +21,9 @@ function table()
 	//
 	//am ende steht "MS ACCESS" quasi für den APP-SERVER *g*
 	//@ web-projekte. easy. infinity.
+	//
+	//TODO/
+	//auslagern woanders hin, zusammen mit "class" usw. .. hier nur erste preparations!
 	//
 }
 
