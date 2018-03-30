@@ -253,24 +253,24 @@ function INIT(_ = {})
 
 	web.RANDOM = {};
 
-	web.RANDOM.size = 32;
+	var size = 64;
 
-	web.RANDOM.binary = web.util.random.binary(web.RANDOM.size);
-	web.RANDOM.hex = web.util.random.hex(web.RANDOM.size);
-	web.RANDOM.base64 = web.util.random.base64(web.RANDOM.size);
-	web.RANDOM.dual = web.util.random.dual(web.RANDOM.size);
-	web.RANDOM.decimal = web.util.random.decimal(web.RANDOM.size);
-	web.RANDOM.octal = web.util.random.octal(web.RANDOM.size);
+	web.RANDOM.binary = web.util.random.binary(size);
+	web.RANDOM.hex = web.util.random.hex(size);
+	web.RANDOM.base64 = web.util.random.base64(size);
+	web.RANDOM.dual = web.util.random.dual(size);
+	web.RANDOM.decimal = web.util.random.decimal(size);
+	web.RANDOM.octal = web.util.random.octal(size);
 
-	web.RANDOM[2] = web.util.random.radix(web.RANDOM.size, 2);
-	web.RANDOM[5] = web.util.random.radix(web.RANDOM.size, 5);
-	web.RANDOM[10] = web.util.random.radix(web.RANDOM.size, 10);
-	web.RANDOM[36] = web.util.random.radix(web.RANDOM.size, 36);
+	web.RANDOM[2] = web.util.random.radix(size, 2);
+	web.RANDOM[5] = web.util.random.radix(size, 5);
+	web.RANDOM[10] = web.util.random.radix(size, 10);
+	web.RANDOM[36] = web.util.random.radix(size, 36);
 
 	var _random_size = document.getElementsByName('random_size');
 	for(var i = 0; i < _random_size.length; i++)
 	{
-		_random_size[i].innerHTML = web.RANDOM.size.toString();
+		_random_size[i].innerHTML = size.toString();
 	}
 	var _random = document.getElementsByName('random');
 	for(var i = 0; i < _random.length; i++)
