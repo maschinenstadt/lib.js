@@ -1,6 +1,6 @@
-function init()
+function init(_ = {})
 {
-	var _init = {};
+	var _init = (_||{});
 
 	//
 	web.UUID = web.util.uuid.random();
@@ -52,7 +52,7 @@ function init()
 	return _init;
 }
 
-function main(_init)
+function main(_init = {})
 {
 	var _main = {};
 
