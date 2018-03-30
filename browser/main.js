@@ -1,4 +1,5 @@
 function main()
 {
-	alert('main');
+	alert('main()');
 }
+

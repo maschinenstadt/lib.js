@@ -4,9 +4,17 @@ on.load = function()
 {
 	try
 	{
-		var _init = init() || undefined;
-		var _main = main((_init||{})) || undefined;
-		return _main; // includes _init..!...
+		var _ = {};
+
+		for(var i = 0; i < arguments.length; i++)
+		{
+			_[i] = arguments[i];
+		}
+
+		var _init = INIT(_) || {};
+		var _main = MAIN(_init) || {};
+		//
+		return _main;
 	}
 	catch(_error)
 	{
