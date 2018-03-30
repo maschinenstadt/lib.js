@@ -288,3 +288,9 @@ function init(_ = {})
 	return _init;
 }
 
+function main(_init = {})
+{
+	var _main = { _init = (_init || {}), _main = main() };
+	return _main;
+}
+

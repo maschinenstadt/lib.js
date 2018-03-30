@@ -1,8 +1,4 @@
-function main(_init = {})
+function main()
 {
-	var _main = { _init = (_init || {}) };
-
-	//
-	return _main;
+	alert('main');
 }
-
