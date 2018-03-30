@@ -95,6 +95,11 @@
 					=> use "/crypto/stream.js" wg. "/crypto/${type}/stream.js"
 
 
+		=> random.encoding = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
+
+			=> ALL SUPPORT IN BROWSER AND NODE.JS (/dev/urandom AND crypto)!
+
+
 
 
 	# "util/random" ...

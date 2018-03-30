@@ -25,20 +25,44 @@ else
 	module.exports = global.Number = Number;
 }
 
+Object.defineProperty(Number, 'radix', {
+	enumerable: false,
+	get: function()
+	{
+		return {
+			min: 2,
+			minimum: 2,
+			max: 36,
+			maximum: 36
+		};
+	}
+});
+
+Object.defineProperty(Number, 'base', {
+	enumerable: false,
+	get: function() { return Number.radix; }
+});
+
 Object.defineProperty(Number.prototype, 'positive', {
+	enumerable: false,
 	get: function() { return this.valueOf() >= 0; } });
 Object.defineProperty(Number.prototype, 'negative', {
+	enumerable: false,
 	get: function() { return this.valueOf() < 0; } });
 
 Object.defineProperty(Number.prototype, 'integer', {
+	enumerable: false,
 	get: function() { return /*this.valueOf() % 1 === 0*/ Number.isInteger(this); } });
 Object.defineProperty(Number.prototype, 'float', {
+	enumerable: false,
 	get: function() { return /*this.valueOf() % 1 !== 0*/ ! Number.isInteger(this); } });
 
 Object.defineProperty(Number.prototype, 'abs', {
+	enumerable: false,
 	get: function() { return Math.abs(this.valueOf()); } });
 
 Object.defineProperty(Number.prototype, 'NaN', {
+	enumerable: false,
 	get: function() { return isNaN(this); } });
 
 Number.prototype.clone = function()

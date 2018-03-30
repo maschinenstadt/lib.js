@@ -206,8 +206,8 @@ function versionWarning()
 	var delta = nextQuery - Date.now();
 
 	console.center('WARNING');
-	console.warning('Node.js version is out-dated! There\'s a newer version available! :-(´');
-	console.warning('Next check in (%d) milliseconds (in case you\'ve already updated ;-)´', delta);
+	console.warning('Your Node.js is out-dated! Newer version available! ..');
+	console.warning('Next version check in (%d) milliseconds. ..', delta);
 }
 
 console.debug(2, "Loaded 'version'");

@@ -5,6 +5,9 @@ settings.default = 'sync' || 'async';
 settings.encoding = 'utf8';
 settings.charset = 'utf-8';
 
+settings.random = [ '/dev/urandom' ];
+//settings.random = [];
+
 settings.version = {};
 settings.version.check = true;	// throw a message if newer version is available ..
 settings.version.url = 'https://nodejs.org/dist/latest/';

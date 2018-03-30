@@ -1,25 +1,34 @@
 var random = {};
 
 random.length = 1024;
+
 random.radix = 2;
-random.encoding = [ 'binary', 'hex', 'base64', 'boolean', 'bits', 'decimal' ];
+
+random.radix_min = Number.radix.min;
+random.radix_max = Number.base.max;
+
+random.encoding = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
+
+
+console.inspect(settings.random, 0);
 
 if(BROWSER)
 {
+	web.util.random = random;
+
+	//
 	random.crypto = window.crypto || window.msCrypto;
 
 	random.random = function(_length = random.length, _encoding = random.encoding[0])
 	{
 		if(not(random.crypto) || not(random.crypto.getRandomValues))
 		{
-			//TODO??/ if window.message doesn't exist.. what else, altert??
-			//
+			//TODO!!?
 			//NOW: using "return _error". better for now.. (check if worx in browser, maybe @ onload-catch?
 			//
 			//.. or should i GLOBALLY use the WEB.CONSOLE(S)!?!?!!?
-			//
-			var errMessage = '"crypto" not available (in your browser)!!';
-			throw new Error(errMessage);
+
+			throw new Error("window.crypto");
 		}
 
 		if(! type(_length, 'Number'))
@@ -31,11 +40,9 @@ if(BROWSER)
 
 		if(encType === 'Number')
 		{
-			if(_encoding < 2 || _encoding > 36)
+			if(_encoding < random.radix_min || _encoding > random.radix_max)
 			{
-				var err = new Error('( 2 .. 36 )');
-				return err;	//  which of ..
-				throw err;	// these both!?
+				_encoding = random.radix || 2;
 			}
 		}
 		else if(encType !== 'String')
@@ -60,18 +67,38 @@ if(BROWSER)
 				if(encType === 'Number')
 				{
 					// various systems (default js)
+
 					str += buffer[i].toString(_encoding);
 				}
 				else if(encType === 'String')
 				{
 					// my own '_encoding's
+
 					switch(_encoding)
 					{
+						case 'dual':
+						case 'bits':
+						case 'bit':
+
+							str += buffer[i].toString(2);
+							break;
+
+						case 'decimal':
+						case 'dec':
+
+							str += buffer[i].toString(10);
+							break;
+
 						case 'hex':
+						case 'hexa':
+						case 'hexadecimal':
+
 							str += buffer[i].toString(16);
 							break;
+
 						case 'base64':
 						case 'binary':
+
 							str += String.fromCharCode(buffer[i]);
 					}
 				}
@@ -91,9 +118,7 @@ if(BROWSER)
 			return new Error(errMessage); // or throw!?? must be catch'ed .. maybe @ window.onload..
 		}
 
-		result = result.substr(0, _length);
-
-		return result;
+		return result.substr(0, _length);
 	}
 
 	random.binary = function(_length = random.length)
@@ -111,21 +136,37 @@ if(BROWSER)
 		return random.random(_length, 'base64');
 	}
 
+	random.dual = function(_length = random.length)
+	{
+		return random.random(_length, 'dual');
+	}
+
+	random.decimal = function(_length = random.length)
+	{
+		return random.random(_length, 'decimal');
+	}
+
 	random.radix = function(_length = random.length, _radix = 2)
 	{
-		if(! global.type(_radix, 'Number'))
+		if(global.type(_radix, 'Number'))
+		{
+			if(_radix < random.radix_min || _radix > random.radix_max)
+			{
+				_radix = random.radix || 2;
+			}
+		}
+		else
 		{
 			_radix = random.radix || 2;
 		}
 
 		return random.random(_length, _radix);
 	}
-
-	//
-	web.util.random = random;
 }
 else
 {
+	module.exports = random;
+
 	/* UPDATE
 	 *
 	 * Bislang war das allein für Linux basierende OS, da "/dev/urandom" genutzt worden war.
@@ -133,28 +174,121 @@ else
 	 * JETZT nutze ich das weiterhin (ob's besser ist als folgendes weiß ich atm nicht! ...)
 	 * selbiges. Falls diese Datei aber nicht existiert, so verwende ich das "crypto"-Modul,
 	 * um auch für andere OS bereit zu stehen! ;-)´
-	 *
 	 */
-	random.crypto;
-	random.entropy = '/dev/urandom';
 
-	if(global.not(random.entropy))
+	var entropy = global.settings.random;
+
+	if(global.not(entropy))
 	{
-		throw new Error('(! random.entropy)');
+		throw new Error(global.type(entropy));
 	}
 
-	if(global.file.exists(random.entropy))
+	for(var i = 0; i < entropy.length; i++)
 	{
-		random.crypto = random.entropy;
+		var p = global.file.path(entropy[i]);
+
+		if(global.file.exists(p))
+		{
+			entropy = p;
+			break;
+		}
 	}
-	else
+
+	var crypto = global.not(entropy);
+
+	//
+	random.random = function(_length = random.length, _encoding = false)
 	{
-		random.crypto = nodejs('crypto').randomFillSync;
-		random.entropy = undefined;
+		if(global.type(_length, 'Number'))
+		{
+			if(_length < 1)
+			{
+				_length = random.length;
+			}
+		}
+		else
+		{
+			_length = random.length;
+		}
+
+		if(global.type(_encoding, 'Boolean'))
+		{
+			if(_encoding)
+			{
+				_encoding = random.encoding[0];
+			}
+		}
+		else if(! global.type(_encoding, 'String'))
+		{
+			_encoding = random.encoding[0];
+		}
+
+remove warnings //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(crypto)
+		{
+			console.warning('WITH crypto');
+		}
+		else
+		{
+			console.warning('WITH*OUT* crypto');
+		}
+remove warnings ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	}
+
+	random.binary = function(_length = random.length)
+	{
+		return random.random(_length, 'binary');
+	}
+
+	random.hex = function(_length = random.length)
+	{
+		return random.random(_length, 'hex');
+	}
+
+	random.base64 = function(_length = random.length)
+	{
+		return random.random(_length, 'base64');
+	}
+
+	random.dual = function(_length = random.length)
+	{
+		return random.random(_length, 'dual');
+	}
+
+	random.decimal = function(_length = random.length)
+	{
+		return random.random(_length, 'decimal');
+	}
+}
+
+
+/*
+
+
+
+////////
+//if !encoding =>  return buffer
+//////////
+
+	Object.defineProperty(random, 'random', {
+		value: function(_length = random.length, _encoding = random.encoding[0])
+		{
+			if(random.entropy)
+			{
+			}
+		}
+	});
+
+
+
+
+	random.random = function(_length = random.length, _encoding = random.encoding[0])
 
 	if(random.entropy)
 	{
+		Object.defineProperty(random, 'random', {
+			value: function(
 		random = Object.assign(random, randomFile(random.entropy));
 	}
 	else
@@ -171,22 +305,44 @@ else
 
 
 
-function randomFile(_path = '/dev/urandom')
+	//TODO/ ALSO "_radix" (>=2 && <= 36)! .. see BROWSER impl. (above)!
+
+
+function randomDevice(_length = random.length, _path = global.settings.random[0])
 {
+	if(! global.type(_length, 'Number'))
+	{
+		_length = random.length;
+	}
+	if(! global.type(_path, 'String'))
+	{
+		_path = global.settings.random[0];
+	}
+
+	if(! global.file.exists(_path))
+	{
+		return new Error(_path);
+	}
 }
 
-function randomCrypto(_crypto = nodejs('crypto'))
+function randomCrypto(_length = random.length, _crypto = global.nodejs('crypto'))
 {
+	if(! global.type(_length, 'Number'))
+	{
+		_length = random.length;
+	}
+	if(! global.type(_crypto, 'Function'))
+	{
+		_crypto = global.nodejs('crypto');
+	}
 }
 
 
 
 
-/*
 
 
 
-	//TODO/ maybe also radix >=2 && <= 36? see BROWSER impl..
 	random.random = function(_length = random.length, _encoding = random.encoding[0])
 	{
 		if(! global.type(_length, 'Number'))
