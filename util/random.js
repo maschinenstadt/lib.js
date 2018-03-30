@@ -1,14 +1,6 @@
 var random = {};
 
-if(BROWSER)
-{
-	web.util.random = random;
-}
-else
-{
-	module.exports = random;
-}
-
+//
 random.length = 1024;
 
 random.radix = 2;
@@ -18,10 +10,17 @@ random.radix_max = Number.base.max;
 
 random.encoding = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
 
+//
+if(BROWSER)
+{
+	web.util.random = random;
+}
+else
+{
+	module.exports = random;
+}
 
-//random.crypt -> crypto
-/etc.
-
+//
 if(BROWSER)
 {
 	var crypto = window.crypto || window.msCrypto;
