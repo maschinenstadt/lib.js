@@ -6,7 +6,7 @@ global.timer.sleep = function(_delay)
 {
 	var end = Date.now() + _delay;
 	while(Date.now() < end) {};
-	return _delay;
+	return Date.now();
 }
 
 global.timer.immediate = {};
