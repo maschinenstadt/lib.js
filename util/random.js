@@ -60,16 +60,13 @@ if(BROWSER)
 				_encoding = random.encoding;
 			}
 		}
-		else if(encType === 'Number')
+		
+		if(encType === 'Number')
 		{
 			if(_encoding < Number.radix.min || _encoding > Number.radix.max)
 			{
 				return new Error(Number.base.min + ' .. ' + Number.base.max);
 			}
-		}
-		else if(encType !== 'String')
-		{
-			_encoding = random.encoding;
 		}
 
 		var result = '';
@@ -83,6 +80,11 @@ if(BROWSER)
 			var buffer = new Uint8Array(_length);
 
 			crypto.getRandomValues(buffer);
+
+			if(_encoding === false)
+			{
+				return buffer;
+			}
 
 			for(var i = 0; i < buffer.length; i++)
 			{
@@ -151,18 +153,37 @@ if(BROWSER)
 		}
 
 		return result.substr(0, _length);
-
-		//TODO/
-		//if(_encoding === false)
-		//	return buffer; ..
-
-
 	}
 }
 else
 {
 	var p = global.file.path(random.entropy);
-	var crypto = global.not(p) || (!global.file.exists(p)) || (!global.file.type.file(p));
+	var crypto;
+
+	if(global.file.exists(p))
+	{
+		if(global.file.type.character(p))
+		{
+			crypto = false;
+		}
+		else if(global.file.type.symlink(p))
+		{
+			var readLink = global.file.readlink.all.resolve(p);
+
+			if(global.file.type.character(readLink))
+			{
+				crypto = false;
+			}
+			else
+			{
+				crypto = true;
+			}
+		}
+	}
+	else
+	{
+		crypto = true;
+	}
 
 	function randomDevice(_length = random.length)
 	{
@@ -201,6 +222,7 @@ else
 
 		//
 		this.crypto = global.nodejs('crypto');
+		this.crypto.randomFillSync(buffer, 0, _length);
 
 		//
 		return buffer;
@@ -228,66 +250,115 @@ else
 			_encoding = random.encoding;
 		}
 
-		var result;
+		var result = '';
+		var iterations = 0;
 
-		if(crypto)
+		while(result.length < _length)
 		{
-			result = randomCrypto(_length);
-		}
-		else
-		{
-			result = randomDevice(_length);
-		}
-//if _encoding === false => return BUFFER!
+			iterations++;
 
-		if(global.type(_encoding, 'String'))
-		{
-			result = result.toString(_encoding);
-		//TEST	//result = result.substr(0, _length);
+			var str = '';
+			var buffer;
+
+			if(crypto)
+			{
+				buffer = randomCrypto(_length);
+			}
+			else
+			{
+				buffer = randomDevice(_length);
+			}
+
+			if(global.type(_encoding, 'Boolean'))
+			{
+				if(_encoding)
+				{
+					_encoding = random.encoding;
+				}
+				else if(buffer.length === _length)
+				{
+					return buffer;
+				}
+			}
+
+			if(global.type(_encoding, 'Number'))
+			{
+				if(_encoding < Number.radix.min || _encoding > Number.radix.max)
+				{
+					return new Error(Number.base.min + ' .. ' + Number.base.max);
+				}
+
+				for(var i = 0; i < buffer.length; i++)
+				{
+					str += buffer[i].toString(_encoding);
+				}
+			}
+			
+			if(global.type(_encoding, 'String'))
+			{
+				var done = false;
+
+				switch(_encoding)
+				{
+					case 'hex':
+
+					case 'base64':
+
+					case 'binary':
+					case 'latin1':
+
+					case 'utf8':
+
+					case 'utf16le':
+					case 'ucs2':
+
+					case 'ascii':
+
+						str += buffer.toString(_encoding);
+						done = true;
+						break;
+				}
+
+				if(! done)
+				{
+					for(var i = 0; i < buffer.length; i++)
+					{
+
+						switch(_encoding)
+						{
+							case 'dual':
+							case 'bits':
+							case 'bit':
+
+								str += buffer[i].toString(2);
+								break;
+
+							case 'octal':
+							case 'oct':
+
+								str += buffer[i].toString(8);
+								break;
+
+							case 'decimal':
+							case 'dec':
+
+								str += buffer[i].toString(10);
+								break;
+						}
+					}
+				}
+			}
+
+			result += str;
 		}
 
-		return result;
+		return result.substr(0, _length);
 	}
 }
 
 random.buffer = function(_length = random.length)
 {
-	//TODO/ in BROWSER implementation
-	//
 	return random.randomData(_length, false);
-}
-
-random.binary = function(_length = random.length)
-{
-	return random.randomData(_length, 'binary');
-}
-
-//TODO!!!!///
-//random.utf8
-
-random.hex = function(_length = random.length)
-{
-	return random.randomData(_length, 'hex');
-}
-
-random.base64 = function(_length = random.length)
-{
-	return random.randomData(_length, 'base64');
-}
-
-random.dual = function(_length = random.length)
-{
-	return random.randomData(_length, 'dual');
-}
-
-random.decimal = function(_length = random.length)
-{
-	return random.randomData(_length, 'decimal');
-}
-
-random.octal = function(_length = random.length)
-{
-	return random.randomData(_length, 'octal');
 }
 
 random.radix = function(_length = random.length, _radix = (random.radix || 2))
@@ -307,6 +378,60 @@ random.radix = function(_length = random.length, _radix = (random.radix || 2))
 	return random.randomData(_length, _radix);
 }
 
+random.octal = function(_length = random.length)
+{
+	return random.randomData(_length, 'octal');
+}
+
+random.decimal = function(_length = random.length)
+{
+	return random.randomData(_length, 'decimal');
+}
+
+random.dual = function(_length = random.length)
+{
+	return random.randomData(_length, 'dual');
+}
+
+random.base64 = function(_length = random.length)
+{
+	return random.randomData(_length, 'base64');
+}
+
+random.hex = function(_length = random.length)
+{
+	return random.randomData(_length, 'hex');
+}
+
+random.utf8 = function(_length = random.length)
+{
+	return random.randomData(_length, 'utf8');
+}
+
+random.utf16le = function(_length = random.length)
+{
+	return random.randomData(_length, 'utf16le');
+}
+
+random.ucs2 = function(_length = random.length)
+{
+	return random.randomData(_length, 'ucs2');
+}
+
+random.binary = function(_length = random.length)
+{
+	return random.randomData(_length, 'binary');
+}
+
+random.latin1 = function(_length = random.length)
+{
+	return random.randomData(_length, 'latin1');
+}
+
+random.ascii = function(_length = random.length)
+{
+	return random.randomData(_length, 'ascii');
+}
 
 
 
