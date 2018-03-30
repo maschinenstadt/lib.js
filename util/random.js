@@ -1,5 +1,14 @@
 var random = {};
 
+if(BROWSER)
+{
+	web.util.random = random;
+}
+else
+{
+	module.exports = random;
+}
+
 random.length = 1024;
 
 random.radix = 2;
@@ -10,18 +19,16 @@ random.radix_max = Number.base.max;
 random.encoding = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
 
 
-console.inspect(settings.random, 0);
+//random.crypt -> crypto
+/etc.
 
 if(BROWSER)
 {
-	web.util.random = random;
-
-	//
-	random.crypto = window.crypto || window.msCrypto;
+	var crypto = window.crypto || window.msCrypto;
 
 	random.randomData = function(_length = random.length, _encoding = random.encoding[0])
 	{
-		if(not(random.crypto) || not(random.crypto.getRandomValues))
+		if(not(crypto) || not(crypto.getRandomValues))
 		{
 			//TODO!!?
 			//NOW: using "return _error". better for now.. (check if worx in browser, maybe @ onload-catch?
@@ -165,8 +172,6 @@ if(BROWSER)
 }
 else
 {
-	module.exports = random;
-
 	/* UPDATE
 	 *
 	 * Bislang war das allein für Linux basierende OS, da "/dev/urandom" genutzt worden war.
@@ -279,8 +284,7 @@ remove warnings ////////////////////////////////////////////////////////////////
 	}
 }
 
-random.random = function
-
+//random.random = function //TODO: NERALY same as Math.random' *original*!
 
 
 

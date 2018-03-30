@@ -11,8 +11,8 @@ on.load = function()
 			_[i] = arguments[i];
 		}
 
-		var _init = INIT(_) || {};
-		var _main = MAIN(_init) || {};
+		var _init = (INIT(_) || {});
+		var _main = (MAIN(_init) || {});
 		//
 		return _main;
 	}
