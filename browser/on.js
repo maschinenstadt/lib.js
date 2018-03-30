@@ -5,8 +5,8 @@ on.load = function()
 	try
 	{
 		var _init = init() || undefined;
-		var _main = main(_init) || undefined;
-		return { init: _init, main: _main };
+		var _main = main((_init||{})) || undefined;
+		return _main; // includes _init..!...
 	}
 	catch(_error)
 	{
