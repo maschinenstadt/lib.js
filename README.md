@@ -49,6 +49,57 @@ include() parameter, it will only search in the current lib.js' path (that is
 
 ## News/Updates
 
+#### Random number generation
+"file.random(.*)()" and "file.readBytes(.*)()" added.. the first one uses the
+second one internally, but refers to "settings.random.entropy" ("/dev/random"
+or "/dev/urandom" (preferred)). Combined with sub-routines (and alternatively
+as parameter) those are able to generate random numbers like Linux does! More
+secure than "Math.random()", that is going to work based on this new element;
+this is my current task: create my *own*, much more secure "Math.random()"...
+
+As "/dev/urandom" (etc.) don't exist on Windows (or other) systems, I've also
+added the same functionality (uses the same interface .. so it can be handled
+exactly the same way. The changes are internally ;-)´ via the "crypto" module
+of Node.js, so also Windows systems can have this better RNG (= random number
+generator).
+
+Additionally, I've created "util/random" as the REAL interface for all random
+things. It uses all I've described above AND can also act (the same way etc.)
+in your web browser! There it uses "window.crypto(.getRandomValues())"!! ;-D´
+
+
+So now, just try:
+
+	#!/usr/bin/env node.js
+	//no need to include - 'util/random' is always integrated (as global)
+	var length = 1024;
+
+	var binary = random.binary(length);
+	var base64 = random.base64(length);
+	var radix = random.radix(length, 4); // would use the quaternary base
+	//
+	var hex = random.randomData(length, 'hex');	// alternative
+
+	//alternatively: direct access to file functions ("main/020_file.js")
+	var decimal = file.readBytes.decimal('/dev/urandom', length);
+	var buffer = file.random(length);	// "Buffer": direct 'Number's
+	var utf8 = file.random.utf8(length);	// direct argument, no sub'..
+	var dual = file.random(length, 'dual');
+	var base = file.random(length, 36);	// radix/base (36) used! :-)´
+
+And in the browser you can do so:
+
+	var length = 64;
+	//
+	var binary = web.util.random.binary(length);
+	var hex = web.util.random.hex(length);
+	var base64 = web.util.random.base64(length);
+	var dec = util.random.decimal(length);
+	//
+	var dual = util.randomData(length, 'dual'||2);
+	var arbitrary = util.random.radix(length, 32);
+
+
 #### "nodejs()". "libjs()"! .. "include()"?
 Below (in this "News/Updates" section) you can find infos to "nodejs()". This
 time I've integrated "libjs()". It doesn't have a cache (like "nodejs()") now
@@ -65,33 +116,6 @@ for the modules, you should use "libjs()"!
 
 And again: "require()" is still possible. But please don't use it. It doesn't
 have any support for all of our API modules etc... it still works, but .. hm!
-
-
-#### Random number generation
-Just (nearly) completed "util/random". On Linux, it uses "/dev/urandom".. the
-browser is also supported (as every "util") using "window.crypto".. Soon I am
-finishing it by: ... (a) using the Node.js "crypto" module (for Windows etc.)
-and ... (b) let "Math.random()" use my new "util/random" class .. this should
-be much more secure (as I've read in the web).
-
-So now, just try:
-
-	#!/usr/bin/env node.js
-
-	var random = include('util/random');
-	var length = 1024;
-
-	var binary = random.binary(length);
-	var hex = random.hex(length);
-	var base64 = random.base64(length);
-
-And in the browser you can use:
-
-	var length = 64;
-
-	var binary = web.util.random.binary(length);
-	var hex = web.util.random.hex(length);
-	var base64 = web.util.random.base64(length);
 
 
 #### Browser support

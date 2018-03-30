@@ -1,7 +1,7 @@
 #!/usr/bin/env node.js
 
-var p = '/dev/urandom';
-var s = 4096;
+var p = '/dev/urandom'; // only necessary if not 'file.random' (the path is in "settings.random.entropy")
+var s = 4096;		// 4K as example .. could also be just (4) (bytes) e.g. ...
 
 //var hex = file.readBytes(p, s, 'hex');
 //var hex = file.readBytes.hex(p, s);
@@ -21,18 +21,22 @@ var s = 4096;
 //var utf8 = file.random.utf8(s);
 //var utf8 = file.readBytes(p, s, 'utf8');
 
-
-
 var decimal = file.readBytes.decimal(p, s);
 
 console.inspect(decimal.length);
 console.inspect(decimal);
 console.EOL(2);
 
-var dual = file.random.dual(s);
+var dual = file.random(s, 'dual');
 
 console.inspect(dual.length);
 console.inspect(dual);
+console.EOL(2);
+
+var arb = file.random(s, 36);
+
+console.inspect(arb.length);
+console.inspect(arb);
 console.EOL(2);
 
 var buffer = file.random(s);
@@ -43,5 +47,5 @@ for(var i = 0; i < /*buffer.length*/16; i++)
 {
 	console.log('[%d] (%d)', i, buffer[i]);
 }
-console.EOL(2);
+console.EOL();
 

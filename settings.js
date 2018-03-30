@@ -6,7 +6,7 @@ settings.encoding = 'utf8';
 settings.charset = 'utf-8';
 
 settings.random = {};
-settings.random.entropy = '/dev/rrandom' || '/dev/random';
+settings.random.entropy = '/dev/urandom' || '/dev/random';
 settings.random.encodings = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
 settings.random.encoding = 0;
 settings.random.radix = 2;

@@ -239,6 +239,7 @@ else
 		{
 			result = randomDevice(_length);
 		}
+//if _encoding === false => return BUFFER!
 
 		if(global.type(_encoding, 'String'))
 		{
@@ -250,10 +251,20 @@ else
 	}
 }
 
+random.buffer = function(_length = random.length)
+{
+	//TODO/ in BROWSER implementation
+	//
+	return random.randomData(_length, false);
+}
+
 random.binary = function(_length = random.length)
 {
 	return random.randomData(_length, 'binary');
 }
+
+//TODO!!!!///
+//random.utf8
 
 random.hex = function(_length = random.length)
 {
