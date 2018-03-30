@@ -10,7 +10,7 @@ on.load = function()
 	}
 	catch(_error)
 	{
-		window.message(_error.message, _error.title);
+		window.message(_error.stack, _error.name);
 	}
 }
 

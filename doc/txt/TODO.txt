@@ -38,6 +38,36 @@
 
 
 
+
+
+	# "util/base" for base32/base64
+
+		=> [BROWSER] base*32* braucht wohl mehr code, weil im browser nur "atob" und "btoa" mit base*64*!
+		=> [NODE.JS] beides ist noch zu implementieren. manuell. gibt's da was fertiges in Node.js??
+
+	# "util/radix" for *EVERYTHING* (belibeige system-konversionen @ quantensystems etc.)
+
+		=> zahlenstrahl? oder welches mittel noch besser? (suche "die zahl"..)!
+
+		=> beliebiges hin und her zw. allen systemen ...
+
+			=> evtl. auch abstraktes vs. konkretes. also innen vs. außen; z.b. ein quadrat. x*y feld.
+				.. oder ein string, wo es um die offset-längen statt der byte-werte geht (in/out mirror)
+
+	# "global/String" for js-internal sys-conversions .. auf basis der byte-werte und toString(_radix)! ;-)´
+
+		.. u.a. wg. konversion von daten (auch utf-8 uvm.!!) z.b. in's binäre o.ä. systeme (z.b. wegen
+			.. daten-(bank-)codierungen!)
+
+			=> TODO: nachher performance checken (und mehr noch?). dann entscheiden, wie daten für datenbank-
+				CARRIER-CODE zu konvertieren (und weiterverwenden) sein werden! ...
+
+
+
+
+
+
+
 	# crypto -> tls -> abstrashiern wg. evtl. anderer crypto-verfahren!!!
 
 		=> und use 'crypto/tls/stream' or so .. wg. "pipe()" aller daten.. genauso bei anderen crypto-verfahren, hm?!

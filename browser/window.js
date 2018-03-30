@@ -19,7 +19,7 @@ Object.defineProperty(window, 'size', {
 window.message = function(_text, _title)
 {
 	//TODO/
-	alert(_text);
+	alert('[' + _title + ']' + EOL + EOL + _text);
 }
 
 window.onload = function()
