@@ -1,12 +1,7 @@
 function main(_ = {})
 {
-	_.en = "Hello World!";
-	_.de = "Hallo Welt!";
-
-	var str = '';
-	for(var idx in _)
-		str += idx + '<br />\n';
-	document.write(str);
+	alert(_.BIRTHDAY);
+	alert(_.UUID);
 }
 
 function table()

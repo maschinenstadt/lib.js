@@ -285,6 +285,11 @@ function INIT(_ = {})
 	delete web.RANDOM.size;
 
 	//
+	web.BIRTHDAY = Date.now();
+	//
+	result.UUID = web.UUID;
+	result.BIRTHDAY = web.BIRTHDAY;
+	//
 	result = Object.assign((result||{}), (_||{}));
 	return (result || {});
 }
@@ -293,7 +298,9 @@ function MAIN(_init = {})
 {
 	var result = {};
 	result = Object.assign((result||{}), (_init||{}));
+
 	var res = main(result);
+
 	result = Object.assign((result||{}), (res||{}));
 	return (result || {});
 }
