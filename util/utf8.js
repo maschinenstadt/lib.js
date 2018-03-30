@@ -17,3 +17,12 @@ else
 {
 	module.exports = utf8;
 }
+
+utf8.encode = utf8.fromString = utf8.toBytes = utf8.toArray = function(_string)
+{
+}
+
+utf8.decode = utf8.toString = utf8.fromBytes = utf8.fromArray = function(_bytes)
+{
+}
+

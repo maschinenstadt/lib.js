@@ -14,7 +14,7 @@ else
 }
 
 // marhshals a string to 'Uint8Array'
-utf8math.encode = utf8math.fromString = utf8math.toBytes = function(_string)
+utf8math.encode = utf8math.fromString = utf8math.toBytes = utf8math.toArray = function(_string)
 {
 	var i = 0;
 	var bytes = new Uint8Array(_string.length * 4);
@@ -70,7 +70,7 @@ utf8math.encode = utf8math.fromString = utf8math.toBytes = function(_string)
 }
 
 // unmarshals an 'Uint8Array' to string.
-utf8math.decode = utf8math.toString = utf8math.fromBytes = function(_bytes)
+utf8math.decode = utf8math.toString = utf8math.fromBytes = utf8math.fromArray = function(_bytes)
 {
 	var s = '';
 	var i = 0;
@@ -136,7 +136,7 @@ utf8math.decode = utf8math.toString = utf8math.fromBytes = function(_bytes)
 	return s;
 }
 
-utf8math.encode2 = utf8math.fromString2 = utf8math.toBytes2 = function(_string)
+utf8math.encode2 = utf8math.fromString2 = utf8math.toBytes2 = = utf8math.toArray2 = function(_string)
 {
 	var utf = [];
 
@@ -179,7 +179,7 @@ utf8math.encode2 = utf8math.fromString2 = utf8math.toBytes2 = function(_string)
 	return utf;
 }
 
-utf8math.decode2 = utf8math.toString2 = utf8math.fromBytes2 = function(_bytes)
+utf8math.decode2 = utf8math.toString2 = utf8math.fromBytes2 = utf8math.fromArray2 = function(_bytes)
 {
 	var str = '';
 	var i;
