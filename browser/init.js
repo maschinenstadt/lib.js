@@ -5,8 +5,10 @@ global.global = global;
 
 web = {};
 web.web = web;
-web.util = {};
-web.util.util = web.util;
+
+util = {};
+util.util = util;
+web.util = util;
 
 if(settings.tls)
 {
