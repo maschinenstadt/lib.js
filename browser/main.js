@@ -3,6 +3,7 @@ function init(_ = {})
 	var _init = (_||{});
 
 	//
+	web.TIMER = {};	// here are the timer HANDLES to "clearTimeout()" etc. them (best way, eh? ;-)´
 	web.TIME = {};
 
 	web.TIME.second = 0;
@@ -12,11 +13,11 @@ function init(_ = {})
 	web.TIME.week = 0;
 
 	// todo... allerdings durch "Date"-klasse.. anpassung der sekunden an jew. funktion (on.hour == ( s / 60 / 60 ) etc...
-	timer.set.timeout(function() { return on.second(web.TIME.second); },	Date.second	);// 1 s(econd) == 1000 m(illiseconds)
-	timer.set.timeout(function() { return on.minute(web.TIME.minute); },	Date.minute	);// 1 m(inute) == 60 s(econds)
-	timer.set.timeout(function() { return on.hour(web.TIME.hour); },	Date.hour	);// 1 h(our) == 60 m(inutes)
-	timer.set.timeout(function() { return on.day(web.TIME.day); },		Date.day	);// 1 d(ay) == 24 h(our)
-	timer.set.timeout(function() { return on.week(web.TIME.week); },	Date.week	);// 1 w(eek) == 7 d(ays)
+	web.TIMER.second = window.setInterval(function() { return on.second(web.TIME.second); },	Date.second	);
+	web.TIMER.minute = window.setInterval(function() { return on.minute(web.TIME.minute); },	Date.minute	);
+	web.TIMER.hour = window.setInterval(function() { return on.hour(web.TIME.hour); },		Date.hour	);
+	web.TIMER.day = window.setInterval(function() { return on.day(web.TIME.day); },		Date.day	);
+	web.TIMER.week = window.setInterval(function() { return on.week(web.TIME.week); },		Date.week	);
 
 	//
 	web.UUID = web.util.uuid.random();
@@ -59,11 +60,6 @@ function init(_ = {})
 	}
 	web.RANDOM.size = undefined;
 	delete web.RANDOM.size;
-
-	//
-	_init.UPTIME = web.UPTIME;
-	_init.UUID = web.UUID;
-	_init.RANDOM = web.RANDOM;
 
 	//
 	return _init;
