@@ -11,6 +11,12 @@ else
 
 // zur daten-konversion zwischen zahlensystemen ..
 //
+//
+//	WICHTIG: der ZAHLENSTRAHL o.ä. ist zu verwenden, nicht die js-limits von radix (2..36)!
+//
+//	.. limitierte version findet sich in "global/String.js". .. für's erste wenigstens. ...
+//
+//
 // .. einer von vielen, vielen (!!) anwendungszwecken ist die datenbank-(carrier-)codierung;
 // d.h. daten in kleineren systemen für perfekte anwendbarkeit @ kontroll-/trennzeichen/..?!
 //
