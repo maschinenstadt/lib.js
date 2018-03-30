@@ -171,34 +171,8 @@ if(BROWSER)
 }
 else
 {
-	/* UPDATE
-	 *
-	 * Bislang war das allein für Linux basierende OS, da "/dev/urandom" genutzt worden war.
-	 *
-	 * JETZT nutze ich das weiterhin (ob's besser ist als folgendes weiß ich atm nicht! ...)
-	 * selbiges. Falls diese Datei aber nicht existiert, so verwende ich das "crypto"-Modul,
-	 * um auch für andere OS bereit zu stehen! ;-)´
-	 */
-
-	var entropy = global.settings.random;
-
-	if(global.not(entropy))
-	{
-		throw new Error(global.type(entropy));
-	}
-
-	for(var i = 0; i < entropy.length; i++)
-	{
-		var p = global.file.path(entropy[i]);
-
-		if(global.file.exists(p))
-		{
-			entropy = p;
-			break;
-		}
-	}
-
-	var crypto = global.not(entropy);
+	var p = global.file.path(global.settings.random);
+	var crypto = global.not(p) || (!global.file.exists(p)) || (!global.file.type.file(p));
 
 	//
 	random.randomData = function(_length = random.length, _encoding = false)
@@ -227,17 +201,15 @@ else
 			_encoding = random.encoding[0];
 		}
 
-// remove warning()s ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
 		if(crypto)
 		{
-			console.warning('WITH crypto');
+			console.warning('WITH "crypto"');
 		}
 		else
 		{
-			console.warning('WITH*OUT* crypto');
+			console.warning('WITH "' + p + '"');
 		}
-// remove warning()s //////////////////////////////////////////////////////////////////////////////////////////////////
-
 	}
 
 	random.binary = function(_length = random.length)
