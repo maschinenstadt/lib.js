@@ -1,5 +1,9 @@
 var utf8 = {};
 
+// < https://gist.github.com/pascaldekloe/62546103a1576803dade9269ccf76330 >
+// < https://gist.github.com/joni/3760795 >
+// ... which is better?!?
+
 if(BROWSER)
 {
 	web.util.utf8 = utf8;
@@ -10,7 +14,7 @@ else
 }
 
 // marhshals a string to 'Uint8Array'
-utf8.encode = utf8.fromString = function(_string)
+utf8.encode = utf8.fromString = utf8.toBytes = function(_string)
 {
 	var i = 0;
 	var bytes = new Uint8Array(_string.length * 4);
@@ -66,7 +70,7 @@ utf8.encode = utf8.fromString = function(_string)
 }
 
 // unmarshals an 'Uint8Array' to string.
-utf8.decode = utf8.toString = function(_bytes)
+utf8.decode = utf8.toString = utf8.fromBytes = function(_bytes)
 {
 	var s = '';
 	var i = 0;
@@ -130,5 +134,90 @@ utf8.decode = utf8.toString = function(_bytes)
 	}
 
 	return s;
+}
+
+utf8.encode2 = utf8.fromString2 = utf8.toBytes2 = function(_string)
+{
+	var utf = [];
+
+	for(var i = 0; i < _string.length; i++)
+	{
+		var charcode = _string.charCodeAt(i);
+
+		if(charcode < 0x80)
+		{
+			utf.push(charcode);
+		}
+		else if(charcode < 0x800)
+		{
+			utf.push(0xc0 | (charcode >> 6),
+				0x80 | (charcode & 0x3f));
+		}
+		else if(charcode < 0xd800 || charcode >= 0xe000)
+		{
+			utf.push(0xe0 | (charcode >> 12),
+				0x80 | ((charcode >> 6) & 0x3f),
+				0x80 | (charcode & 0x3f));
+		}
+		// surrogate pair
+		else
+		{
+			i++;
+			// UTF-16 encodes 0x10000 - 0x10FFFF by
+			// subtracting 0x10000 and splitting the
+			// 20 bits of 0x0 - 0xFFFFF into two halves
+			charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+				| (_string.charCodeAt(i) & 0x3ff));
+
+			utf.push(0xf0 | (charcode >> 18),
+				0x80 | ((charcode >> 12) & 0x3f),
+				0x80 | ((charcode >> 6) & 0x3f),
+				0x80 | (charcode & 0x3f));
+		}
+	}
+
+	return utf;
+}
+
+utf8.decode2 = utf8.toString2 = utf8.fromBytes2 = function(_bytes)
+{
+	var str = '';
+	var i;
+
+	for(i = 0; i < _bytes.length; i++)
+	{
+		var value = _bytes[i];
+
+		if(value < 0x80)
+		{
+			str += String.fromCharCode(value);
+		}
+		else if(value > 0xBF && value < 0xE0)
+		{
+			str += String.fromCharCode((value & 0x1F) << 6
+				| _bytes[i + 1] & 0x3F);
+			i += 1;
+		}
+		else if(value > 0xDF && value < 0xF0)
+		{
+			str += String.fromCharCode((value & 0x0F) << 12
+				| (_bytes[i + 1] & 0x3F) << 6
+				| _bytes[i + 2] & 0x3F);
+			i += 2;
+		}
+		else
+		{
+			// surrogate pair
+			var charCode = ((value & 0x07) << 18
+				| (_bytes[i + 1] & 0x3F) << 12
+				| (_bytes[i + 2] & 0x3F) << 6
+				| _bytes[i + 3] & 0x3F) - 0x010000;
+
+			str += String.fromCharCode(charCode >> 10 | 0xD800, charCode & 0x03FF | 0xDC00);
+			i += 3;
+		}
+	}
+
+	return str;
 }
 
