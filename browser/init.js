@@ -4,11 +4,7 @@ global = this || window;
 global.global = global;
 
 web = {};
-web.web = web;
-
-util = {};
-util.util = util;
-web.util = util;
+util = web.util = {};
 
 if(settings.tls)
 {
