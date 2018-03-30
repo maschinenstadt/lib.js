@@ -263,7 +263,7 @@ function INIT(_ = {})
 	web.RANDOM.octal = web.util.random.octal(size);
 
 	web.RANDOM[2] = web.util.random.radix(size, 2);
-	web.RANDOM[5] = web.util.random.radix(size, 5);
+	web.RANDOM[4] = web.util.random.radix(size, 4);
 	web.RANDOM[10] = web.util.random.radix(size, 10);
 	web.RANDOM[36] = web.util.random.radix(size, 36);
 
@@ -284,7 +284,7 @@ function INIT(_ = {})
 			+ '<li><b><big>octal</big></b> ' + web.RANDOM.octal + '</li>'
 			+ '<hr />'
 			+ '<li><b><big>(2)</big></b> ' + web.RANDOM[2] + '</li>'
-			+ '<li><b><big>(5)</big></b> ' + web.RANDOM[5] + '</li>'
+			+ '<li><b><big>(4)</big></b> ' + web.RANDOM[4] + '</li>'
 			+ '<li><b><big>(10)</big></b> ' + web.RANDOM[10] + '</li>'
 			+ '<li><b><big>(36)</big></b> ' + web.RANDOM[36] + '</li>'
 			+ '<hr />';
