@@ -57,7 +57,7 @@ if(BROWSER)
 		{
 			if(_encoding)
 			{
-				_encoding = random.encodings[random.encoding];
+				_encoding = random.encoding;
 			}
 		}
 		else if(encType === 'Number')
@@ -69,7 +69,7 @@ if(BROWSER)
 		}
 		else if(encType !== 'String')
 		{
-			_encoding = random.encodings[random.encoding];
+			_encoding = random.encoding;
 		}
 
 		var result = '';
@@ -213,7 +213,7 @@ else
 		{
 			if(_encoding)
 			{
-				_encoding = random.encodings[random.encoding];
+				_encoding = random.encoding;
 			}
 		}
 		else if(global.type(_encoding, 'Number'))
@@ -225,7 +225,7 @@ else
 		}
 		else if(! global.type(_encoding, 'String'))
 		{
-			_encoding = random.encodings[random.encoding];
+			_encoding = random.encoding;
 		}
 
 		var result;
