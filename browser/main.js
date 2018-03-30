@@ -3,6 +3,22 @@ function init(_ = {})
 	var _init = (_||{});
 
 	//
+	web.TIME = {};
+
+	web.TIME.second = 0;
+	web.TIME.minute = 0;
+	web.TIME.hour = 0;
+	web.TIME.day = 0;
+	web.TIME.week = 0;
+
+	// todo... allerdings durch "Date"-klasse.. anpassung der sekunden an jew. funktion (on.hour == ( s / 60 / 60 ) etc...
+	timer.set.timeout(function() { return on.second(web.TIME.second); },	Date.second	);// 1 s(econd) == 1000 m(illiseconds)
+	timer.set.timeout(function() { return on.minute(web.TIME.minute); },	Date.minute	);// 1 m(inute) == 60 s(econds)
+	timer.set.timeout(function() { return on.hour(web.TIME.hour); },	Date.hour	);// 1 h(our) == 60 m(inutes)
+	timer.set.timeout(function() { return on.day(web.TIME.day); },		Date.day	);// 1 d(ay) == 24 h(our)
+	timer.set.timeout(function() { return on.week(web.TIME.week); },	Date.week	);// 1 w(eek) == 7 d(ays)
+
+	//
 	web.UUID = web.util.uuid.random();
 
 	var _uuid = document.getElementsByName('uuid');
@@ -45,6 +61,7 @@ function init(_ = {})
 	delete web.RANDOM.size;
 
 	//
+	_init.UPTIME = web.UPTIME;
 	_init.UUID = web.UUID;
 	_init.RANDOM = web.RANDOM;
 

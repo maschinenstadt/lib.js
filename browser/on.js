@@ -49,3 +49,32 @@ on.mouse.move = function(e)
 	var y = e.clientY; // absolutes!?
 }
 
+on.second = function()
+{
+	if(web.TIME.second % 20 === 0)
+	{
+		alert('[second] ' + web.TIME.second + '\n[minute] ' + web.TIME.minute + '\n');
+	}
+	return ++web.TIME.second;
+}
+
+on.minute = function()
+{
+	return ++web.TIME.minute;
+}
+
+on.hour = function()
+{
+	return ++web.TIME.hour;
+}
+
+on.day = function()
+{
+	return ++web.TIME.day;
+}
+
+on.week = function()
+{
+	return ++web.TIME.week;
+}
+

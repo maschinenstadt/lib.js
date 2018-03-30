@@ -14,7 +14,12 @@
 
 
 
-	# windows etc. optimization. currently extepected to only work on linux based systems.
+
+	# use "requestAnimationFrame" in browser. .. (l8rs(!) mainly for <canvas> ..
+
+		.. w/ "delta" (so use "util/time" maybe? AND VECTOR/MATRIX - TODO)
+
+
 
 
 	# think GLOBALLY about Error/Exception handling (strucutres or algoirhtms or so)....
@@ -22,7 +27,8 @@
 
 	# global.file.path();
 
-		=> mabe I should replace '/' by '\\' (vice versa) on windows (etc.?) systems!? (then use file.path() or so for every path)
+		# windows etc. optimization. currently extepected to only work on linux based systems.
+		`==> mabe I should replace '/' by '\\' (vice versa) on windows (etc.?) systems!? (then use file.path() or so for every path)
 
 			=> w/ separator (oder welcher das auch noch war..)
 
