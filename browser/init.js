@@ -1,10 +1,12 @@
 BROWSER = true;
 
-global = this;
+global = this || window;
 global.global = global;
 
 web = {};
+web.web = web;
 web.util = {};
+web.util.util = web.util;
 
 if(settings.tls)
 {
