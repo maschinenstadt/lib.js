@@ -128,6 +128,17 @@
 
 	# "util/random" ...
 
+
+		@ "BROWSER" in "util/random":
+
+			//if(_encoding === false)
+			//	return buffer; ..
+
+			=> Uint8Array() .. müssen wir evtl. zusammenfügen o.ä. .. GERADE BEI MEHREREN "iterations".. oder eben wg. _length!
+
+
+
+
 		=> at the moment w/ "random.binary()", "random.hex()", "random.base64". ... ;-)´
 
 			.. (a) for BROWSER (see "window.crypto")

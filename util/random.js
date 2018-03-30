@@ -1,14 +1,13 @@
 var random = {};
 
 //
-random.length = 1024;
+random.length = global.settings.random.length || 64;
 
-random.radix = 2;
+random.radix = global.settings.random.radix || 2;
+random.encoding = global.settings.random.encoding || 0;
 
-random.radix_min = Number.radix.min;
-random.radix_max = Number.base.max;
-
-random.encoding = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
+random.encodings = global.settings.random.encodings;	// [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
+random.entropy = global.settings.random.entropy;	// '/dev/urandom'
 
 //
 if(BROWSER)
@@ -25,7 +24,7 @@ if(BROWSER)
 {
 	var crypto = window.crypto || window.msCrypto;
 
-	random.randomData = function(_length = random.length, _encoding = random.encoding[0])
+	random.randomData = function(_length = random.length, _encoding = false)
 	{
 		if(not(crypto) || not(crypto.getRandomValues))
 		{
@@ -37,23 +36,37 @@ if(BROWSER)
 			throw new Error("window.crypto");
 		}
 
-		if(! type(_length, 'Number'))
+		if(type(_length, 'Number'))
+		{
+			if(_length < 1)
+			{
+				return new Error('_length < 1 (' + _length + ')');
+			}
+		}
+		else
 		{
 			_length = random.length;
 		}
 
 		var encType = type(_encoding);
 
-		if(encType === 'Number')
+		if(encType === 'Boolean')
 		{
-			if(_encoding < random.radix_min || _encoding > random.radix_max)
+			if(_encoding)
 			{
-				_encoding = random.radix || 2;
+				_encoding = random.encodings[random.encoding];
+			}
+		}
+		else if(encType === 'Number')
+		{
+			if(_encoding < Number.radix.min || _encoding > Number.radix.max)
+			{
+				return new Error(Number.base.min + ' .. ' + Number.base.max);
 			}
 		}
 		else if(encType !== 'String')
 		{
-			_encoding = random.encoding[0];
+			_encoding = random.encodings[random.encoding];
 		}
 
 		var result = '';
@@ -87,6 +100,12 @@ if(BROWSER)
 						case 'bit':
 
 							str += buffer[i].toString(2);
+							break;
+
+						case 'octal':
+						case 'oct':
+
+							str += buffer[i].toString(8);
 							break;
 
 						case 'decimal':
@@ -125,137 +144,140 @@ if(BROWSER)
 		}
 
 		return result.substr(0, _length);
-	}
 
-	random.binary = function(_length = random.length)
-	{
-		return random.randomData(_length, 'binary');
-	}
+		//TODO/
+		//if(_encoding === false)
+		//	return buffer; ..
 
-	random.hex = function(_length = random.length)
-	{
-		return random.randomData(_length, 'hex');
-	}
 
-	random.base64 = function(_length = random.length)
-	{
-		return random.randomData(_length, 'base64');
-	}
-
-	random.dual = function(_length = random.length)
-	{
-		return random.randomData(_length, 'dual');
-	}
-
-	random.decimal = function(_length = random.length)
-	{
-		return random.randomData(_length, 'decimal');
-	}
-
-	random.radix = function(_length = random.length, _radix = (random.radix || 2))
-	{
-		if(global.type(_radix, 'Number'))
-		{
-			if(_radix < random.radix_min || _radix > random.radix_max)
-			{
-				_radix = random.radix || 2;
-			}
-		}
-		else
-		{
-			_radix = random.radix || 2;
-		}
-
-		return random.randomData(_length, _radix);
 	}
 }
 else
 {
-	var p = global.file.path(global.settings.random);
+	var p = global.file.path(random.entropy);
 	var crypto = global.not(p) || (!global.file.exists(p)) || (!global.file.type.file(p));
 
-	//
-	random.randomData = function(_length = random.length, _encoding = false)
+	function randomDevice(_length = random.length)
 	{
 		if(global.type(_length, 'Number'))
 		{
 			if(_length < 1)
 			{
-				_length = random.length;
+				return new Error('_length < 1 (' + _length + ')');
 			}
 		}
 		else
 		{
 			_length = random.length;
 		}
+	}
 
+	function randomCrypto(_length = random.length)
+	{
+		if(global.type(_length, 'Number'))
+		{
+			if(_length < 1)
+			{
+				return new Error('_length < 1 (' + _length + ')');
+			}
+		}
+		else
+		{
+			_length = random.length;
+		}
+	}
+
+	//
+	random.randomData = function(_length = random.length, _encoding = false)
+	{
 		if(global.type(_encoding, 'Boolean'))
 		{
 			if(_encoding)
 			{
-				_encoding = random.encoding[0];
+				_encoding = random.encodings[random.encoding];
+			}
+		}
+		else if(global.type(_encoding, 'Number'))
+		{
+			if(_encoding < Number.radix.min || _encoding > Number.radix.max)
+			{
+				return new Error(Number.base.min + ' .. ' + Number.base.max);
 			}
 		}
 		else if(! global.type(_encoding, 'String'))
 		{
-			_encoding = random.encoding[0];
+			_encoding = random.encodings[random.encoding];
 		}
 
-		//
+		var result; // maybe not here (following "if+else")?!??
+		var buffer = new Buffer(_length);	// o.k.?
+
 		if(crypto)
 		{
-			console.warning('WITH "crypto"');
+			result = randomCrypto(_length, buffer);
 		}
 		else
 		{
-			console.warning('WITH "' + p + '"');
+			result = randomCrypto(_length, buffer);
 		}
-	}
-
-	random.binary = function(_length = random.length)
-	{
-		return random.randomData(_length, 'binary');
-	}
-
-	random.hex = function(_length = random.length)
-	{
-		return random.randomData(_length, 'hex');
-	}
-
-	random.base64 = function(_length = random.length)
-	{
-		return random.randomData(_length, 'base64');
-	}
-
-	random.dual = function(_length = random.length)
-	{
-		return random.randomData(_length, 'dual');
-	}
-
-	random.decimal = function(_length = random.length)
-	{
-		return random.randomData(_length, 'decimal');
-	}
-
-	random.radix = function(_length = random.length, _radix = (random.radix || 2))
-	{
-		if(global.type(_radix, 'Number'))
-		{
-			if(_radix < random.radix_min || _radix > random.radix_max)
-			{
-				_radix = random.radix || 2;
-			}
-		}
-		else
-		{
-			_radix = random.radix || 2;
-		}
-
-		return random.randomData(_length, _radix);
 	}
 }
 
+random.binary = function(_length = random.length)
+{
+	return random.randomData(_length, 'binary');
+}
+
+random.hex = function(_length = random.length)
+{
+	return random.randomData(_length, 'hex');
+}
+
+random.base64 = function(_length = random.length)
+{
+	return random.randomData(_length, 'base64');
+}
+
+random.dual = function(_length = random.length)
+{
+	return random.randomData(_length, 'dual');
+}
+
+random.decimal = function(_length = random.length)
+{
+	return random.randomData(_length, 'decimal');
+}
+
+random.octal = function(_length = random.length)
+{
+	return random.randomData(_length, 'octal');
+}
+
+random.radix = function(_length = random.length, _radix = (random.radix || 2))
+{
+	if(global.type(_radix, 'Number'))
+	{
+		if(_radix < Number.radix.min || _radix > Number.radix.max)
+		{
+			return new Error(Number.base.min + ' .. ' + Number.base.max);
+		}
+	}
+	else
+	{
+		_radix = random.radix || 2;
+	}
+
+	return random.randomData(_length, _radix);
+}
+
+
+
+
+
 //random.random = function //TODO: NERALY same as Math.random' *original*!
+
+
+
 
 
 

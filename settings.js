@@ -5,8 +5,13 @@ settings.default = 'sync' || 'async';
 settings.encoding = 'utf8';
 settings.charset = 'utf-8';
 
-settings.random = '/dev/urandom';
-//settings.random = '';
+settings.random = {};
+settings.random.entropy = '/dev/urandom';
+//settings.random.entropy = '';
+settings.random.encodings = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
+settings.random.encoding = 0;
+settings.random.radix = 2;
+settings.random.length = 64;
 
 settings.version = {};
 settings.version.check = true;	// throw a message if newer version is available ..
