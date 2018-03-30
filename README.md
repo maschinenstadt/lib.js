@@ -98,7 +98,7 @@ And in the browser you can do so:
 	var dual = util.random.randomData(length, 'dual'||2);
 	var arbitrary = util.random.radix(length, 36);	// (36) is JS' maxim.
 
-OR you can see a example, ready to use (second is the preferred, as said...)!
+OR you can see my examples, ready to use (my second is preferred, as said..)!
 
 	./example/random/file-interface.js
 	./example/random/real-interface.js
