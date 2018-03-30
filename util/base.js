@@ -7,13 +7,6 @@ if(BROWSER)
 {
 	web.util.base = base;
 
-	if(not(window.atob) || not(window.btoa))
-	{
-		var err = new Error('"window.(atob|btoa)()" missing in your browser!! :-(´');
-		throw err;
-		return err;
-	}
-
 	base.atob = window.atob;
 	base.btoa = window.btoa;
 
