@@ -20,6 +20,7 @@
 // < https://www.csie.ntu.edu.tw/~r92094/c++/VT100.html >
 // < http://www.termsys.demon.co.uk/vtansi.htm >
 // < http://ascii-table.com/ansi-escape-sequences-vt-100.php >
+// < http://ascii-table.com/ansi-escape-sequences.php >
 
 
 

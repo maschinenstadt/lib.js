@@ -1,11 +1,101 @@
-------------------------------------------------------------------------------------------------------
+======================================================================================================
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
+======================================================================================================
+
+	=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
+
+		...  (man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.); ..
+
+		=> viele interessante aspekte, die das prinzip "information" und ihre "codierbarkeit" aufweist!
+
+			=> konversionen am wichtigsten. gerade abstrakt vs. konkret und innen vs außen. @ quantensystem(e)!! ..
+
+			=> codierungen in codierungen .. systeme enthalten andere systeme(?!!) ... "rekursion" .. (TODO)(!!!!)
+
 ------------------------------------------------------------------------------------------------------
 
+	# Math.random => file.random.decimal etc..
 
-	# TODO: "main/150_random.js" -> uncomment "Math.random = main.random", when it's done!
+		=> ja .. auf basis von "util/random". im web also "window.crypto" etc. .. mit FALLBACK!!!
 
+		=> TODO: "main/150_random.js" -> uncomment "Math.random = main.random", when it's done!
 
+				var chance = new Chance(function() {
+					var arr = new Uint32Array(1);
+					window.crypto.getRandomValues(arr);
+					// This jazz is necessary to translate from a random integer to a floating point from 0 to 1
+					return arr[0]/(0xffffffff + 1);
+				});
+				// Now chance will use window.crypto for random rather than the Mersenne Twister
+
+			=> OR: generate str = '0.' + .. randomized decimal symbols to max. float nachkomma length; then "Number(str)"! ;-)´
+
+				=> but: sometimes we got .. bzw.
+
+					(a) pure 0.0
+					(b) pure 1.0
+					(c) various anzahl der nachkommastellen
+
+						=> perfekt lösbar: eine zusätzliche random-hebelung auf höherer, abstr. ebene (höhere loop?);
+							.. so dass eine länge von ziel-string(/-zahl) bestimmt wird. bei =(1) dann 0.0 vs. 1.0! ;-D
+
+------------------------------------------------------------------------------------------------------
+
+	# "util/random" ...
+
+		@ "BROWSER" part doesn't support BUFFER return..
+
+			=> Uint8Array() .. müssen wir evtl. zusammenfügen o.ä. .. GERADE BEI MEHREREN "iterations".. oder eben wg. _length!
+
+		@ "BROWSER" also doesn't support "utf8" charset return..
+
+		@ "crypto" .. TODO!
+
+				< https://nodejs.org/dist/latest/docs/api/crypto.html#crypto_crypto_randombytes_size_callback >
+
+			=> to test it, set a non-existing path in "settings.random.entropy"! ;-)´
+
+------------------------------------------------------------------------------------------------------
+
+	# BROWSER
+
+		# performance[.now()]
+
+		# hrtime(r) @ "Date"?!!! (btw. "util/time" HAS GONE (for all in "Date"!)!
+
+------------------------------------------------------------------------------------------------------
+
+	# use "requestAnimationFrame" in browser. .. (l8rs(!) mainly for <canvas> ..
+
+		.. w/ "delta" (so use "util/time" maybe? AND VECTOR/MATRIX - TODO)
+
+			=> "util/time"? HAS GONE!! implement everything into "Date"!!!
+
+------------------------------------------------------------------------------------------------------
+
+	# global.file.readBytes() ..
+
+		=> w/ "_start" sowie "_length" .. nicht nur einmal "_size"! geht das (mit node.js hausmitteln)? ;-)
+
+------------------------------------------------------------------------------------------------------
+
+	!!! .. *überall* SYNC AND ASYNC!!!
+
+	# vor allem ALLES *AUCH* *ASYNC* lösen/anbieten!!
+
+			.. hasse jetzt auch: "settings.default = 'sync||async'".
+
+				=> AUTOMATISCHE AUSWAHL JE NACH SETTING von ".async()" oder ".sync()"
+
+					=> einfach an jede funktion noch ".async"-funktion hinzu implementieren
+
+					=> evtl. zusätzlich ".sync" mit verweis auf die ursprüngliche funktion auch noch dazu?
+
+		=> SYNC ist perfekt, ein serieller prozess/flow, um eigene sw-proz-stacks usw zu integrieren. bessere verwaltbarkeit.
+
+			.. aber sonst, regulär verwendet (ohne meine ziel-engine) ist ASYNC für (node.)js-scripts besser (eh?) .. also TODO (eh)!
+
+------------------------------------------------------------------------------------------------------
 
 	# TODO: @ web-browser: "web.console" w/ "console.inspect()" u.a. etc. pp. .. ;-)´
 
@@ -19,35 +109,39 @@
 
 		=> aber eine console mit TABELLEN-ausgabe, z.b. für FILE.LIST() (server-seiten-fs oder lokale fs-struct w/ ws://-daten-CODE!?)?!
 
+		=> ALLES im web-browser durch TABELLEN codieren!?!!?
 
+			=> vs. <canvas> web.drawing() ... eigene, ewige zeichenfläche (war ewigkeit/unendlichkeit === maßstände/einheiten(/systeme/freq.)!?
 
-
-
-	------------------------------------------------------------	------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
 	# GRUNDSÄTZLICH "Object.defineProperty()" verwenden! ... zur implementation, auch bei prototype.
 
 		=> d.h. eine extension der "Object.defineProperty()" könnte uns zur automatischen api-generierung führen!!!!
 
-	------------------------------------------------------------	------------------------------------------------------------
+		=> # use getters/setters for much variables (atm in functions) .. see "doc/txt/JavaScript.txt".
 
-
-
-
-	# use "requestAnimationFrame" in browser. .. (l8rs(!) mainly for <canvas> ..
-
-		.. w/ "delta" (so use "util/time" maybe? AND VECTOR/MATRIX - TODO)
-
-
+------------------------------------------------------------------------------------------------------
 
 	# "util/getopt" w/ "main/040_getopt.js"...!!!!!!!!!!! (endlich mal machen!
 
+		=> eine 'String' funktion wg. argv w/ anführungszeichen (gehören zusammen! parse()!)
+
 		=> [genauso wie virtual polymorphy @ "Arguments"!]
 
-
+------------------------------------------------------------------------------------------------------
 
 	# think GLOBALLY about Error/Exception handling (strucutres or algoirhtms or so)....
 
+		=> *BEST* *SEE* "/doc/PARADIGMEN-WECHSEL.odt"!!!!!!!!!!! ganz neues sw-konzept! hier passt das alles gut mit rein.
+
+		=> und natürlich die objekte mit eigenen konsolen(-streams) etc. .. evtl. wohl auch parser() usw. ..
+
+			=> statt "process.stdout" etc. .. => REMOTE-STREAM @ (MUD-(channel-))SYNCHRONISATION w/ prozess-sync etc.!
+
+				=> danach "application()", "form(s)", .. bis [MS] "ACCESS" @ datenbank+formulare+events @ APP-server! ;-)´
+
+------------------------------------------------------------------------------------------------------
 
 	# global.file.path();
 
@@ -60,23 +154,23 @@
 
 			=> überall, wo pfade angegeben werden, durch "file.path()" schicken!! ..
 
+				=> dazu DON'T FORGET: "/doc/PARADIGMEN-WECHSEL.odt"!!
 
+			# all paths to be checked: if directory, append '/' to mark it as dir! (but performance check, please.. sonst anders(wo)!?)
 
-	# global.file.readBytes() ..
-
-		=> w/ "_start" sowie "_length" .. nicht nur einmal "_size"! geht das (mit node.js hausmitteln)? ;-)
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# "util/base" for base32/base64
 
-		=> [BROWSER] base*32* braucht wohl mehr code, weil im browser nur "atob" und "btoa" mit base*64*!
+		=> [BROWSER] base32 gibt's wohl nicht nativ, muss ich selbst. im BROWSER aber base64(!) mit "atob()" und "btoa()".
 
 		=> [NODE.JS] beides ist noch zu implementieren. manuell. gibt's da was fertiges in Node.js??
 
+------------------------------------------------------------------------------------------------------
+
 	# "util/radix" for *EVERYTHING* (belibeige system-konversionen @ quantensystems etc.)
+
+			.. so will ich ja
 
 		=> zahlenstrahl!?! oder welches mittel noch besser? (suche "die zahl"..)!
 
@@ -85,19 +179,18 @@
 			=> evtl. auch abstraktes vs. konkretes. also innen vs. außen; z.b. ein quadrat. x*y feld.
 				.. oder ein string, wo es um die offset-längen statt der byte-werte geht (in/out mirror)
 
-	# "global/String" for js-internal sys-conversions .. auf basis der byte-werte und toString(_radix)! ;-)´
+		=> EVTL. schon @ EIGENE (Big-)NUMBER!?! "Figure" .. w/ ABSTRAKT vs. KONKRET! etc. .. "Number" ersetzen - oder noch dazu!?
 
-		.. u.a. wg. konversion von daten (auch utf-8 uvm.!!) z.b. in's binäre o.ä. systeme (z.b. wegen
-			.. daten-(bank-)codierungen!)
+
+		# "global/String" for js-internal sys-conversions .. auf basis der byte-werte und toString(_radix)! ;-)´
+
+			.. u.a. wg. konversion von daten (auch utf-8 uvm.!!) z.b. in's binäre o.ä. systeme (z.b. wegen
+				.. daten-(bank-)codierungen!)
 
 			=> TODO: nachher performance checken (und mehr noch?). dann entscheiden, wie daten für datenbank-
 				CARRIER-CODE zu konvertieren (und weiterverwenden) sein werden! ...
 
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# crypto -> tls -> abstrashiern wg. evtl. anderer crypto-verfahren!!!
 
@@ -118,162 +211,17 @@
 
 					=> use "/crypto/stream.js" wg. "/crypto/${type}/stream.js"
 
+------------------------------------------------------------------------------------------------------
 
-		=> random.encoding = [ 'binary', 'hex', 'base64', 'dual', 'decimal' ];
+		@ doc/txt/HTTP....txt (v.a. wegen TLS-SNI ..!!)
 
-			=> ALL SUPPORT IN BROWSER AND NODE.JS (/dev/urandom AND crypto)!
+			< https://stackoverflow.com/questions/35586957/nodejs-starttls-use-sni >
+			< https://stackoverflow.com/questions/12219639/is-it-possible-to-dynamically-return-an-ssl-certificate-in-nodejs >
 
+			< https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
+			< https://www.sitepoint.com/how-to-use-ssltls-with-node-js/ >
 
-
-
-	# "util/random" ...
-
-
-		@ "BROWSER" in "util/random":
-
-			//if(_encoding === false)
-			//	return buffer; ..
-
-			=> Uint8Array() .. müssen wir evtl. zusammenfügen o.ä. .. GERADE BEI MEHREREN "iterations".. oder eben wg. _length!
-
-
-
-
-		=> at the moment w/ "random.binary()", "random.hex()", "random.base64". ... ;-)´
-
-			.. (a) for BROWSER (see "window.crypto")
-
-	(done)		.. (b) for LINUX (seems to be READY! ;-)
-
-				.. uses "/dev/urandom"
-
-			.. (c) for OTHER OS (windows, ..) - but there's no "/dev/urandom" (see (b))
-
-				.. but there's no "/dev/urandom" (see (b)).
-				so USE "nodejs('crypto')"!
-
-					< https://nodejs.org/dist/latest/docs/api/crypto.html#crypto_crypto_randombytes_size_callback >
-
-			=> also think about using _encoding (>= 2 && <= 36) in the way "BROWSER" implementation has got now!
-
-
-		=> Math.random() evtl. auch noch anpassen?
-
-			=> ja .. auf basis von "util/random". im web also "window.crypto" etc. .. mit FALLBACK!!!
-
-
-				var chance = new Chance(function() {
-					var arr = new Uint32Array(1);
-					window.crypto.getRandomValues(arr);
-					// This jazz is necessary to translate from a random integer to a floating point from 0 to 1
-					return arr[0]/(0xffffffff + 1);
-				});
-				// Now chance will use window.crypto for random rather than the Mersenne Twister
-
-!!!!!!!!!!!!!!!!		=> OR: generate str = '0.' + .. randomized decimal symbols to max. float nachkomma length; then "Number(str)"! ;-)´
-
-					=> but: sometimes we got .. bzw.
-
-						(a) pure 0.0
-						(b) pure 1.0
-						(c) various anzahl der nachkommastellen
-
-							=> perfekt lösbar: eine zusätzliche random-hebelung auf höherer, abstr. ebene (höhere loop?);
-								.. so dass eine länge von ziel-string(/-zahl) bestimmt wird. bei =(1) dann 0.0 vs. 1.0! ;-D
-
-
-
-			=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
-
-				(man kann ja alles immer ganz verschieden lösen.. mal mehr, mal minder abstrakt (strings vs. numbers etc.);
-
-
-					encoding = (..) 'bits'|'decimal'
-
-					# aus 'bits' .. ganz easy
-					# aus 'decimal' baue ich zuerst eingene zahlen aus. dann setze ich am anfang einen '.' 
-	
-					... beachte maxLength for Float  @ String
-
-
-	# BROWSER
-
-		# performance[.now()]
-
-		# hrtime(r) @ "util/time" OR "Date"!??
-
-
-
-
-
-
-
-
-
-	# "Function" default argument values .. is not everywhere right now!
-
-		# '||' finden .. sollte das problem evtl. schon erstmals bisschen einkreisen.
-
-
-
-
-
-	# global.type => _object.constructor.name?
-
-		=> in case we want the original class names..
-
-			.. maybe append this name to the 'Object' result string .. and on type test do if .. "startsWith('Object')"..??!
-
-
-
-	# IDE!?
-
-
-
-	# "autorun" nicht nur in "/home/*/lib.js" (siehe "[global.]path.home"), sondern ALLEN include-dirs! ..
-
-		=> also nur root-js(on)-dateien jeweils .. keine sub-directories ... genauso eben wie @ /home.
-
-
-
-
-	# bedenke grundsätlzich - falls möglich - "this"-rückgabe .. für ketten-verschaltung für direkt weitergehende aufrufen.. ;-)´
-
-
-
-
-
-	# überlege wg. "class"es wie ..
-
-		# "core/event"
-		# "mud/entity"
-
-		... usw., wie ich das konstruieren möchte. klar ist z.b., dass "event" überall gebraucht wird, grundsätzlich.
-		aber dann gibt's auch noch die basis-klasse "node", die im prinzip am ende aller klassen zur abs. basis wird.
-		.. sollte das event auch hoch abstrakte basis sein - oder sogar erst vom "node" 'extended' werden? .. UND wo-
-		rauf basiert das "event" weitergehend? evtl. auf (oo-(konsolen-))streams(-sync.)?!? usw. ...
-
-		.. hin zu netzwerk-klassen sehr wichtig z.b. .. inkl. folgendem, also automatische event-registrierung durch listen, ..
-
-
-
-		=> auch wichtig: "net/filter(.js)"! ..
-
-
-
-
-
-
-
-! ! ! ==> ==>	momentante idee .. alles/vieles von "node" "ableiten" (extends also), "node" selbst aber "event" erweitern lassen!?!?
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# net/(server/)...
 !!!	=> callbacks automatisch zusammen setzen. .. aus initialem setup() .. hin zu "this.callbacks" 4 foreign;
@@ -292,48 +240,47 @@
 
 !!!!!!			.. see "/doc/APP-Server.odt"(!!!!!!!!!!)
 
+------------------------------------------------------------------------------------------------------
 
+	# überlege wg. "class"es wie ..
 
-		@ doc/txt/HTTP....txt (v.a. wegen TLS-SNI ..!!)
+		# "core/event"
+		# "mud/entity"
 
-			< https://stackoverflow.com/questions/35586957/nodejs-starttls-use-sni >
-			< https://stackoverflow.com/questions/12219639/is-it-possible-to-dynamically-return-an-ssl-certificate-in-nodejs >
+		... usw., wie ich das konstruieren möchte. klar ist z.b., dass "event" überall gebraucht wird, grundsätzlich.
+		aber dann gibt's auch noch die basis-klasse "node", die im prinzip am ende aller klassen zur abs. basis wird.
+		.. sollte das event auch hoch abstrakte basis sein - oder sogar erst vom "node" 'extended' werden? .. UND wo-
+		rauf basiert das "event" weitergehend? evtl. auf (oo-(konsolen-))streams(-sync.)?!? usw. ...
 
-			< https://journal.paul.querna.org/articles/2010/09/04/limiting-concurrency-node-js/ >
-			< https://www.sitepoint.com/how-to-use-ssltls-with-node-js/ >
+		.. hin zu netzwerk-klassen sehr wichtig z.b. .. inkl. folgendem, also automatische event-registrierung durch listen, ..
 
+		=> auch wichtig: "net/filter(.js)"! ..
 
+------------------------------------------------------------------------------------------------------
 
+	# "autorun" nicht nur in "/home/*/lib.js" (siehe "[global.]path.home"), sondern ALLEN include-dirs! ..
 
-------------------------------------------------
+		=> also nur root-js(on)-dateien jeweils .. keine sub-directories ... genauso eben wie @ /home.
 
-	# Readline ... (v.a. wg. "net/(server/)"..!)
+------------------------------------------------------------------------------------------------------
 
-		...	< https://nodejs.org/api/readline.html >	..
+	# global.type => _object.constructor.name?
 
-		=> maybe "console.prompt()" or "console.read()" etc. is better to solve with this?! :-D
+		=> in case we want the original class names..
 
-		=> maybe "console/ansi(.js)" is not necessary (als ganzes .. evtl. nur zusätzlich wg. FARBEN(!!)?!)
+			.. maybe append this name to the 'Object' result string .. and on type test do if .. "startsWith('Object')"..??!
 
+------------------------------------------------------------------------------------------------------
 
-------------------------------------------------
+	# bedenke grundsätlzich - falls möglich - "this"-rückgabe .. für ketten-verschaltung für direkt weitergehende aufrufen.. ;-)´
 
-	WICHTIGST!!!
+------------------------------------------------------------------------------------------------------
 
-		Array.prototype.get(..); .. etc. pp. ...
+		# default argument values!!!!!!!!!!!! everywhere...
 
+	# "Function" default argument values .. is not everywhere right now!
 
-
-
-	# < https://github.com/mafintosh/fuse-bindings >
-
-		ohne abhängigkeiten... siehe dir die codes mal an und versuche, selbst sowas zu "portieren" .. bestenfalls ganz neues fuse >= 3.0! ;-)´
-
-
-
-------------------------------------------------
-
-
+		# '||' finden .. sollte das problem evtl. schon erstmals bisschen einkreisen.
 
 	# "interessant"/WICHTIG: alle funktionen so "abschließen", dass keine fehler bei argumente-übergabe geschehen kann. w/ default values
 
@@ -349,13 +296,10 @@
 
 				=> relativism? ich sollte mich innherlab der api auf sie selbst mehr beziehen; nicht alles immmer wieder code'n..
 
-
-
 !!!	!!	@ VIRTUAL POLYMORPHY:
 
 ==>			arguments.map(..); darin dann direkt aufruf via "arguments.callee[result]" (result je nach angenommener argv-zeile);
   ===>>				.. wenn man nämlich jeder funktion einfach zusätzlich "func[-1, 0, (..)]" implementiert!! automatism rulez!!
-
 
 
 !! -->>		.. und allg. auch überall noch umfangreiche parameter-checks, inkl. TYPE-CHECKs usw. .. w/ "arguments", too! ^_^
@@ -363,8 +307,6 @@
 !! -->			=> auch bei "get()" z.b. o.ä. .. nicht nur "arguments", auch sonstige zugriffe *FILTER*-bar machen..!
 
 				(.. siehe "Array.prototype.get(_index, _length, _radix = 1, _typeFilter = [], _inverseTypeFilter = false)" ...)
-
-
 
 
 !	==>					if(global.not(_uuid) || (! global.type(_uuid, 'String')))
@@ -375,113 +317,103 @@
 					=> => => ... genau sowas z.b. .. ersetzen durch automatismus mit "arguments" hilfe z.b. ..
 							.. sonst müsste ich das noch ca. so überall einbauen; wg. sicherheit bei der api-nutzung.
 
-
-
-
-------------------------------------------------
-
 	# [global.]not() .. überall ersetzen .. incl. new Error() rückgaben ... (see somewhere below here)
 
-------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
+	# alles in "main/" nochmal durchgehen und mit besseren styles versehen (z.b. default values je func., not() w/ return new Error(), ..)
+	# alles in "global/" nochmal durchgehen und möglichst sinnvolle gestaltung (w/ abstraktion zu gemeinsamen algo-struct-basics wohl..)
 
-
-
-	# String.sprintf();
-	# String.prototype.sscanf();
-	# console.printf();
-	# console.scanf();
-
-
-
-------------------------------------------------
-
-	 .. *überall* SYNC AND ASYNC!!!
-
-------------------------------------------------
-
-
-# alles in "main/" nochmal durchgehen und mit besseren styles versehen (z.b. default values je func., not() w/ return new Error(), ..)
-# alles in "global/" nochmal durchgehen und möglichst sinnvolle gestaltung (w/ abstraktion zu gemeinsamen algo-struct-basics wohl..)
-
-
-# "test/" durcharbeiten und bei fertigstellung nach "example/" verschieben. ich teste, dann mach ich beispiele daraus (neben docs) ;-)´
-
-
-------------------------------------------------
-
-
-
-
-	# global.console.object() ... really? worx todo..
-
-	# global.console.trace() .. maybe good thing for something(s)!?
-
-
-
-
-	# restliche "file"-methoden
-
-		# überall auch ASYNC!!!!!!
-
-
-		# path... .. .
-
-			=> ich würde mal "~" bzw. "~/" ersetzen durch jew. "path.home", was? ;-)´ GREAT!
-
-
-		# file.find()
-
-
-!!!!!!!!!! =>		=> REALLY SLOW!!! 17secs. vs. `find` w/ ~1sec!!! .. solve! (@ "stackoverflow"!???)
-
-
-
-			=> relative pfade im ergebnis-array? oder absolute? oder wie?
-
-			=> richtige reihenfolge im ergebnis-array?
-
-			=> EACCESS etc. werden nicht mit in's array gelistet .. sollte shcon, oder?!
-
-			=> String..glob(); .. wichtig für solche suchläufe ..!! (incl. _caseSensitive)
-
-
-
-		# file.chmod()
-
-			=> (chmod||chown)(.., _recursive); // rekursion @ directories!!! :-D
-
-			=> "TypeError: global.nodejs.fs.lchmodSync is not a function"
-
-				=> is this the same somewhere else (e.g. 'chown')!?
-
-		# file.grep()
-
-			=> still missing..
+	# "test/" durcharbeiten und bei fertigstellung nach "example/" verschieben. ich teste, dann mach ich beispiele daraus (neben docs) ;-)´
 
 ------------------------------------------------------------------------------------------------------
 
-# file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)
+	# web- und console-IDE!? eher: modellierungs-werkzeuge für ...
 
-	=> davon ab sollte ich passende codes zur (de-)serialisierung für meine eigene datenbank. ..
+		(a) 3D-/nD-objekte w/ "Extrusion" etc. und polygon-mesh und anderes mit ZELL-STRUKTUREN ... (bis informations-algorithmen + zahl)
 
-		=> siehe auch "util/radix.js" ;-D´
+		=> (mit katalog-hierarchie für raumzeit-algorithmen in 3d-welten etc., aber acuh string-dimensionen für layer-algos)
 
-# fs-listen-mapping/-filter (array-aktionen und coreutils)
-# file.mode() w/ array-filter
-# array-filter w/ prefix/suffix, relativeTo und XARGS(!)
-# .. sowie auch alle durchlaufen für summation der file-GRÖßEN!! ;-)´
-# new File(); .. w/ list-to-struct(s) (@ arr-filter)
-# website+news+todo+docs+wiki+issues/forum+git w/ api @ net/http+git+smtp+nntp+irc
-# uuid & services w/ account @ dyndns+space
-# ypkg @ lib+linux (live/any) w/ forms+mux (@ net/ssh)
-# (flache, aktive) datenbank und kombination/abstraktion (lib.)js+ylinux+community w/ net+js+db+linux+apps+community+mud+oo
+			=> u.a. wg. (mud-mmorpg)-spiele-universen .. mit zellen .. viele, kleine abstrakte regeln (physik z.b.) sowie zell-automation & WELLEN
+
+		(b) [MS] "ACCESS" style 4 APP-Server.. datenbank-modelle und formular-designer ... events dazu und tabellen-calc ..
+
+		(c) alle möglichen apps .. client-GUI/-forms w/ web-server(-verteilung der last etc.) .. & "Desktop", "Scout", .. (@ 3d-büro/-wohnung + chat)
+
+		(d) WICHTIG: "/doc/PARADIGMEN-WECHSEL.odt". neben RAUMZEIT-ALGORITHM. und LAYER-SCRIPT (w/ vollzugriff)
+
+		(e) protokoll, schritte-bewegung, dim. verschiebungen (w/ zeichnungen und addition von koords, größen etc.)
+
+		(f) ynfynyty ... COMMUNITY w/ ALL (verbunden mit Any/Linux oder "Groups" und "TK-MUD-conferences" und stream-broadcast + radio w/ route(+p2p)
+
+		(g) etc. pp.
 
 ------------------------------------------------------------------------------------------------------
 
+	# WELLEN .. neben daten auch VISUALISIEREN ... etc. und verarbeiten auf quantifizierungs-grundlage (abzählbarkeiten)
 
+		ALLES DARIN. zellen-rotationen erwirken das letztlich. das ganze universum berechnet durch wellen, wie nanobot-bewegungs-kommunikation.
 
+------------------------------------------------------------------------------------------------------
 
+	# "readline"
+		...	< https://nodejs.org/api/readline.html >	..
+
+		=> maybe "console.prompt()" or "console.read()" etc. is better to solve with this?! :-D
+
+		=> maybe "console/ansi(.js)" is not necessary (als ganzes .. evtl. nur zusätzlich wg. FARBEN(!!)?!)
+
+------------------------------------------------------------------------------------------------------
+
+	# console/ansi .. console/form(s/) .. console/mux ...
+
+		=> dialog/whiptail styles .. but w/in "application()" and with "mux"!
+
+		=> WEB.form(s) auch .. PARALLEL (durch PARALLELE STREAMS!?! [== parallele formate, streams in dateien, passt also zusammen]
+
+		=> text-db .. sprach-lokalisierungs usw. .. und größeres konzept für call/return mit switch() oder virt. funktionen "mappen" etc.
+
+------------------------------------------------------------------------------------------------------
+
+	# wichtige konsolen-style-utlities...
+
+		# String.toText();
+
+			=> vor allem der umbruch passend zu texten ...
+
+			=> und es geht darum, bei zu großen ausgabe-strings die nächste(n) zeilen bei einer bestimmen
+			breiten-/offset-positionen zu beginnen. so dass es ordentlich aussieht!
+
+		# String(?).toTable();
+
+			=> einerseits sowas wie `ls -l` (!!)
+
+			=> andererseits einteilung der console in bereiche und sub-bereiche etc. ..(!!!!!!)
+
+------------------------------------------------------------------------------------------------------
+
+	# Array.maxLength
+	# String.maxLength
+
+		=> interesting ..! also for log files maybe? ;-D´ (also see "log/"!)
+
+		=> eher eigene "struct/" (??); array-/string-zugriffe problematisch wg. accessors
+
+	=> log(/rotate)
+
+		=> EXTRA ZUSATZ-FUSE-FS!?? oder anders??
+
+		=> mit bedenken, alles zu loggen (optional? immer dazu?)
+
+		=> evtl. "yfs" bedenken (extra log-files w/ rotation & size-limit)
+
+		=> und sowieso size-limits gliech dazu!
+
+		=> LOG *SERVER* und CLIENTs. ... ständiges protokoll *direkt* in's netzwerk zu anderem host!!
+
+------------------------------------------------------------------------------------------------------
+
+	# Array.prototype.get(..); .. etc. pp. ...
 
 	# überall "offset()" .. (String/Array)
 
@@ -491,17 +423,7 @@
 
 			=> ebenso: wiederholungen ab (0) oder so ebenso, bei _length > this.length!!
 
-
-		// QUESTION: _length -> wiederholungen ab 0 oder wie substr(len) abschneiden!?
-
-			(siehe String..toCharCodes/toArray() or Array..toCharString(); "index()" auch evtl.
-
-
-
-	# *.equals() u.a. .. "überall". ... von wegen reference type vs. values (to compare!) ..
-
-
-
+		=> auch negative offsets ... addition zur länge der arrays/strings etc. .. vom ende aus rückwärts gezählt ;-)´
 
 	# String.capitalize(_all, _char);
 
@@ -521,220 +443,146 @@
 
 	# ..cut()
 
+	...
 
+	# String(/Array).replaceAt(_start, _length, _replaceBy) // ausscheniden && beliebig einfügen
 
+		=> 'insert()' sowie 'cut()' basieren darauf!!! :-D
 
-	# "getopt" .. @ version check:
 
-		=> "--check-version --debug=2" funktioniert nicht, umgekehrte reihenfolge schon...
+		# string[0] = 'x'; // GEHT NICH!! selgit bst neue funktionen dazu .. (w/ substr() maybe ;)´
 
-	!!!		=> wichtig auch "util/getopt.js".. so langsam mal! ;-)´
+		# string..upperCaseAt & lowerCaseAt()
 
-				=> eine 'String' funktion wg. argv w/ anführungszeichen (gehören zusammen! parse()!)
+	..
 
+	# *.equals() u.a. .. "überall". ... von wegen reference type vs. values (to compare!) ..
 
-		.. look @ ... "example/getopt.js" ..
+	...
 
-			=> TODO: in "example/" mal aufräumen .. und evtl. auch noch bessere beispiele einbringen ..?
+	# Object.(values||types||forEach||..) && Array.(..) ...
 
+------------------------------------------------------------------------------------------------------
 
+	# basics ..
 
+			# String.sprintf();
+			# String.prototype.sscanf();
+			# console.printf();
+			# console.scanf();
 
-	# alle funktionen auch in ASYNC ermöglichen ..
+		=> interessant: weitere, eigene "PATTERN MATCH (ENGINEs)"!!
 
-		=> einfach an jede funktion noch ".async"-funktion hinzu implementieren
+			=> beste lösungen, evtl. direkte, plane "BNF"-anbindung für automat. RFC-implement. .. *gg*
 
-			=> node.js async prinzip überprüfen; evtl. selbst erweitern - siehe process(or).stack
+			=> was wäre sinnvoll für das meißte (alle notwendigkeiten/elemente betrachten und allgemeine logik-aussage(n) formulieren)!
 
-		=> evtl. zusätzlich ".sync" mit verweis auf die ursprüngliche funktion auch noch dazu?
+				=> geht z.b. um netzwerk-protokolle .. aber auch script-konversion oder code-abarbeiten .. bis zu db-"evaluation"(?)! etc.
 
+			# (*).glob();
 
+		> glob()
 
-	# file.find() ..
+			=> alle *glob* auch "inverse"..! ;-)´
 
-		=> zuerst nur array aus strings der (relativen vs. absoluten) pfade, ..
+			=> statt (prefix||suffix)() => lieber (*glob*) ..
+				... oder zusätzlich? prefix/suffix läuft ganz gut eig.!?!
 
-			... danach evtl. echte (FS.)"resource" o.ä.? allein weg. eigenem fs bzw. fuse?!?
+				=> object/string.js => return (false||true)
+				=> object/object.js => anwendung auf keys()
+				=> object/array.js => schon fedisch; testen, sobald "String.prototype.glob()" fedisch;
 
-			.. evtl. BEIDE VARIANTEN!??!
+------------------------------------------------------------------------------------------------------
 
+	# < https://github.com/mafintosh/fuse-bindings >
 
+		# ohne abhängigkeiten... siehe dir die codes mal an und versuche, selbst sowas zu "portieren" .. bestenfalls ganz neues fuse >= 3.0! ;-)´
 
+		# extension für meine datenbank ...
 
+			# datenbank w/ ..
 
-	# doc/txt/PROXY.txt
+				(a) x/y oder width/height
 
+				(b) (SOMIT (a)!!) auch ID/PID trees (und damit unendlich tiefe dateisysteme!!! und alles andere)
 
-	# "console/ansi"
+				(c) zell structs .. leere .. raumzeit-koord-relays .. zahlensysteme .. carrier-codes .. ausweitung usw. ..
 
-		// das ist TODO. vermutlich eine extra klasse oder datenstruktur (<Multiset> ?!)
-		//
-		// im übrigen wären _TAGS_ auch nicht ganz verkehrt, so wie bei html? aber evtl.
-		// auch nicht so gut wie einfache klassen-funktionen zum aufruf, bevor text aus-
-		// gegeben wird. ..
-		//
-		// ... beachte auch, wo die texte eingesetzt werden. wenn man die codes in datei
-		// reinschreibt, würde man sie mit `cat file.txt` im terminal mitsamt attributen
-		// ausgeben können. die farben etc. werden also angewandt. alles @ file-prozess!
-		//
+				(d) FLACH .. 1d-abstraktion führt zu abs. hoch-dimensionlen, filligranen strukturen .. auch software-bewegungen/-strukturen v.a.!
 
-			// beachte, dass manche codes '[' benötigen, andere nicht. dazu siehe 'write()' w/ '_left' boolean!
-			//
-			// < http://ascii-table.com/ansi-escape-sequences.php >
-			// < http://ascii-table.com/ansi-escape-sequences-vt-100.php >
+				(e) AKTIV .. direkte anbindung der sw-pointer w/ context o.ä. etc. und db-bewegungs-protokoll @ hebelung/hangelung ..
 
-		// bedneke aber auch "readline" (< https://nodejs.org/api/readline.html >)
+				(f) .. (TODO) .. WICHTIGSTE BASIS ÜBERHAUPT DAS GANZE!
 
+				(g) .. btw. auch für web-publikation w/ wiki etc., aber auch "ypkg"-software-pakete-datenbank usw. .. sowie "Git"-alternative!! ;-)´
 
+				(h) .. crypto .. compress .. hash .. snapsshots .. boot-from .. UND SO SO VIELES MEHR! .. (stop!) .. logging .. netzwerk! LVM! RAID!
 
+------------------------------------------------------------------------------------------------------
 
-	# all paths to be checked: if directory, append '/' to mark it as directory!! (but: performance in checking every time every file??)
+	# restliche "file"-methoden
 
+			# file.find() funktioniert noch nicht ganz. ... siehe auch "test/files/find.js" (erster teil ok, zweiter *nicht*!)
 
+			# fs-listen-mapping/-filter (array-aktionen und coreutils)
+			# file.mode() w/ array-filter
+			# array-filter w/ prefix/suffix, relativeTo und XARGS(!)
+			# .. sowie auch alle durchlaufen für summation der file-GRÖßEN!! ;-)´
+			# new File(); .. w/ list-to-struct(s) (@ arr-filter)
+			# website+news+todo+docs+wiki+issues/forum+git w/ api @ net/http+git+smtp+nntp+irc
+			# uuid & services w/ account @ dyndns+space
+			# ypkg @ lib+linux (live/any) w/ forms+mux (@ net/ssh)
+			# (flache, aktive) datenbank und kombination/abstraktion (lib.)js+ylinux+community w/ net+js+db+linux+apps+community+mud+oo
 
+		# file.chmod()
 
-	# file.find() w/ Array...glob() (etc.); .. und forms/mux.. wg. any/linux packagement v.a. ;-)´
+			=> (chmod||chown)(.., _recursive); // rekursion @ directories!!! :-D
 
+			=> "TypeError: global.nodejs.fs.lchmodSync is not a function"
 
+				=> is this the same somewhere else (e.g. 'chown')!?
 
-		=> glob: '*' als "indexOf()", '**' mit "lastIndexOf()" (also bei 2x* so viel mitnehmen wie möglich)
+		# file.grep()
 
-			=> WICHTIG: das letzte vorkommnis suchen muss angepasst sein an evtl. weitere needles "davor"..!
+			=> still missing.. *MUST* BE *ASYNC*..!!!
 
-			=> muss ich wo auch escapen? '\\*' also? ned??
+		# file.find()
 
+!!!!!!!!!! =>		=> REALLY SLOW!!! 17secs. vs. `find` w/ ~1sec!!! .. solve! (@ "stackoverflow"!???)
 
+			=> richtige reihenfolge im ergebnis-array?
 
-		=> and other file functions .. like grep(), hash(), ..
+			=> EACCESS etc. werden nicht mit in's array gelistet .. sollte shcon, oder?!
 
+			=> String..glob(); .. wichtig für solche suchläufe ..!! (incl. _caseSensitive)
 
-		=> and my own filesystem database (also for web devel)
+			=> relative pfade im ergebnis-array? oder absolute? oder wie?
 
+				=> array-pfad-filter .. usw. .. `xargs()` .. oder aktionen wie "chmod()" auf eine pfad-liste .. und FILTER like callbacks eben.
 
+				=> VIRTUELLE FILE-OBJEKTE. dank code-virtualisierung .. einfach quasi in jeden array-pfad-string "?mode=1777&size=1024" etc.!!!!!!!
 
+------------------------------------------------------------------------------------------------------
 
-	# überall wo "Error" throw'd, diesen auch zurück geben (aber *ohne* throw!!) - ODER!?????
+	!!!! CODE VIRTUALISIERUNG !!!!
 
-		=> außerdem, wo ich (null||undefined) zurück gebe, kann häufig mal "new Error()" return'ed werden?!
+		.. wie in pfad-arrays w/ "?date=..&mode=1777&size=2048" usw..!
 
-			=> `grep -ri 'return undefined'` && `grep -ri 'return null'` .. ;-)´
+	DA GIBTS SO VIELE MÖGLICHKEITEN!! DAS GEHT GANZ BIS ZUR SPRACH-ABSTRAKTION, DANN SOGAR NOCH (*STRING*!) CPU-LOGIK ODER PHYSIK (bis wellen und teilchen)!
 
-		=> eine liste aller eigenen "Error()"-TYPEs aufschreiben (./doc/txt/..); bzw. sogar im script wg. automatism./text/lang-db?!?
-
-			=> viele Error basieren auf "TYPE mismatch" .. DANN: "new Error(global.type(..))" ;-D´
-
-
-====>>		.. PROBLEM: wenn ich error zurück gebe, ist "error === true" .. "undefined/null" sind === false! besser zu prüfen also..
-		.. UND: eigentlich ist (0) ja false .. aber (0) als int-wert ist o.k. und gewünscht?! hm!
-
-			=> lösung (evtl.): global.not(); .. [wenigstens etwas..] funktioniert scheinbar auch.. siehe "node.js" (global.not)
-
-				=> SOLVED! ;-D´
-
-					.. not() is true, even if empty string or empty array .. and not() is NOT true == false if (0)!
-					... not() is true on "Error" .. and - of course - on "null" or "undefined" .. AND if === false. ;-D´
-
-				.. siehe "example/not.js"!
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# console... => every global thing in my lib should be prefixed by 'global.'... also 'console..'!
 
 		=> `grep -ri 'console.'|grep -v 'global.console.'`
 
+------------------------------------------------------------------------------------------------------
 
+	# doc/txt/PROXY.txt
 
+		lohnt sich des? ne! eigenes scripting QUASI .. o.ä. .. besser is: VIRTUALITÄT @ 1d-string-abstraktion (w/ database(+fs))!
 
-
-
-	# Object.(values||types||forEach||..) && Array.(..) ...
-
-
-
-
-	# stream is now extending file (file extends path and directory extends file)
-
-		=> use it to "cache" data in the file system (maybe l8rs also in database?)
-
-			=> use "global.path.temp" (global.nodejs.os.tmpdir())
-
-			=> beware of "_maxLength" etc. .. for LOG FILES this will be rotation e.g. ..
-
-				=> implement "log/rotate.js" etc. .. plus this file-stream(s) ...
-
-			=> bring "process.stdio" to file streams .. also the many more possible streams
-
-		=> network synchronisation, too! :-)´ (see also "doc/txt/STREAM*.txt" ..)
-
-
-
-
-
-	# version-check finsihed. missing parts right now:
-
-		=> dann auch status-ausgabe ab "--debug=2" (oder so) - direkt nach node.js versions-anzeige!
-			.. w/ delay-settings-anzeige, wieviel noch bis zur nächsten abfrage und letzte abfrage ..
-
-
-		=> dann auch noch "util/time" so weit, dass ich aus ms min. minuten usw. ausgebe!
-
-			=> evtl. an anderen stellen auch noch zu verwenden.. ^-^
-
-
-		=> überprüfung, ob neue version schon installiert ist. dann direkt prüfen, nicht delay abwarten!
-
-
-
-
-		=> console/form(s) ... "MessageBox"-style vs. "console.center()" usw. .. bis zu "console/mux"!
-
-
-
-
-
-
-
-
-	# sprintf, sscanf @ object/string.js
-	# printf, scanf @ global/console.js
-
-			< https://github.com/Lellansin/node-scanf/tree/master/lib >
-			< https://github.com/ChauMing/nodejs-scanf/tree/master/lib >
-
-		=> siehe "doc/txt/PRINTF-SCANF.txt" ..
-
-			=> w/ "%O" -> inspect() -> EIGENE inspect() version evtl.. v.a. wegen console/ansi w/ colors!
-
-
-
-
-
-
-	# Array.maxLength
-	# String.maxLength
-
-		=> interesting ..! also for log files maybe? ;-D´ (also see "log/"!)
-
-		=> eher eigene "struct/" (??); array-/string-zugriffe problematisch wg. accessors
-
-
-	=> log(/rotate)
-
-		=> mit bedenken, alles zu loggen (optional? immer dazu?)
-
-		=> evtl. "yfs" bedenken (extra log-files w/ rotation & size-limit)
-
-		=> und sowieso size-limits gliech dazu!
-
-		=> LOG *SERVER* und CLIENTs. ... ständiges protokoll *direkt* in's netzwerk zu anderem host!!
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	=> readlink-fs-traverse .. "util/traverse.js" or so; nutzung in any/linux z.b. etc(??)
 	=> schrittweise auflösung von symlinks .. mit verzeichnis-"traversing" zur auswahl von
@@ -749,58 +597,13 @@
 
 				=> modularität
 
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# "document/html" ... @ HTML-DOM-Parser..! :-)´
 
-		.. min. gut dazu, dass ich die aktuelle "Node.js"-version auffinden kann.
-			.. da momentan nur "negative suche", siehe "main/90_version.js" ...
-				.. alles andere wäre *augenblicklich* zu aufwendig (ohne html-DOM-parser ;-)´ oder!?? ^-^
+		=> .. und andere formate .. script-codes ... am besten ALLES ALS DOM BEHANDELT!?! ;-D´
 
-
-
-
-------------------------------------------------------------------------------------------------
-
-
-	# bestenfalls taktungs-schritte-zählungs-protokoll bzw. quantifizierung für's neuronale netz ..
-
-		=> und zwar durch "[].apply(func, ..)"! unser neuer weg, funktionen aufzurufen! überall bitte umsetzen!! ;-)
-
-
-
-	# SCHRITTWEISE IMMER MEHR STRING-EVALUATION(s-Virtulaität) .. (siehe auch repl)
-
-
-		=> sprich:: statt direkter sw-js-strukturen eher code-Strings verwenden, die jew. - je
-			nach zweck/ziel/.. - selbst parse()'d werden..
-
-			=> siehe z.b. "Arguments.map()" (for [VIRTUAL] POLYMORPHY! ;-)´
-
-			=> am ende prozess-/event-/funktions-aufruf wie in SHELLs "$0 --obj-key [..]"?!
-
-
-
-		"console/" w/ "console/shell/terminal.js" ..
-		... =>>> REPL on "node.js" call w/o script! .. but: REPL on my own (w/ 3D-Script? both/compaitibilty?)
-
-
-			=> alternative i/o streams (not only stdio (stdin, ..))
-
-				=> FILE streams ..
-				=> network streams ..
-				=> cipher streams ..
-				=> (..)!?
-
-			=> beliebig viele weitere streams (w/ unterschiedlichen "targets", "relays" o.ä. ..)
-
-				=> inkl. 'sha3'-streams usw. .. alle i/o hash() Z.B... oder crypto/ oder compress/ oder ..
-
-
+------------------------------------------------------------------------------------------------------
 
 	# "/node.js" @ main.start()
 
@@ -811,59 +614,7 @@
 			... how should all of my processes communicate to handle everyhting together..!?
 				.. (yes, that "ipc" styles should do it?!! or stream-sync bzw. stream-pipelines..)
 
-
-
-
-	# immer mehr in richtung "class"-codierung .. weg vom alten stil... (teilweise nur??)!!
-
-		==>> und alle klassen ableiten lassen von ..
-
-			(a) "node()"
-
-				=> so erhält jedes objekt 'uuid' und render/parse sowie datenbank-features U.A...
-
-			(b) "event()" (unter oder über node?)
-
-				=> so kann am ende jede funktion viele callbacks auslösen z.b. ..
-
-				=> außerdem die modulare erweiterung der api, hin zu custom(ized) codes ... ^_^
-
-
-
-	(!) use "core/event.js" for any own event strategy ...
-
-		=> every object w/ own events should be able to show/list all it's events (keys);
-
-		=> überall ermöglichen außerdem .. auch für reguläre funktions-bewegungen u.a. .. auch
-			.. das sollte ein jew. event auslösen; hm!?! .. (potential für obj.-SYNC ;-)´
-
-		=> event/callback bis in's netzwerk, durch URL-codierung? w/ "node().hash" @ "#fragment"??
-
-			=> klar auch eigene event-verwaltung .. im ASYNC-style .. statt eigentl. Func.!?!!
-
-			=> PUSH kernel!!
-
-		=> @ NETWORK PROTOCOLS @ protocol methods { http: [ GET, POST, .. ], irc: [ PRIVMSG , .. ] ;-)´
-
-		=> don't forget: REPL & own scripting (evaluation .. (lang-)*MAPPING* wohl eher...)
-
-
-
 ------------------------------------------------------------------------------------------------
-
-
-
-	# net/address/ip.js => v6 to array<number> ..
-
-		=> and also render()/parse()
-
-
-
-
-	# default argument values!!!!!!!!!!!! everywhere...
-
-
-
 
 	@ setup.(js|sh)
 
@@ -883,12 +634,11 @@
 
 		# (github-)update-script (w/ cronjob!?!)
 
-
-
+------------------------------------------------------------------------------------------------------
 
 	# dyndns .. hosting .. w/ .zahl/ (siehe "settings.account" ;-)´
 
-
+------------------------------------------------------------------------------------------------------
 
 	# global.console.object()
 
@@ -896,20 +646,12 @@
 
 		=> TODO: finish it..
 
-
-
+------------------------------------------------------------------------------------------------------
 
 	# String.prototype.(hasFunction||toFunction)();
 	# Function.prototype.from(.array||.string);
 
-
-
-
-
-
-
-
-
+		=> bis sogar JSON funktionen beherrscht!?!?!??
 
 	# String.prototype.hash[.sha3](_radix)
 	
@@ -920,77 +662,7 @@
 
 		=> to be implemented in "./crypto/" ...!! (how to give it to a "String" or under "file.."??
 
-
-
-
-
-
-	> glob()
-
-		=> statt (prefix||suffix)() => lieber (*glob*) ..
-			... oder zusätzlich? prefix/suffix läuft ganz gut eig.!?!
-
-			=> object/string.js => return (false||true)
-			=> object/object.js => anwendung auf keys()
-			=> object/array.js => schon fedisch; testen, sobald "String.prototype.glob()" fedisch;
-
-
-
-
-
-
-
-	# ..get() & ..set() ... @ own values (with array as memory!?) .. (4 protocol/qu-counter ;-)´
-
-
-
-	# console.debug() ..
-
-		(a) create more debug output (and maybe adapt level in settings)
-
-		(b) use 'util/getopt' instead of the (pre-)solution @ 'main/50_script.js'
-
-		(c) adapt --debug output ('main/50_script.js')
-
-		(d) scanf/printf (v.a. @ "global/String.js" (w/ 's' prefix ;-))´
-
-
-
-
-
-
-
-
-	# maybe create "static" functions out of all my "prototype" implemention ..? why, what for?
-
-
-	# use getters/setters for much variables (atm in functions) .. see "doc/txt/JavaScript.txt".
-
-
-
-
-	# vergleiche (gibt es 'ne bessere lösung zwischen denen - oder beides äquivalent??)
-
-		(a) wenn Array, dann einzelne aufrufe mit jeweils einem der items
-
-		(b) wenn NICHT array, dann einsetzen des einzigen wertes in ein array (w/ durchlauf)
-
-
-
-
-
-
-
-
-
-	# je nach settings file.append||write() @ ".gitignore" && ".npmignore" ..
-
-		# fb/nix
-
-
-
-	# alle *glob* auch "inverse"..! ;-)´
-
+------------------------------------------------------------------------------------------------------
 
 	# file.lock()? file.diff()? file.fill/truncate()!???
 
@@ -998,8 +670,9 @@
 
 		=> rekursive suche .. w/ *glob* evtl. .. maybe _depth_from, _to, ..? und _type!
 
-		=> _type is now @ sub function .. file.find.(file||directory||symlink||...); :-)
+			=> BESSER "Array-filter" @ listen ... filter vs cb-/logik-apply @ list-elements
 
+	# file.copy()
 
 	# file.move()
 
@@ -1026,119 +699,7 @@
 
 		=> siehe auch _type ..
 
-
-
-
-
-	# global/Arguments.js
-
-		=> Arguments.map() arbeitet noch nicht ganz richtig .. siehe auch "example/test1.js"!
-
-
-
-	# FEHLER (evtl. noch weitere, ganz versteckt in den scripts)
-
-		=> ich kann zwar objekte befragen, ob sie eine bestimmte funktion o.ä. in sich haben:
-
-			if(obj.clone) ..
-
-		... ABER: wenn obj === undefined||null, dann gibt's ne exception! also das mit abfragen!
-
-			=> evtl. auf höherer ebene direkt lösbar? sowas wie mit get/set()!?
-
-				=> ps: "get/set"() override? geht das gut?
-
-
-
-
-
-
-	# "ymux"
-		# OR try to integreate the CLOCK at TMUX styles (4 every lib.js app!)!??!! ;-D´
-
-
-	# "util/time".format() (etc.)
-
-		# https://docs.microsoft.com/de-de/dotnet/standard/base-types/custom-date-and-time-format-strings
-		# http://php.net/manual/de/function.date.php
-
-		# ... FINDE WEITERE FORMATE! wähle bestes oder besser: parallele nutzung (auswahl/setting)
-
-	# "console/ansi"
-
-		=> e.g. for "ymux" oder meine shell und/oder jede "application" .. bis zu eigenen `dialog` ..
-
-			< http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux >
-			< http://ascii-table.com/ansi-escape-sequences.php >
-			< http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html >
-
-			< https://github.com/chalk/ansi-styles >
-			< https://github.com/sindresorhus/ansi-escapes >
-
-	# "console/prompt"
-
-		@ http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux
-
-		=> .. at least a tool (see "Any/Linux") to easily manage "PS1"-env.-var. .. for shell prompts!
-
-			=> choose via menu .. and see an overview/LIST of all "modifiers" etc.! ;-D´
-
-				=> sollte auch schone 'web'-application später werden; also @ HOMEPAGE!! :-)´
-
-	# "console/forms"
-	# "console/mux"
-
-		=> !!! (see above @ ansi etc.)
-
-
-
-	# "include()" .. own CACHE .. like "global.nodejs" w/ include() code ..! or not? ..
-
-
-	# file.mkdir()
-
-		=> SYMLINK support (if NOT DIRECTORY, it will return .. but if resolved == dir, then do!)
-
-	# file.copy()
-	# file.remove()
-
-		=> see also < https://nodejs.org/dist/latest/docs/api/fs.html >
-
-
-
-	# String.alphabet @ base32, base32hex, base64 !! (w/ util/base)
-
-
-
-
-	# clone() [@ doc/txt/deep-copy.clone.txt]
-
-	//
-	// The reason your deep copy is having problems is because you're ending up with circular object references.
-	//
-	// < https://stackoverflow.com/questions/597588/how-do-you-clone-an-array-of-objects-in-javascript >
-
-		=> w/ 'Function' cloning..
-
-	// < < https://stackoverflow.com/questions/1833588/javascript-clone-a-function > >
-
-		=> @ array @ object .. => WHERE ELSE!??
-
-
-	=> @ 'toString'
-
-		@ 'String': (_depth) (bzw radix) für tab-tiefen-versch-anzahl .. eigenes toString()!
-			(siehe (String.prototype.toConsole()) -> weg/ersetzen!? ;)
-
-
-
-
-
-	# install-script (.sh vs. .js) w/ dialog evtl. etc. ..
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# (de-)serialisierung; @ own object codebase(s) .. mit div. (db-like-)optimierungen ..! ;-D´
 
@@ -1149,16 +710,13 @@
 		=> und db-query(-language) - "statt" referenzen im script
 
 
-	eigene objekte w/ database-zugriffen ..
+	# eigene objekte w/ database-zugriffen ..
 
 		=> evtl. hilft's ja .. wenn ich get/set-accessoren verwende?
 
 			.. so im sinne ganzer objekt-zugriffe statt nur einzelne attribute?! :-D
 
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# "ALLES" (.. zumweiterdenken!) relativieren durch "settings" .. hin zu globalem ..
 
@@ -1168,38 +726,7 @@
 			=> was wäre daraus zu machen, wenn mehrfache variablen-zugriffe durch ein
 				dictionary bestimmte keys hätten. etc..
 
-
-	# überall, wo multiple indices o.ä. .. "! type(.., 'Array')" -> NICHT "type(.., 'String'|'number')"
-
-
-
-
-
-
-	# String(/Array).replaceAt(_start, _length, _replaceBy) // ausscheniden && beliebig einfügen
-
-		=> 'insert()' sowie 'cut()' basieren darauf!!! :-D
-
-
-		# string[0] = 'x'; // GEHT NICH!! selgit bst neue funktionen dazu .. (w/ substr() maybe ;)´
-
-		# string..upperCaseAt & lowerCaseAt()
-
-
-
-
-
-
-
-
-	# global.file() (w/ global.file.path())
-	# every "path" argument etc. to be handled additionally by "global.file.path()"
-
-		=> bitte konkrete umsetzung bei jeder funktion, die mit pfaden agiert!
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# (most of the) following vars are only set in "interpreter" mode ..
 
@@ -1212,400 +739,49 @@
 			process.real
 			process.name
 
-
-
-
-
-
-
-	# variables as arrays!? so some kind of memory .. (TODO) (especially @ 3dscript or w/ neural)
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# test if all my changes work .. meaning: test *every* single function, if it works as expected ..! be sure..
 
 	# also test if 'export JS_LIBRARY_PATH' worx! (remember: not existing dirs will be removed! ;-)
 
-
-
-
-
-
-
-
-
-	# check `./test.js eins zwei "drei vier fünf" sechs --debug=4` .. double output, other formats .. want only one..?!
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	WICHTIGe basis: "doc/txt/OBJECT-TODO.txt" @ Object.prototype.TODO ^_^
 
 		=> TODO is more automatism. for this.. so more concrete code structure and algoirthms!
 
+------------------------------------------------------------------------------------------------------
 
+	# security/permissions on functions and objects etc pp. "object.auth()" etc. .. "obj.register()" pp. ...
 
+------------------------------------------------------------------------------------------------------
 
+	# browser-kompaitiblität
 
+		=> ALLES? idee schon oben .. oder teile wenigstens, siehe "util/*" ..
 
-	# net/*				w/ filter/tunnel, ..
-	# core/context.js
-	# core/console.js
-	# core/stream.js		@ SYNC @ mud-räume? *BIT*-read() (and other systems? also Int16/32/..)!
+------------------------------------------------------------------------------------------------------
 
+	# core/master etc.
 
+		=> IPC. siehe threads, netzwerk, cluster, ..
 
+		=> mud-erweiterungen .. synchronized _context z.b. etc.
 
+			=> w/ SCRIPT(ING)-CONTEXT(s)
 
+		=> threading .. u.a. server sollen multiple cpu-kerne sowie netz-lasten-verteilung nutzen
 
-	kernel/application.js ..!!!
+------------------------------------------------------------------------------------------------------
 
-		w/ 'web/desktop' and 'web/scout' .. for web/application .. @ explorer styles (scout) ;-)
+	# *own* "Math.round(_number, _precision)"
 
+		=> siehe "test/math/round.js"..!!
 
-
-
-	# security/permissions on functions and objects etc pp
-
-
-
-
-	# Array... (some methods still [partial] TODO)!
-
-		=> Array.prototype.remove(Real)()!
-
-		=> Array.prototype.[real]removeAt(); // w/ 'diff' as of splice() ;-)
-
-
-
-
-
-
-
-
-
-	# Arguments.get(_offset, _type); => _type as ARRAY (multiple type possibilities!)
-
-	# Arguments.map()
-
-		=> VIRTUAL POLYMORPHY!??! => see "doc/txt/virtual_polymorphy.txt"
-
-
-
-	# Array.prototype.replace(_from, _to, _substr);
-
-
-	# String.prototype.replace.all() => does the new '_repeat' argument make sense??
-
-
-
-	# code/processor.js => js-pre-processor [really necessary? or rather 3DScript only (code/script/*)?]
-
-
-	# (String||Array).(get||set)(_indices, _lengths); // also multiple _lengths! ;-D´
-
-
-	# String.prototype.indexOf(All||Any)()
-
-	# Array.prototype.indexOf(Any||Type)()
-
-
-	# ...lastIndexOf(..) [by myself, as indexOf by me, 2?!!?];
-
-
-	# indexOfAll (@ String @ Array)
-
-		=> TODO: ich möchte in "Array.prototype.indexOfAll" multiple parameter angeben können;
-			damit direkt kausalitäten gesucht werden ..!
-
-			=> evtl. auch noch höhere abstände untersuchen, wenn mehrere argumente zu finden
-
-		=> TODO: case IN-sensitive search.. (IF String to search - also every string in array(s))
-
-		=> TODO: *SUB*-string-search additionally (==> sub-string search in array items)
-
-		=> 2nd & 3rd argument (_from, _to) .. if (_to < _from) => reverse search/result?!
-
-		=> FRAGE: warum zw. String und Array folgende unterschiee!???
-
-			Array.*
-
-			        var idx = _start - 1;
-
-                			if(_end <= idx - 1)
-			                {
-			                        break;
-			                }
-
-			                if(idx > -1)
-			                {
-                        			result[result.length] = idx;
-			                }
-
-			String.*
-
-        			var idx = _start;
-
-			                if(_end < idx - 1)
-			                {
-			                        break;
-			                }
-
-                			if(idx > -1)
-			                {
-			                        result[result.length] = idx - 1;
-			                }
-
-
-
-
-
-	TODO: in String & Array alle offset-bezüge durch eigene funktion "index" bzw. "offset" erweitern!!!
-
-		=> praktisch so die sprache selbst erweitern damit .. (evtl. nur 3DScript?) ..
-
-			=> dann auch alle weiteren (zugriffs-)möglichkeiten in script-sprache erweitern
-
-
-
-
-
-
-	# net/*
-
-	# util/*
-
-	# crypto/*
-
-	# compress/*
-
-	# console/*
-
-		( => bedenke auch "example/16.sh" sowie "example/256.sh" .. )
-
-		# neben "console/forms" auch "web/forms"; von wegen "--xml"; bzw. multiple streams
-
-
-
-
-
-
-
-
-
-	# settings.DEBUG = 5;
-
-		// TODO / further stats/metrics/.. etc. (..? ...even more?)
-
-
-		=> sowohl console.debug() als auch "log/" bzw. util/log(??) erweitern
-
-	# "console.log/*()" => MULTI-LINE-text-anpassung (hostname? stream-prefix uva. "util/time"(!!))
-
-
-	@ util/time
-	@ util/size
-
-
-
-	@ global/getopt.js vs. util/getopt (!!???!)
-
-		=> hier (passend zur config, siehe folgendes)
-
-					@ config.js
-
-				# config.START w/ START_ARGV [ (0)"--no-start", (1)"--start" ]
-				# config.DEBUG w/ LEVEL + DEBUG_ARGV [ (0)"--no-debug", (1)"--debug" ]
-
-			.. so weiter machen, dass zusätzlich parse()d wird auf ' %d' (evtl.) und/oder
-
-
-				'-[-]%s=%d'
-
-
-			.. o.ä. ... z.b. für "--debug 50[%]" oder "--debug=50[%]" ;-)
-
-		=> danach: "richtige" version .. wird zwar eigene abwandlung wieder, aber
-			dann bin ich auch damit zufrieden trotzdem. hat paar vorteile! ;)
-
-			.. v.a. also auch "--debug" check usw. @ global.debug() (/global/script.js)
-
-
-
-
-				@ BTW...! .. gerade nur sehr konkreter code für "global/getopt.js"!
-
-					ich muss bald eine abstrakte(re) version schreiben, ...
-				dazu gehören folgende dinge: ..
-
-
-			.. (a)	jedes *atomare* getopt braucht eine liste o.ä. der echt nutzbaren arguments
-					/ parameters (keys) ...
-
-
-			.. (b) am besten mit angabe, ob weitere params als werte-zuweisung (auch in listen
-					hinein) bestehen KÖNNEN *ODER* MÜSSEN!?! ...
-
-				=> bzw. bestenfalls, für beide fälle abzählen, wie viele denn ...!
-
-
-			.. (c) und natürlich die liste der notwendigen und unnötigen parameter ...
-				by ZÄHLUNGEN!???
-
-
-			.. (d) STRUKTUREN!? .. was ist mit den KONSTELLATIONEN der schalter, wie sie sich
-				evtl. gegenseitig aufheben/behinderten oder so? ist das sache der software-
-				konkretion, für jede application etc. ... oder .. was dann v.a. sinnvoll wäre,
-				wenn solche codierung einfach ist, aber dennoch viel wirkung beisteuert ..!?
-
-
-			.. (e)  [TODO]  ..
-
-
-
-
-
-
-
-					=> alles hin zur voll-automatischen abarbeitung ...
-
-				...	.. auf der basis möglichst simpler, but powerfull description(s/ codes)!
-
-
-
-
-
-
-
-		(PS) bedenke, das ganze am besten *immer* anzuwenden, also *direkt* auf alle "echten"
-
-			prozess-*AUFRUFE* - wie in einer *SHELL* (geht ja auch zu 3d-shell-schripts)!
-
-		.. sprich, echte js-funktionen erhalten den aufruf-fokus (quasi.. eh async!) durch eine
-		process-name-schlüssel-eingabe ..
-
-				... innerhalb einer der ganzen "object.console()[.stream(in/out/err/*]"!!!!
-
-
-			im regulären shell-format ganz easy, nicht mehr nur gezählte parameter abzugeben,
-
-		SONDERN DIREKT wie zb genau so:
-
-
-
-					"/new.js /lib/net/protocol/http/server.js -p 80 --host 127.0.0.1
-
-	# __BEACHTE__ die eingabe von ZWEI JS-prozess(en/-files)!!
-
-
-
-
-
-
-# browser-kompaitiblität
-
-
-
-
-# core/master etc.
-
-	=> mud-erweiterungen .. synchronized _context z.b. etc.
-
-		=> w/ SCRIPT(ING)-CONTEXT(s)
-
-	=> threading .. u.a. server sollen multiple cpu-kerne sowie netz-lasten-verteilung nutzen
-
-
-
-
-
-
-Object.prototype.*
-
-	=> alle..
-
-
-
-
-String.prototype.toText() o.ä.
-
-	=> es geht darum, einerseits konsolen-ausgabe korrekt umzubrechen (wörter trennen, nicht bytes)
-
-	=> und es geht darum, bei zu großen ausgabe-strings die nächste(n) zeilen bei einer bestimmen
-		breiten-/offset-positionen zu beginnen. so dass es ordentlich aussieht!
-
-
-
-
-
-
-*own* "Math.round(_number, _precision)"
-
-	.. as "round(1.456)" (etc.) show (1), not (2) ..etc!
- 
-		... sprich, wir müssen das erledigen, was bislang fehlt:
-			von hinten rückwärts nach vorne hin *alle* (> 5)
-			mit anwenden ...
-
-		.. regulär scheinen also weitere ziffern zu übersehen ..
-
-			PS: kann auch schrittweise jeden ziffern-schritt mehr "round()";
-				but that's not that efficient (as direct symbol comparison), eh!??
-
-
-
-
-Object.toString() etc. .. (w/ 'currentDepth, maxDepth' und als erstes arg '_radix' (außen-limits, siehe array*!)
-
-
-global.file.path.dirname w/ array (check global.file.path.basename for same style)
-	// CHEKC W/ *SINGLE* ARG FIRST! then multiple args ..
-	// single arg should return string, multiple should return array!
-
-
-array/string.(prefix/suffix) w/ MULTIPLE values..
-array.prefix/suffix w/ NESTED ARRAY support ;-)
-// ich will auch noch alle suffix (zb) '.txt' => '.TXT' "übersetzen" w/ argument(str+arr) & für array-anwendung
-Array.replace.all(from, to); // plus mapping??
-Array.replace (EXISTGS?!?) @ String.replace() call for every ..
-
-Object.keys => (_options{prefix,suffix}, foreign)
-Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_from,_to})
-
-
-
-
-
-
-
-
-
-
-
-
-
-	'/etc' einbinden ...
-
-	'/txt', '/xml', '/obj', ...
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 	# process.exit();
-
 
 		# Error.prototype
 
@@ -1615,7 +791,6 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 
 				=> evtl. result-code von "Error.prototype.stack" abhängig machen; im sinne von
 					.. String.prototype.(hash||sum(byte)) o.ä.
-
 
 		// somehow ... verbindung von process.exit() w/ fehler-code-rückgabe mit regulären
 			.. "Error"-throw() oder so .. damit "Error" passende (int ==> byte) values
@@ -1638,60 +813,7 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 					HEBEL weiter zu relayen usw. ... der reihe nach alle hierarchie-
 					ebenen (in '_error_one_two' sind das ja drei dimensionen .. USW)
 
-
-
 ------------------------------------------------------------------------------------------------------
-
-
-
-
-	allg. db-anschluss, FLACH @ hangel/hebel, beweg.-protokoll, .. dim verschiebe-vektoren, ...
-
-
-
-
-		(a) dimensionale verschiebe-vektoren in vektor-raumzeit-grafik ...
-
-					... wo wir max. abstrakt mit 0d-punkten arbeiten, die so als
-					1d-linien-zeichnung einen link mit weiteren zellen eingehen;
-					und jede zelle sammelt alle nachbar-zell-links - unter ihren
-					(eben so) abgezählten träger-achsen ...
-
-						.. zell-verschränkung etc. betrachten @ obj.-transf.
-						.. körper/obj-struct. in vielen dimensionen parallel
-
-			wo wir camera-viewpoint und objekte-/körper-betrachtungen haben ..
-
-					.. vergiss auch nicht ..
-
-							(1) 2d-zell-gitter-struktur als basis (wo ich
-								auch erste wellen-ausbreitungs- sowie
-								zell-KOMMUNIKATIONS-(DE-)MODULATIONS-
-								bewegungen ausprobieren kann) ..
-
-							(2) höhere zell-links, also weg vom ordentlichen
-								2d-raster mit gleich großen & entfernten
-								zellen -> hin zu objekt-structs durch in
-								polygon-meshes usw. verbundene zellen ..
-
-								=> KÖNNTEN ÜBERHAUPT AUS REIN VIRTUELLER
-									EXISTENZ bestehen (nur aus allen
-									(wellen-)bewegungen also) .. die
-							.. GRÖßEREN OBJEKTE-POLYGON-MEHS-STRUKTUREN sind
-							so EVTL. nur das ergebnis der energie-bewegungen
-							(von zahlen/zählungen) zwischen den zellen, hin-
-							und her-schinngend ...
-
-
-
-		.. JEDENFALLS! .. die verschiebungen sind durch additive (//multiplikative??) modulation
-
-			zusammen aufzusummieren, damit stets
-
-
-
-
-
 
 	# .(?)/vector.js w/ ./matrix.js
 
@@ -1699,11 +821,7 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 
 			=> @ mul, div, add, sub, mod, .. AT LEAST.
 
-
-
-# *own* Number.* ..
-
-
+	# # *own* Number.* ..
 	=> maybe "Figure" .. w/ ABSTRACT MATHs ..
 
 		@ vektor-raumzeit- und pointer-arithmetics ..
@@ -1716,27 +834,6 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 	=> BigInt .. => "BigNumber" (siehe dazu auch die paar bookmarks
 
 	=> BigBoolean bzw. BigBit!? BigByte? ^_^
-
-
-		@ util/bitmask.js
-
-			=> own implementation in 'Figure' (as 'BitBool' or so) or EXTEND 'Boolean'?!!!!
-
-
-
-		-----------------------------------------------------------------------------------------------
-		< http://mathjs.org/docs/datatypes/bignumbers.html >
-		< http://www.joseprio.com/blog/2013/04/27/biginteger-libraries-for-js/ >
-		< https://silentmatt.com/biginteger/ >
-		< http://zhangwenli.com/blog/2013/10/23/converting-to-numbers-in-javascript/ >
-		< https://javascript.info/number >
-		< https://github.com/tc39/proposal-bigint >
-		< https://github.com/substack/node-bigint >
-		< https://github.com/rauschma/strint >
-		< https://stackoverflow.com/questions/36826748/how-to-convert-strings-to-bigint-in-javascript >
-		< http://2ality.com/2012/07/large-integers.html >
-		< https://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript >
-		-----------------------------------------------------------------------------------------------
 
 
 	ich möchte ganz eigene "Figure"-klasse für meine eigene zahl haben.
@@ -1755,32 +852,6 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 				konstruktion zu energie-vektoren in nD-dimensionalität; raumzeit-GRID;
 
 
-
-		(TODO)
-
-
-
-	jedenfalls .. am besten wäre, entweder ...
-
-
-			(a) ich verwende den eigenen parser etc. - so dass ich durch "3DScript" zuerst
-				schaffe, meine eigenen (bigint/bignum(!!!!!)) zahlen zu verwalten (mit
-				eigenen sys-konv... [zahlenstrahl???]) ... und parallel dennoch keinen
-				unnötigen code brauche, um damit umzugehen .. (also keine strings erst
-				zum "greifen" der zahlen o.ä. oder ihr internes durchzählen usw. über-
-				haupt auf der basis der originalen js-zahlen ..
-
-			(b) letzteres (original-js-zahlen-class) möchte ich gänzlich vollständig durch
-				meine eigenen erweiterungen *absolut* ersetzen. evtl. auch so denkbar.
-
-
-
-	(TODO) siehe deine bookmarks, da waren 10 links oder so für (js') bignum/bigint, w/ tutorials!
-
-
-
-
-
 		[WICHTIG] ( TODO )
 
 			studiere die quanten ganz genau .. felder und prozesse ... bewegungen & division!
@@ -1792,75 +863,9 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 			(gfx/geometrie-)(!!)transformationen ... etc. pp. ... (natürl. w/ absttr.-denken).
 
 
-
-
-
-
+	=> siehe "doc/txt/NUMBER.txt"!
 
 ------------------------------------------------------------------------------------------------------
-
-
-	ganz, ganz wichtige sache (im prinzip evtl. auch extra weitere klassen o.ä.?)
-
-
-		# fromString(..
-
-		# toString(_radix)
-
-
-	hier evtl. eine art (DE-)SERIALISIERUNG o.ä. .. zur daten-übertragung und code-sicherung aller
-	laufzeit-instanzen usw. etc. pp. ..
-
-
-		TODO: eben AKTIVE DATENBANK, direkt ("flach") angebunden und hangelnd/hebelnd etc., so
-		dabei direkt (de-)modulation der code-symbole mit/aus/durch/* alle anderen (rotation);
-
-
-	bedenke v.a. ..
-
-
-		=> DATENBANK(-Carrier(-Code))
-
-
-			(a) carrier-code in aller bewegung der quantenfelder/pointer/zahlen-zählungen!
-
-			(b) die eigentliche, effiziente, intelligente (non-redundante, ..) CODIERUNGS-
-			..  *BASIS* der/des eigenen datenbank/filesystem!!!
-
-
-				klar muss ich alles heraus holen. effizienz! verlorene ist teufelzeug!
-
-
-			(c) vergiss auch nicht einfachste "flat file" (w/ (LENGTH) @ multiple jump-refs)
-
-
-			(d) MODULO @ (de-)modulation etc. .. bzw. virtuelle summation (oder substraktion
-				bei neg. beweg-richtung => sub() == DE-mod.) .. etc. .. (zahlenstrahl??)
-
-
-			(e) virtuelle bewegungen .. durch (-/+) mathematik, statt phys. code bewegen!!!!!
-
-
-			(f) nutzen multiple zahlensysteme .. u.a. (und weitaus mehr!!!) wg. NON-ESCAP'ING ;)
-
-
-	=> DON'T FORGET:
-
-
-		use "(M)ALLOC()" o.ä. .. eigene version jedenfalls. ich fordere dann von meinem eigenen
-		system erstmal gewisse speicherplätze (freie bereiche, zusammen gesetzt zu einem ganzen
-		zell-(link-)string z.b. (virt. liste/string/Proz. also ^_^) .. usw.
-
-			baldige umsetzung auf hdd, ganz klar, oder im netzwerk (!!!!!!!!!!!!!!!) w/ RAIDs!
-
-		und wie die firewall "net/filter/" jede i/o-verbindung schützt, so schützt ein ..
-		... QUOTA-modul jeden speicherplatz ..
-
-
-
-
-------------------------------------------------------------------------------------------------------
-
 
 	# global.execute() vs. (v.a.) "global['$'](cmdLine)"!!!!!
 
@@ -1880,12 +885,10 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 
 
 
-
 			beachte nur evtl. "PATH"-config .. muss *EVTL* in "process.env['PATH']",
 			EVENTUELL ABER auch selbst sowas mit implementieren ... dass meine soft-
 			ware as eine shell selbst alle ihre (eigens verwalteten) pfade so unter-
 			sucht! ^_^
-
 
 
 					=> TODO: sub-directories einbeziehen in $PFAD-suchläufe;
@@ -1894,22 +897,10 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 							von sowas wie ...
 
 
-
-						/ $> editor/vim
-
+!! ->						/ $> editor/vim
 
 
 					.. auch wenn "/bin/editor/vim" existiert etc.!
-
-
-
-							BESTE MÖGLICHKEIT, MEHR ORDNUNG IN SEIN SYSTEM
-							ZU BRINGEN!!!! WICHTIG! .. nachteile? todo ^_^
-
-		PS: bitte REKURSIV möglich machen ...
-		SOWIE reguläre VARIABLEN einsetzbar halten!
-
-
 
 
 					PPS: CONFIG-FILE-PARSER!! wird dann zum SCRIPT-FILE-INTERPRETER!!
@@ -1930,32 +921,6 @@ Object.filter(EXIST??)||.copy(filter)(EXIST!??) => (_options{prefix,suffix}||{_f
 
 				... sonstige GEHEIMNISSE "guter"[tm] codierbarkeiten!??
 
-
-------------------------------------------------------------------------------------------------------
-
-	# "3dscript/*" .. [specifications nearly complete/ready .. ;-]´
-
-	=>	@ https://kekse.biz/lib.js/ (@ /lib.js/doc/www/*)
-
-		(some php + js styles for automatic documentation etc. pp...)
-		[w/ referential(!) "inclusion" of "npm.js" and "github" data]
-
-			.. maybe i should add some extra structure to the .js
-			source files .. either like C#'s "///" comments or my
-			own specialized functions .. research a bit @ google!
-
-		# api-dokumentation automatisch erzeugt .. w/ "intellisentence" @ [own] ide(s)
-
-			=> dazu noch "3DScript" bedenken..!!
-
-			=> evtl. durch JavaScript-PRE-PROCESSOR?
-
-			=> alternativ echtes scripting bedenken ..
-
-				(a) shell-scripting (Any/Shell)
-
-				(b) scripting daemon (ansi c) .. w/ own (net-)protocol (@ remote-control)
-
-------------------------------------------------------------------------------------------------------
+======================================================================================================
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
-------------------------------------------------------------------------------------------------------
+======================================================================================================
