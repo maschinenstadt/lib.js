@@ -95,7 +95,7 @@ And in the browser you can do so:
 	var base64 = web.util.random.base64(length);
 	var dec = util.random.decimal(length);
 	//
-	var dual = util.randomData(length, 'dual'||2);
+	var dual = util.random.randomData(length, 'dual'||2);
 	var arbitrary = util.random.radix(length, 36);	// (36) is JS' maxim.
 
 OR you can see a example, ready to use in "./example/readRandomBytes.js". HF!
