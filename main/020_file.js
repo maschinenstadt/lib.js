@@ -642,7 +642,86 @@ global.file.read = function(_path, _encoding = global.file.encoding)
 	return null;
 }
 
-// _encoding = ( 'utf8' || 'hex' || 'base64' || 'ascii' || 'utf16le'//'ucs2' || 'latin1'/'binary' ); (!!!)
+global.file.random = function(_size = global.settings.random.length, _encoding = false)
+{
+	if(! global.type(_size, 'Number'))
+	{
+		_size = settings.random.length;
+	}
+	if(global.type(_encoding, 'Number'))
+	{
+		if(_encoding < Number.base.min || _encoding > Number.radix.max)
+		{
+			return new Error(Number.radix.min + ' .. ' + Number.base.max + ' (' + _encoding + ')');
+		}
+	}
+	else if(global.type(_encoding, 'Boolean'))
+	{
+		if(_encoding)
+		{
+			_encoding = global.settings.encodings[global.settings.encoding];
+		}
+	}
+	else if(! global.type(_encoding, 'String'))
+	{
+		return new Error(global.type(_encoding));
+	}
+
+	var p = settings.random.entropy;
+
+	if(not(p))
+	{
+		return new Error(global.type(p));
+	}
+
+	return (global.file.readBytes(p, _size, _encoding));
+}
+
+global.file.random.binary = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'binary');
+}
+
+global.file.random.utf8 = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'utf8');
+}
+
+global.file.random.hex = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'hex');
+}
+
+global.file.random.octal = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'octal');
+}
+
+global.file.random.decimal = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'decimal');
+}
+
+global.file.random.dual = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'dual');
+}
+
+global.file.random.base64 = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, 'base64');
+}
+
+global.file.random.radix = function(_size = global.settings.random.length, _radix = global.settings.random.radix)
+{
+	return global.file.random(_size, _radix);
+}
+
+global.file.random.buffer = function(_size = global.settings.random.length)
+{
+	return global.file.random(_size, false);
+}
+
 global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encoding = false, _flags = 'r')
 {
 	if(global.type(_path, 'String'))
@@ -662,9 +741,12 @@ global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encod
 		{
 			_encoding = global.file.encoding;
 		}
-		else
+	}
+	else if(global.type(_encoding, 'Number'))
+	{
+		if(_encoding < Number.radix.min || _encoding > Number.base.max)
 		{
-			_encoding = undefined;
+			return new Error(Number.base.min + ' .. ' + Number.radix.max);
 		}
 	}
 	else if(! global.type(_encoding, 'String'))
@@ -685,23 +767,75 @@ global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encod
 		return null;
 	}
 
-	var buffer = new Buffer(_size);
-	var handle = global.nodejs('fs').openSync(_path, _flags);
-	var read = global.nodejs('fs').readSync(handle, buffer, 0, _size);
+	var result = '';
 
-	var result;
-
-	if(_encoding)
+	while(result.length < _size)
 	{
-		result = buffer.toString(_encoding);
-		result = result.substr(0, _size);
-	}
-	else
-	{
-		result = buffer;
+		var buffer = new Buffer(_size);
+		var handle = global.nodejs('fs').openSync(_path, _flags);
+		var read = global.nodejs('fs').readSync(handle, buffer, 0, _size);
+
+		if(global.type(_encoding, 'Boolean'))
+		{
+			if(_encoding)
+			{
+				result += buffer.toString('binary');
+			}
+			else
+			{
+				return buffer;
+			}
+		}
+		else if(global.type(_encoding, 'String'))
+		{
+			switch(_encoding)
+			{
+				case 'utf8':
+				case 'hex':
+				case 'base64':
+				case 'binary':
+					result += buffer.toString(_encoding);
+					break;
+				case 'dual':
+				case 'bits':
+				case 'bit':
+					for(var i = 0; i < buffer.length; i++)
+					{
+						result += buffer[i].toString(2);
+					}
+					break;
+				case 'octal':
+				case 'oct':
+					for(var i = 0; i < buffer.length; i++)
+					{
+						result += buffer[i].toString(8);
+					}
+					break;
+				case 'decimal':
+				case 'dec':
+					for(var i = 0; i < buffer.length; i++)
+					{
+						result += buffer[i].toString(10);
+					}
+					break;
+				default:
+					return '';
+			}
+		}
+		else if(global.type(_encoding, 'Number'))
+		{
+			for(var i = 0; i < buffer.length; i++)
+			{
+				result += buffer[i].toString(_encoding);
+			}
+		}
+		else
+		{
+			return null;
+		}
 	}
 
-	return result;
+	return (result.substr(0, _size));
 }
 
 global.file.readBytes.utf8 = function(_path, _size = 0, _flags = 'r')
@@ -722,6 +856,31 @@ global.file.readBytes.base64 = function(_path, _size = 0, _flags = 'r')
 global.file.readBytes.binary = function(_path, _size = 0, _flags = 'r')
 {
 	return global.file.readBytes(_path, _size, 'binary', _flags);
+}
+
+global.file.readBytes.dual = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'dual', _flags);
+}
+
+global.file.readBytes.decimal = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'decimal', _flags);
+}
+
+global.file.readBytes.octal = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, 'octal', _flags);
+}
+
+global.file.readBytes.radix = function(_path, _size = 0, _radix = 2, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, _radix, _flags);
+}
+
+global.file.readBytes.buffer = function(_path, _size = 0, _flags = 'r')
+{
+	return global.file.readBytes(_path, _size, false, _flags);
 }
 
 global.file.write = function(_path, _data = global.EOL, _encoding = global.file.encoding)

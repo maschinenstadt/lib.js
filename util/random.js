@@ -125,6 +125,10 @@ if(BROWSER)
 						case 'binary':
 
 							str += String.fromCharCode(buffer[i]);
+							break;
+
+						default:
+							return '';
 					}
 				}
 			}
@@ -170,6 +174,14 @@ else
 		{
 			_length = random.length;
 		}
+
+		//
+		var buffer = global.file.readBytes(p, _length, false);
+
+		//
+
+		//
+		return buffer;
 	}
 
 	function randomCrypto(_length = random.length)
@@ -185,6 +197,14 @@ else
 		{
 			_length = random.length;
 		}
+
+		var buffer = new Buffer(_length);
+
+		//
+		this.crypto = global.nodejs('crypto');
+
+		//
+		return buffer;
 	}
 
 	//
@@ -209,17 +229,24 @@ else
 			_encoding = random.encodings[random.encoding];
 		}
 
-		var result; // maybe not here (following "if+else")?!??
-		var buffer = new Buffer(_length);	// o.k.?
+		var result;
 
 		if(crypto)
 		{
-			result = randomCrypto(_length, buffer);
+			result = randomCrypto(_length);
 		}
 		else
 		{
-			result = randomCrypto(_length, buffer);
+			result = randomDevice(_length);
 		}
+
+		if(global.type(_encoding, 'String'))
+		{
+			result = result.toString(_encoding);
+		//TEST	//result = result.substr(0, _length);
+		}
+
+		return result;
 	}
 }
 
@@ -275,158 +302,3 @@ random.radix = function(_length = random.length, _radix = (random.radix || 2))
 
 
 //random.random = function //TODO: NERALY same as Math.random' *original*!
-
-
-
-
-
-
-
-
-/*
-
-
-////////
-//if !encoding =>  return buffer
-//////////
-
-	Object.defineProperty(random, 'random', {
-		value: function(_length = random.length, _encoding = random.encoding[0])
-		{
-			if(random.entropy)
-			{
-			}
-		}
-	});
-
-
-
-
-	random.random = function(_length = random.length, _encoding = random.encoding[0])
-
-	if(random.entropy)
-	{
-		Object.defineProperty(random, 'random', {
-			value: function(
-		random = Object.assign(random, randomFile(random.entropy));
-	}
-	else
-	{
-		random = Object.assign(random, randomCrypto(random.crypto));
-	}
-}
-
-
-	//TODO/
-	// (a) 'binary', 'hex', 'base64'
-	// (b) ( 2 .. 36 )
-
-
-
-
-	//TODO/ ALSO "_radix" (>=2 && <= 36)! .. see BROWSER impl. (above)!
-
-
-function randomDevice(_length = random.length, _path = global.settings.random[0])
-{
-	if(! global.type(_length, 'Number'))
-	{
-		_length = random.length;
-	}
-	if(! global.type(_path, 'String'))
-	{
-		_path = global.settings.random[0];
-	}
-
-	if(! global.file.exists(_path))
-	{
-		return new Error(_path);
-	}
-}
-
-function randomCrypto(_length = random.length, _crypto = global.nodejs('crypto'))
-{
-	if(! global.type(_length, 'Number'))
-	{
-		_length = random.length;
-	}
-	if(! global.type(_crypto, 'Function'))
-	{
-		_crypto = global.nodejs('crypto');
-	}
-}
-
-
-
-
-
-
-
-	random.random = function(_length = random.length, _encoding = random.encoding[0])
-	{
-		if(! global.type(_length, 'Number'))
-		{
-			_length = random.length;
-		}
-		if(! global.type(_encoding, 'String'))
-		{
-			_encoding = random.encoding[0];
-		}
-
-		// Don't forget to shorten/pad result, by _encoding (producing various lengths)
-		var result = '';
-
-		// this 'while' is just to be sure... regularily it should work in once (see the "iterations" number variable..)
-		var iterations = 0
-		while(result.length < _length)
-		{
-			iterations++;
-
-			switch(_encoding)
-			{
-				case 'hex':
-					result += global.file.readBytes.hex(random.crypto, _length);
-					break;
-				case 'base64':
-					result += global.file.readBytes.base64(random.crypto, _length);
-					break;
-				case 'binary':
-				default:
-					result += global.file.readBytes.binary(random.crypto, _length);
-			}
-		}
-
-		if(iterations !== 1)
-		{
-			console.warning('"util/random": random() iterations not equal (1)! CHECK THIS!');
-		}
-
-		// SHOULD REGULARILY ALSO result in wished _length .. see "global.file.readBytes()" ;-)´
-		//if(result.length > _length)
-		//{
-		//	result = result.substr(0, _length);
-		//}
-		//
-		return result;
-	}
-
-	random.binary = function(_length = random.length)
-	{
-		return random.random(_length, 'binary');
-	}
-
-	random.hex = function(_length = random.length)
-	{
-		return random.random(_length, 'hex');
-	}
-
-	random.base64 = function(_length = random.length)
-	{
-		return random.random(_length, 'base64');
-	}
-
-	module.exports = random;
-}
-
-*/
-
