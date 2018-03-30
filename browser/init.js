@@ -205,6 +205,19 @@ toJSON = function(_object)
 	}
 }
 
+sleep = function(_delay = 1000)
+{
+	if(! type(_delay, 'Number'))
+	{
+		_delay = 1000;
+	}
+	//
+	var end = Date.now() + _delay;
+	while(Date.now() < end) {};
+	//
+	return Date.now();
+}
+
 EOL = "\r\n";
 ESC = String.fromCharCode(27);
 

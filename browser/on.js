@@ -49,17 +49,14 @@ on.mouse.move = function(e)
 	var y = e.clientY; // absolutes!?
 }
 
-on.second = function()
+on.second = function(_second)
 {
-	if(web.TIME.second % 20 === 0)
-	{
-		alert('[second] ' + web.TIME.second + '\n[minute] ' + web.TIME.minute + '\n');
-	}
 	return ++web.TIME.second;
 }
 
-on.minute = function()
+on.minute = function(_minute)
 {
+	alert('minute: ' + _minute + ', second: ' + web.TIME.second);
 	return ++web.TIME.minute;
 }
 
