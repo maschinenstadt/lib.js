@@ -140,6 +140,17 @@
 				});
 				// Now chance will use window.crypto for random rather than the Mersenne Twister
 
+!!!!!!!!!!!!!!!!		=> OR: generate str = '0.' + .. randomized decimal symbols to max. float nachkomma length; then "Number(str)"! ;-)´
+
+					=> but: sometimes we got .. bzw.
+
+						(a) pure 0.0
+						(b) pure 1.0
+						(c) various anzahl der nachkommastellen
+
+							=> perfekt lösbar: eine zusätzliche random-hebelung auf höherer, abstr. ebene (höhere loop?);
+								.. so dass eine länge von ziel-string(/-zahl) bestimmt wird. bei =(1) dann 0.0 vs. 1.0! ;-D
+
 
 
 			=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
