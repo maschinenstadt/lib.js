@@ -23,7 +23,7 @@ Object.defineProperty(Date, 'day', {
 	get: function() { return (1000 * 60 * 60 * 24); }
 });
 
-Object.defineProperty(this, 'week', {
+Object.defineProperty(Date, 'week', {
 	get: function() { return (1000 * 60 * 60 * 24 * 7); }
 });
 
