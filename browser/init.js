@@ -221,9 +221,9 @@ sleep = function(_delay = 1000)
 EOL = "\r\n";
 ESC = String.fromCharCode(27);
 
-function init(_ = {})
+function init()
 {
-	var _init = (_||{});
+	var result = Date.now();
 
 	//
 	web.TIMER = {};	// here are the timer HANDLES to "clearTimeout()" etc. them (best way, eh? ;-)´
@@ -285,12 +285,11 @@ function init(_ = {})
 	delete web.RANDOM.size;
 
 	//
-	return _init;
+	return result;
 }
 
-function main(_init = {})
+function _main()
 {
-	var _main = { _init = (_init || {}), _main = main() };
-	return _main;
+	return main(Date.now());
 }
 
