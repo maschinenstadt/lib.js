@@ -1,10 +1,5 @@
 function main(_ = {})
 {
-
-	//_.BIRTHDAY
-	//_.UUID
-	//
-
 	//
 }
 
