@@ -49,11 +49,12 @@
 	# "util/base" for base32/base64
 
 		=> [BROWSER] base*32* braucht wohl mehr code, weil im browser nur "atob" und "btoa" mit base*64*!
+
 		=> [NODE.JS] beides ist noch zu implementieren. manuell. gibt's da was fertiges in Node.js??
 
 	# "util/radix" for *EVERYTHING* (belibeige system-konversionen @ quantensystems etc.)
 
-		=> zahlenstrahl? oder welches mittel noch besser? (suche "die zahl"..)!
+		=> zahlenstrahl!?! oder welches mittel noch besser? (suche "die zahl"..)!
 
 		=> beliebiges hin und her zw. allen systemen ...
 
@@ -91,7 +92,7 @@
 
 				.. am besten ein (quasi-)"Interface" für ALLE crypto-verfahren. dazu konkrete _type-einsetzung.
 
-					=> use "/crypto/interface.js"!!! ;-D´
+					=> use "/crypto/stream.js" wg. "/crypto/${type}/stream.js"
 
 
 
@@ -149,6 +150,11 @@
 		# performance[.now()]
 
 		# hrtime(r) @ "util/time" OR "Date"!??
+
+
+
+
+
 
 
 
