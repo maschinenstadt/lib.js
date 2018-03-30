@@ -253,7 +253,7 @@ function init(_ = {})
 
 	web.RANDOM = {};
 
-	web.RANDOM.size = 64;
+	web.RANDOM.size = 32;
 
 	web.RANDOM.binary = web.util.random.binary(web.RANDOM.size);
 	web.RANDOM.hex = web.util.random.hex(web.RANDOM.size);
