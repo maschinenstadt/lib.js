@@ -128,6 +128,7 @@ if(BROWSER)
 
 						case 'base64':
 						case 'binary':
+						case 'latin1':
 
 							str += String.fromCharCode(buffer[i]);
 							break;
