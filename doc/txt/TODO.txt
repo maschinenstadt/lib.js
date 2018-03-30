@@ -6,6 +6,23 @@
 	# TODO: "main/150_random.js" -> uncomment "Math.random = main.random", when it's done!
 
 
+
+	# TODO: @ web-browser: "web.console" w/ "console.inspect()" u.a. etc. pp. .. ;-)´
+
+		=> good question: wäre es gute basis, wenn ich das gesamte "Node.js" (bzw. dessen api)
+			.. in den web-browser hinein brächte?
+
+				.. ich würde dann einfach alles server-seitige via "WebSocket API" übertragen;
+					.. natürlich mit inter-process-communication etc. ..
+
+					=> MAL SEHEN. future.
+
+		=> aber eine console mit TABELLEN-ausgabe, z.b. für FILE.LIST() (server-seiten-fs oder lokale fs-struct w/ ws://-daten-CODE!?)?!
+
+
+
+
+
 	------------------------------------------------------------	------------------------------------------------------------
 
 	# GRUNDSÄTZLICH "Object.defineProperty()" verwenden! ... zur implementation, auch bei prototype.
