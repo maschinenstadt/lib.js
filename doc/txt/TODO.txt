@@ -17,6 +17,8 @@
 
 	# "util/utf8" und "util/utf8math" .. beides sollte in den BROWSER; mindestens(!!); ..
 
+		=> prüfe, ob "utf8math" richtig liegt; vergleiche auch beide versionen(!); DANN nehme *NUR* "utf8math" (w/ rename!)
+
 ------------------------------------------------------------------------------------------------------
 
 	=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
