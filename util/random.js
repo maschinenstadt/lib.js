@@ -29,6 +29,25 @@ if(BROWSER)
 
 	function cryptoObjectData(_length = random.length, _encoding = false)
 	{
+		var buffer = new Uint8Array(_length);
+		cryptoObject.getRandomValues(buffer);
+		return buffer;
+	}
+
+	function mathRandomData(_length = random.length, _encoding = false)
+	{
+		var buffer = new Uint8Array(_length);
+
+		for(var i = 0; i < _length; i++)
+		{
+			buffer[i] = Math.random.integer(255, 0);
+		}
+
+		return buffer;
+	}
+
+	random.randomData = function(_length = random.length, _encoding = false)
+	{
 		if(type(_length, 'Number'))
 		{
 			if(_length < 1)
@@ -67,9 +86,18 @@ if(BROWSER)
 			iterations++;
 
 			var str = '';
-			var buffer = new Uint8Array(_length);
+			var buffer;
 
-			cryptoObject.getRandomValues(buffer);
+			if(cryptoObject)
+			{
+				buffer = cryptoObjectData(_length);
+alert('crypto... -> ' + buffer.length);
+			}
+			else
+			{
+				buffer = mathRandomData(_length);
+alert('math... -> ' + buffer.length);
+			}
 
 			if(_encoding === false)
 			{
@@ -147,139 +175,6 @@ if(BROWSER)
 		}
 
 		return result.substr(0, _length);
-	}
-
-	function mathRandomData(_length = random.length, _encoding = false)
-	{
-		if(type(_length, 'Number'))
-		{
-			if(_length < 1)
-			{
-				return new Error('_length < 1 (' + _length + ')');
-			}
-		}
-		else
-		{
-			_length = random.length;
-		}
-
-		var encType = type(_encoding);
-
-		if(encType === 'Boolean')
-		{
-			if(_encoding)
-			{
-				_encoding = random.encoding;
-			}
-		}
-
-		if(encType === 'Number')
-		{
-			if(_encoding < Number.radix.min || _encoding > Number.base.max)
-			{
-				return new Error(Number.radix.min + ' .. ' + Number.base.max);
-			}
-		}
-
-		var result = '';
-		var iterations = 0;
-
-		while(result.length < _length)
-		{
-			iterations++;
-
-			var str = '';
-			var buffer = new Uint8Array(_length);
-
-			for(var i = 0; i < _length; i++)
-			{
-				buffer[i] = Math.random.integer(255, 0);
-			}
-
-			if(_encoding === false)
-			{
-				return buffer;
-			}
-
-			for(var i = 0; i < buffer.length; i++)
-			{
-				if(encType === 'Number')
-				{
-					str += buffer[i].toString(_encoding);
-				}
-				else if(encType === 'String')
-				{
-					switch(_encoding)
-					{
-						case 'dual':
-						case 'bits':
-						case 'bit':
-						case 'bool':
-						case 'boolean':
-
-							str += buffer[i].toString(2);
-							break;
-
-						case 'octal':
-						case 'oct':
-
-							str += buffer[i].toString(8);
-							break;
-
-						case 'decimal':
-						case 'dec':
-
-							str += buffer[i].toString(10);
-							break;
-
-						case 'hex':
-						case 'hexa':
-						case 'hexadecimal':
-
-							str += buffer[i].toString(16);
-							break;
-
-						case 'base64':
-						case 'binary':
-						case 'bin':
-						case 'latin1':
-
-							str += String.fromCharCode(buffer[i]);
-							break;
-
-						default:
-
-							return buffer;
-					}
-				}
-			}
-
-			if(_encoding === 'base64')
-			{
-				str = window.btoa(str);
-			}
-
-			result += str;
-		}
-
-		if(iterations !== 1)
-		{
-			var errMessage = '"util/random": random() iterations not equal (1)! CHECK THIS!';
-			return new Error(errMessage);
-		}
-
-		return result.substr(0, _length);
-	}
-
-	//TODO/ better abstractions..!
-
-	if(cryptoObject)
-	{
-		random.randomData = cryptoObjectData;
-	}
-	else
-	{
-		random.randomData = mathRandomData;
 	}
 }
 else
