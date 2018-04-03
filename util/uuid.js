@@ -17,9 +17,9 @@ uuid.random = function(_radix = uuid.radix, _upperCase = false)
 {
 	if(global.type(_radix, 'Number'))
 	{
-		if(_radix < Number.base.min || _radix > Number.radix.max)
+		if(_radix < Number.radix.min || _radix > Number.radix.max)
 		{
-			return new Error(Number.radix.min + ' .. ' + Number.base.max);
+			return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 		}
 	}
 	else

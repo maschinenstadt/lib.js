@@ -650,9 +650,9 @@ global.file.random = function(_size = global.settings.random.length, _encoding =
 	}
 	if(global.type(_encoding, 'Number'))
 	{
-		if(_encoding < Number.base.min || _encoding > Number.radix.max)
+		if(_encoding < Number.radix.min || _encoding > Number.radix.max)
 		{
-			return new Error(Number.radix.min + ' .. ' + Number.base.max + ' (' + _encoding + ')');
+			return new Error(Number.radix.min + ' .. ' + Number.radix.max + ' (' + _encoding + ')');
 		}
 	}
 	else if(global.type(_encoding, 'Boolean'))
@@ -744,9 +744,9 @@ global.file.readBytes = function(_path, _size = 0, _encoding = global.file.encod
 	}
 	else if(global.type(_encoding, 'Number'))
 	{
-		if(_encoding < Number.radix.min || _encoding > Number.base.max)
+		if(_encoding < Number.radix.min || _encoding > Number.radix.max)
 		{
-			return new Error(Number.base.min + ' .. ' + Number.radix.max);
+			return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 		}
 	}
 	else if(! global.type(_encoding, 'String'))

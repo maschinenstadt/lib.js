@@ -76,7 +76,7 @@ if(BROWSER)
 		{
 			if(_encoding < Number.radix.min || _encoding > Number.radix.max)
 			{
-				return new Error(Number.base.min + ' .. ' + Number.base.max);
+				return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 			}
 		}
 
@@ -264,7 +264,7 @@ else
 		{
 			if(_encoding < Number.radix.min || _encoding > Number.radix.max)
 			{
-				return new Error(Number.base.min + ' .. ' + Number.base.max);
+				return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 			}
 		}
 		else if(! global.type(_encoding, 'String'))
@@ -307,7 +307,7 @@ else
 			{
 				if(_encoding < Number.radix.min || _encoding > Number.radix.max)
 				{
-					return new Error(Number.base.min + ' .. ' + Number.base.max);
+					return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 				}
 
 				for(var i = 0; i < buffer.length; i++)
@@ -403,7 +403,7 @@ random.radix = function(_length = random.length, _radix = (random.radix || 2))
 	{
 		if(_radix < Number.radix.min || _radix > Number.radix.max)
 		{
-			return new Error(Number.base.min + ' .. ' + Number.base.max);
+			return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 		}
 	}
 	else

@@ -8,9 +8,9 @@ mac.random = function(_radix = mac.radix, _separator = mac.separator, _upperCase
 {
 	if(global.type(_radix, 'Number'))
 	{
-		if(_radix < Number.radix.min || _radix > Number.base.max)
+		if(_radix < Number.radix.min || _radix > Number.radix.max)
 		{
-			return new Error(Number.base.min + ' .. ' + Number.radix.max);
+			return new Error(Number.radix.min + ' .. ' + Number.radix.max);
 		}
 	}
 	else
