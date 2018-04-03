@@ -33,13 +33,14 @@ Object.defineProperty(stack.prototype, 'push', {
 	enumerable: false,
 	value: function()
 	{
-		var result = [];
+		var result = 0;
 
 		for(var i = 0; i < arguments.length; i++)
 		{
 			if(this.stack.length < this.size)
 			{
-				result[result.length] = this.stack[this.stack.length] = arguments[i];
+				this.stack[this.stack.length] = arguments[i];
+				result++;
 			}
 			else
 			{
