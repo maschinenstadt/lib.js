@@ -8,3 +8,16 @@ easy engine quasi ..
 
 bis dahin verwenden wir ein array als result von glob(), um nun in reihenfolge
 der sternchen $1, $2 etc (wie regexp) zu erhalten. ..
+
+
+
+
+
+
+sowie ..
+
+
+	< https://blog.ircmaxell.com/2015/05/prefix-trees-and-parsers.html >
+
+	... gerade wg. ROUTING, mindestens(!) im HTTP-(server-)modul! ..
+
