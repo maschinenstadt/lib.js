@@ -5,6 +5,7 @@ global.global = global;
 
 web = {};
 util = web.util = {};
+struct = web.struct = {};
 
 if(settings.tls)
 {
