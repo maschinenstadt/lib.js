@@ -1,61 +1,73 @@
-//TODO/ maybe "extends list"!?!?
-class queue extends node
+var queue = function(_size = undefined)
 {
-	constructor()
+	if(global.type(_size, 'Number'))
 	{
-		super();
-		this.values = []; // TODO / see above .. maybe extending 'list'?!?
+		this.size = _size;
+	}
+	else
+	{
+		this.size = undefined;
 	}
 
-	enqueue(_item)
-	{
-		for(var i = 0; i < arguments.length; i++)
-		{
-			this.values.splice(0, 0, arguments[i]);
-		}
+	this.values = []; // TODO / see above .. maybe extending 'list'?!?
 
-		return Array.from(arguments);
-	}
+	//
+	return this;
+}
 
-	dequeue(_amount = 1, _peek = false)
+queue.enqueue = function()
+{
+	var result = [];
+
+	for(var i = 0; i < arguments.length; i++)
 	{
-		if(! global.type(_peek, 'Boolean'))
+		if(this.values.length <= this.size)
 		{
-			_peek = false;
-		}
-		if(global.type(_amount, 'Number'))
-		{
-			_amount = _amount % this.length;
+			this.values[this.values.length] = result[result.length] = arguments[i];
 		}
 		else
 		{
-			_amount = 1 % this.length;
+			return result;
 		}
+	}
 
-		var result = [];
+	return result;
+}
 
-		for(var i = 0; i < _amount; i++)
+queue.dequeue = function(_amount = 1, _peek = false)
+{
+	if(! global.type(_peek, 'Boolean'))
+	{
+		_peek = false;
+	}
+	if(! global.type(_amount, 'Number'))
+	{
+		_amount = 1;
+	}
+
+	_amount = _amount % this.values.length;
+
+	var result = [];
+
+	for(var i = 0; i < _amount; i++)
+	{
+		if(_peek)
+		{
+			result[i] = this.values[i];
+		}
+		else
 		{
 			result[i] = this.values[0];
-
-			if(! _peek)
-			{
-				this.values.splice(0, 1);
-			}
+			this.values.splice(0, 1);
 		}
-
-		if(_amount === 1)
-		{
-			return result[0];
-		}
-
-		return result;
 	}
 
-	peek(_amount = 1)
-	{
-		return this.dequeue(_amount, true);
-	}
+	return result;
+}
+
+queue.peek = function(_amount = 1)
+{
+	return this.dequeue(_amount, true);
 }
 
 if(BROWSER)

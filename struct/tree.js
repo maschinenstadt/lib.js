@@ -1,9 +1,7 @@
-class tree extends node
+var tree = function()
 {
-	constructor()
-	{
-		super();
-	}
+	//
+	return this;
 }
 
 if(BROWSER)

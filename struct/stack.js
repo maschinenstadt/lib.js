@@ -1,20 +1,39 @@
-//maybe "extends list"?!?
-class stack extends node
+var stack = function()
 {
-	constructor()
+	constructor(_size = undefined)
 	{
-		super();
+		if(global.type(_size, 'Number'))
+		{
+			this.size = _size;
+		}
+		else
+		{
+			this.size = undefined;
+		}
+
 		this.values = [];  // or rather "extends list"!??
+
+		//
+		return this;
 	}
 
 	push()
 	{
+		var result = [];
+
 		for(var i = 0; i < arguments.length; i++)
 		{
-			this.values[this.values.length] = arguments[i];
+			if(this.values.length <= this.size)
+			{
+				result[result.length] = this.values[this.values.length] = arguments[i];
+			}
+			else
+			{
+				return result;
+			}
 		}
 
-		return Array.from(arguments);
+		return result;
 	}
 
 	pop(_amount = 1, _peek = false)

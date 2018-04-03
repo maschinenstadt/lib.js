@@ -1,9 +1,16 @@
-class list extends node
+var list = function(_size = undefined)
 {
-	constructor()
+	if(global.type(_size, 'Number'))
 	{
-		super();
+		this.size = _size;
 	}
+	else
+	{
+		this.size = undefined;
+	}
+
+	//
+	return this;
 }
 
 if(BROWSER)

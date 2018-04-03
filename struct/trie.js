@@ -1,9 +1,7 @@
-class trie extends node
+var trie = function()
 {
-	constructor()
-	{
-		super();
-	}
+	//
+	return this;
 }
 
 if(BROWSER)

@@ -1,9 +1,7 @@
-class matrix extends node
+var matrix = function()
 {
-	constructor()
-	{
-		super();
-	}
+	//
+	return this;
 }
 
 if(BROWSER)
