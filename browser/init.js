@@ -194,8 +194,8 @@ global.sleep = function(_delay = 1000)
 
 global.sleep.delay = 1000;
 
-EOL = "\r\n";
-ESC = String.fromCharCode(27);
+global.EOL = "\r\n";
+global.ESC = String.fromCharCode(27);
 
 function INIT(_ = {})
 {
@@ -209,26 +209,30 @@ function INIT(_ = {})
 	var charset = global.settings.charset || 'utf-8';
 
 	var meta = document.getElementsByTagName('meta');
-	var charsetExists = -1;
+	var charsetIndex = -1;
 
 	for(var i = 0; i < meta.length; i++)
 	{
 		if(meta[i].getAttribute('charset'))
 		{
-			alert('exists (' + i + '): ' + meta[i].charset);
-			meta[i].setAttribute('charset', charset);
-			alert('now: ' + meta[i].charset);
-			charsetExists = i;
+			charsetIndex = i;
 			break;
 		}
 	}
 
-	if(charsetExists === -1)
+	if(charsetIndex === -1)
 	{
 		meta = document.createElement('meta');
 		meta.setAttribute('charset', charset);
 		html.head[0].appendChild(meta);
 	}
+	else
+	{
+		meta[charsetIndex].setAttribute('charset', charset);
+		meta = meta[charsetIndex];
+	}
+
+	global.html.charset = meta;
 
 	//
 	if(global.settings.title)
