@@ -9,7 +9,7 @@ var queue = function(_size = undefined)
 		this.size = undefined;
 	}
 
-	this.values = []; // TODO / see above .. maybe extending 'list'?!?
+	this.queue = []; // TODO / see above .. maybe extending 'list'?!?
 
 	//
 	return this;
@@ -20,13 +20,13 @@ Object.defineProperty(queue.prototype, 'toString', {
 	configurable: true,
 	value: function()
 	{
-		return this.values.toString.apply(arguments.caller, arguments);
+		return this.queue.toString();
 	}
 });
 
 Object.defineProperty(queue.prototype, 'length', {
 	enumerable: false,
-	get: function() { return this.values.length; }
+	get: function() { return this.queue.length; }
 });
 
 Object.defineProperty(queue.prototype, 'enqueue', {
@@ -37,9 +37,9 @@ Object.defineProperty(queue.prototype, 'enqueue', {
 
 		for(var i = 0; i < arguments.length; i++)
 		{
-			if(this.values.length <= this.size)
+			if(this.queue.length <= this.size)
 			{
-				this.values[this.values.length] = result[result.length] = arguments[i];
+				this.queue[this.queue.length] = result[result.length] = arguments[i];
 			}
 			else
 			{
@@ -64,7 +64,7 @@ Object.defineProperty(queue.prototype, 'dequeue', {
 			_amount = 1;
 		}
 
-		_amount = _amount % this.values.length;
+		_amount = _amount % this.queue.length;
 
 		var result = [];
 
@@ -72,12 +72,12 @@ Object.defineProperty(queue.prototype, 'dequeue', {
 		{
 			if(_peek)
 			{
-				result[i] = this.values[i];
+				result[i] = this.queue[i];
 			}
 			else
 			{
-				result[i] = this.values[0];
-				this.values.splice(0, 1);
+				result[i] = this.queue[0];
+				this.queue.splice(0, 1);
 			}
 		}
 

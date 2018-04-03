@@ -9,7 +9,7 @@ var stack = function(_size = undefined)
 		this.size = undefined;
 	}
 
-	this.values = [];  // or rather "extends list"!??
+	this.stack = [];  // or rather "extends list"!??
 
 	//
 	return this;
@@ -20,13 +20,13 @@ Object.defineProperty(stack.prototype, 'toString', {
 	configurable: true,
 	value: function()
 	{
-		return this.values.toString.apply(arguments.caller, arguments);
+		return this.stack.toString();
 	}
 });
 
 Object.defineProperty(stack.prototype, 'length', {
 	enumerable: false,
-	get: function() { return this.values.length; }
+	get: function() { return this.stack.length; }
 });
 
 Object.defineProperty(stack.prototype, 'push', {
@@ -37,9 +37,9 @@ Object.defineProperty(stack.prototype, 'push', {
 
 		for(var i = 0; i < arguments.length; i++)
 		{
-			if(this.values.length <= this.size)
+			if(this.stack.length <= this.size)
 			{
-				result[result.length] = this.values[this.values.length] = arguments[i];
+				result[result.length] = this.stack[this.stack.length] = arguments[i];
 			}
 			else
 			{
@@ -72,11 +72,11 @@ Object.defineProperty(stack.prototype, 'pop', {
 
 		for(var i = this.length - 1, j = 0; i >= 0; i--, j++)
 		{
-			result[j] = this.values[i];
+			result[j] = this.stack[i];
 
 			if(! _peek)
 			{
-				this.values.splice(this.values.length - 1, 1);
+				this.stack.splice(this.stack.length - 1, 1);
 			}
 		}
 
