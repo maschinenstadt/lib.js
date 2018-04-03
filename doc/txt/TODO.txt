@@ -4,32 +4,18 @@
 
 	# "util/random" ...
 
-		@ "BROWSER" doesn't support "utf8" charset return.. and more(?)?!
+		-> die folgenden _encoding fehlen noch in "util/random" innerhalb des BROWSER(!!);
 
-		=> check if browser really returns Uint8Array (buffer) on _encoding = false!!!!
-
-		-> MAKE ALL THESE WORK, also in BROWSER(!!)
-
-				# buffer
-				# array
-
-				# radix
-
-				# octal
-				# decimal
-				# dual
-
-				# base64
-				# hex
-
+				# ascii (7-bit!?)
 				# utf8
 				# utf16le|ucs2
 
 					// < https://developer.mozilla.org/de/docs/Web/API/TextEncoder >
 					// < https://developer.mozilla.org/de/docs/Web/API/TextDecoder >
 
-				# binary|latin1
-				# ascii
+------------------------------------------------------------------------------------------------------
+
+	# "util/utf8" und "util/utf8math" .. beides sollte in den BROWSER; mindestens(!!); ..
 
 ------------------------------------------------------------------------------------------------------
 
