@@ -27,18 +27,8 @@ if(BROWSER)
 {
 	var crypto = window.crypto || window.msCrypto;
 
-	random.randomData = function(_length = random.length, _encoding = false)
+	function cryptoObjectData(_length = random.length, _encoding = false)
 	{
-		if(not(crypto) || not(crypto.getRandomValues))
-		{
-			//TODO!!?
-			//NOW: using "return _error". better for now.. (check if worx in browser, maybe @ onload-catch?
-			//
-			//.. or should i GLOBALLY use the WEB.CONSOLE(S)!?!?!!?
-
-			throw new Error("window.crypto");
-		}
-
 		if(type(_length, 'Number'))
 		{
 			if(_length < 1)
@@ -103,6 +93,8 @@ if(BROWSER)
 						case 'dual':
 						case 'bits':
 						case 'bit':
+						case 'bool':
+						case 'boolean':
 
 							str += buffer[i].toString(2);
 							break;
@@ -128,13 +120,14 @@ if(BROWSER)
 
 						case 'base64':
 						case 'binary':
+						case 'bin':
 						case 'latin1':
 
 							str += String.fromCharCode(buffer[i]);
 							break;
 
 						default:
-							return '';
+							return buffer;
 					}
 				}
 			}
@@ -154,6 +147,137 @@ if(BROWSER)
 		}
 
 		return result.substr(0, _length);
+	}
+
+	function mathRandomData(_length = random.length, _encoding = false)
+	{
+		if(type(_length, 'Number'))
+		{
+			if(_length < 1)
+			{
+				return new Error('_length < 1 (' + _length + ')');
+			}
+		}
+		else
+		{
+			_length = random.length;
+		}
+
+		var encType = type(_encoding);
+
+		if(encType === 'Boolean')
+		{
+			if(_encoding)
+			{
+				_encoding = random.encoding;
+			}
+		}
+
+		if(encType === 'Number')
+		{
+			if(_encoding < Number.radix.min || _encoding > Number.base.max)
+			{
+				return new Error(Number.radix.min + ' .. ' + Number.base.max);
+			}
+		}
+
+		var result = '';
+		var iterations = 0;
+
+		while(result.length < _length)
+		{
+			iterations++;
+
+			var str = '';
+			var buffer = new Uint8Array(_length);
+
+			for(var i = 0; i < _length; i++)
+			{
+				buffer[i] = Math.random.integer(255, 0);
+			}
+
+			if(_encoding === false)
+			{
+				return buffer;
+			}
+
+			for(var i = 0; i < buffer.length; i++)
+			{
+				if(encType === 'Number')
+				{
+					str += buffer[i].toString(_encoding);
+				}
+				else if(encType === 'String')
+				{
+					switch(_encoding)
+					{
+						case 'dual':
+						case 'bits':
+						case 'bit':
+						case 'bool':
+						case 'boolean':
+
+							str += buffer[i].toString(2);
+							break;
+
+						case 'octal':
+						case 'oct':
+
+							str += buffer[i].toString(8);
+							break;
+
+						case 'decimal':
+						case 'dec':
+
+							str += buffer[i].toString(10);
+							break;
+
+						case 'hex':
+						case 'hexa':
+						case 'hexadecimal':
+
+							str += buffer[i].toString(16);
+							break;
+
+						case 'base64':
+						case 'binary':
+						case 'bin':
+						case 'latin1':
+
+							str += String.fromCharCode(buffer[i]);
+							break;
+
+						default:
+
+							return buffer;
+					}
+				}
+			}
+
+			if(_encoding === 'base64')
+			{
+				str = window.btoa(str);
+			}
+
+			result += str;
+		}
+
+		if(iterations !== 1)
+		{
+			var errMessage = '"util/random": random() iterations not equal (1)! CHECK THIS!';
+			return new Error(errMessage);
+		}
+
+		return result.substr(0, _length);
+	}
+
+	if(not(crypto) || not(crypto.getRandomValues))
+	{
+		random.randomData = mathRandomData;
+	}
+	else
+	{
+		random.randomData = cryptoObjectData;
 	}
 }
 else
@@ -306,6 +430,7 @@ else
 					case 'base64':
 
 					case 'binary':
+					case 'bin':
 					case 'latin1':
 
 					case 'utf8':
@@ -330,6 +455,8 @@ else
 							case 'dual':
 							case 'bits':
 							case 'bit':
+							case 'bool':
+							case 'boolean':
 
 								str += buffer[i].toString(2);
 								break;
@@ -345,6 +472,11 @@ else
 
 								str += buffer[i].toString(10);
 								break;
+
+							default:
+
+								return buffer;
+
 						}
 					}
 				}
@@ -379,17 +511,17 @@ random.radix = function(_length = random.length, _radix = (random.radix || 2))
 	return random.randomData(_length, _radix);
 }
 
-random.octal = function(_length = random.length)
+random.octal = random.oct = function(_length = random.length)
 {
 	return random.randomData(_length, 'octal');
 }
 
-random.decimal = function(_length = random.length)
+random.decimal = random.dec = function(_length = random.length)
 {
 	return random.randomData(_length, 'decimal');
 }
 
-random.dual = function(_length = random.length)
+random.dual = random.bool = function(_length = random.length)
 {
 	return random.randomData(_length, 'dual');
 }
@@ -419,7 +551,7 @@ random.ucs2 = function(_length = random.length)
 	return random.randomData(_length, 'ucs2');
 }
 
-random.binary = function(_length = random.length)
+random.binary = random.bin = function(_length = random.length)
 {
 	return random.randomData(_length, 'binary');
 }
@@ -433,8 +565,3 @@ random.ascii = function(_length = random.length)
 {
 	return random.randomData(_length, 'ascii');
 }
-
-
-
-
-//random.random = function //TODO: NERALY same as Math.random' *original*!
