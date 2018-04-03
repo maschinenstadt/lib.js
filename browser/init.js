@@ -311,7 +311,6 @@ function INIT(_ = {})
 			+ '<li><b><big>dual</big></b> ' + global.web.RANDOM.dual + '</li>'
 			+ '<li><b><big>decimal</big></b> ' + global.web.RANDOM.decimal + '</li>'
 			+ '<li><b><big>octal</big></b> ' + global.web.RANDOM.octal + '</li>'
-			+ '<hr />'
 			+ '<li><b><big>(2)</big></b> ' + global.web.RANDOM[2] + '</li>'
 			+ '<li><b><big>(4)</big></b> ' + global.web.RANDOM[4] + '</li>'
 			+ '<li><b><big>(10)</big></b> ' + global.web.RANDOM[10] + '</li>'
