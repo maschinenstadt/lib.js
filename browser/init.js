@@ -204,11 +204,11 @@ function INIT(_ = {})
 	//
 	global.web.time = {};
 
-	global.web.time.second = 0;
-	global.web.time.minute = 0;
-	global.web.time.hour = 0;
-	global.web.time.day = 0;
-	global.web.time.week = 0;
+	global.web.time.second = global.web.time.seconds = 0;
+	global.web.time.minute = global.web.time.minutes = 0;
+	global.web.time.hour = global.web.time.hours = 0;
+	global.web.time.day = global.web.time.days = 0;
+	global.web.time.week = global.web.time.weeks = 0;
 
 	//
 	global.html.head = document.getElementsByTagName('head');
