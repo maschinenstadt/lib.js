@@ -212,11 +212,26 @@ function INIT(_ = {})
 
 	global.web.timer = {};
 
-	global.web.timer.second = window.setInterval(global.on.timer.second, Date.second);
-	global.web.timer.minute = window.setInterval(global.on.timer.minute, Date.minute);
-	global.web.timer.hour = window.setInterval(global.on.timer.hour, Date.hour);
-	global.web.timer.day = window.setInterval(global.on.timer.day, Date.day);
-	global.web.timer.week = window.setInterval(global.on.timer.week, Date.week);
+	global.web.timer.second = window.setInterval(
+		function() { return global.on.timer.second(++web.time.second); },
+		Date.second
+	);
+	global.web.timer.minute = window.setInterval(
+		function() { return global.on.timer.minute(++web.time.minute); },
+		Date.minute
+	);
+	global.web.timer.hour = window.setInterval(
+		function() { return global.on.timer.hour(++web.time.hour); },
+		Date.hour
+	);
+	global.web.timer.day = window.setInterval(
+		function() { return global.on.timer.day(++web.time.day); },
+		Date.day
+	);
+	global.web.timer.week = window.setInterval(
+		function() { return global.on.timer.week(++web.time.week); },
+		Date.week
+	);
 
 	//
 	global.html.head = document.getElementsByTagName('head');

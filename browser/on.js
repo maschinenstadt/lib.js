@@ -61,26 +61,21 @@ global.on.timer = {};
 
 global.on.timer.second = function(_second)
 {
-	return ++global.web.time.second;
 }
 
 global.on.timer.minute = function(_minute)
 {
-	return ++global.web.time.minute;
 }
 
 global.on.timer.hour = function()
 {
-	return ++global.web.time.hour;
 }
 
 global.on.timer.day = function()
 {
-	return ++global.web.time.day;
 }
 
 global.on.timer.week = function()
 {
-	return ++global.web.time.week;
 }
 
