@@ -206,14 +206,18 @@ function INIT(_ = {})
 	global.html.body = document.getElementsByTagName('body');
 
 	//
+	var charset = global.settings.charset || 'utf-8';
+
 	var meta = document.getElementsByTagName('meta');
 	var charsetExists = -1;
 
 	for(var i = 0; i < meta.length; i++)
 	{
-		if(meta.getAttribute('charset'))
+		if(meta[i].getAttribute('charset'))
 		{
-			alert('exists (' + i + ')');
+			alert('exists (' + i + '): ' + meta[i].charset);
+			meta[i].setAttribute('charset', charset);
+			alert('now: ' + meta[i].charset);
 			charsetExists = i;
 			break;
 		}
@@ -222,16 +226,7 @@ function INIT(_ = {})
 	if(charsetExists === -1)
 	{
 		meta = document.createElement('meta');
-
-		if(global.settings.charset && global.settings.charset.length > 0)
-		{
-			meta.setAttribute('charset', global.settings.charset);
-		}
-		else
-		{
-			meta.setAttribute('charset', 'utf-8');
-		}
-
+		meta.setAttribute('charset', charset);
 		html.head[0].appendChild(meta);
 	}
 

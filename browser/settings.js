@@ -1,7 +1,7 @@
 settings = {};
 
 settings.charset = 'utf-8';
-settings.title = 'kekse!';
+settings.title = 'kekse!!';
 
 settings.tls = true;
 settings.www = false;
