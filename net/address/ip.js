@@ -1,3 +1,8 @@
+var ip = module.exports = {};
+
+ip.v4 = include('net/address/ipv4');
+ip.v6 = include('net/address/ipv6');
+
 /*
 var ip = module.exports = function()
 {
