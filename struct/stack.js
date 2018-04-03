@@ -37,7 +37,7 @@ Object.defineProperty(stack.prototype, 'push', {
 
 		for(var i = 0; i < arguments.length; i++)
 		{
-			if(this.stack.length <= this.size)
+			if(this.stack.length < this.size)
 			{
 				result[result.length] = this.stack[this.stack.length] = arguments[i];
 			}

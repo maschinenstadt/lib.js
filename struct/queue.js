@@ -37,7 +37,7 @@ Object.defineProperty(queue.prototype, 'enqueue', {
 
 		for(var i = 0; i < arguments.length; i++)
 		{
-			if(this.queue.length <= this.size)
+			if(this.queue.length < this.size)
 			{
 				this.queue[this.queue.length] = result[result.length] = arguments[i];
 			}
