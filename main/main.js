@@ -41,6 +41,22 @@ Object.defineProperty(global, 'eth', {
 		return eth;
 	} });
 
+global.sleep = function(_delay = 1000)
+{
+	if(! global.type(_delay, 'Number'))
+	{
+		_delay = global.sleep.delay;
+	}
+
+	var end = Date.now() + _delay;
+
+	while(Date.now() < end) {};
+
+	return end;
+}
+
+global.sleep.delay = 1000;
+
 global.object = function(_string)
 {
 	return eval(_string);

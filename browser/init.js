@@ -3,11 +3,11 @@ BROWSER = true;
 global = this || window;
 global.global = global;
 
-web = {};
-util = web.util = {};
-struct = web.struct = {};
+global.web = {};
+global.util = global.web.util = {};
+global.struct = global.web.struct = {};
 
-if(settings.tls)
+if(global.settings.tls)
 {
 	if(window.location.protocol === 'http:')
 	{
@@ -22,7 +22,7 @@ else
 	}
 }
 
-if(settings.www)
+if(global.settings.www)
 {
 	if(! window.location.hostname.startsWith('www.'))
 	{
@@ -37,7 +37,7 @@ else
 	}
 }
 
-if(settings.slash)
+if(global.settings.slash)
 {
 	var p = window.location.pathname.split('/');
 
@@ -50,50 +50,9 @@ if(settings.slash)
 	}
 }
 
-html = {};
-
-html.head = document.getElementsByTagName('head');
-html.body = document.getElementsByTagName('body');
-
-if(html.head.length === 1)
-{
-	html.head = html.head[0];
-}
-if(html.body.length === 1)
-{
-	html.body = html.body[0];
-}
-
-{
-	//TODO/ maybe check if already defined in document? and use that?
-
-	let meta = document.createElement('meta');
-
-	if(settings.charset && settings.charset.length > 0)
-	{
-		meta.setAttribute('charset', settings.charset);
-	}
-	else
-	{
-		meta.setAttribute('charset', 'utf-8');
-	}
-
-	html.head.appendChild(meta);
-}
-
-if(settings.title)
-{
-	document.title = settings.title;
-}
-//TODO/
-//else if(..:
-//-> if html NOT contains '<title>', set a default one..
-
-//
-
 const __toString = Object.prototype.toString;
 
-type = function(_object, _types = undefined)
+global.type = function(_object, _types = undefined)
 {
 	var type;
 
@@ -138,7 +97,7 @@ type = function(_object, _types = undefined)
 	return ( type || undefined );
 }
 
-clone = function(_object, _depth = 1, _currentDepth = 1, _foreign = false)
+global.clone = function(_object, _depth = 1, _currentDepth = 1, _foreign = false)
 {
 	if(arguments.length === 0)
 	{
@@ -160,7 +119,7 @@ clone = function(_object, _depth = 1, _currentDepth = 1, _foreign = false)
 	return ( fromJSON(toJSON(_object)) );
 }
 
-not = function(_object, _zero = false)
+global.not = function(_object, _zero = false)
 {
 	if(_object === null)
 	{
@@ -190,12 +149,12 @@ not = function(_object, _zero = false)
 	return false;
 }
 
-object = function(_string)
+global.object = function(_string)
 {
 	return eval(_string);
 }
 
-fromJSON = function(_string)
+global.fromJSON = function(_string)
 {
 	try
 	{
@@ -207,7 +166,7 @@ fromJSON = function(_string)
 	}
 }
 
-toJSON = function(_object)
+global.toJSON = function(_object)
 {
 	try
 	{
@@ -219,18 +178,21 @@ toJSON = function(_object)
 	}
 }
 
-sleep = function(_delay = 1000)
+global.sleep = function(_delay = 1000)
 {
-	if(! type(_delay, 'Number'))
+	if(! global.type(_delay, 'Number'))
 	{
-		_delay = 1000;
+		_delay = global.sleep.delay;
 	}
 	//
 	var end = Date.now() + _delay;
+
 	while(Date.now() < end) {};
-	//
-	return Date.now();
+
+	return end;
 }
+
+global.sleep.delay = 1000;
 
 EOL = "\r\n";
 ESC = String.fromCharCode(27);
@@ -240,24 +202,20 @@ function INIT(_ = {})
 	var result = {};
 
 	//
-	web.TIMER = {};	// here are the timer HANDLES to "clearTimeout()" etc. them (best way, eh? ;-)´
-	web.TIME = {};
+	global.web.time = {};
 
-	web.TIME.second = 0;
-	web.TIME.minute = 0;
-	web.TIME.hour = 0;
-	web.TIME.day = 0;
-	web.TIME.week = 0;
-
-	// todo... allerdings durch "Date"-klasse.. anpassung der sekunden an jew. funktion (on.hour == ( s / 60 / 60 ) etc...
-	web.TIMER.second = window.setInterval(function() { return on.second(web.TIME.second); },	Date.second	);
-	web.TIMER.minute = window.setInterval(function() { return on.minute(web.TIME.minute); },	Date.minute	);
-	web.TIMER.hour = window.setInterval(function() { return on.hour(web.TIME.hour); },		Date.hour	);
-	web.TIMER.day = window.setInterval(function() { return on.day(web.TIME.day); },		Date.day	);
-	web.TIMER.week = window.setInterval(function() { return on.week(web.TIME.week); },		Date.week	);
+	global.web.time.second = 0;
+	global.web.time.minute = 0;
+	global.web.time.hour = 0;
+	global.web.time.day = 0;
+	global.web.time.week = 0;
 
 	//
-	web.UUID = web.util.uuid.random();
+	global.html.head = document.getElementsByTagName('head');
+	global.html.body = document.getElementsByTagName('body');
+
+	//
+	global.web.UUID = global.web.util.uuid.random();
 
 	var _uuid = document.getElementsByName('uuid');
 	for(var i = 0; i < _uuid.length; i++)
@@ -265,21 +223,21 @@ function INIT(_ = {})
 		_uuid[i].innerHTML = web.UUID;
 	}
 
-	web.RANDOM = {};
+	global.web.RANDOM = {};
 
 	var size = 64;
 
-	web.RANDOM.binary = web.util.random.binary(size);
-	web.RANDOM.hex = web.util.random.hex(size);
-	web.RANDOM.base64 = web.util.random.base64(size);
-	web.RANDOM.dual = web.util.random.dual(size);
-	web.RANDOM.decimal = web.util.random.decimal(size);
-	web.RANDOM.octal = web.util.random.octal(size);
+	global.web.RANDOM.binary = global.web.util.random.binary(size);
+	global.web.RANDOM.hex = global.web.util.random.hex(size);
+	global.web.RANDOM.base64 = global.web.util.random.base64(size);
+	global.web.RANDOM.dual = global.web.util.random.dual(size);
+	global.web.RANDOM.decimal = global.web.util.random.decimal(size);
+	global.web.RANDOM.octal = global.web.util.random.octal(size);
 
-	web.RANDOM[2] = web.util.random.radix(size, 2);
-	web.RANDOM[4] = web.util.random.radix(size, 4);
-	web.RANDOM[10] = web.util.random.radix(size, 10);
-	web.RANDOM[36] = web.util.random.radix(size, 36);
+	global.web.RANDOM[2] = global.web.util.random.radix(size, 2);
+	global.web.RANDOM[4] = global.web.util.random.radix(size, 4);
+	global.web.RANDOM[10] = global.web.util.random.radix(size, 10);
+	global.web.RANDOM[36] = global.web.util.random.radix(size, 36);
 
 	var _random_size = document.getElementsByName('random_size');
 	for(var i = 0; i < _random_size.length; i++)
@@ -290,28 +248,26 @@ function INIT(_ = {})
 	for(var i = 0; i < _random.length; i++)
 	{
 		var str = '<hr>'
-			+ '<li><b><big>binary</big></b> ' + web.RANDOM.binary + '</li>'
-			+ '<li><b><big>hex</big></b> ' + web.RANDOM.hex + '</li>'
-			+ '<li><b><big>base64</big></b> ' + web.RANDOM.base64 + '</li>'
-			+ '<li><b><big>dual</big></b> ' + web.RANDOM.dual + '</li>'
-			+ '<li><b><big>decimal</big></b> ' + web.RANDOM.decimal + '</li>'
-			+ '<li><b><big>octal</big></b> ' + web.RANDOM.octal + '</li>'
+			+ '<li><b><big>binary</big></b> ' + global.web.RANDOM.binary + '</li>'
+			+ '<li><b><big>hex</big></b> ' + global.web.RANDOM.hex + '</li>'
+			+ '<li><b><big>base64</big></b> ' + global.web.RANDOM.base64 + '</li>'
+			+ '<li><b><big>dual</big></b> ' + global.web.RANDOM.dual + '</li>'
+			+ '<li><b><big>decimal</big></b> ' + global.web.RANDOM.decimal + '</li>'
+			+ '<li><b><big>octal</big></b> ' + global.web.RANDOM.octal + '</li>'
 			+ '<hr />'
-			+ '<li><b><big>(2)</big></b> ' + web.RANDOM[2] + '</li>'
-			+ '<li><b><big>(4)</big></b> ' + web.RANDOM[4] + '</li>'
-			+ '<li><b><big>(10)</big></b> ' + web.RANDOM[10] + '</li>'
-			+ '<li><b><big>(36)</big></b> ' + web.RANDOM[36] + '</li>'
+			+ '<li><b><big>(2)</big></b> ' + global.web.RANDOM[2] + '</li>'
+			+ '<li><b><big>(4)</big></b> ' + global.web.RANDOM[4] + '</li>'
+			+ '<li><b><big>(10)</big></b> ' + global.web.RANDOM[10] + '</li>'
+			+ '<li><b><big>(36)</big></b> ' + global.web.RANDOM[36] + '</li>'
 			+ '<hr />';
 		_random[i].innerHTML = str;
 	}
-	web.RANDOM.size = undefined;
-	delete web.RANDOM.size;
 
 	//
-	web.BIRTHDAY = Date.now();
+	global.web.BIRTHDAY = Date.now();
 	//
-	result.UUID = web.UUID;
-	result.BIRTHDAY = web.BIRTHDAY;
+	result.UUID = global.web.UUID;
+	result.BIRTHDAY = global.web.BIRTHDAY;
 	//
 	result = Object.assign((result||{}), (_||{}));
 	return (result || {});

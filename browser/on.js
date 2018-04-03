@@ -1,6 +1,6 @@
-on = {};
+global.on = {};
 
-on.load = function()
+global.on.load = function()
 {
 	try
 	{
@@ -22,63 +22,65 @@ on.load = function()
 	}
 }
 
-on.resize = function(_width, _height)
+global.on.resize = function(_width, _height)
 {
 	//
 }
 
-on.key = {};
+global.on.key = {};
 
-on.key.down = function()
+global.on.key.down = function()
 {
 }
 
-on.key.up = function()
+global.on.key.up = function()
 {
 }
 
-on.mouse = {};
+global.on.mouse = {};
 
-on.mouse.down = function(e)
+global.on.mouse.down = function(e)
 {
 	var x = e.clientX; // .. 'client'!
 	var y = e.clientY; // what 'bout absolute coords?
 }
 
-on.mouse.up = function(e)
+global.on.mouse.up = function(e)
 {
 	var x = e.clientX; // .. 'client'!
 	var y = e.clientY; // absolutes??
 }
 
-on.mouse.move = function(e)
+global.on.mouse.move = function(e)
 {
 	var x = e.clientX; // ... 'client'!
 	var y = e.clientY; // absolutes!?
 }
 
-on.second = function(_second)
+global.on.second = function(_second)
 {
-	return ++web.TIME.second;
+	return ++global.web.time.second;
 }
 
-on.minute = function(_minute)
+global.on.minute = function(_minute)
 {
-	return ++web.TIME.minute;
+	alert('on.minute(' + _minute + ')');
+	//
+	return ++global.web.time.minute;
 }
 
-on.hour = function()
+global.on.hour = function()
 {
-	return ++web.TIME.hour;
+	return ++global.web.time.hour;
 }
 
-on.day = function()
+global.on.day = function()
 {
-	return ++web.TIME.day;
+	return ++global.web.time.day;
 }
 
-on.week = function()
+global.on.week = function()
 {
-	return ++web.TIME.week;
+	return ++global.web.time.week;
 }
 
