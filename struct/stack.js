@@ -54,7 +54,7 @@ Object.defineProperty(stack.prototype, 'push', {
 
 Object.defineProperty(stack.prototype, 'pop', {
 	enumerable: false,
-	value: function(_amount = 1, _peek = false)
+	value: function(_amount = 1, _peek = false, _reverse = false)
 	{
 		if(! global.type(_peek, 'Boolean'))
 		{
@@ -71,6 +71,10 @@ Object.defineProperty(stack.prototype, 'pop', {
 		{
 			_amount = 1;
 		}
+		if(! global.type(_reverse, 'Boolean'))
+		{
+			_reverse = false;
+		}
 
 		var result = [];
 
@@ -84,15 +88,20 @@ Object.defineProperty(stack.prototype, 'pop', {
 			}
 		}
 
+		if(_reverse)
+		{
+			return result.reverse();
+		}
+
 		return result;
 	}
 });
 
 Object.defineProperty(stack.prototype, 'peek', {
 	enumerable: false,
-	value: function(_amount = 1)
+	value: function(_amount = 1, _reverse = false)
 	{
-		return this.pop(_amount, true);
+		return this.pop(_amount, true, _reverse);
 	}
 });
 
