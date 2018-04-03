@@ -48,7 +48,7 @@ if(BROWSER)
 		return buffer;
 	}
 
-	random.randomData = function(_length = random.length, _encoding = false)
+	random.data = function(_length = random.length, _encoding = false)
 	{
 		if(type(_length, 'Number'))
 		{
@@ -251,7 +251,7 @@ else
 	}
 
 	//
-	random.randomData = function(_length = random.length, _encoding = false)
+	random.data = function(_length = random.length, _encoding = false)
 	{
 		if(global.type(_encoding, 'Boolean'))
 		{
@@ -388,12 +388,12 @@ else
 
 random.buffer = function(_length = random.length)
 {
-	return random.randomData(_length, false);
+	return random.data(_length, false);
 }
 
 random.array = function(_length = random.length)
 {
-	var buffer = random.randomData(_length, false);
+	var buffer = random.data(_length, false);
 	return Array.from(buffer);
 }
 
@@ -411,60 +411,61 @@ random.radix = function(_length = random.length, _radix = (random.radix || 2))
 		_radix = random.radix || 2;
 	}
 
-	return random.randomData(_length, _radix);
+	return random.data(_length, _radix);
 }
 
 random.octal = random.oct = function(_length = random.length)
 {
-	return random.randomData(_length, 'octal');
+	return random.data(_length, 'octal');
 }
 
 random.decimal = random.dec = function(_length = random.length)
 {
-	return random.randomData(_length, 'decimal');
+	return random.data(_length, 'decimal');
 }
 
 random.dual = random.bool = function(_length = random.length)
 {
-	return random.randomData(_length, 'dual');
+	return random.data(_length, 'dual');
 }
 
 random.base64 = function(_length = random.length)
 {
-	return random.randomData(_length, 'base64');
+	return random.data(_length, 'base64');
 }
 
 random.hex = function(_length = random.length)
 {
-	return random.randomData(_length, 'hex');
+	return random.data(_length, 'hex');
 }
 
 random.utf8 = function(_length = random.length)
 {
-	return random.randomData(_length, 'utf8');
+	return random.data(_length, 'utf8');
 }
 
 random.utf16le = function(_length = random.length)
 {
-	return random.randomData(_length, 'utf16le');
+	return random.data(_length, 'utf16le');
 }
 
 random.ucs2 = function(_length = random.length)
 {
-	return random.randomData(_length, 'ucs2');
+	return random.data(_length, 'ucs2');
 }
 
 random.binary = random.bin = function(_length = random.length)
 {
-	return random.randomData(_length, 'binary');
+	return random.data(_length, 'binary');
 }
 
 random.latin1 = function(_length = random.length)
 {
-	return random.randomData(_length, 'latin1');
+	return random.data(_length, 'latin1');
 }
 
 random.ascii = function(_length = random.length)
 {
-	return random.randomData(_length, 'ascii');
+	return random.data(_length, 'ascii');
 }
+
