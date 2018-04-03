@@ -172,41 +172,41 @@ Object.defineProperty(Object.prototype, 'assign', {
 	}
 });
 
-//Object.prototype.keys = function(_foreign = false, _suffix, _prefix, _maximum, _remove, _filter)
+var __keys = Object.prototype.keys;
+
 Object.defineProperty(Object.prototype, 'keys', {
 	enumerable: false,
-	value: function(_foreign = false)
+	get: function()
 	{
-		//TODO/ mit allen args..
-		//
-	
-		var result = [];
+		return Object.keys(this);
+	}
+});
+
+Object.defineProperty(Object.prototype, 'values', {
+	enumerable: false,
+	get: function()
+	{
+		return Object.values(this);
+	}
+});
+
+Object.defineProperty(Object.prototype, 'types', {
+	enumerable: false,
+	get: function()
+	{
+		var foreign = false;
+
+		var result = {};
 
 		for(var idx in this)
 		{
-			if(_foreign || this.hasOwnProperty(idx))
+			if(foreign || this.hasOwnProperty(idx))
 			{
-				result[result.length] = idx;
+				result[idx] = global.type(this[idx]);
 			}
 		}
 
 		return result;
-	}
-});
-
-//Object.prototype.values = function(_foreign = false, _suffix, _prefix, _maximum, _remove, _filter)
-Object.defineProperty(Object.prototype, 'values', {
-	enumerable: false,
-	value: function(_foreign = false)
-	{
-	}
-});
-
-//Object.prototype.types = function(_foreign = false, _suffix, _prefix, _maximum, _remove, _filter)
-Object.defineProperty(Object.prototype, 'types', {
-	enumerable: false,
-	value: function(_foreign = false)
-	{
 	}
 });
 

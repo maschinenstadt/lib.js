@@ -38,11 +38,6 @@ Object.defineProperty(Number, 'radix', {
 	}
 });
 
-Object.defineProperty(Number, 'base', {
-	enumerable: false,
-	get: function() { return Number.radix; }
-});
-
 Object.defineProperty(Number.prototype, 'isPositive', {
 	enumerable: false,
 	get: function() { return this.valueOf() >= 0; } });
@@ -71,20 +66,6 @@ Object.defineProperty(Number.prototype, 'clone', {
 	value: function()
 	{
 		return this.valueOf();
-	}
-});
-
-Object.defineProperty(Number.prototype, 'toString', {
-	enumerable: false,
-	configurable: true,
-	value: function(_precision = 0)
-	{
-		if(! global.type(_precision, 'Number'))
-		{
-			_precision = 0;
-		}
-
-		return this.toFixed(_precision);
 	}
 });
 
