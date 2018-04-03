@@ -202,6 +202,10 @@ function INIT(_ = {})
 	var result = {};
 
 	//
+	global.html.head = document.getElementsByTagName('head');
+	global.html.body = document.getElementsByTagName('body');
+
+	//
 	var meta = document.getElementsByTagName('meta');
 	var charsetExists = -1;
 
@@ -268,10 +272,6 @@ function INIT(_ = {})
 		function() { return global.on.timer.week(++web.time.week); },
 		Date.week
 	);
-
-	//
-	global.html.head = document.getElementsByTagName('head');
-	global.html.body = document.getElementsByTagName('body');
 
 	//
 	global.web.UUID = global.web.util.uuid.random();
