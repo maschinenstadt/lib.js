@@ -11,6 +11,7 @@
 		-> MAKE ALL THESE WORK, also in BROWSER(!!)
 
 				# buffer
+				# array
 
 				# radix
 
