@@ -51,6 +51,10 @@
 
 		# hrtime(r) @ "Date"?!!! (btw. "util/time" HAS GONE (for all in "Date"!)!
 
+			# @ "global/Date.js" AUCH *hrtime* ..! ;-)´
+
+		# ALLES "Node.js" AUCH IM BROWSER (see "WebSocket API" .. ;-)´
+
 ------------------------------------------------------------------------------------------------------
 
 	# use "requestAnimationFrame" in browser. .. (l8rs(!) mainly for <canvas> ..
