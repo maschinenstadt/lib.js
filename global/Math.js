@@ -54,7 +54,7 @@ Math.random.integer = function(_max, _min)
 {
 	_max = _max || 255;
 	_min = _min || 0;
-	return Math.floor(_random() * (_max - _min + 1)) + _min;
+	return Math.floor(Math.random() * (_max - _min + 1)) + _min;
 }
 
 Math.radToDeg = function(_radians)
