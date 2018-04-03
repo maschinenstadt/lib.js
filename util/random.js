@@ -25,11 +25,10 @@ else
 //
 if(BROWSER)
 {
-	var cryptoObject = window.crypto || window.msCrypto;
+	var cryptoObject = window.crypto || window.msCrypto || false;
 
 	function cryptoObjectData(_length = random.length, _encoding = false)
 	{
-alert('CRYPTO');
 		if(type(_length, 'Number'))
 		{
 			if(_length < 1)
@@ -152,7 +151,6 @@ alert('CRYPTO');
 
 	function mathRandomData(_length = random.length, _encoding = false)
 	{
-alert('MATH');
 		if(type(_length, 'Number'))
 		{
 			if(_length < 1)
