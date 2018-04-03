@@ -202,6 +202,42 @@ function INIT(_ = {})
 	var result = {};
 
 	//
+	var meta = document.getElementsByTagName('meta');
+	var charsetExists = -1;
+
+	for(var i = 0; i < meta.length; i++)
+	{
+		if(meta.getAttribute('charset'))
+		{
+			alert('exists (' + i + ')');
+			charsetExists = i;
+			break;
+		}
+	}
+
+	if(charsetExists === -1)
+	{
+		meta = document.createElement('meta');
+
+		if(global.settings.charset && global.settings.charset.length > 0)
+		{
+			meta.setAttribute('charset', global.settings.charset);
+		}
+		else
+		{
+			meta.setAttribute('charset', 'utf-8');
+		}
+
+		html.head[0].appendChild(meta);
+	}
+
+	//
+	if(global.settings.title)
+	{
+		document.title = global.settings.title;
+	}
+
+	//
 	global.web.time = {};
 
 	global.web.time.second = global.web.time.seconds = 0;
@@ -289,6 +325,7 @@ function INIT(_ = {})
 	//
 	result.UUID = global.web.UUID;
 	result.BIRTHDAY = global.web.BIRTHDAY;
+
 	//
 	result = Object.assign((result||{}), (_||{}));
 	return (result || {});
