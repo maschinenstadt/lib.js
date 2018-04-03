@@ -25,10 +25,11 @@ else
 //
 if(BROWSER)
 {
-	var crypto = window.crypto || window.msCrypto;
+	var cryptoObject = window.crypto || window.msCrypto;
 
 	function cryptoObjectData(_length = random.length, _encoding = false)
 	{
+alert('CRYPTO');
 		if(type(_length, 'Number'))
 		{
 			if(_length < 1)
@@ -69,7 +70,7 @@ if(BROWSER)
 			var str = '';
 			var buffer = new Uint8Array(_length);
 
-			crypto.getRandomValues(buffer);
+			cryptoObject.getRandomValues(buffer);
 
 			if(_encoding === false)
 			{
@@ -151,6 +152,7 @@ if(BROWSER)
 
 	function mathRandomData(_length = random.length, _encoding = false)
 	{
+alert('MATH');
 		if(type(_length, 'Number'))
 		{
 			if(_length < 1)
@@ -271,13 +273,15 @@ if(BROWSER)
 		return result.substr(0, _length);
 	}
 
-	if(not(crypto) || not(crypto.getRandomValues))
+	//TODO/ better abstractions..!
+
+	if(cryptoObject)
 	{
-		random.randomData = mathRandomData;
+		random.randomData = cryptoObjectData;
 	}
 	else
 	{
-		random.randomData = cryptoObjectData;
+		random.randomData = mathRandomData;
 	}
 }
 else

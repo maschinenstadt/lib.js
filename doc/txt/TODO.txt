@@ -74,6 +74,10 @@
 
 			=> to test it, set a non-existing path in "settings.random.entropy"! ;-)´
 
+		=> better abstractions ..
+
+			=> e.g. "mathRandomData" (or so..) lediglich einen buffer zu füllen .. der rest aus "cryptoObjectData". z.b..
+
 ------------------------------------------------------------------------------------------------------
 
 	=> diverse system-/charset-/type-konversionen testen evtl. (v.a. wg. performance? aber auch entropie?!). ..
