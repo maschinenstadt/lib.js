@@ -62,7 +62,7 @@ Object.defineProperty(stack.prototype, 'pop', {
 		}
 		if(global.type(_amount, 'Number'))
 		{
-			_amount = _amount % this.length;
+			_amount = _amount % (this.length + 1);
 		}
 		else
 		{

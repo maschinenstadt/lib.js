@@ -65,7 +65,7 @@ Object.defineProperty(queue.prototype, 'dequeue', {
 			_amount = 1;
 		}
 
-		_amount = _amount % this.queue.length;
+		_amount = _amount % (this.queue.length + 1);
 
 		var result = [];
 
