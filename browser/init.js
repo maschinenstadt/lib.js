@@ -210,6 +210,14 @@ function INIT(_ = {})
 	global.web.time.day = global.web.time.days = 0;
 	global.web.time.week = global.web.time.weeks = 0;
 
+	global.web.timer = {};
+
+	global.web.timer.second = window.setInterval(global.on.timer.second, Date.second);
+	global.web.timer.minute = window.setInterval(global.on.timer.minute, Date.minute);
+	global.web.timer.hour = window.setInterval(global.on.timer.hour, Date.hour);
+	global.web.timer.day = window.setInterval(global.on.timer.day, Date.day);
+	global.web.timer.week = window.setInterval(global.on.timer.week, Date.week);
+
 	//
 	global.html.head = document.getElementsByTagName('head');
 	global.html.body = document.getElementsByTagName('body');

@@ -57,29 +57,29 @@ global.on.mouse.move = function(e)
 	var y = e.clientY; // absolutes!?
 }
 
-global.on.second = function(_second)
+global.on.timer = {};
+
+global.on.timer.second = function(_second)
 {
 	return ++global.web.time.second;
 }
 
-global.on.minute = function(_minute)
+global.on.timer.minute = function(_minute)
 {
-	alert('on.minute(' + _minute + ')');
-	//
 	return ++global.web.time.minute;
 }
 
-global.on.hour = function()
+global.on.timer.hour = function()
 {
 	return ++global.web.time.hour;
 }
 
-global.on.day = function()
+global.on.timer.day = function()
 {
 	return ++global.web.time.day;
 }
 
-global.on.week = function()
+global.on.timer.week = function()
 {
 	return ++global.web.time.week;
 }
