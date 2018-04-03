@@ -30,7 +30,9 @@ if(BROWSER)
 	function cryptoObjectData(_length = random.length, _encoding = false)
 	{
 		var buffer = new Uint8Array(_length);
+
 		cryptoObject.getRandomValues(buffer);
+
 		return buffer;
 	}
 
@@ -91,12 +93,10 @@ if(BROWSER)
 			if(cryptoObject)
 			{
 				buffer = cryptoObjectData(_length);
-alert('crypto... -> ' + buffer.length);
 			}
 			else
 			{
 				buffer = mathRandomData(_length);
-alert('math... -> ' + buffer.length);
 			}
 
 			if(_encoding === false)
@@ -389,6 +389,12 @@ else
 random.buffer = function(_length = random.length)
 {
 	return random.randomData(_length, false);
+}
+
+random.array = function(_length = random.length)
+{
+	var buffer = random.randomData(_length, false);
+	return Array.from(buffer);
 }
 
 random.radix = function(_length = random.length, _radix = (random.radix || 2))
