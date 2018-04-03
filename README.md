@@ -54,14 +54,17 @@ include() parameter, it will only search in the current lib.js' path (that is
 second one internally, but refers to "settings.random.entropy" ("/dev/random"
 or "/dev/urandom" (preferred)). Combined with sub-routines (and alternatively
 as parameter) those are able to generate random numbers like Linux does! More
-secure than "Math.random()", that is going to work based on this new element;
-this is my current task: create my *own*, much more secure "Math.random()"...
+secure than "Math.random()".
 
 As "/dev/urandom" (etc.) don't exist on Windows (or other) systems, I've also
 added the same functionality (uses the same interface .. so it can be handled
 exactly the same way. The changes are internally ;-)´ via the "crypto" module
 of Node.js, so also Windows systems can have this better RNG (= random number
 generator).
+
+And now I have also added the regular "Math.random()" for my browser support,
+where the "window.crypto" object is not available. My "util/random" interface
+will use "Math.random()" in this case. So every case is now covered! ;-)´ ...
 
 Additionally, I've created "util/random" as the REAL interface for all random
 things. It uses all I've described above AND can also act (the same way etc.)
