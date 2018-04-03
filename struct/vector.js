@@ -1,4 +1,10 @@
-var vector = {};
+class vector extends node
+{
+	constructor()
+	{
+		super();
+	}
+}
 
 if(BROWSER)
 {

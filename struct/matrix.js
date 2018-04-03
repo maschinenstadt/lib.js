@@ -1,4 +1,10 @@
-var matrix = {};
+class matrix extends node
+{
+	constructor()
+	{
+		super();
+	}
+}
 
 if(BROWSER)
 {

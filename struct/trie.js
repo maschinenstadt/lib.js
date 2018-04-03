@@ -1,4 +1,10 @@
-var trie = {};
+class trie extends node
+{
+	constructor()
+	{
+		super();
+	}
+}
 
 if(BROWSER)
 {

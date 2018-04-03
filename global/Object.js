@@ -172,7 +172,13 @@ Object.defineProperty(Object.prototype, 'assign', {
 	}
 });
 
-var __keys = Object.prototype.keys;
+Object.defineProperty(Object.prototype, 'own', {
+	enumerable: false,
+	get: function()
+	{
+		return Object.getOwnPropertyNames(this);
+	}
+});
 
 Object.defineProperty(Object.prototype, 'keys', {
 	enumerable: false,

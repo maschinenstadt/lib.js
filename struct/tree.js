@@ -1,4 +1,10 @@
-var tree = {};
+class tree extends node
+{
+	constructor()
+	{
+		super();
+	}
+}
 
 if(BROWSER)
 {

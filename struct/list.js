@@ -1,4 +1,10 @@
-var list = {};
+class list extends node
+{
+	constructor()
+	{
+		super();
+	}
+}
 
 if(BROWSER)
 {
