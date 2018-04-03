@@ -247,8 +247,7 @@ function INIT(_ = {})
 	var _random = document.getElementsByName('random');
 	for(var i = 0; i < _random.length; i++)
 	{
-		var str = '<hr>'
-			+ '<li><b><big>binary</big></b> ' + global.web.RANDOM.binary + '</li>'
+		var str = '<li><b><big>binary</big></b> ' + global.web.RANDOM.binary + '</li>'
 			+ '<li><b><big>hex</big></b> ' + global.web.RANDOM.hex + '</li>'
 			+ '<li><b><big>base64</big></b> ' + global.web.RANDOM.base64 + '</li>'
 			+ '<li><b><big>dual</big></b> ' + global.web.RANDOM.dual + '</li>'
@@ -258,8 +257,7 @@ function INIT(_ = {})
 			+ '<li><b><big>(2)</big></b> ' + global.web.RANDOM[2] + '</li>'
 			+ '<li><b><big>(4)</big></b> ' + global.web.RANDOM[4] + '</li>'
 			+ '<li><b><big>(10)</big></b> ' + global.web.RANDOM[10] + '</li>'
-			+ '<li><b><big>(36)</big></b> ' + global.web.RANDOM[36] + '</li>'
-			+ '<hr />';
+			+ '<li><b><big>(36)</big></b> ' + global.web.RANDOM[36] + '</li>';
 		_random[i].innerHTML = str;
 	}
 
