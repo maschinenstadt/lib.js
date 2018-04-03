@@ -36,6 +36,19 @@ else
 	}
 }
 
+if(settings.slash)
+{
+	var p = window.location.pathname.split('/');
+
+	if(p[p.length - 1].indexOf('.') > -1)
+	{
+		p[p.length - 1] = '';
+		p = p.join('/');
+
+		window.location.pathname = p;
+	}
+}
+
 html = {};
 
 html.head = document.getElementsByTagName('head');
