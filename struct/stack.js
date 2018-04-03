@@ -15,6 +15,11 @@ var stack = function(_size = undefined)
 	return this;
 }
 
+Object.defineProperty(stack.prototype, 'length', {
+	enumerable: false,
+	get: function() { return this.values.length; }
+});
+
 Object.defineProperty(stack.prototype, 'push', {
 	enumerable: false,
 	value: function()

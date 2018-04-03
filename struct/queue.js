@@ -15,6 +15,11 @@ var queue = function(_size = undefined)
 	return this;
 }
 
+Object.defineProperty(queue.prototype, 'length', {
+	enumerable: false,
+	get: function() { return this.values.length; }
+});
+
 Object.defineProperty(queue.prototype, 'enqueue', {
 	enumerable: false,
 	value: function()
