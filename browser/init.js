@@ -283,7 +283,7 @@ function INIT(_ = {})
 
 	global.web.RANDOM = {};
 
-	var size = 64;
+	var size = 16;
 
 	global.web.RANDOM.binary = global.web.util.random.binary(size);
 	global.web.RANDOM.hex = global.web.util.random.hex(size);
