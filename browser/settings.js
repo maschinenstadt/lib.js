@@ -5,6 +5,7 @@ settings.title = 'kekse!';
 
 settings.tls = true;
 settings.www = false;
+settings.slash = true;
 
 settings.random = {};
 settings.random.length = 64;
