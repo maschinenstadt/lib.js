@@ -16,18 +16,20 @@ var size = 16;
 
 
 var r0 = random.buffer(size);
-var r1 = random.hex(size);
-var r2 = random.base64(size);
-var r3 = random.binary(size)
-var r4 = random.dual(size);
-var r5 = random.octal(size);
-var r6 = random.decimal(size);
-var r7 = random.utf8(size);
-var r8 = random.ascii(size);
-var r9 = random.ucs2(size);
-var r10 = random.radix(size, 4);
+var r1 = random.array(size);
+var r2 = random.hex(size);
+var r3 = random.base64(size);
+var r4 = random.binary(size)
+var r5 = random.dual(size);
+var r6 = random.octal(size);
+var r7 = random.decimal(size);
+var r8 = random.utf8(size);
+var r9 = random.ascii(size);
+var r10 = random.ucs2(size);
+var r11 = random.radix(size, 4);
 
 console.info('[buffer(%d)] "%s"\n'
+	+ '[array(%d)] "%s"\n'
 	+ '[hex(%d)] "%s"\n'
 	+ '[base64(%d)] "%s"\n'
 	+ '[binary(%d)] "%s"\n'
@@ -48,6 +50,7 @@ console.info('[buffer(%d)] "%s"\n'
 	r7.length, r7,
 	r8.length, r8,
 	r9.length, r9,
-	r10.length, r10
+	r10.length, r10,
+	r11.length, r11
 );
 
