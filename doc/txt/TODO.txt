@@ -27,8 +27,14 @@
 
 	@ "struct/"
 
+		@ < https://blog.ircmaxell.com/2015/05/prefix-trees-and-parsers.html >
+
 		        < https://en.wikipedia.org/wiki/Radix_tree >
 		        < https://en.wikipedia.org/wiki/Trie >
+
+		@ < http://beej.us/blog/data/object-pool/ >
+
+		=> and don't forget "core/node"...!!!
 
 ------------------------------------------------------------------------------------------------------
 
