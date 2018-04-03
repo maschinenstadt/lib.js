@@ -15,6 +15,16 @@
 
 ------------------------------------------------------------------------------------------------------
 
+	# routing (min. HTTP) .. mit PATTERNs .. so dass jedes verzeichnis im http-pfad einem array hinzugefügt wird. mindestens. ..
+
+		# *EVTL.* ABSTRAKT gelöst!?? durch "util/" oder gar einfach im "String(.prototype)"!!??
+
+			# im "global/String" auch "glob()" sowie diverse PATTERN-logiken, u.a. "printf()" vs. "scanf()"..!
+
+		# siehe auch (mit viel zusätzlichem): < https://blog.ircmaxell.com/2015/05/prefix-trees-and-parsers.html >
+
+------------------------------------------------------------------------------------------------------
+
 	# "util/utf8" und "util/utf8math" .. beides sollte in den BROWSER; mindestens(!!); ..
 
 		=> prüfe, ob "utf8math" richtig liegt; vergleiche auch beide versionen(!); DANN nehme *NUR* "utf8math" (w/ rename!)
