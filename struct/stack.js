@@ -74,7 +74,7 @@ Object.defineProperty(stack.prototype, 'pop', {
 
 		var result = [];
 
-		for(var i = this.length - 1, j = 0; i >= 0; i--, j++)
+		for(var i = this.length - 1, j = 0; i >= 0, j < _amount; i--, j++)
 		{
 			result[j] = this.stack[i];
 
