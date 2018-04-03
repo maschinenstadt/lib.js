@@ -15,7 +15,7 @@ var queue = function(_size = undefined)
 	return this;
 }
 
-queue.enqueue = function()
+queue.prototype.enqueue = function()
 {
 	var result = [];
 
@@ -34,7 +34,7 @@ queue.enqueue = function()
 	return result;
 }
 
-queue.dequeue = function(_amount = 1, _peek = false)
+queue.prototype.dequeue = function(_amount = 1, _peek = false)
 {
 	if(! global.type(_peek, 'Boolean'))
 	{
@@ -65,7 +65,7 @@ queue.dequeue = function(_amount = 1, _peek = false)
 	return result;
 }
 
-queue.peek = function(_amount = 1)
+queue.prototype.peek = function(_amount = 1)
 {
 	return this.dequeue(_amount, true);
 }

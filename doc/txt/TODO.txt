@@ -2,6 +2,10 @@
 			ZUM SCHLUSS ARBEITE ALLE /maschinenstadt/doc/txt/ (min.) AB. ...
 ======================================================================================================
 
+	# "core/node" -> "struct/"!? jedenfalls "node" auch im browser, wäre gut! ..
+
+------------------------------------------------------------------------------------------------------
+
 	# "util/random" ...
 
 		-> die folgenden _encoding fehlen noch in "util/random" innerhalb des BROWSER(!!);
