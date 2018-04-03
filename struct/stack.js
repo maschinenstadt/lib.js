@@ -15,59 +15,68 @@ var stack = function(_size = undefined)
 	return this;
 }
 
-stack.prototype.push = function()
-{
-	var result = [];
-
-	for(var i = 0; i < arguments.length; i++)
+Object.defineProperty(stack.prototype, 'push', {
+	enumerable: false,
+	value: function()
 	{
-		if(this.values.length <= this.size)
+		var result = [];
+
+		for(var i = 0; i < arguments.length; i++)
 		{
-			result[result.length] = this.values[this.values.length] = arguments[i];
+			if(this.values.length <= this.size)
+			{
+				result[result.length] = this.values[this.values.length] = arguments[i];
+			}
+			else
+			{
+				return result;
+			}
+		}
+
+		return result;
+	}
+});
+
+Object.defineProperty(stack.prototype, 'pop', {
+	enumerable: false,
+	value: function(_amount = 1, _peek = false)
+	{
+		if(! global.type(_peek, 'Boolean'))
+		{
+			_peek = false;
+		}
+		if(global.type(_amount, 'Number'))
+		{
+			_amount = _amount % this.length;
 		}
 		else
 		{
-			return result;
+			_amount = 1 % this.length;
 		}
-	}
 
-	return result;
-}
+		var result = [];
 
-stack.prototype.pop = function(_amount = 1, _peek = false)
-{
-	if(! global.type(_peek, 'Boolean'))
-	{
-		_peek = false;
-	}
-	if(global.type(_amount, 'Number'))
-	{
-		_amount = _amount % this.length;
-	}
-	else
-	{
-		_amount = 1 % this.length;
-	}
-
-	var result = [];
-
-	for(var i = this.length - 1, j = 0; i >= 0; i--, j++)
-	{
-		result[j] = this.values[i];
-
-		if(! _peek)
+		for(var i = this.length - 1, j = 0; i >= 0; i--, j++)
 		{
-			this.values.splice(this.values.length - 1, 1);
+			result[j] = this.values[i];
+
+			if(! _peek)
+			{
+				this.values.splice(this.values.length - 1, 1);
+			}
 		}
+
+		return result;
 	}
+});
 
-	return result;
-}
-
-stack.prototype.peek = function(_amount = 1)
-{
-	return this.pop(_amount, true);
-}
+Object.defineProperty(stack.prototype, 'peek', {
+	enumerable: false,
+	value: function(_amount = 1)
+	{
+		return this.pop(_amount, true);
+	}
+});
 
 if(BROWSER)
 {
