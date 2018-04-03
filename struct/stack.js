@@ -62,11 +62,14 @@ Object.defineProperty(stack.prototype, 'pop', {
 		}
 		if(global.type(_amount, 'Number'))
 		{
-			_amount = _amount % (this.length + 1);
+			if(_amount > this.stack.length)
+			{
+				_amount = this.stack.length;
+			}
 		}
 		else
 		{
-			_amount = 1 % this.length;
+			_amount = 1;
 		}
 
 		var result = [];

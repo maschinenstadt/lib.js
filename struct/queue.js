@@ -60,12 +60,17 @@ Object.defineProperty(queue.prototype, 'dequeue', {
 		{
 			_peek = false;
 		}
-		if(! global.type(_amount, 'Number'))
+		if(global.type(_amount, 'Number'))
+		{
+			if(_amount > this.queue.length)
+			{
+				_amount = this.queue.length;
+			}
+		}
+		else
 		{
 			_amount = 1;
 		}
-
-		_amount = _amount % (this.queue.length + 1);
 
 		var result = [];
 
