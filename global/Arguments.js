@@ -15,10 +15,23 @@ else
 // arguments.callee	// reference to the currently executing function
 // arguments.caller	// reference to the function that invoked the currently executing function
 
-Arguments.clone = function()
-{
-	return this.valueOf();
-}
+Object.defineProperty(Arguments, 'toString', {
+	enumerable: false,
+	configurable: true,
+	value: function()
+	{
+		//TODO/..
+	}
+});
+
+Object.defineProperty(Arguments, 'clone', {
+	configurable: true,
+	enumerable: false,
+	value: function()
+	{
+		return this.valueOf();
+	}
+});
 
 Object.defineProperty(Arguments, 'toArray', {
 	enumerable: false,

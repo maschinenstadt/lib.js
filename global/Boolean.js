@@ -7,19 +7,30 @@ else
 	module.exports = global.Boolean = Boolean;
 }
 
-Boolean.prototype.clone = function()
-{
-	return this.valueOf();
-}
+Object.defineProperty(Boolean.prototype, 'clone', {
+	configurable: true,
+	enumerable: false,
+	value: function()
+	{
+		return this.valueOf();
+	}
+});
 
-Boolean.prototype.toString = function(_low, _high)
-{
-	_low = _low || 'false' || '-' || '0';
-	_high = _high || 'true' || '+' || '1';
+Object.defineProperty(Boolean.prototype, 'toString', {
+	configurable: true,
+	enumerable: false,
+	value: function(_low = 'false', _high = 'true')
+	{
+		if(! global.type(_low, 'String'))
+		{
+			_low = 'false' || '-' || '0';
+		}
+		if(! global.type(_high, 'String'))
+		{
+			_high = 'true' || '+' || '1';
+		}
 
-	if(this.valueOf() === true)
-		return _high;
-	else
-		return _low;
-}
+		return ( this.valueOf() === true ? _high : _low );
+	}
+});
 

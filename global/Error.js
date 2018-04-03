@@ -13,17 +13,23 @@ else
 	module.exports = global.Error = Error;
 }
 
-Error.prototype.clone = function()
-{
-	return this.valueOf();
-}
+Object.defineProperty(Error.prototype, 'clone', {
+	configurable: true,
+	enumerable: false,
+	value: function()
+	{
+		return this.valueOf();
+	}
+});
 
-Error.prototype.throw = function()
-{
-	throw this;
-}
+Object.defineProperty(Error.prototype, 'throw', {
+	enumerable: false,
+	value: function() { throw this; }
+});
 
-Object.defineProperty(Error.prototype, 'text', {
+Object.defineProperty(Error.prototype, 'toString', {
+	enumerable: false,
+	configurable: true,
 	get: function()
 	{
 		var text = global.EOL + '( Exception / Error )' + global.EOL
@@ -36,6 +42,7 @@ Object.defineProperty(Error.prototype, 'text', {
 });
 
 Object.defineProperty(Error.prototype, 'title', {
+	enumerable: false,
 	get: function()
 	{
 		return this.name;

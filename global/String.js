@@ -218,11 +218,6 @@ String.prototype.removeVoids = function()
 	return ( result = result.trim() );
 }
 
-String.prototype.clone = function()
-{
-	return this.valueOf();
-}
-
 //
 String.prototype.replaceAt = function(_start = 0, _length = this.length - _start, _value)
 {
@@ -459,15 +454,31 @@ String.alphabet[62] = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTU
 
 // WICHTIG TODO /
 // w/ _radix, ..
-String.prototype.toString = function(_withQuotationMark = false)
-{
-	if(_withQuotationMark)
+Object.defineProperty(String.prototype, 'toString', {
+	enumerable: false,
+	configurable: true,
+	value: function(_quotationMarks = '"')
 	{
-		return '"' + this.valueOf() + '"';
-	}
+		if(global.type(_quotationMarks, 'Boolean'))
+		{
+			if(_quotationMarks)
+			{
+				_quotationsMarks = '"';
+			}
+		}
+		else if(! global.type(_quotationMarks, 'String'))
+		{
+			_quotationMarks = '"';
+		}
 
-	return this.valueOf();
-}
+		if(_quotationMarks)
+		{
+			return _quotationMarks + this.valueOf() + _quotationMarks;
+		}
+
+		return this.valueOf();
+	}
+});
 
 /*String.prototype.toDebug = function(_radix, _tag)
 {
@@ -861,22 +872,6 @@ var c = str.count('a', 'b', 'c', 'd', 'e', ' ');
 console.log(c.toString());
 */
 
-String.prototype.offset = function(_offset)
-{
-	_offset = (_offset||0) % this.length;
-
-	while(_offset < 0)
-	{
-		_offset = this.length + _offset;
-	}
-
-	return Math.abs(_offset);
-}
-
-String.prototype.index = function(_offset)
-{
-	return this[this.offset((_offset||0))];
-}
 
 /*
 String.prototype.get = function()
@@ -923,4 +918,34 @@ String.prototype.pattern = function(_format)
 	// (nearly..) "BNF"!??? ... i don't want regexp, here, am i right?
 	// //TODO//
 }
+
+Object.defineProperty(String.prototype, 'clone', {
+	enumerable: false,
+	value: function()
+	{
+		return this.valueOf();
+	}
+});
+
+Object.defineProperty(String.prototype, 'offset', {
+	enumerable: false,
+	value: function(_offset = this.length - 1)
+	{
+		//TODO/ *TESTEN*!!!
+
+		if(! global.type(_offset, 'Number'))
+		{
+			_offset = this.length - 1;
+		}
+
+		_offset = _offset % this.length;
+
+		if(_offset < 0)
+		{
+			_offset = 0 - _offset;
+		}
+
+		return _offset;
+	}
+});
 

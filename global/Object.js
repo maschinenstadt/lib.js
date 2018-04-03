@@ -279,9 +279,14 @@ Object.defineProperty(Object.prototype, 'clone', {
 	}
 });
 
-/*
-Object.prototype.toString = function(_radix, _tag, _foreign)
-*/
+Object.defineProperty(Object.prototype, 'toString', {
+	enumerable: false,
+	configurable: true,
+	value: function()
+	{
+		//TODO/
+	}
+});
 
 /*
 Object.prototype.toDebug = function(_radix, _tag, _foreign, _colors)

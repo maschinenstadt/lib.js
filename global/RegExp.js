@@ -7,8 +7,21 @@ else
 	module.exports = global.RegExp = RegExp;
 }
 
-RegExp.clone = function()
-{
-	return this.valueOf();
-}
+Object.defineProperty(RegExp.prototype, 'clone', {
+	enumerable: false,
+	configurable: true,
+	value: function()
+	{
+		return this.valueOf();
+	}
+});
+
+Object.defineProperty(RegExp.prototype, 'toString', {
+	enumerable: false,
+	configurable: true,
+	value: function()
+	{
+		//TODO/
+	}
+});
 

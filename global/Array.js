@@ -310,15 +310,19 @@ Object.defineProperty(Array.prototype, 'unsetTypeInverse', {
 	}
 });
 
-/*
-Array.prototype.unset = function()
-	// String.js
-*/
+Object.defineProperty(Array.prototype, 'unset', {
+	enumerable: false,
+	value: function(_offset = this.length - 1)
+	{
+	}
+});
 
-/*
-Array.prototype.unsetInverse = function()
-	// String.js
-*/
+Object.defineProperty(Array.prototype, 'unsetInverse', {
+	enumerable: false,
+	value: function(_notOffset = this.length - 1)
+	{
+	}
+});
 
 /*
 Array.prototype.replaceAt = function(_start = 0, _length = this.length - _start, _replace)
@@ -439,6 +443,7 @@ Object.defineProperty(Array.prototype, 'removeDuplicates', {
 });
 
 Object.defineProperty(Array.prototype, 'clone', {
+	configurable: true,
 	enumerable: false,
 	value: function(_depth = 1, _currentDepth = 1)
 	{
@@ -689,6 +694,7 @@ Object.defineProperty(Array.prototype, 'globs', {
 
 //TODO/ _radix
 Object.defineProperty(Array.prototype, 'toString', {
+	configurable: true,
 	enumerable: false,
 	value: function()
 	{
