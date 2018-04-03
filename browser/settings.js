@@ -1,4 +1,4 @@
-global.settings = settings = {};
+settings = {};
 
 settings.charset = 'utf-8';
 settings.title = 'kekse!';
