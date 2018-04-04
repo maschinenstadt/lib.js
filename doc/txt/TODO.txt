@@ -12,6 +12,10 @@
 
 				=> evtl. noch viel, viel mehr [kompaitibilät zw. browser und node.js]..!!!??!
 
+					=> AM BESTEN ALLES IN "core/*" AUCH ZUM BROWSER BRINGEN!
+
+						.. (so auch die "application" z.b., wg. "web/form(s)" [vs. "console/form(s)"].. ;-)´
+
 ------------------------------------------------------------------------------------------------------
 
 	# CUTE STACK .. ca. das gleiche wie < https://www.npmjs.com/package/cute-stack > .. nur selbst (auch via "console/ansi" ;-)´
