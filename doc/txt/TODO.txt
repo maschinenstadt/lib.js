@@ -257,7 +257,10 @@
 
 	# überlege wg. "class"es wie ..
 
+		# "core/application"
 		# "core/event"
+		# "core/stream"
+		# ..
 		# "mud/entity"
 
 		... usw., wie ich das konstruieren möchte. klar ist z.b., dass "event" überall gebraucht wird, grundsätzlich.
