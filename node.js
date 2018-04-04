@@ -269,7 +269,7 @@ try
 	delete main.paths;
 
 	// default
-	global.node = include('core/node');
+	global.node = include('struct/node');
 
 	//
 	main.environment();
