@@ -5,18 +5,10 @@ const stream = include('core/stream');
 
 module.exports = class node extends struct
 {
-	constructor(_uuid = uuid.random())
+	constructor(_uuid = undefined)
 	{
-		super();
-
+		super(_uuid);
 		this.event = new event();
-
-		if(! global.type(_uuid, 'String'))
-		{
-			_uuid = uuid.random();
-		}
-
-		this.UUID = _uuid;
 	}
 }
 
