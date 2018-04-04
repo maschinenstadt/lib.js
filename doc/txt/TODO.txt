@@ -6,6 +6,12 @@
 
 	# "core/node" -> "struct/"!? jedenfalls "node" auch im browser, wäre gut! ..
 
+		=> LÖSUNG: beides!
+
+			=> TODO ist nun auch, das "core/event" ebenso in den BROWSER zu bringen. "extends (browser-event-emitter..)!
+
+				=> evtl. noch viel, viel mehr [kompaitibilät zw. browser und node.js]..!!!??!
+
 ------------------------------------------------------------------------------------------------------
 
 	# CUTE STACK .. ca. das gleiche wie < https://www.npmjs.com/package/cute-stack > .. nur selbst (auch via "console/ansi" ;-)´
