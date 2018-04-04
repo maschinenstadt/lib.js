@@ -5,12 +5,10 @@ var node = function(_uuid = undefined)
 		if(BROWSER)
 		{
 			this.UUID = global.web.util.uuid.random();
-			alert(' => ' + this.UUID);
 		}
 		else
 		{
 			this.UUID = include('util/uuid').random();
-			console.inspect(' => ' + this.UUID);
 		}
 	}
 
