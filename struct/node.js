@@ -23,7 +23,7 @@ Object.defineProperty(node.prototype, 'toString', {
 	configurable: true,
 	value: function()
 	{
-		//TODO/
+		return this.UUID;
 	}
 });
 
