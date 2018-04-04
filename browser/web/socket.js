@@ -1,5 +1,3 @@
-web = web || {};
-
 web.socket = function()
 {
 	//
