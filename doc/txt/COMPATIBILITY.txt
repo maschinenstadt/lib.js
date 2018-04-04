@@ -1,0 +1,13 @@
+	
+	# "core/node" -> "struct/"!? jedenfalls "node" auch im browser, wäre gut! ..
+
+		=> LÖSUNG: beides!
+
+			=> TODO ist nun auch, das "core/event" ebenso in den BROWSER zu bringen. "extends (browser-event-emitter..)!
+
+				=> evtl. noch viel, viel mehr [kompaitibilät zw. browser und node.js]..!!!??!
+
+ (!!!) ===>>				=> AM BESTEN ALLES IN "core/*" AUCH ZUM BROWSER BRINGEN!
+
+						.. (so auch die "application" z.b., wg. "web/form(s)" [vs. "console/form(s)"].. ;-)´
+
