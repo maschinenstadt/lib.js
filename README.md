@@ -1,3 +1,14 @@
+# REWRITE (FROM SCRATCH)
+Just for your info. .. currently I am hardly working on a better, new version
+of this "lib.js". It's much more clean right now, even if it contains just my
+regular implementation right now.
+
+Additionally I'm also working on some Android App(s), also to support Node.js
+in there. .. it'll get some interface and API connectivity, .. and much more.
+
+Stay tuned for something new! ;-)´
+
+
 # lib.js
 My personal JavaScript w/ Node.js library (and interpreter) extension(s).
 
