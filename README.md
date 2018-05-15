@@ -1,3 +1,37 @@
+# STATUS
+My work goes on!
+
+The plan is now maximum compatibility with the WEB BROWSER, not only Node.js.
+Even "console.log()" etc. will work in your browser (remote process streams).
+
+This is also going on here: I would give you a plattform to easily scale your
+own apps - the current state is that you will just need to create a directory
+for every app, where all your application code can reside. My implemented web
+browser JavaScript code will provide an interface to select/start those apps,
+just by clicking. And not only starting, but integrating them into the server
+document/script/.. routing process and, if you wish so, a nice web interface;
+AND - of course - the same also in any console/terminal or by own SSH server.
+
+And your apps? They can use my library code, e.g. for GUIs in the web browser
+and also the console (with own term "mux" etc.) - of course also some network
+protocols, utilities (getopt, Math extensions, ..) or just structures (Matrix
+oder Vector e.g.).
+
+Last but not least there will be distributed processes (and own threads), all
+with the help of some (irc style..) communication, which will also provide my
+own database distribution etc. ..
+
+And more is planned .. like user defined codes for any system user @ "/home",
+which can be automatically included, .. with my extensions of global objects,
+like the "Object", "Number", .. etc. .. also easy to extend by any user.. AND
+the Node.js VERSION CHECK (which is now an extra process..).
+
+ETC. .. PP. ... :-D´
+
+
+
+
+
 # REWRITE (FROM SCRATCH)
 Just for your info. .. currently I am hardly working on a better, new version
 of this "lib.js". It's much more clean right now, even if it contains just my
@@ -7,6 +41,11 @@ Additionally I'm also working on some Android App(s), also to support Node.js
 in there. .. it'll get some interface and API connectivity, .. and much more.
 
 Stay tuned for something new! ;-)´
+
+
+
+
+
 
 
 # lib.js
