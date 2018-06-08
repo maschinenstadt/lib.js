@@ -1,8 +1,19 @@
 # STATUS
-My work goes on!
 
-At the moment my new version is better than the last .. My old shit is nearly
-completely adopted to the new version. .. but I am waiting for more features.
+(Maybe..) NEXT WEEK (June, 11.-15.) I'll publish my first release of this new
+'libjs' version (rewritten from scratch). .. many parts are done, even if the
+thing which is missing will be much concrete implementation: class constructs
+which prepare some "new" software/script/code/.. construction etc., and those
+for basic things like networking etc. (many protocols missing yet).
+
+The main thing of this library is anyway the "module loader" (which uses many
+library search paths etc.). That is a feature I've implement over and over in
+many versions. But now it seems to work great! ;)´
+
+So long. Have some good nights! Cakes.
+
+
+
 
 
 
