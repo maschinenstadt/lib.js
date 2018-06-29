@@ -1,16 +1,11 @@
 # STATUS
 
-(Maybe..) NEXT WEEK (June, 11.-15.) I'll publish my first release of this new
-'libjs' version (rewritten from scratch). .. many parts are done, even if the
-thing which is missing will be much concrete implementation: class constructs
-which prepare some "new" software/script/code/.. construction etc., and those
-for basic things like networking etc. (many protocols missing yet).
+Ich bin seit kurzem auf C(++) umgestiegen. ...
 
-The main thing of this library is anyway the "module loader" (which uses many
-library search paths etc.). That is a feature I've implement over and over in
-many versions. But now it seems to work great! ;)´
+Das heißt, ich nutze meine Zeit momentan, um fleißig Übung zu bekommen. Somit
+geht gerade nicht viel mit meiner "lib.js". Ich bitte, dies zu entschuldigen!
 
-So long. Have some good nights! Cakes.
+
 
 
 
