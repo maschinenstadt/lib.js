@@ -1,9 +1,20 @@
 # STATUS
 
-Ich bin seit kurzem auf C(++) umgestiegen. ...
+I'm working again!
 
-Das heißt, ich nutze meine Zeit momentan, um fleißig Übung zu bekommen. Somit
-geht gerade nicht viel mit meiner "lib.js". Ich bitte, dies zu entschuldigen!
+The next weeks I'll finally publish my best version ever.
+
+But maybe I won't publish as npm repository, only on github .. and not my own
+"bleeding edge" development version, but only the latest state of it, as I am
+working with "Git" again, but on a private repository (on my own server). ...
+
+So stay tuned - again! ;-)
+
+
+PS: Can anybody tell me if I can `npm publish` a completely new version under
+the same name? 'Cause if I'd to change the (npm) name, I won't use npm again.
+
+
 
 
 
