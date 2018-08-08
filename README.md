@@ -1,3 +1,24 @@
+# First publishment ..
+
+... of this new version (from scratch).
+
+As said, you'll find it on npmjs.com - but without Git repository, as I'm using
+a private one for now.
+
+So, the best version of my "lib.js" can now be downloaded:
+
+	https://www.npmjs.com/package/@kekse.biz/lib.js
+
+
+More, including the whole API, is going to be there in some weeks or so. TODO..
+
+
+
+
+
+
+
+
 # STATUS
 
 I'm working again!
